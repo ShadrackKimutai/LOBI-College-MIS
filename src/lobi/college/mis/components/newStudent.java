@@ -8,8 +8,10 @@ package lobi.college.mis.components;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.util.Date;
 
 /**
  *
@@ -44,33 +46,33 @@ public class newStudent extends javax.swing.JPanel {
         txtStdFirst = new javax.swing.JTextField();
         txtStdOther = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButtonMale = new javax.swing.JRadioButton();
-        JButtonFemale = new javax.swing.JRadioButton();
+        optMale = new javax.swing.JRadioButton();
+        optFemale = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         txtIdNum = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtBCert = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        txtAddress = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JFormattedTextField();
+        txtEmail = new javax.swing.JFormattedTextField();
         txtPassport = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        cboState = new javax.swing.JComboBox<>();
+        txtCounty = new javax.swing.JTextField();
+        txtSubCounty = new javax.swing.JTextField();
+        txtDivision = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
+        txtSubLocation = new javax.swing.JTextField();
+        txtVillage = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
+        txtNextofKin = new javax.swing.JTextField();
+        cboParentType = new javax.swing.JComboBox<>();
+        txtNextOfKinPhone = new javax.swing.JTextField();
+        txtNextOfKinEmail = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTextField17 = new javax.swing.JTextField();
@@ -129,11 +131,11 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel3.setText("Gender");
 
-        buttonGroup1.add(jButtonMale);
-        jButtonMale.setText("Male");
+        buttonGroup1.add(optMale);
+        optMale.setText("Male");
 
-        buttonGroup1.add(JButtonFemale);
-        JButtonFemale.setText("Female");
+        buttonGroup1.add(optFemale);
+        optFemale.setText("Female");
 
         jLabel4.setText("National ID");
 
@@ -151,38 +153,38 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel5.setText("B-Cert");
 
-        jTextField4.setText("(B-Cert Number)");
-        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtBCert.setText("(B-Cert Number)");
+        txtBCert.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField4FocusGained(evt);
+                txtBCertFocusGained(evt);
             }
         });
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtBCert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtBCertActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Contact Details");
 
-        jTextField6.setText("(Post Office Box)");
-        jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtAddress.setText("(Post Office Box)");
+        txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField6FocusGained(evt);
+                txtAddressFocusGained(evt);
             }
         });
 
-        jFormattedTextField2.setText("(Phone Number)");
-        jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPhone.setText("(Phone Number)");
+        txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jFormattedTextField2FocusGained(evt);
+                txtPhoneFocusGained(evt);
             }
         });
 
-        jFormattedTextField3.setText("(Email)");
-        jFormattedTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtEmail.setText("(Email)");
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jFormattedTextField3FocusGained(evt);
+                txtEmailFocusGained(evt);
             }
         });
 
@@ -197,52 +199,52 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel8.setText("Nationalty");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kenyan", "East African", "International Student" }));
+        cboState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kenyan", "East African", "International Student" }));
 
-        jTextField8.setText("(County)");
-        jTextField8.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtCounty.setText("(County)");
+        txtCounty.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField8FocusGained(evt);
+                txtCountyFocusGained(evt);
             }
         });
 
-        jTextField9.setText("(Sub County)");
-        jTextField9.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtSubCounty.setText("(Sub County)");
+        txtSubCounty.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField9FocusGained(evt);
+                txtSubCountyFocusGained(evt);
             }
         });
 
-        jTextField10.setText("(Division)");
-        jTextField10.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtDivision.setText("(Division)");
+        txtDivision.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField10FocusGained(evt);
+                txtDivisionFocusGained(evt);
             }
         });
 
-        jTextField11.setText("(Location)");
-        jTextField11.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtLocation.setText("(Location)");
+        txtLocation.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField11FocusGained(evt);
+                txtLocationFocusGained(evt);
             }
         });
 
-        jTextField12.setText("(Sub Location)");
-        jTextField12.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtSubLocation.setText("(Sub Location)");
+        txtSubLocation.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField12FocusGained(evt);
+                txtSubLocationFocusGained(evt);
             }
         });
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        txtSubLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                txtSubLocationActionPerformed(evt);
             }
         });
 
-        jTextField13.setText("(Estate /Village)");
-        jTextField13.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtVillage.setText("(Estate /Village)");
+        txtVillage.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField13FocusGained(evt);
+                txtVillageFocusGained(evt);
             }
         });
 
@@ -261,13 +263,13 @@ public class newStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9)
+                                .addComponent(txtSubCounty)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtIdNum, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,31 +284,31 @@ public class newStudent extends javax.swing.JPanel {
                                 .addComponent(txtStdFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonMale)
+                                        .addComponent(optMale)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(JButtonFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(optFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(txtStdOther)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jFormattedTextField2)
+                        .addComponent(txtPhone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
@@ -322,29 +324,29 @@ public class newStudent extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonMale)
-                    .addComponent(JButtonFemale)
+                    .addComponent(optMale)
+                    .addComponent(optFemale)
                     .addComponent(jLabel4)
                     .addComponent(txtPassport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -354,31 +356,31 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel9.setText("Next of Kin");
 
-        jTextField14.setText("(Next of Kin Name)");
-        jTextField14.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtNextofKin.setText("(Next of Kin Name)");
+        txtNextofKin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField14FocusGained(evt);
+                txtNextofKinFocusGained(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Parent", "Guardian", "Other" }));
+        cboParentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Parent", "Guardian", "Other" }));
 
-        jTextField15.setText("(Phone Number)");
-        jTextField15.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtNextOfKinPhone.setText("(Phone Number)");
+        txtNextOfKinPhone.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField15FocusGained(evt);
+                txtNextOfKinPhoneFocusGained(evt);
             }
         });
 
-        jTextField16.setText("(Email)");
-        jTextField16.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtNextOfKinEmail.setText("(Email)");
+        txtNextOfKinEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField16FocusGained(evt);
+                txtNextOfKinEmailFocusGained(evt);
             }
         });
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+        txtNextOfKinEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
+                txtNextOfKinEmailActionPerformed(evt);
             }
         });
 
@@ -390,13 +392,13 @@ public class newStudent extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboParentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNextofKin, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNextOfKinPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField16))
+                .addComponent(txtNextOfKinEmail))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,10 +406,10 @@ public class newStudent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNextofKin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboParentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNextOfKinPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNextOfKinEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -478,6 +480,11 @@ public class newStudent extends javax.swing.JPanel {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -639,17 +646,17 @@ public class newStudent extends javax.swing.JPanel {
     }//GEN-LAST:event_txtStdFirstActionPerformed
 
     private void txtIdNumMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdNumMouseEntered
-         //   jFormattedTextField1.setText("");        // TODO add your handling code here:
+        //   jFormattedTextField1.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_txtIdNumMouseEntered
 
     private void txtIdNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdNumFocusGained
         // TODO add your handling code here:
-        txtIdNum.setText(""); 
+        txtIdNum.setText("");
     }//GEN-LAST:event_txtIdNumFocusGained
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtBCertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBCertActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtBCertActionPerformed
 
     private void txtStdSurFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdSurFocusGained
         // TODO add your handling code here:
@@ -666,151 +673,178 @@ public class newStudent extends javax.swing.JPanel {
         txtStdOther.setText("");
     }//GEN-LAST:event_txtStdOtherFocusGained
 
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
+    private void txtBCertFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBCertFocusGained
         // TODO add your handling code here:
-        jTextField4.setText("");
-    }//GEN-LAST:event_jTextField4FocusGained
+        txtBCert.setText("");
+    }//GEN-LAST:event_txtBCertFocusGained
 
-    private void jFormattedTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusGained
+    private void txtPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusGained
         // TODO add your handling code here:
-        jFormattedTextField2.setText("");
-    }//GEN-LAST:event_jFormattedTextField2FocusGained
+        txtPhone.setText("");
+    }//GEN-LAST:event_txtPhoneFocusGained
 
-    private void jFormattedTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField3FocusGained
+    private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
         // TODO add your handling code here:
-         jFormattedTextField3.setText("");
-    }//GEN-LAST:event_jFormattedTextField3FocusGained
+        txtEmail.setText("");
+    }//GEN-LAST:event_txtEmailFocusGained
 
-    private void jTextField6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusGained
+    private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
         // TODO add your handling code here:
-         jTextField6.setText("");
-    }//GEN-LAST:event_jTextField6FocusGained
+        txtAddress.setText("");
+    }//GEN-LAST:event_txtAddressFocusGained
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+    private void txtSubLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubLocationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_txtSubLocationActionPerformed
 
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
+    private void txtNextOfKinEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNextOfKinEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
+    }//GEN-LAST:event_txtNextOfKinEmailActionPerformed
 
-    private void jTextField8FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField8FocusGained
+    private void txtCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCountyFocusGained
         // TODO add your handling code here:
-          jTextField8.setText("");
-    }//GEN-LAST:event_jTextField8FocusGained
+        txtCounty.setText("");
+    }//GEN-LAST:event_txtCountyFocusGained
 
-    private void jTextField9FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField9FocusGained
+    private void txtSubCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubCountyFocusGained
         // TODO add your handling code here:
-          jTextField9.setText("");
-    }//GEN-LAST:event_jTextField9FocusGained
+        txtSubCounty.setText("");
+    }//GEN-LAST:event_txtSubCountyFocusGained
 
-    private void jTextField10FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField10FocusGained
+    private void txtDivisionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDivisionFocusGained
         // TODO add your handling code here:
-          jTextField10.setText("");
-    }//GEN-LAST:event_jTextField10FocusGained
+        txtDivision.setText("");
+    }//GEN-LAST:event_txtDivisionFocusGained
 
-    private void jTextField11FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField11FocusGained
+    private void txtLocationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLocationFocusGained
         // TODO add your handling code here:
-          jTextField11.setText("");
-    }//GEN-LAST:event_jTextField11FocusGained
+        txtLocation.setText("");
+    }//GEN-LAST:event_txtLocationFocusGained
 
-    private void jTextField12FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField12FocusGained
+    private void txtSubLocationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubLocationFocusGained
         // TODO add your handling code here:
-          jTextField12.setText("");
-    }//GEN-LAST:event_jTextField12FocusGained
+        txtSubLocation.setText("");
+    }//GEN-LAST:event_txtSubLocationFocusGained
 
-    private void jTextField13FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField13FocusGained
+    private void txtVillageFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtVillageFocusGained
         // TODO add your handling code here:
-          jTextField13.setText("");
-    }//GEN-LAST:event_jTextField13FocusGained
+        txtVillage.setText("");
+    }//GEN-LAST:event_txtVillageFocusGained
 
     private void txtPassportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassportFocusGained
         // TODO add your handling code here:
-          txtPassport.setText("");
+        txtPassport.setText("");
     }//GEN-LAST:event_txtPassportFocusGained
 
-    private void jTextField14FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField14FocusGained
+    private void txtNextofKinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNextofKinFocusGained
         // TODO add your handling code here:
-          jTextField14.setText("");
-    }//GEN-LAST:event_jTextField14FocusGained
+        txtNextofKin.setText("");
+    }//GEN-LAST:event_txtNextofKinFocusGained
 
-    private void jTextField15FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField15FocusGained
+    private void txtNextOfKinPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNextOfKinPhoneFocusGained
         // TODO add your handling code here:
-          jTextField15.setText("");
-    }//GEN-LAST:event_jTextField15FocusGained
+        txtNextOfKinPhone.setText("");
+    }//GEN-LAST:event_txtNextOfKinPhoneFocusGained
 
-    private void jTextField16FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField16FocusGained
+    private void txtNextOfKinEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNextOfKinEmailFocusGained
         // TODO add your handling code here:
-          jTextField16.setText("");
-    }//GEN-LAST:event_jTextField16FocusGained
+        txtNextOfKinEmail.setText("");
+    }//GEN-LAST:event_txtNextOfKinEmailFocusGained
 
     private void jTextField17FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField17FocusGained
         // TODO add your handling code here:
-          jTextField17.setText("");
+        jTextField17.setText("");
     }//GEN-LAST:event_jTextField17FocusGained
 
     private void jTextField18FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField18FocusGained
         // TODO add your handling code here:
-          jTextField18.setText("");
+        jTextField18.setText("");
     }//GEN-LAST:event_jTextField18FocusGained
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-       try
-    {
-      // create a mysql database connection
-      String myDriver = "org.gjt.mm.mysql.Driver";
-      String myUrl = "jdbc:mysql://localhost/test";
-      Class.forName(myDriver);
-      Connection conn = DriverManager.getConnection(myUrl, "root", "");
-    
-      // create a sql date object so we can use it in our INSERT statement
-      Calendar calendar = Calendar.getInstance();
-      java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+        try {
+            // create a mysql database connection
+            String myDriver = "MySQL";
+            String myUrl = "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myUrl, "root", "");
 
-      // the mysql insert statement
-      String query = " insert into users (first_name, last_name, date_created, is_admin, num_points)"
-        + " values (?, ?, ?, ?, ?)";
+            // create a sql date object so we can use it in our INSERT statement
+            Calendar calendar = Calendar.getInstance();
+            java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
-      // create the mysql insert preparedstatement
-      PreparedStatement preparedStmt = conn.prepareStatement(query);
-      preparedStmt.setString (1, "Barney");
-      preparedStmt.setString (2, "Rubble");
-      preparedStmt.setDate   (3, startDate);
-      preparedStmt.setBoolean(4, false);
-      preparedStmt.setInt    (5, 5000);
+            // the mysql insert statement
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date CurrentDate = new Date();
 
-      // execute the preparedstatement
-      preparedStmt.execute();
-      
-      conn.close();
-    }
-    catch (Exception e)
-    {
-      System.err.println("Got an exception!");
-      System.err.println(e.getMessage());
-    }
-   
+            String IDNum = "", Gender = "", currentDate = "", Query = "";
+
+            currentDate = dateFormat.format(CurrentDate).toString();
+            if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
+                IDNum = txtPassport.getText();
+            } else {
+                IDNum = txtIdNum.getText();
+            }
+            if (optMale.isSelected()) {
+                Gender = "Male";
+            } else if (optFemale.isSelected()) {
+                Gender = "Female";
+            }
+
+            Query = "insert into Students (student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = conn.prepareStatement(Query);
+            preparedStmt.setString(1, txtStdSur.getText() + " " + txtStdFirst.getText() + " " + txtStdOther.getText());
+            preparedStmt.setString(2, txtBCert.getText());
+            preparedStmt.setString(3, IDNum);
+            preparedStmt.setString(4, Gender);
+            preparedStmt.setString(5, cboState.getSelectedItem().toString());
+            preparedStmt.setString(6, txtCounty.getText());
+            preparedStmt.setString(7, txtSubCounty.getText());
+            preparedStmt.setString(8, txtDivision.getText());
+            preparedStmt.setString(9, txtLocation.getText());
+            preparedStmt.setString(10, txtSubLocation.getText());
+            preparedStmt.setString(11, txtVillage.getText());
+            preparedStmt.setString(12, txtAddress.getText());
+            preparedStmt.setString(13, txtPhone.getText());
+            preparedStmt.setString(14, txtEmail.getText());
+            preparedStmt.setString(15, txtNextofKin.getText() + "[" + cboParentType.getSelectedItem() + "]");
+            preparedStmt.setString(16, txtNextOfKinPhone.getText());
+            preparedStmt.setString(17, txtNextOfKinEmail.getText());
+            preparedStmt.setString(18, currentDate);
+
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+        }
+
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:       
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton JButtonFemale;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox<String> cboParentType;
+    private javax.swing.JComboBox<String> cboState;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JRadioButton jButtonMale;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -833,25 +867,29 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JRadioButton optFemale;
+    private javax.swing.JRadioButton optMale;
     private javax.swing.JLabel picpassportphoto;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtBCert;
+    private javax.swing.JTextField txtCounty;
+    private javax.swing.JTextField txtDivision;
+    private javax.swing.JFormattedTextField txtEmail;
     private javax.swing.JFormattedTextField txtIdNum;
+    private javax.swing.JTextField txtLocation;
+    private javax.swing.JTextField txtNextOfKinEmail;
+    private javax.swing.JTextField txtNextOfKinPhone;
+    private javax.swing.JTextField txtNextofKin;
     private javax.swing.JTextField txtPassport;
+    private javax.swing.JFormattedTextField txtPhone;
     private javax.swing.JTextField txtStdFirst;
     private javax.swing.JTextField txtStdOther;
     private javax.swing.JTextField txtStdSur;
+    private javax.swing.JTextField txtSubCounty;
+    private javax.swing.JTextField txtSubLocation;
+    private javax.swing.JTextField txtVillage;
     // End of variables declaration//GEN-END:variables
 }
