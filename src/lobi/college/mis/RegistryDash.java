@@ -5,13 +5,7 @@
  */
 package lobi.college.mis;
 
-import static com.sun.glass.ui.Window.State.MAXIMIZED;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.JInternalFrame;
-import javax.swing.WindowConstants;
 import lobi.college.mis.components.RegisteredStudents;
 import lobi.college.mis.components.newStudent;
 
@@ -26,7 +20,7 @@ public class RegistryDash extends javax.swing.JInternalFrame {
      */
     public RegistryDash() {
         initComponents();
-        
+       // JinternalFrame.getRootPane().setWindowDecorationStyle(5);
     }
 
     /**
@@ -52,6 +46,24 @@ public class RegistryDash extends javax.swing.JInternalFrame {
         setDoubleBuffered(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/user-group.png"))); // NOI18N
         setName(""); // NOI18N
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                loadRegisteredStudents(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                WindowClosing(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -158,6 +170,16 @@ public class RegistryDash extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         System.out.println(registryPane.getSize().height);
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void WindowClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_WindowClosing
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_WindowClosing
+
+    private void loadRegisteredStudents(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_loadRegisteredStudents
+        // TODO add your handling code here:
+        jButton1.doClick();
+    }//GEN-LAST:event_loadRegisteredStudents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

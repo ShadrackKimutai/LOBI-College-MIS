@@ -151,8 +151,8 @@ public class Login extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
          DashBoard dashBoard=new DashBoard();
-            dashBoard.setVisible(true);
-            this.setVisible(false); 
+           dashBoard.setVisible(true);
+           this.setVisible(false); 
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
