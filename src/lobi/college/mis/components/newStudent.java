@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -782,6 +783,7 @@ public class newStudent extends javax.swing.JPanel {
             String myUrl = cf.getProperties().getProperty("url");
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
+            
            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
                 // create a sql date object so we can use it in our INSERT statement
                 Calendar calendar = Calendar.getInstance();
@@ -824,7 +826,7 @@ public class newStudent extends javax.swing.JPanel {
                 // execute the preparedstatement
                 preparedStmt.execute();
             
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this,"Error Occured",e.getMessage(),JOptionPane.ERROR);

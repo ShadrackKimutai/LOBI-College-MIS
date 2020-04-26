@@ -7,10 +7,12 @@ package lobi.college.mis.components;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -108,6 +110,8 @@ public class RegisteredStudents extends javax.swing.JPanel {
      String myUrl = cf.getProperties().getProperty("url");
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
+           
+            File f = new File("server.properties");
            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
             
        
@@ -127,8 +131,8 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
 tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
-    catch(Exception e){
+    catch(ClassNotFoundException | SQLException e){
 
-        JOptionPane.showMessageDialog(null,"Error in Employee Grid View..... "+e);
+        JOptionPane.showMessageDialog(null,"Error "+e.getMessage());
     }  }
 }

@@ -7,7 +7,9 @@ package lobi.college.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,14 +40,35 @@ private  Properties properties;
     }
     private String filename;
     public Configurations() {
-            filename="configurations.properties";
+            filename="MacroDriver.dll";
            
-        try {
+       
+         try (OutputStream output = new FileOutputStream(filename)) {
+
+            Properties prop = new Properties();
+
+            // set the properties value
+            prop.setProperty("url","jdbc:mysql://localhost:3306/CollegeMIS?zeroDateTimeBehavior=convertToNull [root on Default schema]");
+            prop.setProperty("username","root");
+            prop.setProperty("password","");
+            prop.setProperty("driverClassName","org.mariadb.jdbc.Driver");
+
+
+            // save properties to project root folder
+            prop.store(output, null);
+
+         //   System.out.println(prop);
+
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+
+            try {
             properties = readPropertiesFile(filename);
         } catch (IOException ex) {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+        
     }
 
      public static Properties readPropertiesFile(String fileName) throws IOException  {
