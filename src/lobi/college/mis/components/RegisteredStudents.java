@@ -48,7 +48,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane(tblStudents);
         tblStudents = new javax.swing.JTable();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student Number", "Name", "Department", "Course", " " }));
@@ -66,7 +66,9 @@ public class RegisteredStudents extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13"
             }
         ));
+        tblStudents.setDoubleBuffered(true);
         jScrollPane3.setViewportView(tblStudents);
+        tblStudents.getAccessibleContext().setAccessibleParent(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,7 +80,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(375, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
@@ -98,13 +100,17 @@ public class RegisteredStudents extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblStudents;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
+        
+         
+        
+        
+        
         try{
     Configurations cf=new Configurations();
      String myUrl = cf.getProperties().getProperty("url");

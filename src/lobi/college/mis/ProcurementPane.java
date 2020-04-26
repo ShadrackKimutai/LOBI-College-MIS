@@ -1,19 +1,20 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package lobi.college.mis;
 
 /**
  *
- * @author Manu
+ * @author shady
  */
-public class Accounts extends javax.swing.JInternalFrame {
+public class ProcurementPane extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Sphinx
+     * Creates new form ProcurementPane
      */
-    public Accounts() {
+    public ProcurementPane() {
         initComponents();
     }
 
@@ -27,23 +28,26 @@ public class Accounts extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
-        setResizable(true);
-        setTitle("Sphinx 4 Panel ");
-        setDoubleBuffered(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Procurement Pane");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 687, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

@@ -42,9 +42,9 @@ public class RegistryDash extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Registy");
+        setTitle("Registy Pane");
         setDoubleBuffered(true);
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/presentation.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
         setName(""); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
