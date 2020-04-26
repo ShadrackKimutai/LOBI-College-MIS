@@ -5,13 +5,15 @@
  */
 package lobi.college.mis;
 
+import java.awt.Color;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import lobi.college.util.Counters;
+import lobi.college.util.Configurations;
 
 /**
  *
@@ -230,6 +232,7 @@ public class DashBoard extends javax.swing.JFrame {
                 try {
                         // Set cross-platform Java L&F (also called "Metal")
                     UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+                  
                 }catch (UnsupportedLookAndFeelException e) {
                    // handle exception
                 } catch (InstantiationException ex) {

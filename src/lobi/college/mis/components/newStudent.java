@@ -5,6 +5,10 @@
  */
 package lobi.college.mis.components;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +16,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import lobi.college.util.Configurations;
 
 /**
  *
@@ -19,11 +28,14 @@ import java.util.Date;
  */
 public class newStudent extends javax.swing.JPanel {
 
-    /**
-     * Creates new form newStudent
-     */
+   
+   
     public newStudent() {
-        initComponents();
+        
+            initComponents();
+        
+         
+        
     }
 
     /**
@@ -81,8 +93,8 @@ public class newStudent extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jTextField18 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
@@ -469,17 +481,22 @@ public class newStudent extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Registration Tools"));
 
-        jButton1.setText("Reset Fields");
-
-        jButton2.setText("Register Student");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReset.setText("Reset Fields");
+        btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnResetMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+
+        btnRegister.setText("Register Student");
+        btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegisterMouseClicked(evt);
+            }
+        });
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -490,21 +507,21 @@ public class newStudent extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(btnRegister)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnRegister, btnReset});
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Admission"));
 
@@ -580,7 +597,7 @@ public class newStudent extends javax.swing.JPanel {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(picpassportphoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(picpassportphoto, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -613,16 +630,14 @@ public class newStudent extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -759,86 +774,82 @@ public class newStudent extends javax.swing.JPanel {
         jTextField18.setText("");
     }//GEN-LAST:event_jTextField18FocusGained
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
         try {
             // create a mysql database connection
-            
-            String myUrl = "jdbc:mysql://localhost:3306/CollegeMIS?zeroDateTimeBehavior=convertToNull [root on Default schema]";
-            Class.forName("org.mariadb.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(myUrl, "root", "");
-
+        Configurations cf=new Configurations();
+            String myUrl = cf.getProperties().getProperty("url");
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
-            Calendar calendar = Calendar.getInstance();
-            java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-
-            // the mysql insert statement
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date CurrentDate = new Date();
-
-            String IDNum = "", Gender = "", currentDate = "", Query = "";
-
-            currentDate = dateFormat.format(CurrentDate).toString();
-            if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
-                IDNum = txtPassport.getText();
-            } else {
-                IDNum = txtIdNum.getText();
-            }
-            if (optMale.isSelected()) {
-                Gender = "Male";
-            } else if (optFemale.isSelected()) {
-                Gender = "Female";
-            }
-
-            Query = "insert into Students (student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = conn.prepareStatement(Query);
-            preparedStmt.setString(1, txtStdSur.getText() + " " + txtStdFirst.getText() + " " + txtStdOther.getText());
-            preparedStmt.setString(2, txtBCert.getText());
-            preparedStmt.setString(3, IDNum);
-            preparedStmt.setString(4, Gender);
-            preparedStmt.setString(5, cboState.getSelectedItem().toString());
-            preparedStmt.setString(6, txtCounty.getText());
-            preparedStmt.setString(7, txtSubCounty.getText());
-            preparedStmt.setString(8, txtDivision.getText());
-            preparedStmt.setString(9, txtLocation.getText());
-            preparedStmt.setString(10, txtSubLocation.getText());
-            preparedStmt.setString(11, txtVillage.getText());
-            preparedStmt.setString(12, txtAddress.getText());
-            preparedStmt.setString(13, txtPhone.getText());
-            preparedStmt.setString(14, txtEmail.getText());
-            preparedStmt.setString(15, txtNextofKin.getText() + "[" + cboParentType.getSelectedItem() + "]");
-            preparedStmt.setString(16, txtNextOfKinPhone.getText());
-            preparedStmt.setString(17, txtNextOfKinEmail.getText());
-            preparedStmt.setString(18, null);
-            preparedStmt.setString(19,currentDate);
-
-
-            // execute the preparedstatement
-            preparedStmt.execute();
-
-            conn.close();
+           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
+                // create a sql date object so we can use it in our INSERT statement
+                Calendar calendar = Calendar.getInstance();
+                java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+                // the mysql insert statement
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date CurrentDate = new Date();
+                String IDNum = "", Gender = "", currentDate = "", Query = "";
+                currentDate = dateFormat.format(CurrentDate).toString();
+                if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
+                    IDNum = txtPassport.getText();
+                } else {
+                    IDNum = txtIdNum.getText();
+                }   if (optMale.isSelected()) {
+                    Gender = "Male";
+                } else if (optFemale.isSelected()) {
+                    Gender = "Female";
+                }   Query = "insert into Students (student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                // create the mysql insert preparedstatement
+                PreparedStatement preparedStmt = conn.prepareStatement(Query);
+                preparedStmt.setString(1, txtStdSur.getText() + " " + txtStdFirst.getText() + " " + txtStdOther.getText());
+                preparedStmt.setString(2, txtBCert.getText());
+                preparedStmt.setString(3, IDNum);
+                preparedStmt.setString(4, Gender);
+                preparedStmt.setString(5, cboState.getSelectedItem().toString());
+                preparedStmt.setString(6, txtCounty.getText());
+                preparedStmt.setString(7, txtSubCounty.getText());
+                preparedStmt.setString(8, txtDivision.getText());
+                preparedStmt.setString(9, txtLocation.getText());
+                preparedStmt.setString(10, txtSubLocation.getText());
+                preparedStmt.setString(11, txtVillage.getText());
+                preparedStmt.setString(12, txtAddress.getText());
+                preparedStmt.setString(13, txtPhone.getText());
+                preparedStmt.setString(14, txtEmail.getText());
+                preparedStmt.setString(15, txtNextofKin.getText() + "[" + cboParentType.getSelectedItem() + "]");
+                preparedStmt.setString(16, txtNextOfKinPhone.getText());
+                preparedStmt.setString(17, txtNextOfKinEmail.getText());
+                preparedStmt.setString(18, null);
+                preparedStmt.setString(19,currentDate);
+                // execute the preparedstatement
+                preparedStmt.execute();
+            
         } catch (Exception e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this,"Error Occured",e.getMessage(),JOptionPane.ERROR);
         }
 
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btnRegisterMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:       
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnResetMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox<String> cboParentType;
     private javax.swing.JComboBox<String> cboState;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -891,4 +902,6 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtSubLocation;
     private javax.swing.JTextField txtVillage;
     // End of variables declaration//GEN-END:variables
+
+   
 }
