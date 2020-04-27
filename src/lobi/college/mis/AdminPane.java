@@ -5,6 +5,10 @@
  */
 package lobi.college.mis;
 
+import java.awt.BorderLayout;
+import lobi.college.mis.components.ManageCourses;
+import lobi.college.mis.components.newStudent;
+
 /**
  *
  * @author shady
@@ -30,8 +34,8 @@ public class AdminPane extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btnAlterStudentDetail = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        btnCourses = new javax.swing.JButton();
+        adminPane = new javax.swing.JPanel();
 
         setClosable(true);
         setIconifiable(true);
@@ -46,17 +50,22 @@ public class AdminPane extends javax.swing.JInternalFrame {
         jToolBar1.add(btnAlterStudentDetail);
         jToolBar1.add(jSeparator1);
 
-        jButton1.setText("Courses");
-        jToolBar1.add(jButton1);
+        btnCourses.setText("Courses");
+        btnCourses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCoursesMouseClicked(evt);
+            }
+        });
+        jToolBar1.add(btnCourses);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 981, Short.MAX_VALUE)
+        javax.swing.GroupLayout adminPaneLayout = new javax.swing.GroupLayout(adminPane);
+        adminPane.setLayout(adminPaneLayout);
+        adminPaneLayout.setHorizontalGroup(
+            adminPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        adminPaneLayout.setVerticalGroup(
+            adminPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 453, Short.MAX_VALUE)
         );
 
@@ -64,27 +73,39 @@ public class AdminPane extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
+            .addComponent(adminPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(adminPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCoursesMouseClicked
+        // TODO add your handling code here:
+         ManageCourses courses = new ManageCourses();
+        adminPane.removeAll();
+       adminPane.setVisible(false);
+        adminPane.setSize(adminPane.getSize().width,adminPane.getSize().height);
+        adminPane.setVisible(true);
+        adminPane.setLayout(new BorderLayout());
+        adminPane.add(courses);
+
+        adminPane.setVisible(true);
+        pack();
+    }//GEN-LAST:event_btnCoursesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminPane;
     private javax.swing.JButton btnAlterStudentDetail;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnCourses;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

@@ -14,12 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import lobi.college.util.Configurations;
 
 /**
@@ -28,12 +25,16 @@ import lobi.college.util.Configurations;
  */
 public class RegisteredStudents extends javax.swing.JPanel {
 
+    private final Color Silver;
+
     /**
      * Creates new form RegisteredStudents
      */
     public RegisteredStudents() {
+        Silver=new Color(247, 247, 247);
         initComponents();
         populateTable();
+        
     }
 
     /**
@@ -58,6 +59,18 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
         jScrollPane3.setAutoscrolls(true);
 
+        tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table,
+                Object value, boolean isSelected, boolean hasFocus,
+                int row, int column) {
+                Component c = super.getTableCellRendererComponent(table,
+                    value, isSelected, hasFocus, row, column);
+                c.setBackground(row%2==0 ? Color.white : Silver);
+                return c;
+            };
+        });
         tblStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -68,7 +81,6 @@ public class RegisteredStudents extends javax.swing.JPanel {
         ));
         tblStudents.setDoubleBuffered(true);
         jScrollPane3.setViewportView(tblStudents);
-        tblStudents.getAccessibleContext().setAccessibleParent(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

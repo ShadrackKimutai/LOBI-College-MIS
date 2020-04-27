@@ -100,11 +100,9 @@
             </Property>
             <Property name="doubleBuffered" type="boolean" value="true"/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="null"/>
-            </Property>
-          </AccessibilityProperties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Silver);                        &#xa;            return c;&#xa;        };&#xa;    });"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

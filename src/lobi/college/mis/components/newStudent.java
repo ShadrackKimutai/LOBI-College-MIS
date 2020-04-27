@@ -5,21 +5,16 @@
  */
 package lobi.college.mis.components;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lobi.college.util.Configurations;
 
@@ -35,8 +30,8 @@ public class newStudent extends javax.swing.JPanel {
     public newStudent() {
         
             initComponents();
-        
-         
+       
+         populateCombo();
         
     }
 
@@ -101,8 +96,8 @@ public class newStudent extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        cboLevel = new javax.swing.JComboBox<>();
+        cboCourse = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         picpassportphoto = new javax.swing.JLabel();
@@ -525,9 +520,24 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel13.setText("Department");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA" }));
+        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA" }));
+        cboLevel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboLevelItemStateChanged(evt);
+            }
+        });
+        cboLevel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cboLevelFocusGained(evt);
+            }
+        });
+        cboLevel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboLevelMouseClicked(evt);
+            }
+        });
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel15.setText("Course");
 
@@ -543,8 +553,8 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -557,11 +567,11 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addContainerGap())
         );
@@ -847,6 +857,21 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_cboLevelFocusGained
+
+    private void cboLevelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLevelMouseClicked
+        // TODO add your handling code here:
+        populateCombo();
+    }//GEN-LAST:event_cboLevelMouseClicked
+
+    private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
+        // TODO add your handling code here:
+        populateCombo();
+    }//GEN-LAST:event_cboLevelItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
@@ -854,13 +879,13 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox<String> cboCourse;
+    private javax.swing.JComboBox<String> cboLevel;
     private javax.swing.JComboBox<String> cboParentType;
     private javax.swing.JComboBox<String> cboState;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -908,6 +933,39 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtSubLocation;
     private javax.swing.JTextField txtVillage;
     // End of variables declaration//GEN-END:variables
+
+    private void populateCombo() {
+
+ 
+        
+        //combo.addItem("Please Select...");
+ 
+        try {
+               Configurations cf=new Configurations();
+            String myUrl = cf.getProperties().getProperty("url");
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            // create a sql date object so we can use it in our INSERT statement
+           
+           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
+            Statement st = conn.createStatement();
+             cboCourse.removeAllItems();
+            ResultSet rs = st.executeQuery("select CourseName  from Courses Where Level = '"+cboLevel.getSelectedItem().toString()+"'");
+ 
+            while (rs.next()) {
+                    cboCourse.addItem(rs.getString("CourseName"));
+                    System.out.println(rs.getString("CourseName"));
+            }
+            
+   
+        } catch (SQLException | ClassNotFoundException e) {
+                
+           JOptionPane.showMessageDialog(this,  "When Populating Courses, " +e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+ 
+ 
+        
+    }    
 
    
 }
