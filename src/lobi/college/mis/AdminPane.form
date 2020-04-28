@@ -51,12 +51,18 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnAlterStudentDetail">
+        <Component class="javax.swing.JButton" name="btnMgtDepartments">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Manage Students"/>
+            <Property name="text" type="java.lang.String" value="Departments"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnMgtDepartmentsMouseClicked"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
         </Component>
         <Component class="javax.swing.JButton" name="btnCourses">
           <Properties>
@@ -65,6 +71,13 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCoursesMouseClicked"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnStaff">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Staff"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

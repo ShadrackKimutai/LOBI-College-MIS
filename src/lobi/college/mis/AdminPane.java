@@ -7,6 +7,7 @@ package lobi.college.mis;
 
 import java.awt.BorderLayout;
 import lobi.college.mis.components.ManageCourses;
+import lobi.college.mis.components.ManageDepartments;
 import lobi.college.mis.components.newStudent;
 
 /**
@@ -32,9 +33,11 @@ public class AdminPane extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        btnAlterStudentDetail = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnMgtDepartments = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnCourses = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnStaff = new javax.swing.JButton();
         adminPane = new javax.swing.JPanel();
 
         setClosable(true);
@@ -46,9 +49,17 @@ public class AdminPane extends javax.swing.JInternalFrame {
 
         jToolBar1.setRollover(true);
 
-        btnAlterStudentDetail.setText("Manage Students");
-        jToolBar1.add(btnAlterStudentDetail);
-        jToolBar1.add(jSeparator1);
+        btnMgtDepartments.setText("Departments");
+        btnMgtDepartments.setFocusable(false);
+        btnMgtDepartments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMgtDepartments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMgtDepartments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMgtDepartmentsMouseClicked(evt);
+            }
+        });
+        jToolBar1.add(btnMgtDepartments);
+        jToolBar1.add(jSeparator2);
 
         btnCourses.setText("Courses");
         btnCourses.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -57,6 +68,10 @@ public class AdminPane extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btnCourses);
+        jToolBar1.add(jSeparator1);
+
+        btnStaff.setText("Staff");
+        jToolBar1.add(btnStaff);
 
         javax.swing.GroupLayout adminPaneLayout = new javax.swing.GroupLayout(adminPane);
         adminPane.setLayout(adminPaneLayout);
@@ -101,12 +116,28 @@ public class AdminPane extends javax.swing.JInternalFrame {
         pack();
     }//GEN-LAST:event_btnCoursesMouseClicked
 
+    private void btnMgtDepartmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMgtDepartmentsMouseClicked
+        // TODO add your handling code here:
+         ManageDepartments dept = new ManageDepartments();
+        adminPane.removeAll();
+       adminPane.setVisible(false);
+        adminPane.setSize(adminPane.getSize().width,adminPane.getSize().height);
+        adminPane.setVisible(true);
+        adminPane.setLayout(new BorderLayout());
+        adminPane.add(dept);
+
+        adminPane.setVisible(true);
+        pack();
+    }//GEN-LAST:event_btnMgtDepartmentsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminPane;
-    private javax.swing.JButton btnAlterStudentDetail;
     private javax.swing.JButton btnCourses;
+    private javax.swing.JButton btnMgtDepartments;
+    private javax.swing.JButton btnStaff;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
