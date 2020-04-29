@@ -21,6 +21,7 @@ public class AdminPane extends javax.swing.JInternalFrame {
      */
     public AdminPane() {
         initComponents();
+        
     }
 
     /**
@@ -62,6 +63,7 @@ public class AdminPane extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator2);
 
         btnCourses.setText("Courses");
+        btnCourses.setFocusable(false);
         btnCourses.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCoursesMouseClicked(evt);

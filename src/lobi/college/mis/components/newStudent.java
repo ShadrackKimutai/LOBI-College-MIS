@@ -30,7 +30,7 @@ public class newStudent extends javax.swing.JPanel {
     public newStudent() {
         
             initComponents();
-       
+       populateDept();
          populateCombo();
         
     }
@@ -93,7 +93,7 @@ public class newStudent extends javax.swing.JPanel {
         btnReset = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cboDept = new javax.swing.JComboBox<>();
         cboLevel = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         cboCourse = new javax.swing.JComboBox<>();
@@ -514,8 +514,6 @@ public class newStudent extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Admission"));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ICT Department", "Mechanical Engineeing Department", "Building and Civil Engineering Department", "Hospitality and Dietetics Department", "Agriculural Engineering Department" }));
-
         cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA" }));
         cboLevel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -554,7 +552,7 @@ public class newStudent extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cboLevel, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, 0, 384, Short.MAX_VALUE)
+                    .addComponent(cboDept, javax.swing.GroupLayout.Alignment.TRAILING, 0, 384, Short.MAX_VALUE)
                     .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
@@ -562,7 +560,7 @@ public class newStudent extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -879,11 +877,11 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox<String> cboCourse;
+    private javax.swing.JComboBox<String> cboDept;
     private javax.swing.JComboBox<String> cboLevel;
     private javax.swing.JComboBox<String> cboParentType;
     private javax.swing.JComboBox<String> cboState;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -965,6 +963,32 @@ public class newStudent extends javax.swing.JPanel {
  
         
     }    
+
+    private void populateDept() {
+    try {
+               Configurations cf=new Configurations();
+            String myUrl = cf.getProperties().getProperty("url");
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            // create a sql date object so we can use it in our INSERT statement
+           
+           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
+            Statement st = conn.createStatement();
+             cboDept.removeAllItems();
+            ResultSet rs = st.executeQuery("select DeptName  from Departments where AdmittingFlag=1");
+ 
+            while (rs.next()) {
+                    cboDept.addItem(rs.getString("DeptName"));
+                    System.out.println(rs.getString("DeptName"));
+            }
+            
+   
+        } catch (SQLException | ClassNotFoundException e) {
+                
+           JOptionPane.showMessageDialog(this,  "When Populating Departments," + e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+ 
+     }
 
    
 }
