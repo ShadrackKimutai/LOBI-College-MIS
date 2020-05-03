@@ -15,9 +15,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lobi.college.util.Configurations;
-
 
 /**
  *
@@ -25,13 +26,12 @@ import lobi.college.util.Configurations;
  */
 public class newStudent extends javax.swing.JPanel {
 
-   
-   
     public newStudent() {
-        
-            initComponents();
-       populateDept();
-         populateCombo();
+
+        initComponents();
+        populateDept();
+        populateCombo();
+        studentID();
         
     }
 
@@ -75,7 +75,7 @@ public class newStudent extends javax.swing.JPanel {
         txtLocation = new javax.swing.JTextField();
         txtSubLocation = new javax.swing.JTextField();
         txtVillage = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtStudentID = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtNextofKin = new javax.swing.JTextField();
@@ -352,7 +352,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTextField5.setText("EMS18001");
+        txtStudentID.setText("EMS18001");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Secondary Information"));
 
@@ -480,6 +480,11 @@ public class newStudent extends javax.swing.JPanel {
         btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnResetMouseClicked(evt);
+            }
+        });
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -619,7 +624,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -637,7 +642,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -781,57 +786,60 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             // create a mysql database connection
-        Configurations cf=new Configurations();
+            Configurations cf = new Configurations();
             String myUrl = cf.getProperties().getProperty("url");
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
-            
-           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
-                // create a sql date object so we can use it in our INSERT statement
-                Calendar calendar = Calendar.getInstance();
-                java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-                // the mysql insert statement
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date CurrentDate = new Date();
-                String IDNum = "", Gender = "", currentDate = "", Query = "";
-                currentDate = dateFormat.format(CurrentDate).toString();
-                if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
-                    IDNum = txtPassport.getText();
-                } else {
-                    IDNum = txtIdNum.getText();
-                }   if (optMale.isSelected()) {
-                    Gender = "Male";
-                } else if (optFemale.isSelected()) {
-                    Gender = "Female";
-                }   Query = "insert into Students (student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                // create the mysql insert preparedstatement
-                PreparedStatement preparedStmt = conn.prepareStatement(Query);
-                preparedStmt.setString(1, txtStdSur.getText() + " " + txtStdFirst.getText() + " " + txtStdOther.getText());
-                preparedStmt.setString(2, txtBCert.getText());
-                preparedStmt.setString(3, IDNum);
-                preparedStmt.setString(4, Gender);
-                preparedStmt.setString(5, cboState.getSelectedItem().toString());
-                preparedStmt.setString(6, txtCounty.getText());
-                preparedStmt.setString(7, txtSubCounty.getText());
-                preparedStmt.setString(8, txtDivision.getText());
-                preparedStmt.setString(9, txtLocation.getText());
-                preparedStmt.setString(10, txtSubLocation.getText());
-                preparedStmt.setString(11, txtVillage.getText());
-                preparedStmt.setString(12, txtAddress.getText());
-                preparedStmt.setString(13, txtPhone.getText());
-                preparedStmt.setString(14, txtEmail.getText());
-                preparedStmt.setString(15, txtNextofKin.getText() + "[" + cboParentType.getSelectedItem() + "]");
-                preparedStmt.setString(16, txtNextOfKinPhone.getText());
-                preparedStmt.setString(17, txtNextOfKinEmail.getText());
-                preparedStmt.setString(18, null);
-                preparedStmt.setString(19,currentDate);
-                // execute the preparedstatement
-                preparedStmt.execute();
+
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            // create a sql date object so we can use it in our INSERT statement
+            // the mysql insert statement
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date CurrentDate = new Date();
+            String IDNum = "", Gender = "", currentDate = "", Query = "";
+            currentDate = dateFormat.format(CurrentDate);
+            if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
+                IDNum = txtPassport.getText();
+            } else {
+                IDNum = txtIdNum.getText();
+            }
+            if (optMale.isSelected()) {
+                Gender = "Male";
+            } else if (optFemale.isSelected()) {
+                Gender = "Female";
+            }
+            Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = conn.prepareStatement(Query);
+            preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
+            preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
+            preparedStmt.setString(3, txtBCert.getText().toUpperCase());
+            preparedStmt.setString(4, IDNum);
+            preparedStmt.setString(5, Gender);
+            preparedStmt.setString(6, cboState.getSelectedItem().toString());
+            preparedStmt.setString(7, txtCounty.getText().toUpperCase());
+            preparedStmt.setString(8, txtSubCounty.getText().toUpperCase());
+            preparedStmt.setString(9, txtDivision.getText().toUpperCase());
+            preparedStmt.setString(10, txtLocation.getText().toUpperCase());
+            preparedStmt.setString(11, txtSubLocation.getText().toUpperCase());
+            preparedStmt.setString(12, txtVillage.getText().toUpperCase());
+            preparedStmt.setString(13, txtAddress.getText().toUpperCase());
+            preparedStmt.setString(14, txtPhone.getText().toUpperCase());
+            preparedStmt.setString(15, txtEmail.getText().toUpperCase());
+            preparedStmt.setString(16, txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]");
+            preparedStmt.setString(17, txtNextOfKinPhone.getText().toUpperCase());
+            preparedStmt.setString(18, txtNextOfKinEmail.getText().toUpperCase());
+            preparedStmt.setString(19, null);
+            preparedStmt.setString(20, currentDate);
+            // execute the preparedstatement
+            preparedStmt.execute();
+            JOptionPane.showInternalConfirmDialog(btnRegister,"Insert Successful", "New Student has been registered", JOptionPane.INFORMATION_MESSAGE);
+            repaint();
             
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this,"Error Occured",e.getMessage(),JOptionPane.ERROR);
+            JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnRegisterMouseClicked
@@ -842,12 +850,12 @@ public class newStudent extends javax.swing.JPanel {
 
     private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnResetMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -856,7 +864,7 @@ public class newStudent extends javax.swing.JPanel {
 
     private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
         // TODO add your handling code here:
-         
+
     }//GEN-LAST:event_cboLevelFocusGained
 
     private void cboLevelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLevelMouseClicked
@@ -868,6 +876,11 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateCombo();
     }//GEN-LAST:event_cboLevelItemStateChanged
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        studentID();
+    }//GEN-LAST:event_btnResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -907,7 +920,6 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JRadioButton optFemale;
     private javax.swing.JRadioButton optMale;
     private javax.swing.JLabel picpassportphoto;
@@ -926,6 +938,7 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtStdFirst;
     private javax.swing.JTextField txtStdOther;
     private javax.swing.JTextField txtStdSur;
+    private javax.swing.JTextField txtStudentID;
     private javax.swing.JTextField txtSubCounty;
     private javax.swing.JTextField txtSubLocation;
     private javax.swing.JTextField txtVillage;
@@ -933,62 +946,113 @@ public class newStudent extends javax.swing.JPanel {
 
     private void populateCombo() {
 
- 
-        
         //combo.addItem("Please Select...");
- 
         try {
-               Configurations cf=new Configurations();
+            Configurations cf = new Configurations();
             String myUrl = cf.getProperties().getProperty("url");
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
-           
-           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
+
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             Statement st = conn.createStatement();
-             cboCourse.removeAllItems();
-            ResultSet rs = st.executeQuery("select CourseName  from Courses Where Level = '"+cboLevel.getSelectedItem().toString()+"'");
- 
+            cboCourse.removeAllItems();
+            ResultSet rs = st.executeQuery("select CourseName  from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "'");
+
             while (rs.next()) {
-                    cboCourse.addItem(rs.getString("CourseName"));
-                    System.out.println(rs.getString("CourseName"));
+                cboCourse.addItem(rs.getString("CourseName"));
+                System.out.println(rs.getString("CourseName"));
             }
-            
-   
+
         } catch (SQLException | ClassNotFoundException e) {
-                
-           JOptionPane.showMessageDialog(this,  "When Populating Courses, " +e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "When Populating Courses, " + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
- 
- 
-        
-    }    
+
+    }
 
     private void populateDept() {
-    try {
-               Configurations cf=new Configurations();
+        try {
+            Configurations cf = new Configurations();
             String myUrl = cf.getProperties().getProperty("url");
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
-           
-           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
+
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             Statement st = conn.createStatement();
-             cboDept.removeAllItems();
+            cboDept.removeAllItems();
             ResultSet rs = st.executeQuery("select DeptName  from Departments where AdmittingFlag=1");
- 
+
             while (rs.next()) {
-                    cboDept.addItem(rs.getString("DeptName"));
-                    System.out.println(rs.getString("DeptName"));
+                cboDept.addItem(rs.getString("DeptName"));
+                System.out.println(rs.getString("DeptName"));
             }
-            
-   
+
         } catch (SQLException | ClassNotFoundException e) {
-                
-           JOptionPane.showMessageDialog(this,  "When Populating Departments," + e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
- 
-     }
+       
+    }
 
-   
+    private void studentID() {
+        String StudentID = "";
+        try {
+            Configurations cf = new Configurations();
+            String yearPart,Query, myUrl = cf.getProperties().getProperty("url"), Pattern = "KTVC";
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date CurrentDate = new Date();
+            Statement st;
+            ResultSet rs;
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            // create a sql date object so we can use it in our INSERT statement
+
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
+            Pattern = Pattern+ yearPart;
+            int tempVal = 1;
+            st = conn.createStatement();
+            Query="select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'";
+            System.out.println(Query);
+            rs = st.executeQuery(Query);
+
+            while (rs!=null) {
+
+                rs = st.executeQuery("select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'");
+                System.out.println(Pattern+formatIndex(tempVal));
+                if (!rs.first()) {
+                    StudentID = Pattern+formatIndex(tempVal);
+                    txtStudentID.setText(StudentID);
+                    break;
+                } else {
+                    tempVal++;
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    private String formatIndex(int tempVal) {
+        String Pattern="";
+        switch (String.valueOf(tempVal).length()) {
+            case 1:
+                Pattern = "000" + String.valueOf(tempVal);
+                break;
+            case 2:
+                Pattern = "00" + String.valueOf(tempVal);
+                break;
+            case 3:
+                Pattern = "0" + String.valueOf(tempVal);
+                break;
+            case 4:
+                Pattern = String.valueOf(tempVal);
+                break;
+        }
+       
+        return Pattern;
+    }
 }

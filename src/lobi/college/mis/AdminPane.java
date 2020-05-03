@@ -47,6 +47,23 @@ public class AdminPane extends javax.swing.JInternalFrame {
         setTitle("Administration Pane");
         setDoubleBuffered(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -57,6 +74,11 @@ public class AdminPane extends javax.swing.JInternalFrame {
         btnMgtDepartments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMgtDepartmentsMouseClicked(evt);
+            }
+        });
+        btnMgtDepartments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMgtDepartmentsActionPerformed(evt);
             }
         });
         jToolBar1.add(btnMgtDepartments);
@@ -120,6 +142,11 @@ public class AdminPane extends javax.swing.JInternalFrame {
 
     private void btnMgtDepartmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMgtDepartmentsMouseClicked
         // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnMgtDepartmentsMouseClicked
+
+    private void btnMgtDepartmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMgtDepartmentsActionPerformed
+        // TODO add your handling code here:
          ManageDepartments dept = new ManageDepartments();
         adminPane.removeAll();
        adminPane.setVisible(false);
@@ -130,7 +157,12 @@ public class AdminPane extends javax.swing.JInternalFrame {
 
         adminPane.setVisible(true);
         pack();
-    }//GEN-LAST:event_btnMgtDepartmentsMouseClicked
+    }//GEN-LAST:event_btnMgtDepartmentsActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        btnMgtDepartments.doClick();
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
