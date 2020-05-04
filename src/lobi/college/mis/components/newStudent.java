@@ -276,7 +276,7 @@ public class newStudent extends javax.swing.JPanel {
                         .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtIdNum, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
@@ -285,15 +285,13 @@ public class newStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(optMale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(optFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(optMale)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(optFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtStdSur, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -815,8 +813,8 @@ public class newStudent extends javax.swing.JPanel {
             preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
             preparedStmt.setString(3, txtBCert.getText().toUpperCase());
             preparedStmt.setString(4, IDNum);
-            preparedStmt.setString(5, Gender);
-            preparedStmt.setString(6, cboState.getSelectedItem().toString());
+            preparedStmt.setString(5, Gender.toUpperCase());
+            preparedStmt.setString(6, cboState.getSelectedItem().toString().toUpperCase());
             preparedStmt.setString(7, txtCounty.getText().toUpperCase());
             preparedStmt.setString(8, txtSubCounty.getText().toUpperCase());
             preparedStmt.setString(9, txtDivision.getText().toUpperCase());
@@ -985,7 +983,7 @@ public class newStudent extends javax.swing.JPanel {
 
             while (rs.next()) {
                 cboDept.addItem(rs.getString("DeptName"));
-                System.out.println(rs.getString("DeptName"));
+               
             }
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -1015,7 +1013,7 @@ public class newStudent extends javax.swing.JPanel {
             int tempVal = 1;
             st = conn.createStatement();
             Query="select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'";
-            System.out.println(Query);
+            
             rs = st.executeQuery(Query);
 
             while (rs!=null) {

@@ -57,7 +57,9 @@ public class RegisteredStudents extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/research.png"))); // NOI18N
         jButton1.setText("<html><b>Search</b>");
 
+        jScrollPane3.setForeground(new java.awt.Color(31, 28, 28));
         jScrollPane3.setAutoscrolls(true);
+        jScrollPane3.setDoubleBuffered(true);
 
         tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
@@ -140,7 +142,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
         while(rs.next()){
 
-            Object o[] = {rs.getInt("B_Certificate"),rs.getString("Student_Name"),rs.getInt("IDNo"),rs.getString("Gender"),rs.getString("Nationality"),rs.getString("County"),rs.getString("Subcounty"),rs.getString("Phone"),rs.getString("email"),rs.getString("Address"),rs.getString("Gender"),rs.getString("NextOfKin"),rs.getString("NextofKinPhone")};
+            Object o[] = {rs.getString("StudentID"),rs.getInt("B_Certificate"),rs.getString("Student_Name"),rs.getInt("IDNo"),rs.getString("Gender"),rs.getString("Nationality"),rs.getString("County"),rs.getString("Subcounty"),rs.getString("Phone"),rs.getString("email"),rs.getString("Address"),rs.getString("Gender"),rs.getString("NextOfKin"),rs.getString("NextofKinPhone")};
             tm.addRow(o);
 
 
