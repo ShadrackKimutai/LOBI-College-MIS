@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         setModalExclusionType(null);
         setResizable(false);
         setSize(new java.awt.Dimension(305, 251));
+        setType(java.awt.Window.Type.UTILITY);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setText("UserName");
