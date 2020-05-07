@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import lobi.college.util.Configurations;
 
@@ -26,7 +27,8 @@ import lobi.college.util.Configurations;
  */
 public class newStudent extends javax.swing.JPanel {
 
-    private String enrolledInCourse = "";
+    private String enrolledInCourse;
+    private int courseID;
 
     public newStudent() {
 
@@ -86,11 +88,11 @@ public class newStudent extends javax.swing.JPanel {
         txtNextOfKinEmail = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        txtPreviousGrade = new javax.swing.JTextField();
+        cboPreviousLevel = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        txtPreviousIndex = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnReset = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
@@ -101,6 +103,8 @@ public class newStudent extends javax.swing.JPanel {
         cboCourse = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        cboEnrollTo = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         picpassportphoto = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -419,23 +423,23 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel10.setText("Previous Level");
 
-        jTextField17.setText("(Mean Grade)");
-        jTextField17.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPreviousGrade.setText("(Mean Grade)");
+        txtPreviousGrade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField17FocusGained(evt);
+                txtPreviousGradeFocusGained(evt);
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KCPE", "KCSE", "ARTISAN CERTIFICATE", "KNEC CRAFT CERTIFICATE", "KNEC DIPLOMA CERTIFICATE" }));
+        cboPreviousLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KCPE", "KCSE", "ARTISAN CERTIFICATE", "KNEC CRAFT CERTIFICATE", "KNEC DIPLOMA CERTIFICATE" }));
 
         jLabel11.setText("Grade");
 
         jLabel12.setText("Index Number");
 
-        jTextField18.setText("(Enter Full Index Number of Previous Level)");
-        jTextField18.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPreviousIndex.setText("(Enter Full Index Number of Previous Level)");
+        txtPreviousIndex.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField18FocusGained(evt);
+                txtPreviousIndexFocusGained(evt);
             }
         });
 
@@ -451,9 +455,9 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField17)
-                    .addComponent(jTextField18))
+                    .addComponent(cboPreviousLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPreviousGrade)
+                    .addComponent(txtPreviousIndex))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -462,16 +466,16 @@ public class newStudent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboPreviousLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPreviousGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtPreviousIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Registration Tools"));
@@ -514,12 +518,12 @@ public class newStudent extends javax.swing.JPanel {
                 .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Admission"));
 
-        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA" }));
+        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA", "HIGHER DIPLOMA" }));
         cboLevel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboLevelItemStateChanged(evt);
@@ -530,9 +534,9 @@ public class newStudent extends javax.swing.JPanel {
                 cboLevelFocusGained(evt);
             }
         });
-        cboLevel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboLevelMouseClicked(evt);
+        cboLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLevelActionPerformed(evt);
             }
         });
 
@@ -543,6 +547,10 @@ public class newStudent extends javax.swing.JPanel {
         jLabel15.setText("Course");
 
         jLabel13.setText("Department");
+
+        jLabel16.setText("Module");
+
+        cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -556,21 +564,28 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cboLevel, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cboDept, javax.swing.GroupLayout.Alignment.TRAILING, 0, 384, Short.MAX_VALUE)
-                    .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(cboDept, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboEnrollTo, 0, 146, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel16)
+                    .addComponent(cboEnrollTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -772,15 +787,15 @@ public class newStudent extends javax.swing.JPanel {
         txtNextOfKinEmail.setText("");
     }//GEN-LAST:event_txtNextOfKinEmailFocusGained
 
-    private void jTextField17FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField17FocusGained
+    private void txtPreviousGradeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreviousGradeFocusGained
         // TODO add your handling code here:
-        jTextField17.setText("");
-    }//GEN-LAST:event_jTextField17FocusGained
+        txtPreviousGrade.setText("");
+    }//GEN-LAST:event_txtPreviousGradeFocusGained
 
-    private void jTextField18FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField18FocusGained
+    private void txtPreviousIndexFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreviousIndexFocusGained
         // TODO add your handling code here:
-        jTextField18.setText("");
-    }//GEN-LAST:event_jTextField18FocusGained
+        txtPreviousIndex.setText("");
+    }//GEN-LAST:event_txtPreviousIndexFocusGained
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
@@ -816,20 +831,39 @@ public class newStudent extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cboLevelFocusGained
 
-    private void cboLevelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLevelMouseClicked
-        // TODO add your handling code here:
-        populateCombo();
-    }//GEN-LAST:event_cboLevelMouseClicked
-
     private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
         // TODO add your handling code here:
+
         populateCombo();
+        cboEnrollTo.removeAll();
+
+//
+//DefaultComboBoxModel model = new DefaultComboBoxModel( yourStringArray );
+//comboBox.setModel( model );
+        switch (cboLevel.getSelectedIndex()) {
+            case 0:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+                break;
+            case 1:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2"}));
+                break;
+            case 2:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2", "3"}));
+                break;
+            case 3:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+                break;
+        }
     }//GEN-LAST:event_cboLevelItemStateChanged
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
         studentID();
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboLevelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -840,11 +874,12 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox<String> cboCourse;
     private javax.swing.JComboBox<String> cboDept;
+    private javax.swing.JComboBox<String> cboEnrollTo;
     private javax.swing.JComboBox<String> cboLevel;
     private javax.swing.JComboBox<String> cboParentType;
+    private javax.swing.JComboBox<String> cboPreviousLevel;
     private javax.swing.JComboBox<String> cboState;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -852,6 +887,7 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -867,8 +903,6 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
     private javax.swing.JRadioButton optFemale;
     private javax.swing.JRadioButton optMale;
     private javax.swing.JLabel picpassportphoto;
@@ -884,6 +918,8 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtNextofKin;
     private javax.swing.JTextField txtPassport;
     private javax.swing.JFormattedTextField txtPhone;
+    private javax.swing.JTextField txtPreviousGrade;
+    private javax.swing.JTextField txtPreviousIndex;
     private javax.swing.JTextField txtStdFirst;
     private javax.swing.JTextField txtStdOther;
     private javax.swing.JTextField txtStdSur;
@@ -905,11 +941,11 @@ public class newStudent extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             Statement st = conn.createStatement();
             cboCourse.removeAllItems();
-            ResultSet rs = st.executeQuery("select CourseName  from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "'");
+            ResultSet rs = st.executeQuery("select CourseName,CourseID from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "'");
 
             while (rs.next()) {
                 cboCourse.addItem(rs.getString("CourseName"));
-                System.out.println(rs.getString("CourseName"));
+                courseID = rs.getInt("CourseID");
             }
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -1055,33 +1091,41 @@ public class newStudent extends javax.swing.JPanel {
             preparedStmt.setString(20, currentDate);
             // execute the preparedstatement
             preparedStmt.execute();
-            JOptionPane.showInternalConfirmDialog(btnRegister, "Insert Successful", "New Student has been registered", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "New Student has been registered","Insert Successful",  JOptionPane.INFORMATION_MESSAGE);
             repaint();
 
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,  e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void enrollNewStudenttoClass() {
-try {
+        try {
             Configurations cf = new Configurations();
             String Query, myUrl = cf.getProperties().getProperty("url");
-                    
+
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             // create a sql date object so we can use it in our INSERT statement
             Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
-        
+
             Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
-           PreparedStatement preparedStmt = conn.prepareStatement(Query);
-           preparedStmt.setString(1, txtStudentID.getText());
-           preparedStmt.setInt(2, txtBCert.getText());
-           preparedStmt.setInt(3,)
-           
-            
+            PreparedStatement preparedStmt = conn.prepareStatement(Query);
+            preparedStmt.setString(1, txtStudentID.getText());
+            preparedStmt.setInt(2, Integer.valueOf(txtBCert.getText()));
+            preparedStmt.setInt(3, courseID);
+            preparedStmt.setString(4, cboPreviousLevel.getSelectedItem().toString());
+            preparedStmt.setString(5, txtPreviousIndex.getText());
+            preparedStmt.setString(6, txtPreviousGrade.getText());
+            preparedStmt.setString(7, cboEnrollTo.getSelectedItem().toString());
+            preparedStmt.setString(8, "Active");
+            preparedStmt.execute();
+            JOptionPane.showMessageDialog(this,  "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module " + cboEnrollTo.getSelectedItem(),"Insert Successful", JOptionPane.INFORMATION_MESSAGE);
+            repaint();
+
         } catch (ClassNotFoundException | SQLException ex) {
+                        JOptionPane.showMessageDialog(this,ex.getMessage(),"Error Occured"  , JOptionPane.ERROR_MESSAGE);
 
         }
     }
@@ -1126,9 +1170,13 @@ try {
             Query = "select CourseName  from Courses where CourseID=" + CourseId + "";
 
             rs = st.executeQuery(Query);
-            enrolledInCourse=rs.getString("CourseName");
+            enrolledInCourse = rs.getString("CourseName");
         } catch (ClassNotFoundException | SQLException ex) {
 
         }
+    }
+
+    private int getCourseID() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
