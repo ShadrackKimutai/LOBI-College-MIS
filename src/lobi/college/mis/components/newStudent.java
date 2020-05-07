@@ -1076,7 +1076,9 @@ try {
         
             Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
            PreparedStatement preparedStmt = conn.prepareStatement(Query);
-           
+           preparedStmt.setString(1, txtStudentID.getText());
+           preparedStmt.setInt(2, txtBCert.getText());
+           preparedStmt.setInt(3,)
            
             
         } catch (ClassNotFoundException | SQLException ex) {
