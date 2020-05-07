@@ -1066,7 +1066,22 @@ public class newStudent extends javax.swing.JPanel {
     }
 
     private void enrollNewStudenttoClass() {
+try {
+            Configurations cf = new Configurations();
+            String Query, myUrl = cf.getProperties().getProperty("url");
+                    
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            // create a sql date object so we can use it in our INSERT statement
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+        
+            Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
+           PreparedStatement preparedStmt = conn.prepareStatement(Query);
+           
+           
+            
+        } catch (ClassNotFoundException | SQLException ex) {
 
+        }
     }
 
     private boolean checkifEnrolled() {
@@ -1110,7 +1125,7 @@ public class newStudent extends javax.swing.JPanel {
 
             rs = st.executeQuery(Query);
             enrolledInCourse=rs.getString("CourseName");
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
 
         }
     }
