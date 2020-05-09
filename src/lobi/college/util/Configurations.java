@@ -5,6 +5,7 @@
  */
 package lobi.college.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,8 +21,9 @@ import lobi.college.mis.components.newStudent;
  * @author shady
  */
 public class Configurations {
-    
-private  Properties properties;
+
+    private Properties properties;
+    private String filename;
 
     public void setProperties(Properties properties) {
         this.properties = properties;
@@ -38,40 +40,37 @@ private  Properties properties;
     public String getFilename() {
         return filename;
     }
-    private String filename;
+
     public Configurations() {
-            filename="MacroDriver.dll";
-           
-       
-         try (OutputStream output = new FileOutputStream(filename)) {
+        filename = "molotov.ini";
+
+        try (OutputStream output = new FileOutputStream(filename)) {
 
             Properties prop = new Properties();
 
             // set the properties value
-            prop.setProperty("url","jdbc:mysql://localhost:3306/CollegeMIS?zeroDateTimeBehavior=convertToNull [root on Default schema]");
-            prop.setProperty("username","root");
-            prop.setProperty("password","");
-            prop.setProperty("driverClassName","org.mariadb.jdbc.Driver");
-
+            prop.setProperty("url", "jdbc:mysql://localhost:3306/CollegeMIS?zeroDateTimeBehavior=convertToNull [root on Default schema]");
+            prop.setProperty("username", "root");
+            prop.setProperty("password", "");
+            prop.setProperty("driverClassName", "org.mariadb.jdbc.Driver");
 
             // save properties to project root folder
             prop.store(output, null);
 
-         //   System.out.println(prop);
-
+            //   System.out.println(prop);
         } catch (IOException io) {
             io.printStackTrace();
         }
 
-            try {
+        try {
             properties = readPropertiesFile(filename);
         } catch (IOException ex) {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
-     public static Properties readPropertiesFile(String fileName) throws IOException  {
+    public static Properties readPropertiesFile(String fileName) throws IOException {
         FileInputStream fileInputStream = null;
         Properties prop = null;
         try {
@@ -92,5 +91,15 @@ private  Properties properties;
         }
 
         return prop;
+    }
+
+    public void deletePropertiesFile() {
+        File file = new File(filename);
+        try {
+            file.delete();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

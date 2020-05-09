@@ -6,6 +6,7 @@
 package lobi.college.mis;
 
 import java.awt.BorderLayout;
+import lobi.college.mis.components.ClassManager;
 import lobi.college.mis.components.Exams;
 
 /**
@@ -47,6 +48,11 @@ public class AcademicPane extends javax.swing.JInternalFrame {
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton1);
 
         jButton2.setText("Examination");
@@ -68,14 +74,14 @@ public class AcademicPane extends javax.swing.JInternalFrame {
         );
         AcadPaneLayout.setVerticalGroup(
             AcadPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
             .addComponent(AcadPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -103,6 +109,19 @@ public class AcademicPane extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ClassManager classmgr = new ClassManager();
+        AcadPane.removeAll();
+        AcadPane.setVisible(false);
+        AcadPane.setSize(AcadPane.getSize().width, AcadPane.getSize().height);
+        AcadPane.setVisible(true);
+        AcadPane.setLayout(new BorderLayout());
+        AcadPane.add(classmgr);
+        AcadPane.setVisible(true);
+        pack();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

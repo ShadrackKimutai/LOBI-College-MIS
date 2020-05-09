@@ -20,6 +20,7 @@ public class splash extends javax.swing.JFrame {
      */
     public splash() {
         initComponents();
+        
     }
 
     /**
@@ -32,7 +33,6 @@ public class splash extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -41,6 +41,7 @@ public class splash extends javax.swing.JFrame {
         setFocusable(false);
         setFocusableWindowState(false);
         setMaximumSize(new java.awt.Dimension(602, 310));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(602, 310));
         setResizable(false);
         setSize(new java.awt.Dimension(602, 310));
@@ -57,14 +58,12 @@ public class splash extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,18 +111,10 @@ public class splash extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 
     public void progressBar(){
-        for (int i = 0;i<100;i++){
-            try {
-                jProgressBar1.setValue(i);
-                Thread.sleep(40);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        
     }
     
 }

@@ -13,11 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import lobi.college.util.Configurations;
 
@@ -803,7 +801,7 @@ public class newStudent extends javax.swing.JPanel {
             enrollNewStudenttoClass();
             insertNewStudent();
         } else {
-            JOptionPane.showMessageDialog(btnRegister, "That students is already registered to another course.");
+            JOptionPane.showMessageDialog(this, "That students is already registered to another course.","Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnRegisterMouseClicked
@@ -1091,7 +1089,7 @@ public class newStudent extends javax.swing.JPanel {
             preparedStmt.setString(20, currentDate);
             // execute the preparedstatement
             preparedStmt.execute();
-            JOptionPane.showMessageDialog(this, "New Student has been registered","Insert Successful",  JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class","Class Placement",  JOptionPane.INFORMATION_MESSAGE);
             repaint();
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -1121,7 +1119,7 @@ public class newStudent extends javax.swing.JPanel {
             preparedStmt.setString(7, cboEnrollTo.getSelectedItem().toString());
             preparedStmt.setString(8, "Active");
             preparedStmt.execute();
-            JOptionPane.showMessageDialog(this,  "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module " + cboEnrollTo.getSelectedItem(),"Insert Successful", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,  "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module/Stage " + cboEnrollTo.getSelectedItem(),"Insert Successful", JOptionPane.INFORMATION_MESSAGE);
             repaint();
 
         } catch (ClassNotFoundException | SQLException ex) {
@@ -1175,8 +1173,4 @@ public class newStudent extends javax.swing.JPanel {
 
         }
     }
-
-    private int getCourseID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
+  }
