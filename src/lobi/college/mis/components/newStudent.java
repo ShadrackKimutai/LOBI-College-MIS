@@ -491,6 +491,7 @@ public class newStudent extends javax.swing.JPanel {
         });
 
         btnRegister.setText("Register Student");
+        btnRegister.setEnabled(false);
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegisterMouseClicked(evt);
@@ -541,6 +542,11 @@ public class newStudent extends javax.swing.JPanel {
         jLabel14.setText("Level");
 
         cboCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cboCourseMouseExited(evt);
+            }
+        });
 
         jLabel15.setText("Course");
 
@@ -797,13 +803,14 @@ public class newStudent extends javax.swing.JPanel {
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
+
         if (checkifEnrolled() == false) {
             enrollNewStudenttoClass();
             insertNewStudent();
         } else {
-            JOptionPane.showMessageDialog(this, "That students is already registered to another course.","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        newStudent.this.getTopLevelAncestor().setVisible(false);
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -862,6 +869,11 @@ public class newStudent extends javax.swing.JPanel {
     private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboLevelActionPerformed
+
+    private void cboCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCourseMouseExited
+        // TODO add your handling code here:
+        btnRegister.setEnabled(true);
+    }//GEN-LAST:event_cboCourseMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1089,13 +1101,13 @@ public class newStudent extends javax.swing.JPanel {
             preparedStmt.setString(20, currentDate);
             // execute the preparedstatement
             preparedStmt.execute();
-            JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class","Class Placement",  JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class", "Class Placement", JOptionPane.INFORMATION_MESSAGE);
             repaint();
 
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this,  e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -1119,11 +1131,11 @@ public class newStudent extends javax.swing.JPanel {
             preparedStmt.setString(7, cboEnrollTo.getSelectedItem().toString());
             preparedStmt.setString(8, "Active");
             preparedStmt.execute();
-            JOptionPane.showMessageDialog(this,  "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module/Stage " + cboEnrollTo.getSelectedItem(),"Insert Successful", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module/Stage " + cboEnrollTo.getSelectedItem(), "Insert Successful", JOptionPane.INFORMATION_MESSAGE);
             repaint();
 
         } catch (ClassNotFoundException | SQLException ex) {
-                        JOptionPane.showMessageDialog(this,ex.getMessage(),"Error Occured"  , JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
     }
@@ -1173,4 +1185,4 @@ public class newStudent extends javax.swing.JPanel {
 
         }
     }
-  }
+}
