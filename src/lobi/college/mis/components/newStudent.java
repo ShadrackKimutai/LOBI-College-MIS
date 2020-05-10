@@ -805,12 +805,22 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (checkifEnrolled() == false) {
-            enrollNewStudenttoClass();
-            insertNewStudent();
+            try {
+
+                insertNewStudent();
+                Thread.sleep(2000);
+                enrollNewStudenttoClass();
+                Thread.sleep(2000);
+                // newStudent.this.getTopLevelAncestor().dispose();
+               // this.getTopLevelAncestor().setVisible(false);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        newStudent.this.getTopLevelAncestor().setVisible(false);
+        //this.getRootPane().setVisible(false);
+
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -829,6 +839,7 @@ public class newStudent extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
@@ -1052,6 +1063,11 @@ public class newStudent extends javax.swing.JPanel {
     }
 
     private void insertNewStudent() {
+        boolean notHavingIDorPassPort = false;
+        if (((txtIdNum.getText().equals("")) || (txtIdNum.getText().equals("(ID Number)"))) && ((txtPassport.getText().equals("")) || (txtPassport.getText().equals("(Passpot Number)")))) {
+            notHavingIDorPassPort = true;
+        }
+
         try {
             // create a mysql database connection
             Configurations cf = new Configurations();
@@ -1076,38 +1092,65 @@ public class newStudent extends javax.swing.JPanel {
             } else if (optFemale.isSelected()) {
                 Gender = "Female";
             }
-            Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            if (!notHavingIDorPassPort) {
+                Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStmt = conn.prepareStatement(Query);
+                preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
+                preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
+                preparedStmt.setString(3, txtBCert.getText().toUpperCase());
+                preparedStmt.setString(4, IDNum);
+                preparedStmt.setString(5, Gender.toUpperCase());
+                preparedStmt.setString(6, cboState.getSelectedItem().toString().toUpperCase());
+                preparedStmt.setString(7, txtCounty.getText().toUpperCase());
+                preparedStmt.setString(8, txtSubCounty.getText().toUpperCase());
+                preparedStmt.setString(9, txtDivision.getText().toUpperCase());
+                preparedStmt.setString(10, txtLocation.getText().toUpperCase());
+                preparedStmt.setString(11, txtSubLocation.getText().toUpperCase());
+                preparedStmt.setString(12, txtVillage.getText().toUpperCase());
+                preparedStmt.setString(13, txtAddress.getText().toUpperCase());
+                preparedStmt.setString(14, txtPhone.getText().toUpperCase());
+                preparedStmt.setString(15, txtEmail.getText().toUpperCase());
+                preparedStmt.setString(16, txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]");
+                preparedStmt.setString(17, txtNextOfKinPhone.getText().toUpperCase());
+                preparedStmt.setString(18, txtNextOfKinEmail.getText().toUpperCase());
+                preparedStmt.setString(19, null);
+                preparedStmt.setString(20, currentDate);
+                preparedStmt.execute();
+            } else {
+                Query = "insert into Students (studentID,student_name, B_Certificate, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStmt = conn.prepareStatement(Query);
+                preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
+                preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
+                preparedStmt.setString(3, txtBCert.getText().toUpperCase());
+                preparedStmt.setString(4, Gender.toUpperCase());
+                preparedStmt.setString(5, cboState.getSelectedItem().toString().toUpperCase());
+                preparedStmt.setString(6, txtCounty.getText().toUpperCase());
+                preparedStmt.setString(7, txtSubCounty.getText().toUpperCase());
+                preparedStmt.setString(8, txtDivision.getText().toUpperCase());
+                preparedStmt.setString(9, txtLocation.getText().toUpperCase());
+                preparedStmt.setString(10, txtSubLocation.getText().toUpperCase());
+                preparedStmt.setString(11, txtVillage.getText().toUpperCase());
+                preparedStmt.setString(12, txtAddress.getText().toUpperCase());
+                preparedStmt.setString(13, txtPhone.getText().toUpperCase());
+                preparedStmt.setString(14, txtEmail.getText().toUpperCase());
+                preparedStmt.setString(15, txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]");
+                preparedStmt.setString(16, txtNextOfKinPhone.getText().toUpperCase());
+                preparedStmt.setString(17, txtNextOfKinEmail.getText().toUpperCase());
+                preparedStmt.setString(18, null);
+                preparedStmt.setString(19, currentDate);
+                preparedStmt.execute();
+            }
             // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = conn.prepareStatement(Query);
-            preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
-            preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
-            preparedStmt.setString(3, txtBCert.getText().toUpperCase());
-            preparedStmt.setString(4, IDNum);
-            preparedStmt.setString(5, Gender.toUpperCase());
-            preparedStmt.setString(6, cboState.getSelectedItem().toString().toUpperCase());
-            preparedStmt.setString(7, txtCounty.getText().toUpperCase());
-            preparedStmt.setString(8, txtSubCounty.getText().toUpperCase());
-            preparedStmt.setString(9, txtDivision.getText().toUpperCase());
-            preparedStmt.setString(10, txtLocation.getText().toUpperCase());
-            preparedStmt.setString(11, txtSubLocation.getText().toUpperCase());
-            preparedStmt.setString(12, txtVillage.getText().toUpperCase());
-            preparedStmt.setString(13, txtAddress.getText().toUpperCase());
-            preparedStmt.setString(14, txtPhone.getText().toUpperCase());
-            preparedStmt.setString(15, txtEmail.getText().toUpperCase());
-            preparedStmt.setString(16, txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]");
-            preparedStmt.setString(17, txtNextOfKinPhone.getText().toUpperCase());
-            preparedStmt.setString(18, txtNextOfKinEmail.getText().toUpperCase());
-            preparedStmt.setString(19, null);
-            preparedStmt.setString(20, currentDate);
+
             // execute the preparedstatement
-            preparedStmt.execute();
             JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class", "Class Placement", JOptionPane.INFORMATION_MESSAGE);
-            repaint();
 
         } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Got an exception!");
+            System.err.println(e.toString());
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + e.getStackTrace(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
