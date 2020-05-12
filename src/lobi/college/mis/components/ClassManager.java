@@ -28,73 +28,96 @@ public class ClassManager extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane6 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jTabbedPane5 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
 
-        jTabbedPane6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jTabbedPane6.addTab("tab1", jScrollPane1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 682, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
         );
 
-        jTabbedPane6.addTab("tab2", jPanel1);
+        jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/interface.png")), jPanel3); // NOI18N
 
-        jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/archive.png")), jTabbedPane6); // NOI18N
-        jTabbedPane1.addTab("Nominoll Roll ", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/interface.png")), jTabbedPane2); // NOI18N
-        jTabbedPane1.addTab(" Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/user-group.png")), jTabbedPane4); // NOI18N
-        jTabbedPane1.addTab("Enroll Student", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/people.png")), jTabbedPane3); // NOI18N
-        jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/person.png")), jTabbedPane5); // NOI18N
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Nominal  Roll", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/archive.png")), jPanel6); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Manage Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/user-group.png")), jPanel4); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/people.png")), jPanel5); // NOI18N
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 688, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details1.png")), jPanel7); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
