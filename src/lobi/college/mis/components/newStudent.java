@@ -27,12 +27,12 @@ public class newStudent extends javax.swing.JPanel {
 
     private String enrolledInCourse;
     private int courseID;
+    private int deptId;
 
     public newStudent() {
 
         initComponents();
         populateDept();
-        populateCombo();
         studentID();
 
     }
@@ -962,7 +962,7 @@ public class newStudent extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             Statement st = conn.createStatement();
             cboCourse.removeAllItems();
-            ResultSet rs = st.executeQuery("select CourseName,CourseID from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "'");
+            ResultSet rs = st.executeQuery("select CourseName,CourseID from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ deptId +"");
 
             while (rs.next()) {
                 cboCourse.addItem(rs.getString("CourseName"));
@@ -987,11 +987,12 @@ public class newStudent extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             Statement st = conn.createStatement();
             cboDept.removeAllItems();
-            ResultSet rs = st.executeQuery("select DeptName  from Departments where AdmittingFlag=1");
+            ResultSet rs = st.executeQuery("select DeptName,DeptID  from Departments where AdmittingFlag=1");
 
             while (rs.next()) {
                 cboDept.addItem(rs.getString("DeptName"));
-
+                deptId=rs.getInt("DeptID");
+                System.out.println(deptId);
             }
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -1000,6 +1001,7 @@ public class newStudent extends javax.swing.JPanel {
 
         }
 
+        populateCombo();
     }
 
     private void studentID() {
