@@ -704,6 +704,9 @@ public class newStudent extends javax.swing.JPanel {
     private void txtIdNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdNumFocusGained
         // TODO add your handling code here:
         txtIdNum.setText("");
+        if(txtPassport.getText().equals("(Passpot Number)")){
+            txtPassport.setText("");
+        }
     }//GEN-LAST:event_txtIdNumFocusGained
 
     private void txtBCertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBCertActionPerformed
@@ -718,6 +721,10 @@ public class newStudent extends javax.swing.JPanel {
     private void txtStdFirstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdFirstFocusGained
         // TODO add your handling code here:
         txtStdFirst.setText("");
+        if  (txtStdOther.getText().equals("(Other Names)")){
+             txtStdOther.setText("");
+        }
+        
     }//GEN-LAST:event_txtStdFirstFocusGained
 
     private void txtStdOtherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdOtherFocusGained
@@ -786,6 +793,9 @@ public class newStudent extends javax.swing.JPanel {
     private void txtPassportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassportFocusGained
         // TODO add your handling code here:
         txtPassport.setText("");
+         if(txtIdNum.getText().equals("(ID Number)")){
+            txtIdNum.setText("");
+        }
     }//GEN-LAST:event_txtPassportFocusGained
 
     private void txtNextofKinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNextofKinFocusGained
@@ -818,11 +828,12 @@ public class newStudent extends javax.swing.JPanel {
 if (cboCourse.getItemCount()!=0){
         if (checkifEnrolled() == false) {
             try {
-
+                enrollNewStudenttoClass();
+Thread.sleep(2000);
                 insertNewStudent();
                 Thread.sleep(2000);
-                enrollNewStudenttoClass();
-                Thread.sleep(2000);
+                
+                
                 // newStudent.this.getTopLevelAncestor().dispose();
                // this.getTopLevelAncestor().setVisible(false);
             } catch (InterruptedException ex) {
@@ -1119,7 +1130,7 @@ Util x=new Util();
             } else if (optFemale.isSelected()) {
                 Gender = "Female";
             }
-
+            System.out.println(IDNum);
             if (!notHavingIDorPassPort) {
                 Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStmt = conn.prepareStatement(Query);
