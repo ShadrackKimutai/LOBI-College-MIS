@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lobi.college.util.Configurations;
+import lobi.college.util.Util;
 
 /**
  *
@@ -522,6 +523,17 @@ public class newStudent extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Admission"));
 
+        cboDept.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboDeptItemStateChanged(evt);
+            }
+        });
+        cboDept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDeptActionPerformed(evt);
+            }
+        });
+
         cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA", "HIGHER DIPLOMA" }));
         cboLevel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -803,7 +815,7 @@ public class newStudent extends javax.swing.JPanel {
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
-
+if (cboCourse.getItemCount()!=0){
         if (checkifEnrolled() == false) {
             try {
 
@@ -817,10 +829,13 @@ public class newStudent extends javax.swing.JPanel {
                 Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Student Already in Session", JOptionPane.ERROR_MESSAGE);
         }
         //this.getRootPane().setVisible(false);
-
+}else{
+                JOptionPane.showMessageDialog(this, "Select a Course to be Persued By the Student.", "Missing Information", JOptionPane.ERROR_MESSAGE);
+                   cboCourse.grabFocus();
+}
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -874,7 +889,7 @@ public class newStudent extends javax.swing.JPanel {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        studentID();
+        System.out.println(cboCourse.getItemCount());
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
@@ -885,6 +900,15 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
         btnRegister.setEnabled(true);
     }//GEN-LAST:event_cboCourseMouseExited
+
+    private void cboDeptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDeptItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboDeptItemStateChanged
+
+    private void cboDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDeptActionPerformed
+        // TODO add your handling code here:
+        populateCombo();
+    }//GEN-LAST:event_cboDeptActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -951,6 +975,7 @@ public class newStudent extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateCombo() {
+Util x=new Util();
 
         //combo.addItem("Please Select...");
         try {
@@ -962,11 +987,11 @@ public class newStudent extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             Statement st = conn.createStatement();
             cboCourse.removeAllItems();
-            ResultSet rs = st.executeQuery("select CourseName,CourseID from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ deptId +"");
-
+            ResultSet rs = st.executeQuery("select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
+            //System.out.println("Query is : select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
             while (rs.next()) {
                 cboCourse.addItem(rs.getString("CourseName"));
-                courseID = rs.getInt("CourseID");
+               
             }
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -991,8 +1016,8 @@ public class newStudent extends javax.swing.JPanel {
 
             while (rs.next()) {
                 cboDept.addItem(rs.getString("DeptName"));
-                deptId=rs.getInt("DeptID");
-                System.out.println(deptId);
+               
+             //   System.out.println(deptId);
             }
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -1029,7 +1054,7 @@ public class newStudent extends javax.swing.JPanel {
             while (rs != null) {
 
                 rs = st.executeQuery("select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'");
-                System.out.println(Pattern + formatIndex(tempVal));
+               // System.out.println(Pattern + formatIndex(tempVal));
                 if (!rs.first()) {
                     StudentID = Pattern + formatIndex(tempVal);
                     txtStudentID.setText(StudentID);
