@@ -13,11 +13,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Configurations;
+import lobi.college.util.Util;
 
 /**
  *
@@ -26,6 +28,7 @@ import lobi.college.util.Configurations;
 public class ManageCourses extends javax.swing.JPanel {
 
     private final Color Silver;
+  
 
     /**
      * Creates new form ManageCourses
@@ -34,6 +37,7 @@ public class ManageCourses extends javax.swing.JPanel {
         Silver=new Color(247, 247, 247);
         initComponents();
         populateTable();
+        populateDepartments();
 
     }
 
@@ -92,6 +96,11 @@ public class ManageCourses extends javax.swing.JPanel {
                 btnResetMouseClicked(evt);
             }
         });
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         cboAccreditationBody.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "K.I.C.D", "TVET CDACC", "N.I.T.A", "K.A.S.N.E.B", "Internal " }));
 
@@ -99,7 +108,12 @@ public class ManageCourses extends javax.swing.JPanel {
 
         jLabel6.setText("Course Department");
 
-        cboDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboDepartment.setAutoscrolls(true);
+        cboDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDepartmentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,6 +231,8 @@ public class ManageCourses extends javax.swing.JPanel {
 
     private void btnRegisterCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterCourseMouseClicked
         // TODO add your handling code here:
+       Util x = new Util();
+        int deptID = x.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem()));
         try {
             // create a mysql database connection
             Configurations cf = new Configurations();
@@ -226,7 +242,7 @@ public class ManageCourses extends javax.swing.JPanel {
 
             Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             // create a sql date object so we can use it in our INSERT statement
-            String Query = "insert into Courses (CourseName,Level,Requirement,AltRequirement,Accreditor,Examiner) values (?,?,?,?,?,?)";
+            String Query = "insert into Courses (CourseName,Level,Requirement,AltRequirement,Accreditor,Examiner,deptID) values (?,?,?,?,?,?,?)";
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = conn.prepareStatement(Query);
             preparedStmt.setString(1, txtCourseName.getText());
@@ -235,10 +251,11 @@ public class ManageCourses extends javax.swing.JPanel {
             preparedStmt.setString(4, txtAltRequirements.getText());
             preparedStmt.setString(5, cboAccreditationBody.getSelectedItem().toString());
             preparedStmt.setString(6, cboExaminingBody.getSelectedItem().toString());
+            preparedStmt.setInt(7,deptID);
 
             // execute the preparedstatement
             preparedStmt.execute();
-JOptionPane.showConfirmDialog(btnReset, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
+JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
@@ -254,6 +271,17 @@ JOptionPane.showConfirmDialog(btnReset, "Course has been regstered successfuly",
         txtMinRequirements.setText("");
         txtCourseName.setText("");
     }//GEN-LAST:event_btnResetMouseClicked
+
+    private void cboDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDepartmentActionPerformed
+        // TODO add your handling code here:
+       // System.out.println(Util.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem().toString())));
+       
+    }//GEN-LAST:event_cboDepartmentActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_btnResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -305,5 +333,36 @@ JOptionPane.showConfirmDialog(btnReset, "Course has been regstered successfuly",
 
         }
     }
+
+    private void populateDepartments() {
+   
+        try {
+            Configurations cf = new Configurations();
+            String myUrl = cf.getProperties().getProperty("url");
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            // create a sql date object so we can use it in our INSERT statement
+
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Statement st = conn.createStatement();
+            cboDepartment.removeAllItems();
+            ResultSet rs = st.executeQuery("select DeptName from Departments where AdmittingFlag=1");
+
+            while (rs.next()) {
+                cboDepartment.addItem(rs.getString("DeptName"));
+               
+                
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+       
+    
+    }
+
+    
 
 }

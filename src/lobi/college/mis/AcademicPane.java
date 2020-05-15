@@ -66,6 +66,8 @@ public class AcademicPane extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(jButton2);
 
+        AcadPane.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.shadow"));
+
         javax.swing.GroupLayout AcadPaneLayout = new javax.swing.GroupLayout(AcadPane);
         AcadPane.setLayout(AcadPaneLayout);
         AcadPaneLayout.setHorizontalGroup(

@@ -1,0 +1,60 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package lobi.college.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author shady
+ */
+public class Util {
+ private int departmentID;
+
+    public Util() {
+        this.departmentID = 0;
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+ 
+     public int getDepartmentID(String Department) {
+        
+            try {
+            Configurations cf = new Configurations();
+            String myUrl = cf.getProperties().getProperty("url");
+            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            // create a sql date object so we can use it in our INSERT statement
+
+            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select DeptID from Departments where DeptName='"+Department+"'");
+            rs.next();
+           departmentID=rs.getInt(1);
+
+        } catch (SQLException | ClassNotFoundException e) {
+
+            JOptionPane.showMessageDialog(null, "Issue on Getting Department ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+          
+        
+        return departmentID;
+    }
+
+   
+   
+  
+
+    
+
+   
+   
+}
