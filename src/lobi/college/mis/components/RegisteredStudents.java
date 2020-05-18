@@ -11,7 +11,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import lobi.college.util.Configurations;
+import lobi.college.util.Database;
 
 /**
  *
@@ -131,15 +130,13 @@ public class RegisteredStudents extends javax.swing.JPanel {
     private void populateTable() {
 
         try {
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+          
             // create a sql date object so we can use it in our INSERT statement
 
             File f = new File("server.properties");
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection cnn = Database.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("Select * from Students");
+            PreparedStatement ps = cnn.prepareStatement("Select * from Students");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
             tm.setRowCount(0);
@@ -152,7 +149,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
             }
 
             tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
