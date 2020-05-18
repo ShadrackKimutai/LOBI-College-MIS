@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Configurations;
+import lobi.college.util.Database;
 import lobi.college.util.Util;
 
 /**
@@ -235,16 +236,14 @@ public class ManageCourses extends javax.swing.JPanel {
         int deptID = x.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem()));
         try {
             // create a mysql database connection
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+          
             // create a sql date object so we can use it in our INSERT statement
 
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection cnn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
             String Query = "insert into Courses (CourseName,Level,Requirement,AltRequirement,Accreditor,Examiner,deptID) values (?,?,?,?,?,?,?)";
             // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = conn.prepareStatement(Query);
+            PreparedStatement preparedStmt = cnn.prepareStatement(Query);
             preparedStmt.setString(1, txtCourseName.getText());
             preparedStmt.setString(2, cboLevel.getSelectedItem().toString());
             preparedStmt.setString(3, txtMinRequirements.getText());
@@ -256,7 +255,7 @@ public class ManageCourses extends javax.swing.JPanel {
             // execute the preparedstatement
             preparedStmt.execute();
 JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
@@ -308,15 +307,13 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
     private void populateTable() {
 
         try {
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+           
             // create a sql date object so we can use it in our INSERT statement
 
             File f = new File("server.properties");
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection cnn = Database.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("Select * from Courses");
+            PreparedStatement ps = cnn.prepareStatement("Select * from Courses");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblCourses.getModel();
             tm.setRowCount(0);
@@ -328,7 +325,7 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
             }
 
             tblCourses.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this,  e.getMessage(), "Error Occured",JOptionPane.ERROR_MESSAGE);
 
         }
@@ -337,12 +334,10 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
     private void populateDepartments() {
    
         try {
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            
             // create a sql date object so we can use it in our INSERT statement
 
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboDepartment.removeAllItems();
             ResultSet rs = st.executeQuery("select DeptName from Departments where AdmittingFlag=1");
@@ -353,7 +348,7 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
                 
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 

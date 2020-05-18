@@ -13,11 +13,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lobi.college.util.Configurations;
+import lobi.college.util.Database;
 import lobi.college.util.Util;
 
 /**
@@ -825,6 +827,8 @@ public class newStudent extends javax.swing.JPanel {
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
+        //System.out.println(txtBCert.getText() +"\n"+!txtBCert.getText().equals("")+"\n"+!txtBCert.getText().trim().equals("(B-Cert Number)") );
+      if (!txtBCert.getText().equals("") && !txtBCert.getText().trim().equals("(B-Cert Number)")){
 if (cboCourse.getItemCount()!=0){
         if (checkifEnrolled() == false) {
             try {
@@ -847,8 +851,13 @@ Thread.sleep(2000);
                 JOptionPane.showMessageDialog(this, "Select a Course to be Persued By the Student.", "Missing Information", JOptionPane.ERROR_MESSAGE);
                    cboCourse.grabFocus();
 }
-    }//GEN-LAST:event_btnRegisterMouseClicked
+        }else{
+            JOptionPane.showMessageDialog(this, "Enter the Student's Birth Centificate Number - Cannot be empty.", "Missing Information", JOptionPane.ERROR_MESSAGE);
+                   txtBCert.grabFocus();
+        }
 
+    }//GEN-LAST:event_btnRegisterMouseClicked
+    
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:       
     }//GEN-LAST:event_btnRegisterActionPerformed
@@ -990,13 +999,9 @@ Util x=new Util();
 
         //combo.addItem("Please Select...");
         try {
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
-
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
-            Statement st = conn.createStatement();
+           
+            Connection cnn =Database.getConnection();
+            Statement st = cnn.createStatement();
             cboCourse.removeAllItems();
             ResultSet rs = st.executeQuery("select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
             //System.out.println("Query is : select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
@@ -1005,7 +1010,7 @@ Util x=new Util();
                
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(this, "When Populating Courses, " + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
@@ -1015,13 +1020,11 @@ Util x=new Util();
 
     private void populateDept() {
         try {
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+    
             // create a sql date object so we can use it in our INSERT statement
 
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
-            Statement st = conn.createStatement();
+            Connection cnn =Database.getConnection();
+            Statement st = cnn.createStatement();
             cboDept.removeAllItems();
             ResultSet rs = st.executeQuery("select DeptName,DeptID  from Departments where AdmittingFlag=1");
 
@@ -1031,7 +1034,7 @@ Util x=new Util();
              //   System.out.println(deptId);
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
@@ -1043,21 +1046,21 @@ Util x=new Util();
     private void studentID() {
         String StudentID = "";
         try {
-            Configurations cf = new Configurations();
-            String yearPart, Query, myUrl = cf.getProperties().getProperty("url"), Pattern = "KTVC";
+    
+            String yearPart, Query,  Pattern = "KTVC";
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date CurrentDate = new Date();
             Statement st;
             ResultSet rs;
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+           
             // create a sql date object so we can use it in our INSERT statement
 
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection cnn =Database.getConnection();
             yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
             Pattern = Pattern + yearPart;
             int tempVal = 1;
-            st = conn.createStatement();
+            st = cnn.createStatement();
             Query = "select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'";
 
             rs = st.executeQuery(Query);
@@ -1074,7 +1077,7 @@ Util x=new Util();
                     tempVal++;
                 }
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -1107,13 +1110,9 @@ Util x=new Util();
         }
 
         try {
-            // create a mysql database connection
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
+           
 
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection cnn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
             // the mysql insert statement
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -1133,7 +1132,7 @@ Util x=new Util();
             System.out.println(IDNum);
             if (!notHavingIDorPassPort) {
                 Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                PreparedStatement preparedStmt = conn.prepareStatement(Query);
+                PreparedStatement preparedStmt = cnn.prepareStatement(Query);
                 preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
                 preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
                 preparedStmt.setString(3, txtBCert.getText().toUpperCase());
@@ -1157,7 +1156,7 @@ Util x=new Util();
                 preparedStmt.execute();
             } else {
                 Query = "insert into Students (studentID,student_name, B_Certificate, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                PreparedStatement preparedStmt = conn.prepareStatement(Query);
+                PreparedStatement preparedStmt = cnn.prepareStatement(Query);
                 preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
                 preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
                 preparedStmt.setString(3, txtBCert.getText().toUpperCase());
@@ -1184,25 +1183,21 @@ Util x=new Util();
             // execute the preparedstatement
             JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class", "Class Placement", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.toString());
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + e.getStackTrace(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
     }
 
     private void enrollNewStudenttoClass() {
         try {
-            Configurations cf = new Configurations();
-            String Query, myUrl = cf.getProperties().getProperty("url");
+           // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
 
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
-
-            Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
-            PreparedStatement preparedStmt = conn.prepareStatement(Query);
+            String Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStmt = cnn.prepareStatement(Query);
             preparedStmt.setString(1, txtStudentID.getText());
             preparedStmt.setInt(2, Integer.valueOf(txtBCert.getText()));
             preparedStmt.setInt(3, courseID);
@@ -1215,7 +1210,7 @@ Util x=new Util();
             JOptionPane.showMessageDialog(this, "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module/Stage " + cboEnrollTo.getSelectedItem(), "Insert Successful", JOptionPane.INFORMATION_MESSAGE);
             repaint();
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
@@ -1224,14 +1219,12 @@ Util x=new Util();
     private boolean checkifEnrolled() {
         boolean enrolled = false;
         try {
-            Configurations cf = new Configurations();
-            String Query, myUrl = cf.getProperties().getProperty("url");
+            String Query;
             Statement st;
             ResultSet rs;
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
-            st = conn.createStatement();
+            
+            Connection cnn=Database.getConnection();
+            st = cnn.createStatement();
             Query = "select *  from CourseEnrollment where Bcert=" + txtBCert.getText() + "";
 
             rs = st.executeQuery(Query);
@@ -1242,7 +1235,7 @@ Util x=new Util();
                 getEnrolledCourse(rs.getInt("CourseID"));
             }
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
         return enrolled;
@@ -1250,20 +1243,19 @@ Util x=new Util();
 
     private void getEnrolledCourse(int CourseId) {
         try {
-            Configurations cf = new Configurations();
-            String Query, myUrl = cf.getProperties().getProperty("url");
+            String Query;
             Statement st;
             ResultSet rs;
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+         
             // create a sql date object so we can use it in our INSERT statement
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
-            st = conn.createStatement();
+            Connection cnn = Database.getConnection();
+            st = cnn.createStatement();
             Query = "select CourseName  from Courses where CourseID=" + CourseId + "";
 
             rs = st.executeQuery(Query);
             enrolledInCourse = rs.getString("CourseName");
-        } catch (ClassNotFoundException | SQLException ex) {
-
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

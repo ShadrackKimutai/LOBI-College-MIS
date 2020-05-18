@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Configurations;
+import lobi.college.util.Database;
 
 /**
  *
@@ -243,13 +244,8 @@ public class ManageDepartments extends javax.swing.JPanel {
         // TODO add your handling code here:
          
         try {
-            // create a mysql database connection
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
-
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+          
+            Connection conn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
             String Query = "insert into Departments(DeptName,DeptSlug , AdmittingFlag) values (?,?,?)";
             // create the mysql insert preparedstatement
@@ -273,7 +269,7 @@ public class ManageDepartments extends javax.swing.JPanel {
             // execute the preparedstatement
             preparedStmt.execute();
 JOptionPane.showConfirmDialog(this, "Department has been registered successfuly", "Entry Successful", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
@@ -307,15 +303,13 @@ JOptionPane.showConfirmDialog(this, "Department has been registered successfuly"
 
     private void populateTable() {
  try {
-            Configurations cf = new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+            
             // create a sql date object so we can use it in our INSERT statement
 
             File f = new File("server.properties");
-            Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
+            Connection cnn = Database.getConnection();
 
-            PreparedStatement ps = conn.prepareStatement("Select * from Departments");
+            PreparedStatement ps = cnn.prepareStatement("Select * from Departments");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblDepartment.getModel();
             tm.setRowCount(0);
@@ -334,7 +328,7 @@ JOptionPane.showConfirmDialog(this, "Department has been registered successfuly"
             }
 
             tblDepartment.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this,  "Error Occured",e.getMessage() ,JOptionPane.ERROR_MESSAGE);
 
         }    }
