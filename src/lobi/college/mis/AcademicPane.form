@@ -28,7 +28,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar1" pref="944" max="32767" attributes="0"/>
+          <Component id="jToolBar1" pref="911" max="32767" attributes="0"/>
           <Component id="AcadPane" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
