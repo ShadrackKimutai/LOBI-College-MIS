@@ -28,7 +28,7 @@ public class LOBICollegeMIS {
 
         try {
             // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
