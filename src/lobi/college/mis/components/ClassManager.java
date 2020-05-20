@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -61,7 +64,7 @@ public class ClassManager extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCohortID = new javax.swing.JTextField();
         cboType = new javax.swing.JComboBox<>();
         cboLevel = new javax.swing.JComboBox<>();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
@@ -186,14 +189,39 @@ public class ClassManager extends javax.swing.JPanel {
         jLabel4.setText("Course");
 
         cboCourses.setEnabled(false);
+        cboCourses.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cboCoursesFocusLost(evt);
+            }
+        });
+        cboCourses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cboCoursesMouseExited(evt);
+            }
+        });
+        cboCourses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboCoursesActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText(" Intake");
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("January");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("May");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("September");
@@ -209,7 +237,8 @@ public class ClassManager extends javax.swing.JPanel {
 
         jLabel7.setText("Type");
 
-        jTextField2.setText("jTextField2");
+        txtCohortID.setEditable(false);
+        txtCohortID.setDisabledTextColor(new java.awt.Color(245, 242, 238));
 
         cboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modular Programme", "Stage Programme", " " }));
 
@@ -262,7 +291,7 @@ public class ClassManager extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2)
+                        .addComponent(txtCohortID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,8 +303,8 @@ public class ClassManager extends javax.swing.JPanel {
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, 0, 194, Short.MAX_VALUE))))
+                                .addGap(9, 9, 9)
+                                .addComponent(jComboBox2, 0, 197, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -312,7 +341,7 @@ public class ClassManager extends javax.swing.JPanel {
                             .addComponent(jLabel9)
                             .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCohortID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addContainerGap(35, Short.MAX_VALUE))))
         );
@@ -393,7 +422,7 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jPanel5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel5FocusGained
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jPanel5FocusGained
 
     private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
@@ -404,12 +433,38 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
+        generateClassID();
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         // TODO add your handling code here:
-        System.out.println(jXDatePicker1.getDate().toString());
+        // System.out.println(jXDatePicker1.getDate().toString());
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
+    private void cboCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCoursesActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cboCoursesActionPerformed
+
+    private void cboCoursesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCoursesMouseExited
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cboCoursesMouseExited
+
+    private void cboCoursesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboCoursesFocusLost
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_cboCoursesFocusLost
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -446,27 +501,51 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTree jTree1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
+    private javax.swing.JTextField txtCohortID;
     // End of variables declaration//GEN-END:variables
+private void generateClassID() {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date CurrentDate = new Date();
+        Statement st;
+        ResultSet rs;
+        String slug, month, yearPart, tempString;
+        slug = getSlug();
+        if (jRadioButton1.isSelected()) {
+            month = "J";
+        } else if (jRadioButton2.isSelected()) {
+            month = "M";
+        } else if (jRadioButton3.isSelected()) {
+            month = "S";
+        } else {
+            JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
+            jRadioButton1.grabFocus();
+            return;
+        }
+        yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
+        tempString = slug.toUpperCase() + yearPart + month;
+        // create a sql date object so we can use it in our INSERT statement
+        txtCohortID.setText("");
+        txtCohortID.setText(tempString.toUpperCase());
+
+    }
 
     private void populateCourses() {
         try {
-            
-            // create a sql date object so we can use it in our INSERT statement
 
+            // create a sql date object so we can use it in our INSERT statement
             Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboCourses.removeAllItems();
-            ResultSet rs = st.executeQuery("select coursename from Courses where level='"+cboLevel.getSelectedItem()+"'");
+            ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "'");
 
             while (rs.next()) {
                 cboCourses.addItem(rs.getString("courseName"));
-               
-                
+
             }
 
         } catch (SQLException e) {
@@ -474,11 +553,10 @@ public class ClassManager extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
- 
-        
+
     }
-    
-    public final void pop_tree() {
+
+    /*  public final void pop_tree() {
        
         try {
  Connection cnn = Database.getConnection();
@@ -555,5 +633,29 @@ public class ClassManager extends javax.swing.JPanel {
         }
  
         return (node);
+    }
+     */
+    private String getSlug() {
+        String slug = null;
+        Connection cnn = Database.getConnection();
+        Statement stmt = null;
+
+        try {
+            stmt = cnn.createStatement();
+            ResultSet rs = stmt.executeQuery("select slug from Courses where level='" + cboLevel.getSelectedItem() + "' and  CourseName='" + cboCourses.getSelectedItem() + "'");
+
+            while (rs.next()) {
+                slug = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "When selecting abbreveation, The system encountered the following, \n" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
+        }
+
+        return slug;
+    }
+
+    private void createCohort() {
+        // `CohortName`, `Level`, `Course`, `Capacity`, `StartDate`, `Structure`, `Progress`
     }
 }
