@@ -31,7 +31,7 @@ public class ManageDepartments extends javax.swing.JPanel {
      */
     public ManageDepartments() {
         initComponents();
-        Silver=new Color(200, 200, 200);
+        Silver = new Color(200, 200, 200);
         populateTable();
     }
 
@@ -240,33 +240,33 @@ public class ManageDepartments extends javax.swing.JPanel {
     private void btnRegisterDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterDeptMouseClicked
         // TODO add your handling code here:
         // TODO add your handling code here:
-         
+
         try {
-          
+
             Connection conn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
             String Query = "insert into Departments(DeptName,DeptSlug , AdmittingFlag) values (?,?,?)";
             // create the mysql insert preparedstatement
             String Admitting;
-            if (optYes.isSelected()){
-                Admitting="1";
-            }else if(optNo.isSelected()){
-                Admitting="0";
-            }else {
+            if (optYes.isSelected()) {
+                Admitting = "1";
+            } else if (optNo.isSelected()) {
+                Admitting = "0";
+            } else {
                 JOptionPane.showMessageDialog(this, "Please Specify whether department is admitting or a not", "Specify Department", JOptionPane.WARNING_MESSAGE);
                 optYes.grabFocus();
                 return;
             }
-            
+
             PreparedStatement preparedStmt = conn.prepareStatement(Query);
             preparedStmt.setString(1, txtDeptName.getText());
             preparedStmt.setString(2, txtDeptSlugName.getText());
-           
+
             preparedStmt.setString(3, Admitting);
 
             // execute the preparedstatement
             preparedStmt.execute();
-JOptionPane.showConfirmDialog(this, "Department has been registered successfuly", "Entry Successful", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showConfirmDialog(this, "Department has been registered successfuly", "Entry Successful", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
@@ -274,7 +274,6 @@ JOptionPane.showConfirmDialog(this, "Department has been registered successfuly"
         }
         populateTable();
     }//GEN-LAST:event_btnRegisterDeptMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegisterDept;
@@ -300,10 +299,9 @@ JOptionPane.showConfirmDialog(this, "Department has been registered successfuly"
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
- try {
-            
-            // create a sql date object so we can use it in our INSERT statement
+        try {
 
+            // create a sql date object so we can use it in our INSERT statement
             File f = new File("server.properties");
             Connection cnn = Database.getConnection();
 
@@ -314,20 +312,21 @@ JOptionPane.showConfirmDialog(this, "Department has been registered successfuly"
 
             while (rs.next()) {
                 Object Admitting;
-                if (rs.getBoolean("AdmittingFlag")){
-                    Admitting="True";
-                }else{
-                    Admitting="False";
+                if (rs.getBoolean("AdmittingFlag")) {
+                    Admitting = "True";
+                } else {
+                    Admitting = "False";
                 }
-              
-                Object o[] = {rs.getInt("DeptID"), rs.getString("DeptName"), rs.getString("DeptSlug"), rs.getString("DeptHead"),Admitting};
+
+                Object o[] = {rs.getInt("DeptID"), rs.getString("DeptName"), rs.getString("DeptSlug"), rs.getString("DeptHead"), Admitting};
                 tm.addRow(o);
 
             }
 
             tblDepartment.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this,  "Error Occured",e.getMessage() ,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
 
-        }    }
+        }
+    }
 }

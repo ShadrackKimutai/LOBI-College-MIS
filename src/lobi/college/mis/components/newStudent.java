@@ -704,7 +704,7 @@ public class newStudent extends javax.swing.JPanel {
     private void txtIdNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdNumFocusGained
         // TODO add your handling code here:
         txtIdNum.setText("");
-        if(txtPassport.getText().equals("(Passpot Number)")){
+        if (txtPassport.getText().equals("(Passpot Number)")) {
             txtPassport.setText("");
         }
     }//GEN-LAST:event_txtIdNumFocusGained
@@ -721,10 +721,10 @@ public class newStudent extends javax.swing.JPanel {
     private void txtStdFirstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdFirstFocusGained
         // TODO add your handling code here:
         txtStdFirst.setText("");
-        if  (txtStdOther.getText().equals("(Other Names)")){
-             txtStdOther.setText("");
+        if (txtStdOther.getText().equals("(Other Names)")) {
+            txtStdOther.setText("");
         }
-        
+
     }//GEN-LAST:event_txtStdFirstFocusGained
 
     private void txtStdOtherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdOtherFocusGained
@@ -793,7 +793,7 @@ public class newStudent extends javax.swing.JPanel {
     private void txtPassportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassportFocusGained
         // TODO add your handling code here:
         txtPassport.setText("");
-         if(txtIdNum.getText().equals("(ID Number)")){
+        if (txtIdNum.getText().equals("(ID Number)")) {
             txtIdNum.setText("");
         }
     }//GEN-LAST:event_txtPassportFocusGained
@@ -826,36 +826,35 @@ public class newStudent extends javax.swing.JPanel {
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
         //System.out.println(txtBCert.getText() +"\n"+!txtBCert.getText().equals("")+"\n"+!txtBCert.getText().trim().equals("(B-Cert Number)") );
-      if (!txtBCert.getText().equals("") && !txtBCert.getText().trim().equals("(B-Cert Number)")){
-if (cboCourse.getItemCount()!=0){
-        if (checkifEnrolled() == false) {
-            try {
-                enrollNewStudenttoClass();
-Thread.sleep(2000);
-                insertNewStudent();
-                Thread.sleep(2000);
-                
-                
-                // newStudent.this.getTopLevelAncestor().dispose();
-               // this.getTopLevelAncestor().setVisible(false);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+        if (!txtBCert.getText().equals("") && !txtBCert.getText().trim().equals("(B-Cert Number)")) {
+            if (cboCourse.getItemCount() != 0) {
+                if (checkifEnrolled() == false) {
+                    try {
+                        enrollNewStudenttoClass();
+                        Thread.sleep(2000);
+                        insertNewStudent();
+                        Thread.sleep(2000);
+
+                        // newStudent.this.getTopLevelAncestor().dispose();
+                        // this.getTopLevelAncestor().setVisible(false);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Student Already in Session", JOptionPane.ERROR_MESSAGE);
+                }
+                //this.getRootPane().setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Select a Course to be Persued By the Student.", "Missing Information", JOptionPane.ERROR_MESSAGE);
+                cboCourse.grabFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Student Already in Session", JOptionPane.ERROR_MESSAGE);
-        }
-        //this.getRootPane().setVisible(false);
-}else{
-                JOptionPane.showMessageDialog(this, "Select a Course to be Persued By the Student.", "Missing Information", JOptionPane.ERROR_MESSAGE);
-                   cboCourse.grabFocus();
-}
-        }else{
             JOptionPane.showMessageDialog(this, "Enter the Student's Birth Centificate Number - Cannot be empty.", "Missing Information", JOptionPane.ERROR_MESSAGE);
-                   txtBCert.grabFocus();
+            txtBCert.grabFocus();
         }
 
     }//GEN-LAST:event_btnRegisterMouseClicked
-    
+
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:       
     }//GEN-LAST:event_btnRegisterActionPerformed
@@ -872,7 +871,7 @@ Thread.sleep(2000);
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
@@ -927,7 +926,6 @@ Thread.sleep(2000);
         // TODO add your handling code here:
         populateCombo();
     }//GEN-LAST:event_cboDeptActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
@@ -993,19 +991,19 @@ Thread.sleep(2000);
     // End of variables declaration//GEN-END:variables
 
     private void populateCombo() {
-Util x=new Util();
+        Util x = new Util();
 
         //combo.addItem("Please Select...");
         try {
-           
-            Connection cnn =Database.getConnection();
+
+            Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             cboCourse.removeAllItems();
-            ResultSet rs = st.executeQuery("select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
+            ResultSet rs = st.executeQuery("select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId=" + x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) + "");
             //System.out.println("Query is : select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
             while (rs.next()) {
                 cboCourse.addItem(rs.getString("CourseName"));
-               
+
             }
 
         } catch (SQLException e) {
@@ -1018,18 +1016,17 @@ Util x=new Util();
 
     private void populateDept() {
         try {
-    
-            // create a sql date object so we can use it in our INSERT statement
 
-            Connection cnn =Database.getConnection();
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             cboDept.removeAllItems();
             ResultSet rs = st.executeQuery("select DeptName,DeptID  from Departments where AdmittingFlag=1");
 
             while (rs.next()) {
                 cboDept.addItem(rs.getString("DeptName"));
-               
-             //   System.out.println(deptId);
+
+                //   System.out.println(deptId);
             }
 
         } catch (SQLException e) {
@@ -1044,17 +1041,16 @@ Util x=new Util();
     private void studentID() {
         String StudentID = "";
         try {
-    
-            String yearPart, Query,  Pattern = "KTVC";
+
+            String yearPart, Query, Pattern = "KTVC";
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date CurrentDate = new Date();
             Statement st;
             ResultSet rs;
-           
-            // create a sql date object so we can use it in our INSERT statement
 
-            Connection cnn =Database.getConnection();
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
             yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
             Pattern = Pattern + yearPart;
             int tempVal = 1;
@@ -1066,7 +1062,7 @@ Util x=new Util();
             while (rs != null) {
 
                 rs = st.executeQuery("select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'");
-               // System.out.println(Pattern + formatIndex(tempVal));
+                // System.out.println(Pattern + formatIndex(tempVal));
                 if (!rs.first()) {
                     StudentID = Pattern + formatIndex(tempVal);
                     txtStudentID.setText(StudentID);
@@ -1108,7 +1104,6 @@ Util x=new Util();
         }
 
         try {
-           
 
             Connection cnn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
@@ -1191,7 +1186,7 @@ Util x=new Util();
 
     private void enrollNewStudenttoClass() {
         try {
-           // create a sql date object so we can use it in our INSERT statement
+            // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
 
             String Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
@@ -1220,8 +1215,8 @@ Util x=new Util();
             String Query;
             Statement st;
             ResultSet rs;
-            
-            Connection cnn=Database.getConnection();
+
+            Connection cnn = Database.getConnection();
             st = cnn.createStatement();
             Query = "select *  from CourseEnrollment where Bcert=" + txtBCert.getText() + "";
 
@@ -1244,7 +1239,7 @@ Util x=new Util();
             String Query;
             Statement st;
             ResultSet rs;
-         
+
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
             st = cnn.createStatement();

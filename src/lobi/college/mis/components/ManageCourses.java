@@ -27,13 +27,12 @@ import lobi.college.util.Util;
 public class ManageCourses extends javax.swing.JPanel {
 
     private final Color Silver;
-  
 
     /**
      * Creates new form ManageCourses
      */
     public ManageCourses() {
-        Silver=new Color(247, 247, 247);
+        Silver = new Color(247, 247, 247);
         initComponents();
         populateTable();
         populateDepartments();
@@ -230,13 +229,12 @@ public class ManageCourses extends javax.swing.JPanel {
 
     private void btnRegisterCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterCourseMouseClicked
         // TODO add your handling code here:
-       Util x = new Util();
+        Util x = new Util();
         int deptID = x.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem()));
         try {
             // create a mysql database connection
-          
-            // create a sql date object so we can use it in our INSERT statement
 
+            // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
             String Query = "insert into Courses (CourseName,Level,Requirement,AltRequirement,Accreditor,Examiner,deptID) values (?,?,?,?,?,?,?)";
@@ -248,11 +246,11 @@ public class ManageCourses extends javax.swing.JPanel {
             preparedStmt.setString(4, txtAltRequirements.getText());
             preparedStmt.setString(5, cboAccreditationBody.getSelectedItem().toString());
             preparedStmt.setString(6, cboExaminingBody.getSelectedItem().toString());
-            preparedStmt.setInt(7,deptID);
+            preparedStmt.setInt(7, deptID);
 
             // execute the preparedstatement
             preparedStmt.execute();
-JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
@@ -271,15 +269,14 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
 
     private void cboDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDepartmentActionPerformed
         // TODO add your handling code here:
-       // System.out.println(Util.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem().toString())));
-       
+        // System.out.println(Util.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem().toString())));
+
     }//GEN-LAST:event_cboDepartmentActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-      
-    }//GEN-LAST:event_btnResetActionPerformed
 
+    }//GEN-LAST:event_btnResetActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegisterCourse;
@@ -305,9 +302,8 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
     private void populateTable() {
 
         try {
-           
-            // create a sql date object so we can use it in our INSERT statement
 
+            // create a sql date object so we can use it in our INSERT statement
             File f = new File("server.properties");
             Connection cnn = Database.getConnection();
 
@@ -317,24 +313,23 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
             tm.setRowCount(0);
 
             while (rs.next()) {
-                Object o[] = { rs.getString("Level"), rs.getString("CourseName"), rs.getString("Requirement"), rs.getString("AltRequirement"), rs.getString("Accreditor"), rs.getString("Examiner")};
+                Object o[] = {rs.getString("Level"), rs.getString("CourseName"), rs.getString("Requirement"), rs.getString("AltRequirement"), rs.getString("Accreditor"), rs.getString("Examiner")};
                 tm.addRow(o);
 
             }
 
             tblCourses.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this,  e.getMessage(), "Error Occured",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
     }
 
     private void populateDepartments() {
-   
-        try {
-            
-            // create a sql date object so we can use it in our INSERT statement
 
+        try {
+
+            // create a sql date object so we can use it in our INSERT statement
             Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboDepartment.removeAllItems();
@@ -342,8 +337,7 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
 
             while (rs.next()) {
                 cboDepartment.addItem(rs.getString("DeptName"));
-               
-                
+
             }
 
         } catch (SQLException e) {
@@ -352,10 +346,6 @@ JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "En
 
         }
 
-       
-    
     }
-
-    
 
 }

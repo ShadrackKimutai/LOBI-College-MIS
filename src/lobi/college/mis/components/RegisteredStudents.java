@@ -118,7 +118,6 @@ public class RegisteredStudents extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -130,9 +129,8 @@ public class RegisteredStudents extends javax.swing.JPanel {
     private void populateTable() {
 
         try {
-          
-            // create a sql date object so we can use it in our INSERT statement
 
+            // create a sql date object so we can use it in our INSERT statement
             File f = new File("server.properties");
             Connection cnn = Database.getConnection();
 
