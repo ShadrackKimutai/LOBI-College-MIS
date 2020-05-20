@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -212,14 +214,19 @@ public class ClassManager extends javax.swing.JPanel {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("January");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+        jRadioButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jRadioButton1FocusLost(evt);
             }
         });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("May");
+        jRadioButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jRadioButton2FocusLost(evt);
+            }
+        });
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
@@ -228,6 +235,11 @@ public class ClassManager extends javax.swing.JPanel {
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("September");
+        jRadioButton3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jRadioButton3FocusLost(evt);
+            }
+        });
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
@@ -438,7 +450,7 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
-        generateClassID();
+        
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void cboCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCoursesActionPerformed
@@ -458,13 +470,8 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
-        generateClassID();
+       
     }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-        generateClassID();
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -476,6 +483,21 @@ public class ClassManager extends javax.swing.JPanel {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(jXDatePicker1, jXDatePicker1.getEditor().getText());
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
+    private void jRadioButton3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton3FocusLost
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_jRadioButton3FocusLost
+
+    private void jRadioButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton2FocusLost
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_jRadioButton2FocusLost
+
+    private void jRadioButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton1FocusLost
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_jRadioButton1FocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -673,7 +695,7 @@ private void generateClassID() {
             Connection cnn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
             String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress) values (?,?,?,?,?,?,?)";
-            
+
 // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = cnn.prepareStatement(Query);
             preparedStmt.setString(1, txtCohortID.getText());
@@ -685,14 +707,15 @@ private void generateClassID() {
             preparedStmt.setString(7, jComboBox2.getSelectedItem().toString());
 
             // execute the preparedstatement
-            if(checkExists()==false){
-            preparedStmt.execute();
-            JOptionPane.showConfirmDialog(this, "Cohourt has been created successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
-        }else{
+            if (checkExists() == false) {
+                preparedStmt.execute();
+                JOptionPane.showMessageDialog(this, "Cohourt has been created successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cohourt already Exists", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
+                txtCohortID.grabFocus();
                 return;
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
@@ -706,7 +729,6 @@ private void generateClassID() {
         try {
 
             // create a sql date object so we can use it in our INSERT statement
-        
             Connection cnn = Database.getConnection();
 
             PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts order by No DESC ");
@@ -728,8 +750,28 @@ private void generateClassID() {
         }
     }
 
-
     private boolean checkExists() {
-return false;
+        boolean Exists = false;
+        try {
+            String Query;
+            Statement st;
+            ResultSet rs;
+
+            Connection cnn = Database.getConnection();
+            st = cnn.createStatement();
+            Query = "select *  from Cohorts where CohortName='" + txtCohortID.getText() + "'";
+
+            rs = st.executeQuery(Query);
+
+            if (rs.first()) {
+
+                Exists = true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Exists;
     }
+
 }

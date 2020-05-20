@@ -399,7 +399,7 @@
                     <Property name="text" type="java.lang.String" value="January"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jRadioButton1FocusLost"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButton2">
@@ -410,6 +410,7 @@
                     <Property name="text" type="java.lang.String" value="May"/>
                   </Properties>
                   <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jRadioButton2FocusLost"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
                   </Events>
                 </Component>
@@ -421,6 +422,7 @@
                     <Property name="text" type="java.lang.String" value="September"/>
                   </Properties>
                   <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jRadioButton3FocusLost"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton3ActionPerformed"/>
                   </Events>
                 </Component>
