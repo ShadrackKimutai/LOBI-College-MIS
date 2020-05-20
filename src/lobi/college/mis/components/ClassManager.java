@@ -481,7 +481,7 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(jXDatePicker1, jXDatePicker1.getEditor().getText());
+        //JOptionPane.showMessageDialog(jXDatePicker1, jXDatePicker1.getEditor().getText());
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     private void jRadioButton3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton3FocusLost
@@ -547,6 +547,7 @@ private void generateClassID() {
         ResultSet rs;
         String slug, month, yearPart, tempString;
         slug = getSlug();
+        
         if (jRadioButton1.isSelected()) {
             month = "J";
         } else if (jRadioButton2.isSelected()) {
@@ -554,7 +555,7 @@ private void generateClassID() {
         } else if (jRadioButton3.isSelected()) {
             month = "S";
         } else {
-            JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
             jRadioButton1.grabFocus();
             return;
         }
@@ -588,85 +589,7 @@ private void generateClassID() {
 
     }
 
-    /*  public final void pop_tree() {
-       
-        try {
- Connection cnn = Database.getConnection();
-                Statement stm = cnn.createStatement();
-            try {
-                
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            ArrayList list = new ArrayList();
-            list.add("Category List");
-            String sql = "SELECT * from category";
- 
-            ResultSet rs = stm.executeQuery(sql);
- 
-            while (rs.next()) {
-                Object value[] = {rs.getString(1), rs.getString(2)};
-                list.add(value);
-            }
-            Object hierarchy[] = list.toArray();
-            DefaultMutableTreeNode root = processHierarchy(hierarchy);
- 
-            DefaultTreeModel treeModel = new DefaultTreeModel(root);
-          jTree1.setModel(treeModel);
-        } catch (Exception e) {
-        }
- 
-    }
- 
-    @SuppressWarnings("CallToThreadDumpStack")
-    public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
-        try {
-            int ctrow = 0;
-            int i = 0;
-            try {
-                Connection con = Database.getConnection();
-                Statement stm = con.createStatement();
-                try {
-                    
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-                String sql = "SELECT DISTINCT `Level` FROM `Courses`";
-                ResultSet rs = stm.executeQuery(sql);
- 
-                while (rs.next()) {
-                    ctrow = rs.getRow();
-                }
-                String L1Nam[] = new String[ctrow];
-                String L1Id[] = new String[ctrow];
-                ResultSet rs1 = stm.executeQuery(sql);
-                while (rs1.next()) {
-                    L1Nam[i] = rs1.getString("Level");
-                    i++;
-                }
-                DefaultMutableTreeNode child, grandchild;
-                for (int childIndex = 0; childIndex < L1Nam.length; childIndex++) {
-                    child = new DefaultMutableTreeNode(L1Nam[childIndex]);
-                    node.add(child);//add each created child to root
-                    String sql2 = "SELECT scatname from subcategory where catid= '" + L1Id[childIndex] + "' ";
-                    ResultSet rs3 = stm.executeQuery(sql2);
-                    while (rs3.next()) {
-                        grandchild = new DefaultMutableTreeNode(rs3.getString("scatname"));
-                        child.add(grandchild);//add each grandchild to each child
-                    }
-                }
- 
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
- 
-        } catch (Exception e) {
-        }
- 
-        return (node);
-    }
-     */
+   
     private String getSlug() {
         String slug = null;
         Connection cnn = Database.getConnection();
@@ -688,6 +611,10 @@ private void generateClassID() {
     }
 
     private void createCohort() {
+         if (jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected()) {
+         
+        
+        
         try {
             // create a mysql database connection
 
@@ -721,6 +648,9 @@ private void generateClassID() {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
         }
         populateTable();
+        } else {
+            jRadioButton1.grabFocus();
+        }
 // `CohortName`, `Level`, `Course`, `Capacity`, `StartDate`, `Structure`, `Progress`
     }
 
