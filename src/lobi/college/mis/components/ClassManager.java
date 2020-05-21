@@ -214,6 +214,7 @@ public class ClassManager extends javax.swing.JPanel {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("January");
+        jRadioButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jRadioButton1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jRadioButton1FocusLost(evt);
@@ -222,6 +223,7 @@ public class ClassManager extends javax.swing.JPanel {
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("May");
+        jRadioButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jRadioButton2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jRadioButton2FocusLost(evt);
@@ -235,6 +237,7 @@ public class ClassManager extends javax.swing.JPanel {
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("September");
+        jRadioButton3.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jRadioButton3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jRadioButton3FocusLost(evt);
@@ -460,12 +463,12 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void cboCoursesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCoursesMouseExited
         // TODO add your handling code here:
-
+//generateClassID();
     }//GEN-LAST:event_cboCoursesMouseExited
 
     private void cboCoursesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboCoursesFocusLost
         // TODO add your handling code here:
-        generateClassID();
+        generateClassID(false);
     }//GEN-LAST:event_cboCoursesFocusLost
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -486,17 +489,17 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jRadioButton3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton3FocusLost
         // TODO add your handling code here:
-        generateClassID();
+       generateClassID(false);
     }//GEN-LAST:event_jRadioButton3FocusLost
 
     private void jRadioButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton2FocusLost
         // TODO add your handling code here:
-        generateClassID();
+      generateClassID(false);
     }//GEN-LAST:event_jRadioButton2FocusLost
 
     private void jRadioButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton1FocusLost
         // TODO add your handling code here:
-        generateClassID();
+        generateClassID(false);
     }//GEN-LAST:event_jRadioButton1FocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -540,6 +543,8 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JTextField txtCohortID;
     // End of variables declaration//GEN-END:variables
 private void generateClassID() {
+
+
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date CurrentDate = new Date();
@@ -702,6 +707,32 @@ private void generateClassID() {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Exists;
+    }
+
+    private void generateClassID(boolean b) {
+         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date CurrentDate = new Date();
+        Statement st;
+        ResultSet rs;
+        String slug, month, yearPart, tempString;
+        slug = getSlug();
+        
+        if (jRadioButton1.isSelected()) {
+            month = "J";
+        } else if (jRadioButton2.isSelected()) {
+            month = "M";
+        } else if (jRadioButton3.isSelected()) {
+            month = "S";
+        } else {
+          // JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
+            jRadioButton1.grabFocus();
+            return;
+        }
+        yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
+        tempString = slug.toUpperCase() + yearPart + month;
+        // create a sql date object so we can use it in our INSERT statement
+        txtCohortID.setText("");
+        txtCohortID.setText(tempString.toUpperCase());
     }
 
 }
