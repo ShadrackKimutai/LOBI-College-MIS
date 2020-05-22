@@ -202,8 +202,8 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
-
-            PreparedStatement ps = cnn.prepareStatement("Select * from Students where "+dbParam+" like '%"+key+"%'");
+              PreparedStatement ps=cnn.prepareStatement("SELECT * FROM Students WHERE StudentID like '%"+key+"%' OR Student_Name like '%"+key+"%' OR B_Certificate like '%"+key+"%' OR IDNo like '%"+key+"%' OR Gender like '%"+key+"%' OR Nationality like '%"+key+"%' OR County like '%"+key+"%' OR Subcounty like '%"+key+"%' OR Division like '%"+key+"%' OR Location like '%"+key+"%' OR SubLocation like '%"+key+"%' OR Village like '%"+key+"%' OR Address like '%"+key+"%' OR Phone like '%"+key+"%' OR email like '%"+key+"%' OR NextOfKin like '%"+key+"%' OR NextofKinPhone like '%"+key+"%' OR NextofKinEmail");
+            //PreparedStatement ps = cnn.prepareStatement("Select * from Students where "+dbParam+" like '%"+key+"%'");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
             tm.setRowCount(0);
