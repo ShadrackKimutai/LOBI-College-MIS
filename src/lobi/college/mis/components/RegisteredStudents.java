@@ -51,16 +51,27 @@ public class RegisteredStudents extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        cboParam = new javax.swing.JComboBox<>();
+        txtSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane(tblStudents);
         tblStudents = new javax.swing.JTable();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student Number", "Name", "Department", "Course", " " }));
+        cboParam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student Number", "Name", "Department", "Course", " " }));
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/research.png"))); // NOI18N
         jButton1.setText("<html><b>Search</b>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jScrollPane3.setForeground(new java.awt.Color(31, 28, 28));
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -98,9 +109,9 @@ public class RegisteredStudents extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboParam, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -110,20 +121,30 @@ public class RegisteredStudents extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        // TODO add your handling code here:
+       populateTable(txtSearch.getText());
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboParam;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblStudents;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
@@ -135,6 +156,54 @@ public class RegisteredStudents extends javax.swing.JPanel {
             Connection cnn = Database.getConnection();
 
             PreparedStatement ps = cnn.prepareStatement("Select * from Students");
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
+            tm.setRowCount(0);
+
+            while (rs.next()) {
+
+                Object o[] = {rs.getString("StudentID"), rs.getInt("B_Certificate"), rs.getString("Student_Name"), rs.getInt("IDNo"), rs.getString("Gender"), rs.getString("Nationality"), rs.getString("County"), rs.getString("Subcounty"), rs.getString("Phone"), rs.getString("email"), rs.getString("Address"), rs.getString("Gender"), rs.getString("NextOfKin"), rs.getString("NextofKinPhone")};
+                tm.addRow(o);
+
+            }
+
+            tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
+
+    private void populateTable(String key) {
+        String dbParam = "", seachParam = cboParam.getSelectedItem().toString();
+
+        switch (seachParam) {
+            case "Student Number":
+                dbParam = "StudentID" ;
+                
+                break;
+            case "Name":
+                dbParam = "Student_Name";
+                break;
+            case "Department":
+                populateTable();
+                return;
+                //dbParam = "";
+            case "Course":
+                populateTable();
+                return;
+              //  dbParam = "";
+            default:
+                populateTable();
+                return;
+        }
+
+        try {
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+
+            PreparedStatement ps = cnn.prepareStatement("Select * from Students where "+dbParam+" like '%"+key+"%'");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
             tm.setRowCount(0);
