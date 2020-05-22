@@ -51,13 +51,10 @@ public class RegisteredStudents extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cboParam = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane(tblStudents);
         tblStudents = new javax.swing.JTable();
-
-        cboParam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student Number", "Name", "Department", "Course", " " }));
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -109,8 +106,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(cboParam, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +117,6 @@ public class RegisteredStudents extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboParam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,16 +126,15 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
         // TODO add your handling code here:
-       populateTable(txtSearch.getText());
+        populateTable(txtSearch.getText());
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        populateTable(txtSearch.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboParam;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblStudents;
@@ -175,34 +169,12 @@ public class RegisteredStudents extends javax.swing.JPanel {
     }
 
     private void populateTable(String key) {
-        String dbParam = "", seachParam = cboParam.getSelectedItem().toString();
-
-        switch (seachParam) {
-            case "Student Number":
-                dbParam = "StudentID" ;
-                
-                break;
-            case "Name":
-                dbParam = "Student_Name";
-                break;
-            case "Department":
-                populateTable();
-                return;
-                //dbParam = "";
-            case "Course":
-                populateTable();
-                return;
-              //  dbParam = "";
-            default:
-                populateTable();
-                return;
-        }
 
         try {
 
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
-              PreparedStatement ps=cnn.prepareStatement("SELECT * FROM Students WHERE StudentID like '%"+key+"%' OR Student_Name like '%"+key+"%' OR B_Certificate like '%"+key+"%' OR IDNo like '%"+key+"%' OR Gender like '%"+key+"%' OR Nationality like '%"+key+"%' OR County like '%"+key+"%' OR Subcounty like '%"+key+"%' OR Division like '%"+key+"%' OR Location like '%"+key+"%' OR SubLocation like '%"+key+"%' OR Village like '%"+key+"%' OR Address like '%"+key+"%' OR Phone like '%"+key+"%' OR email like '%"+key+"%' OR NextOfKin like '%"+key+"%' OR NextofKinPhone like '%"+key+"%' OR NextofKinEmail");
+            PreparedStatement ps = cnn.prepareStatement("SELECT * FROM Students WHERE StudentID like '%" + key + "%' OR Student_Name like '%" + key + "%' OR B_Certificate like '%" + key + "%' OR IDNo like '%" + key + "%' OR Gender like '%" + key + "%' OR Nationality like '%" + key + "%' OR County like '%" + key + "%' OR Subcounty like '%" + key + "%' OR Division like '%" + key + "%' OR Location like '%" + key + "%' OR SubLocation like '%" + key + "%' OR Village like '%" + key + "%' OR Address like '%" + key + "%' OR Phone like '%" + key + "%' OR email like '%" + key + "%' OR NextOfKin like '%" + key + "%' OR NextofKinPhone like '%" + key + "%' OR NextofKinEmail");
             //PreparedStatement ps = cnn.prepareStatement("Select * from Students where "+dbParam+" like '%"+key+"%'");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
