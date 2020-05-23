@@ -18,22 +18,28 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import lobi.college.mis.DashBoard;
 import lobi.college.util.Database;
+import lobi.college.util.Util;
 
 /**
  *
  * @author shady
  */
 public class RegisteredStudents extends javax.swing.JPanel {
-
+   private String User,Dept;
     private final Color Silver;
     Toolkit toolkit;
     Dimension dimension;
 
     /**
      * Creates new form RegisteredStudents
+     * @param user
+     * @param dept
      */
-    public RegisteredStudents() {
+    public RegisteredStudents(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         Silver = new Color(247, 247, 247);
         toolkit = Toolkit.getDefaultToolkit();
         dimension = toolkit.getScreenSize();
@@ -59,6 +65,9 @@ public class RegisteredStudents extends javax.swing.JPanel {
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
             }
         });
 
@@ -130,9 +139,16 @@ public class RegisteredStudents extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        populateTable(txtSearch.getText());
+        System.out.println(User+Dept);        // TODO add your handling code here:
+       
+       
+      populateTable(txtSearch.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:  
+        
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

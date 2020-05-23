@@ -29,9 +29,12 @@ public class newStudent extends javax.swing.JPanel {
     private String enrolledInCourse;
     private int courseID;
     private int deptId;
+    private final String User;
+    private final String Dept;
 
-    public newStudent() {
-
+    public newStudent(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
         populateDept();
         studentID();

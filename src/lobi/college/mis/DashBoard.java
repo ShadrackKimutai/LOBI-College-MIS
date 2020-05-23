@@ -20,13 +20,27 @@ import lobi.college.util.Configurations;
  * @author shady
  */
 public class DashBoard extends javax.swing.JFrame {
+public String userDept,user;
 
+    public String getUserDept() {
+        return userDept;
+    }
+
+    public String getUser() {
+        return user;
+    }
     /**
      * Creates new form DashBoard
+     *
+     * @param User
+     * @param UserDepartment
      */
-    public DashBoard() {
+    public DashBoard(String User, String UserDepartment) {
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        this.user=User;
+        this.userDept=UserDepartment;
+        
     }
 
     /**
@@ -67,6 +81,9 @@ public class DashBoard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LoBi College MIS");
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -254,7 +271,7 @@ public class DashBoard extends javax.swing.JFrame {
         int c = desktopPane.getAllFrames().length;
         Random r = new Random();
         if (c < 5) {
-            RegistryDash registry = new RegistryDash();
+            RegistryDash registry = new RegistryDash(user,userDept);
             registry.setVisible(true);
 
             desktopPane.add(registry);
@@ -283,7 +300,7 @@ public class DashBoard extends javax.swing.JFrame {
                 sp.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -297,7 +314,7 @@ public class DashBoard extends javax.swing.JFrame {
         int c = desktopPane.getAllFrames().length;
         Random r = new Random();
         if (c < 5) {
-            AdminPane admPane = new AdminPane();
+            AdminPane admPane = new AdminPane(user,userDept);
             admPane.setVisible(true);
             desktopPane.add(admPane);
             admPane.setLocation(c * 50, c * 50);
@@ -305,7 +322,7 @@ public class DashBoard extends javax.swing.JFrame {
                 admPane.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAdminMouseClicked
@@ -323,18 +340,18 @@ public class DashBoard extends javax.swing.JFrame {
                 procPane.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnProcurementMouseClicked
 
     private void btnAcademicPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcademicPaneMouseClicked
         // TODO add your handling code here:
-        
-                  int c = desktopPane.getAllFrames().length;
+
+        int c = desktopPane.getAllFrames().length;
         Random r = new Random();
         if (c < 5) {
-            AcademicPane academicPane = new AcademicPane();
+            AcademicPane academicPane = new AcademicPane(user,userDept);
             academicPane.setVisible(true);
             desktopPane.add(academicPane);
             academicPane.setLocation(c * 50, c * 50);
@@ -342,16 +359,21 @@ public class DashBoard extends javax.swing.JFrame {
                 academicPane.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAcademicPaneMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        Configurations conf=new Configurations();
+        Configurations conf = new Configurations();
         conf.deletePropertiesFile();
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+       this.setTitle("LoBI College MIS ("+user+")");
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -378,7 +400,8 @@ public class DashBoard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashBoard().setVisible(true);
+                //new DashBoard().setVisible(true);
+                
             }
         });
     }

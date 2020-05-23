@@ -17,11 +17,20 @@ import javax.swing.JOptionPane;
  * @author shady
  */
 public class Util {
- private int departmentID;
+ private int departmentID, userDeptID;
 
     public Util() {
         this.departmentID = 0;
+        this.userDeptID=0;
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getUserDeptID() {
+        return userDeptID;
+    }
+
+    public void setUserDeptID(int userDeptID) {
+        this.userDeptID = userDeptID;
     }
  
      public int getDepartmentID(String Department) {

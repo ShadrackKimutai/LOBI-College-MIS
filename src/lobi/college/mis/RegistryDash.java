@@ -14,11 +14,15 @@ import lobi.college.mis.components.newStudent;
  * @author shady
  */
 public class RegistryDash extends javax.swing.JInternalFrame {
-
+private String User,Dept;
     /**
      * Creates new form NewJInternalFrame
+     * @param User
+     * @param Dept
      */
-    public RegistryDash() {
+    public RegistryDash(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
        // JinternalFrame.getRootPane().setWindowDecorationStyle(5);
     }
@@ -137,7 +141,7 @@ public class RegistryDash extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        RegisteredStudents registeredStudents = new RegisteredStudents();
+        RegisteredStudents registeredStudents = new RegisteredStudents(User,Dept);
         //registeredStudents.setVisible(true);
         registryPane.removeAll();
         registryPane.setVisible(false);
@@ -154,7 +158,7 @@ public class RegistryDash extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        newStudent newStudents = new newStudent();
+        newStudent newStudents = new newStudent(User,Dept);
         registryPane.removeAll();
         registryPane.setVisible(false);
         newStudents.setSize(registryPane.getSize().width,registryPane.getSize().height);

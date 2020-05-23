@@ -11,10 +11,15 @@ package lobi.college.mis.components;
  */
 public class Exams extends javax.swing.JPanel {
 
+    private final String User;
+    private final String Dept;
+
     /**
      * Creates new form Academics
      */
-    public Exams() {
+    public Exams(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
     }
 

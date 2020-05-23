@@ -28,12 +28,18 @@ import lobi.college.util.Util;
  */
 public class ClassManager extends javax.swing.JPanel {
 
+    private String User;
+    private String Dept;
+
     /**
      * Creates new form ClassManager
      */
-    public ClassManager() {
+    public ClassManager(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
         populateTable();
+        populateStudentTable();
     }
 
     /**
@@ -57,7 +63,6 @@ public class ClassManager extends javax.swing.JPanel {
         jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
         jXDatePicker3 = new org.jdesktop.swingx.JXDatePicker();
         jPanel6 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -83,6 +88,12 @@ public class ClassManager extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCohorts = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblStudents = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Class and Term Details"));
 
@@ -115,7 +126,7 @@ public class ClassManager extends javax.swing.JPanel {
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -152,7 +163,7 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/interface.png")), jPanel3); // NOI18N
@@ -161,27 +172,14 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 875, Short.MAX_VALUE)
+            .addGap(0, 787, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addGap(0, 366, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Nominal  Roll", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/archive.png")), jPanel6); // NOI18N
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 875, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Manage Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/user-group.png")), jPanel4); // NOI18N
 
         jPanel5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -315,7 +313,7 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jLabel9)
                         .addGap(24, 24, 24)
                         .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -408,20 +406,87 @@ public class ClassManager extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/people.png")), jPanel5); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 872, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 333, Short.MAX_VALUE))
+        );
+
+        tblStudents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Student Number", "Student ", "ID Number ", "Level", "Course", "Year", "Phone"
+            }
+        ));
+        jScrollPane3.setViewportView(tblStudents);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/research.png"))); // NOI18N
+        jButton3.setText("Search");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 875, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(614, 663, Short.MAX_VALUE))
+            .addComponent(jScrollPane3)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details1.png")), jPanel7); // NOI18N
@@ -435,7 +500,7 @@ public class ClassManager extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -502,6 +567,16 @@ public class ClassManager extends javax.swing.JPanel {
         generateClassID(false);
     }//GEN-LAST:event_jRadioButton1FocusLost
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+        populateStudentTable(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        populateStudentTable(jTextField1.getText());
+    }//GEN-LAST:event_jTextField1KeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboCourses;
@@ -509,6 +584,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -524,22 +600,26 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
     private javax.swing.JTable tblCohorts;
+    private javax.swing.JTable tblStudents;
     private javax.swing.JTextField txtCohortID;
     // End of variables declaration//GEN-END:variables
 private void generateClassID() {
@@ -735,4 +815,59 @@ private void generateClassID() {
         txtCohortID.setText(tempString.toUpperCase());
     }
 
+    private void populateStudentTable() {
+
+        try {
+
+            // create a sql date object so we can use it in our INSERT statement
+            File f = new File("server.properties");
+            Connection cnn = Database.getConnection();
+  String Query="select STU.StudentID,Student_Name,IDNo,CRS.Level,CourseName,CurrentProgress,Phone from Students STU inner join CourseEnrollment CRSE ON STU.StudentID = CRSE.StudentID inner Join Courses CRS ON CRSE.CourseID = CRS.CourseID Where CRS.DeptID='"+Dept+"' ";
+           // System.out.println(Query);
+            PreparedStatement ps = cnn.prepareStatement(Query);
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
+            tm.setRowCount(0);
+
+            while (rs.next()) {
+
+                Object o[] = {rs.getString("STU.StudentID"), rs.getString("Student_Name"), rs.getInt("IDNo"), rs.getString("CRS.Level"), rs.getString("CourseName"), rs.getString("CurrentProgress"), rs.getString("Phone")};
+                tm.addRow(o);
+
+            }
+
+            tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null ,e.getMessage(), "Error ",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void populateStudentTable(String key) {
+
+        try {
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+            String Query="select STU.StudentID,Student_Name,IDNo,CRS.Level,CourseName,CurrentProgress,Phone from Students STU inner join CourseEnrollment CRSE ON STU.StudentID = CRSE.StudentID inner Join Courses CRS ON CRSE.CourseID = CRS.CourseID Where CRS.DeptID='"+Dept+"' AND (STU.StudentID  LIKE '%"+key+"%' or Student_Name   LIKE '%"+key+"%' or IDNo   LIKE '%"+key+"%' or CRS.Level   LIKE '%"+key+"%' or CourseName LIKE '%"+key+"%' or CurrentProgress   LIKE '%"+key+"%' or Phone  LIKE '%"+key+"%')";
+            //System.out.println(Query);
+            PreparedStatement ps = cnn.prepareStatement(Query);
+            //PreparedStatement ps = cnn.prepareStatement("Select * from Students where "+dbParam+" like '%"+key+"%'");
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
+            tm.setRowCount(0);
+
+            while (rs.next()) {
+
+                Object o[] = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7)};
+                tm.addRow(o);
+
+            }
+
+            tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null , e.getMessage(), "Error ",JOptionPane.ERROR);
+        }
+    }
 }

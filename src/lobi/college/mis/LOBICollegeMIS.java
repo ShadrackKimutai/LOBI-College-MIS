@@ -10,13 +10,15 @@ import javax.swing.UnsupportedLookAndFeelException;
 import lobi.college.util.splash;
 //import ch.randelshofer.quaqua.QuaquaLookAndFeel
 
-//import com.formdev.flatlaf.FlatIntelliJLaf
+
+//import com.formdev.flatlaf.FlatLightLaf
 /**
  *
  * @author shady
  */
 public class LOBICollegeMIS {
 
+   
     public LOBICollegeMIS() {
 
     }
@@ -28,7 +30,7 @@ public class LOBICollegeMIS {
 
         try {
             // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }

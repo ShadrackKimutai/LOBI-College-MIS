@@ -27,11 +27,15 @@ import lobi.college.util.Util;
 public class ManageCourses extends javax.swing.JPanel {
 
     private final Color Silver;
+    private final String User;
+    private final String Dept;
 
     /**
      * Creates new form ManageCourses
      */
-    public ManageCourses() {
+    public ManageCourses(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         Silver = new Color(247, 247, 247);
         initComponents();
         populateTable();
