@@ -14,11 +14,13 @@ import lobi.college.mis.components.Exams;
  * @author shady
  */
 public class AcademicPane extends javax.swing.JInternalFrame {
-
+private String User,Dept;
     /**
      * Creates new form AcademicPane
      */
-    public AcademicPane() {
+    public AcademicPane(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
     }
 
@@ -99,7 +101,7 @@ public class AcademicPane extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Exams exams = new Exams();
+        Exams exams = new Exams(User,Dept);
         AcadPane.removeAll();
         AcadPane.setVisible(false);
         AcadPane.setSize(AcadPane.getSize().width, AcadPane.getSize().height);
@@ -114,7 +116,7 @@ public class AcademicPane extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ClassManager classmgr = new ClassManager();
+        ClassManager classmgr = new ClassManager(User,Dept);
         AcadPane.removeAll();
         AcadPane.setVisible(false);
         AcadPane.setSize(AcadPane.getSize().width, AcadPane.getSize().height);
