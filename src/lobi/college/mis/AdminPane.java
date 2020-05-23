@@ -16,12 +16,17 @@ import lobi.college.mis.components.newStudent;
  */
 public class AdminPane extends javax.swing.JInternalFrame {
 
+    private final String User;
+    private final String Dept;
+
     /**
      * Creates new form AdminPane
      */
-    public AdminPane() {
+    public AdminPane(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
-        
+        System.out.println(user+dept);
     }
 
     /**
@@ -128,7 +133,7 @@ public class AdminPane extends javax.swing.JInternalFrame {
 
     private void btnCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCoursesMouseClicked
         // TODO add your handling code here:
-         ManageCourses courses = new ManageCourses();
+         ManageCourses courses = new ManageCourses(User,Dept);
         adminPane.removeAll();
        adminPane.setVisible(false);
         adminPane.setSize(adminPane.getSize().width,adminPane.getSize().height);
@@ -147,7 +152,7 @@ public class AdminPane extends javax.swing.JInternalFrame {
 
     private void btnMgtDepartmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMgtDepartmentsActionPerformed
         // TODO add your handling code here:
-         ManageDepartments dept = new ManageDepartments();
+         ManageDepartments dept = new ManageDepartments(User,Dept);
         adminPane.removeAll();
        adminPane.setVisible(false);
         adminPane.setSize(adminPane.getSize().width,adminPane.getSize().height);
