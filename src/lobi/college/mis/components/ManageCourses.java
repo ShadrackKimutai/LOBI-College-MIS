@@ -185,7 +185,7 @@ public class ManageCourses extends javax.swing.JPanel {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnRegisterCourse, btnReset});
 
-        tblCourses.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        /*tblCourses.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
             @Override
             public Component getTableCellRendererComponent(JTable table,
@@ -196,7 +196,7 @@ public class ManageCourses extends javax.swing.JPanel {
                 c.setBackground(row%2==0 ? Color.white : Color.lightGray);
                 return c;
             };
-        });
+        });*/
         tblCourses.setAutoCreateRowSorter(true);
         tblCourses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -225,9 +225,8 @@ public class ManageCourses extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

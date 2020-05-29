@@ -6,15 +6,14 @@
 package lobi.college.mis.components;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Database;
 
@@ -30,6 +29,8 @@ public class ManageDepartments extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageDepartments
+     * @param user
+     * @param dept
      */
     public ManageDepartments(String user,String dept) {
         this.User=user;
@@ -37,6 +38,7 @@ public class ManageDepartments extends javax.swing.JPanel {
         initComponents();
         Silver = new Color(200, 200, 200);
         populateTable();
+        populateDepartments();
     }
 
     /**
@@ -61,7 +63,7 @@ public class ManageDepartments extends javax.swing.JPanel {
         btnRegisterDept = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboDeptName = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -150,8 +152,13 @@ public class ManageDepartments extends javax.swing.JPanel {
         jTabbedPane1.addTab("Register Department", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/document.png")), jPanel1); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modify Existing Details"));
+        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel2FocusGained(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboDeptName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Select Department");
 
@@ -172,17 +179,17 @@ public class ManageDepartments extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, 0, 516, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(cboDeptName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtModifyDept, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtModifyDept, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDeptName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -194,7 +201,7 @@ public class ManageDepartments extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Assign Departmental Head", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/manager.png")), jPanel2); // NOI18N
 
-        tblDepartment.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        /*tblDepartment.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
             @Override
             public Component getTableCellRendererComponent(JTable table,
@@ -207,6 +214,7 @@ public class ManageDepartments extends javax.swing.JPanel {
                 return c;
             };
         });
+        */
         tblDepartment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -215,7 +223,8 @@ public class ManageDepartments extends javax.swing.JPanel {
                 "", "Department Name", "Dept Slug (Abbrev)", "Current H.O.D", "Is Admitting Dept Or Not"
             }
         ));
-        tblDepartment.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblDepartment.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblDepartment.setDoubleBuffered(true);
         jScrollPane1.setViewportView(tblDepartment);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -230,8 +239,7 @@ public class ManageDepartments extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -263,8 +271,8 @@ public class ManageDepartments extends javax.swing.JPanel {
             }
 
             PreparedStatement preparedStmt = conn.prepareStatement(Query);
-            preparedStmt.setString(1, txtDeptName.getText());
-            preparedStmt.setString(2, txtDeptSlugName.getText());
+            preparedStmt.setString(1, txtDeptName.getText().toUpperCase());
+            preparedStmt.setString(2, txtDeptSlugName.getText().toUpperCase());
 
             preparedStmt.setString(3, Admitting);
 
@@ -279,11 +287,16 @@ public class ManageDepartments extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btnRegisterDeptMouseClicked
 
+    private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jPanel2FocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegisterDept;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cboDeptName;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -317,9 +330,9 @@ public class ManageDepartments extends javax.swing.JPanel {
             while (rs.next()) {
                 Object Admitting;
                 if (rs.getBoolean("AdmittingFlag")) {
-                    Admitting = "True";
+                    Admitting = "ADMITTING";
                 } else {
-                    Admitting = "False";
+                    Admitting = "NON ADMITTING";
                 }
 
                 Object o[] = {rs.getInt("DeptID"), rs.getString("DeptName"), rs.getString("DeptSlug"), rs.getString("DeptHead"), Admitting};
@@ -332,5 +345,27 @@ public class ManageDepartments extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
 
         }
+    }
+
+    private void populateDepartments() {
+try {
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection conn = Database.getConnection();
+            Statement st = conn.createStatement();
+            cboDeptName.removeAllItems();
+            ResultSet rs = st.executeQuery("select DeptName from Departments");
+
+            while (rs.next()) {
+                cboDeptName.addItem(rs.getString("DeptName"));
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }
 }

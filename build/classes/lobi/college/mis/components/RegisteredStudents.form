@@ -98,7 +98,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tblStudents.setPreferredScrollableViewportSize(new Dimension(dimension.width,dimension.height));"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Silver);                        &#xa;            return c;&#xa;        };&#xa;    });&#xa;tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Silver);                        &#xa;            return c;&#xa;        };&#xa;    });&#xa;tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);*/"/>
           </AuxValues>
         </Component>
       </SubComponents>

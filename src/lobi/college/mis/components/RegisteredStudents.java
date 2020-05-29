@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import lobi.college.mis.DashBoard;
 import lobi.college.util.Database;
 import lobi.college.util.Util;
 
@@ -84,7 +83,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         jScrollPane3.setDoubleBuffered(true);
         jScrollPane3.setWheelScrollingEnabled(false);
 
-        tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        /*tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
             @Override
             public Component getTableCellRendererComponent(JTable table,
@@ -96,7 +95,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
                 return c;
             };
         });
-        tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);*/
         tblStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -135,18 +134,19 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
         // TODO add your handling code here:
-        populateTable(txtSearch.getText());
+        
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.out.println(User+Dept);        // TODO add your handling code here:
+       Util util=new Util();
        
-       
-      populateTable(txtSearch.getText());
+      populateTable(util.formatString(txtSearch.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        // TODO add your handling code here:  
+        Util util=new Util();
+        populateTable(util.formatString(txtSearch.getText()));        // TODO add your handling code here:  
         
     }//GEN-LAST:event_txtSearchKeyReleased
 

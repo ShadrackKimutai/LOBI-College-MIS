@@ -29,8 +29,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="168" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="180" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -179,6 +178,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPanel2FocusGained"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Assign Departmental Head">
@@ -201,12 +203,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBox2" pref="516" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" max="32767" attributes="0"/>
+                          <Component id="cboDeptName" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="txtModifyDept" min="-2" pref="81" max="-2" attributes="0"/>
+                      <Component id="txtModifyDept" min="-2" pref="91" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -215,7 +217,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cboDeptName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -230,7 +232,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="cboDeptName">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -297,7 +299,7 @@
                 <Column editable="true" title="Is Admitting Dept Or Not" type="java.lang.Object"/>
               </Table>
             </Property>
-            <Property name="autoResizeMode" type="int" value="4"/>
+            <Property name="autoResizeMode" type="int" value="1"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -322,12 +324,13 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblDepartment.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Silver);&#xa;            c.setForeground(row%2==0 ? Color.black :Color.white);&#xa;            return c;&#xa;        };&#xa;    });"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*tblDepartment.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Silver);&#xa;            c.setForeground(row%2==0 ? Color.black :Color.white);&#xa;            return c;&#xa;        };&#xa;    });&#xa;*/"/>
           </AuxValues>
         </Component>
       </SubComponents>

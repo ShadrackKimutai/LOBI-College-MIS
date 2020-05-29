@@ -25,9 +25,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="228" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="254" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -267,7 +266,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblCourses.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Color.lightGray);                        &#xa;            return c;&#xa;        };&#xa;    });"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*tblCourses.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Color.lightGray);                        &#xa;            return c;&#xa;        };&#xa;    });*/"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -53,6 +53,10 @@ public class Util {
         return departmentID;
     }
 
+    public String formatString(String unsanitizedString) {
+             return unsanitizedString.replace("'", "`");
+    }
+
    
    
   

@@ -5,6 +5,10 @@
  */
 package lobi.college.mis.components;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +20,12 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import lobi.college.util.Database;
 import lobi.college.util.Util;
 
@@ -32,9 +41,9 @@ public class newStudent extends javax.swing.JPanel {
     private final String User;
     private final String Dept;
 
-    public newStudent(String user,String dept) {
-        this.User=user;
-        this.Dept=dept;
+    public newStudent(String user, String dept) {
+        this.User = user;
+        this.Dept = dept;
         initComponents();
         populateDept();
         studentID();
@@ -873,7 +882,31 @@ public class newStudent extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+
+        File selectedFile;
+        //recomended extensions
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images","jpg", "png", "jpeg");
+        fileChooser.setFileFilter(filter);
+        
+        //fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                //System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                BufferedImage img = ImageIO.read(new File(selectedFile.getAbsolutePath()));
+
+                Image dimg = img.getScaledInstance(picpassportphoto.getWidth(), picpassportphoto.getHeight(),
+                        Image.SCALE_SMOOTH);
+
+                ImageIcon passPortPhoto = new ImageIcon(dimg);
+                picpassportphoto.setText("");
+                picpassportphoto.setIcon(passPortPhoto);
+            } catch (NullPointerException | IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1101,6 +1134,7 @@ public class newStudent extends javax.swing.JPanel {
     }
 
     private void insertNewStudent() {
+        Util u = new Util();
         boolean notHavingIDorPassPort = false;
         if (((txtIdNum.getText().equals("")) || (txtIdNum.getText().equals("(ID Number)"))) && ((txtPassport.getText().equals("")) || (txtPassport.getText().equals("(Passpot Number)")))) {
             notHavingIDorPassPort = true;
@@ -1125,26 +1159,27 @@ public class newStudent extends javax.swing.JPanel {
             } else if (optFemale.isSelected()) {
                 Gender = "Female";
             }
-            System.out.println(IDNum);
+            // System.out.println(IDNum);
+
             if (!notHavingIDorPassPort) {
                 Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
-                preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
-                preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
+                preparedStmt.setString(1, u.formatString(txtStudentID.getText().toUpperCase()));
+                preparedStmt.setString(2, u.formatString(txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase()));
                 preparedStmt.setString(3, txtBCert.getText().toUpperCase());
                 preparedStmt.setString(4, IDNum);
                 preparedStmt.setString(5, Gender.toUpperCase());
                 preparedStmt.setString(6, cboState.getSelectedItem().toString().toUpperCase());
-                preparedStmt.setString(7, txtCounty.getText().toUpperCase());
-                preparedStmt.setString(8, txtSubCounty.getText().toUpperCase());
-                preparedStmt.setString(9, txtDivision.getText().toUpperCase());
-                preparedStmt.setString(10, txtLocation.getText().toUpperCase());
-                preparedStmt.setString(11, txtSubLocation.getText().toUpperCase());
-                preparedStmt.setString(12, txtVillage.getText().toUpperCase());
-                preparedStmt.setString(13, txtAddress.getText().toUpperCase());
+                preparedStmt.setString(7, u.formatString(txtCounty.getText().toUpperCase()));
+                preparedStmt.setString(8, u.formatString(txtSubCounty.getText().toUpperCase()));
+                preparedStmt.setString(9, u.formatString(txtDivision.getText().toUpperCase()));
+                preparedStmt.setString(10, u.formatString(txtLocation.getText().toUpperCase()));
+                preparedStmt.setString(11, u.formatString(txtSubLocation.getText().toUpperCase()));
+                preparedStmt.setString(12, u.formatString(txtVillage.getText().toUpperCase()));
+                preparedStmt.setString(13, u.formatString(txtAddress.getText().toUpperCase()));
                 preparedStmt.setString(14, txtPhone.getText().toUpperCase());
                 preparedStmt.setString(15, txtEmail.getText().toUpperCase());
-                preparedStmt.setString(16, txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]");
+                preparedStmt.setString(16, u.formatString(txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]"));
                 preparedStmt.setString(17, txtNextOfKinPhone.getText().toUpperCase());
                 preparedStmt.setString(18, txtNextOfKinEmail.getText().toUpperCase());
                 preparedStmt.setString(19, null);
@@ -1154,20 +1189,20 @@ public class newStudent extends javax.swing.JPanel {
                 Query = "insert into Students (studentID,student_name, B_Certificate, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
                 preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
-                preparedStmt.setString(2, txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase());
+                preparedStmt.setString(2, u.formatString(txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase()));
                 preparedStmt.setString(3, txtBCert.getText().toUpperCase());
                 preparedStmt.setString(4, Gender.toUpperCase());
                 preparedStmt.setString(5, cboState.getSelectedItem().toString().toUpperCase());
-                preparedStmt.setString(6, txtCounty.getText().toUpperCase());
-                preparedStmt.setString(7, txtSubCounty.getText().toUpperCase());
-                preparedStmt.setString(8, txtDivision.getText().toUpperCase());
-                preparedStmt.setString(9, txtLocation.getText().toUpperCase());
-                preparedStmt.setString(10, txtSubLocation.getText().toUpperCase());
-                preparedStmt.setString(11, txtVillage.getText().toUpperCase());
-                preparedStmt.setString(12, txtAddress.getText().toUpperCase());
+                preparedStmt.setString(6, u.formatString(txtCounty.getText().toUpperCase()));
+                preparedStmt.setString(7, u.formatString(txtSubCounty.getText().toUpperCase()));
+                preparedStmt.setString(8, u.formatString(txtDivision.getText().toUpperCase()));
+                preparedStmt.setString(9, u.formatString(txtLocation.getText().toUpperCase()));
+                preparedStmt.setString(10, u.formatString(txtSubLocation.getText().toUpperCase()));
+                preparedStmt.setString(11, u.formatString(txtVillage.getText().toUpperCase()));
+                preparedStmt.setString(12, u.formatString(txtAddress.getText().toUpperCase()));
                 preparedStmt.setString(13, txtPhone.getText().toUpperCase());
                 preparedStmt.setString(14, txtEmail.getText().toUpperCase());
-                preparedStmt.setString(15, txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]");
+                preparedStmt.setString(15, u.formatString(txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]"));
                 preparedStmt.setString(16, txtNextOfKinPhone.getText().toUpperCase());
                 preparedStmt.setString(17, txtNextOfKinEmail.getText().toUpperCase());
                 preparedStmt.setString(18, null);
