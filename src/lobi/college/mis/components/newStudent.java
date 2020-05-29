@@ -8,6 +8,8 @@ package lobi.college.mis.components;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +26,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import lobi.college.util.Database;
 import lobi.college.util.Util;
@@ -40,10 +41,12 @@ public class newStudent extends javax.swing.JPanel {
     private int deptId;
     private final String User;
     private final String Dept;
+    private File selectedFile;
 
     public newStudent(String user, String dept) {
         this.User = user;
         this.Dept = dept;
+        this.selectedFile=null;
         initComponents();
         populateDept();
         studentID();
@@ -84,12 +87,12 @@ public class newStudent extends javax.swing.JPanel {
         cboState = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtCounty = new javax.swing.JTextField();
         txtSubCounty = new javax.swing.JTextField();
         txtDivision = new javax.swing.JTextField();
         txtLocation = new javax.swing.JTextField();
         txtSubLocation = new javax.swing.JTextField();
         txtVillage = new javax.swing.JTextField();
+        cboCounty = new javax.swing.JComboBox<>();
         txtStudentID = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -222,17 +225,15 @@ public class newStudent extends javax.swing.JPanel {
         });
 
         cboState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kenyan", "East African", "International Student" }));
+        cboState.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboStateItemStateChanged(evt);
+            }
+        });
 
         jLabel7.setText("Passport");
 
         jLabel8.setText("Nationalty");
-
-        txtCounty.setText("(County)");
-        txtCounty.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtCountyFocusGained(evt);
-            }
-        });
 
         txtSubCounty.setText("(Sub County)");
         txtSubCounty.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -273,6 +274,9 @@ public class newStudent extends javax.swing.JPanel {
                 txtVillageFocusGained(evt);
             }
         });
+
+        cboCounty.setEditable(true);
+        cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baringo", "Bomet\t", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita–Taveta", "Tana River", "Tharaka-Nithi", "Trans-Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -318,7 +322,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -353,12 +357,12 @@ public class newStudent extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -772,11 +776,6 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNextOfKinEmailActionPerformed
 
-    private void txtCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCountyFocusGained
-        // TODO add your handling code here:
-        txtCounty.setText("");
-    }//GEN-LAST:event_txtCountyFocusGained
-
     private void txtSubCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubCountyFocusGained
         // TODO add your handling code here:
         txtSubCounty.setText("");
@@ -842,10 +841,11 @@ public class newStudent extends javax.swing.JPanel {
             if (cboCourse.getItemCount() != 0) {
                 if (checkifEnrolled() == false) {
                     try {
-                        enrollNewStudenttoClass();
-                        Thread.sleep(2000);
-                        insertNewStudent();
-                        Thread.sleep(2000);
+                        
+                       enrollNewStudenttoClass();
+                         Thread.sleep(2000);
+                         insertNewStudent();
+                       
 
                         // newStudent.this.getTopLevelAncestor().dispose();
                         // this.getTopLevelAncestor().setVisible(false);
@@ -884,7 +884,6 @@ public class newStudent extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
 
-        File selectedFile;
         //recomended extensions
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Images","jpg", "png", "jpeg");
         fileChooser.setFileFilter(filter);
@@ -963,12 +962,24 @@ public class newStudent extends javax.swing.JPanel {
         populateCombo();
     }//GEN-LAST:event_cboDeptActionPerformed
 
+    private void cboStateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboStateItemStateChanged
+        // TODO add your handling code here:
+        if (cboState.getSelectedItem().equals("Kenya")){
+            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baringo", "Bomet\t", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita–Taveta", "Tana River", "Tharaka-Nithi", "Trans-Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot" }));
+
+        }else{
+            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {""}));
+
+        }
+    }//GEN-LAST:event_cboStateItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox<String> cboCounty;
     private javax.swing.JComboBox<String> cboCourse;
     private javax.swing.JComboBox<String> cboDept;
     private javax.swing.JComboBox<String> cboEnrollTo;
@@ -1005,7 +1016,6 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JLabel picpassportphoto;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtBCert;
-    private javax.swing.JTextField txtCounty;
     private javax.swing.JTextField txtDivision;
     private javax.swing.JFormattedTextField txtEmail;
     private javax.swing.JFormattedTextField txtIdNum;
@@ -1135,7 +1145,12 @@ public class newStudent extends javax.swing.JPanel {
 
     private void insertNewStudent() {
         Util u = new Util();
+        ClassLoader classLoader = null;
         boolean notHavingIDorPassPort = false;
+        FileInputStream fileInputStream;
+        
+      
+        
         if (((txtIdNum.getText().equals("")) || (txtIdNum.getText().equals("(ID Number)"))) && ((txtPassport.getText().equals("")) || (txtPassport.getText().equals("(Passpot Number)")))) {
             notHavingIDorPassPort = true;
         }
@@ -1147,7 +1162,7 @@ public class newStudent extends javax.swing.JPanel {
             // the mysql insert statement
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date CurrentDate = new Date();
-            String IDNum = "", Gender = "", currentDate = "", Query = "";
+            String IDNum, Gender, currentDate, Query ;
             currentDate = dateFormat.format(CurrentDate);
             if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
                 IDNum = txtPassport.getText();
@@ -1156,11 +1171,23 @@ public class newStudent extends javax.swing.JPanel {
             }
             if (optMale.isSelected()) {
                 Gender = "Male";
+                if (selectedFile == null){
+                    
+        selectedFile = new File("."+"/src/lobi/college/mis/resources/male.passport.less.png");
+                }
             } else if (optFemale.isSelected()) {
                 Gender = "Female";
+                if (selectedFile == null){
+        selectedFile = new File("."+"/src/lobi/college/mis/resources/female.passport.less.png");
+                }
+            }else{
+               
+                optMale.grabFocus();
+                 return;
             }
             // System.out.println(IDNum);
-
+            fileInputStream=new FileInputStream (selectedFile);
+ 
             if (!notHavingIDorPassPort) {
                 Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
@@ -1170,7 +1197,7 @@ public class newStudent extends javax.swing.JPanel {
                 preparedStmt.setString(4, IDNum);
                 preparedStmt.setString(5, Gender.toUpperCase());
                 preparedStmt.setString(6, cboState.getSelectedItem().toString().toUpperCase());
-                preparedStmt.setString(7, u.formatString(txtCounty.getText().toUpperCase()));
+                preparedStmt.setString(7, u.formatString(cboCounty.getSelectedItem().toString().toUpperCase()));
                 preparedStmt.setString(8, u.formatString(txtSubCounty.getText().toUpperCase()));
                 preparedStmt.setString(9, u.formatString(txtDivision.getText().toUpperCase()));
                 preparedStmt.setString(10, u.formatString(txtLocation.getText().toUpperCase()));
@@ -1182,7 +1209,7 @@ public class newStudent extends javax.swing.JPanel {
                 preparedStmt.setString(16, u.formatString(txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]"));
                 preparedStmt.setString(17, txtNextOfKinPhone.getText().toUpperCase());
                 preparedStmt.setString(18, txtNextOfKinEmail.getText().toUpperCase());
-                preparedStmt.setString(19, null);
+                preparedStmt.setBinaryStream(19, fileInputStream, (int) selectedFile.length());
                 preparedStmt.setString(20, currentDate);
                 preparedStmt.execute();
             } else {
@@ -1193,7 +1220,7 @@ public class newStudent extends javax.swing.JPanel {
                 preparedStmt.setString(3, txtBCert.getText().toUpperCase());
                 preparedStmt.setString(4, Gender.toUpperCase());
                 preparedStmt.setString(5, cboState.getSelectedItem().toString().toUpperCase());
-                preparedStmt.setString(6, u.formatString(txtCounty.getText().toUpperCase()));
+                preparedStmt.setString(6, u.formatString(cboCounty.getSelectedItem().toString().toUpperCase()));
                 preparedStmt.setString(7, u.formatString(txtSubCounty.getText().toUpperCase()));
                 preparedStmt.setString(8, u.formatString(txtDivision.getText().toUpperCase()));
                 preparedStmt.setString(9, u.formatString(txtLocation.getText().toUpperCase()));
@@ -1205,7 +1232,7 @@ public class newStudent extends javax.swing.JPanel {
                 preparedStmt.setString(15, u.formatString(txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]"));
                 preparedStmt.setString(16, txtNextOfKinPhone.getText().toUpperCase());
                 preparedStmt.setString(17, txtNextOfKinEmail.getText().toUpperCase());
-                preparedStmt.setString(18, null);
+                preparedStmt.setBinaryStream(18, fileInputStream, (int) selectedFile.length());
                 preparedStmt.setString(19, currentDate);
                 preparedStmt.execute();
             }
@@ -1214,11 +1241,10 @@ public class newStudent extends javax.swing.JPanel {
             // execute the preparedstatement
             JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class", "Class Placement", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (SQLException e) {
+        } catch (FileNotFoundException | NullPointerException | SQLException e) {
             System.err.println(e.toString());
             System.err.println(e.getMessage());
             JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()), "Error Occured", JOptionPane.ERROR_MESSAGE);
-
         }
     }
 
