@@ -5,6 +5,10 @@
  */
 package lobi.college.mis;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lobi.college.util.Util;
 
 /**
@@ -148,7 +152,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        this.dispose();
+        // this.dispose();
+       ClassLoader classLoader = null;
+        File selectedFile = new File("."+"/src/lobi/college/mis/resources/female.passport.less.png");//(classLoader.getResource("female.passport.less.png").getFile());
+        try {
+            System.out.println(selectedFile.getCanonicalFile());
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

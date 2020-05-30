@@ -845,7 +845,8 @@ public class newStudent extends javax.swing.JPanel {
                        enrollNewStudenttoClass();
                          Thread.sleep(2000);
                          insertNewStudent();
-                       
+                          studentID();
+                          resetFields();
 
                         // newStudent.this.getTopLevelAncestor().dispose();
                         // this.getTopLevelAncestor().setVisible(false);
@@ -1315,4 +1316,25 @@ public class newStudent extends javax.swing.JPanel {
             System.out.println(ex.getMessage());
         }
     }
+
+    private void resetFields() {
+ txtStdSur.setText("(Sur Name)");
+ txtStdFirst.setText("(First Name)");
+txtStdOther.setText("(Other Names)");
+        txtIdNum.setText("(ID Number)");
+        txtBCert.setText("(B-Cert Number)");
+        txtAddress.setText("(Post Office Box)");
+        txtPhone.setText("(Phone Number)");
+        txtEmail.setText("(Email)");
+        txtPassport.setText("(Passpot Number)");
+        txtSubCounty.setText("(Sub County)");
+        txtDivision.setText("(Division)");
+        txtLocation.setText("(Location)");
+        txtSubLocation.setText("(Sub Location)");
+        txtVillage.setText("(Village/Estate)");
+        txtNextofKin.setText("(Next of Kin Name)");
+        txtNextOfKinPhone.setText("(Phone Number)");
+        txtNextOfKinEmail.setText("(Email)");
+        txtPreviousGrade.setText("(Mean Grade)");
+        jLabel12.setText("Index Number");    }
 }
