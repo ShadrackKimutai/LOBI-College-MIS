@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Database;
+import lobi.college.util.StudentInfo;
 import lobi.college.util.Util;
 
 /**
@@ -446,6 +447,11 @@ public class ClassManager extends javax.swing.JPanel {
                 "Student Number", "Student ", "ID Number ", "Level", "Course", "Year", "Phone"
             }
         ));
+        tblStudents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStudentsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblStudents);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -576,6 +582,20 @@ public class ClassManager extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateStudentTable(jTextField1.getText());
     }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentsMouseClicked
+        // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
+        String x = model.getValueAt(tblStudents.getSelectedRow(), 0).toString();
+       // JOptionPane.showMessageDialog(this, x);
+        try {
+            StudentInfo studentInfo = new StudentInfo(x);
+            studentInfo.setLocationRelativeTo(this);
+            studentInfo.setVisible(true);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_tblStudentsMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

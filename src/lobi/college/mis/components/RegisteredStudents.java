@@ -19,24 +19,28 @@ import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Database;
 import lobi.college.util.Util;
 import javax.swing.JScrollPane;
+import lobi.college.util.StudentInfo;
+
 /**
  *
  * @author shady
  */
 public class RegisteredStudents extends javax.swing.JPanel {
-   private String User,Dept;
+
+    private String User, Dept;
     private final Color Silver;
     Toolkit toolkit;
     Dimension dimension;
 
     /**
      * Creates new form RegisteredStudents
+     *
      * @param user
      * @param dept
      */
-    public RegisteredStudents(String user,String dept) {
-        this.User=user;
-        this.Dept=dept;
+    public RegisteredStudents(String user, String dept) {
+        this.User = user;
+        this.Dept = dept;
         Silver = new Color(247, 247, 247);
         toolkit = Toolkit.getDefaultToolkit();
         dimension = toolkit.getScreenSize();
@@ -143,26 +147,34 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtSearchKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println(User+Dept);        // TODO add your handling code here:
-       Util util=new Util();
-       
-      populateTable(util.formatString(txtSearch.getText()));
+        System.out.println(User + Dept);        // TODO add your handling code here:
+        Util util = new Util();
+
+        populateTable(util.formatString(txtSearch.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        Util util=new Util();
+        Util util = new Util();
         populateTable(util.formatString(txtSearch.getText()));        // TODO add your handling code here:  
-        
+
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentsMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel model = new DefaultTableModel();
-        JOptionPane.showMessageDialog(this, tblStudents.getSelectedRow());
+        DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
+        String x = model.getValueAt(tblStudents.getSelectedRow(), 0).toString();
+       // JOptionPane.showMessageDialog(this, x);
+        try {
+            StudentInfo studentInfo = new StudentInfo(x);
+            studentInfo.setLocationRelativeTo(this);
+            studentInfo.setVisible(true);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_tblStudentsMouseClicked
 
