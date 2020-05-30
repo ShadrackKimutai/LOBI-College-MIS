@@ -6,7 +6,6 @@
 package lobi.college.mis.components;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -16,11 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Database;
 import lobi.college.util.Util;
-
+import javax.swing.JScrollPane;
 /**
  *
  * @author shady
@@ -58,7 +56,8 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
         txtSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane(tblStudents);
+        jScrollPane3 = new JScrollPane(tblStudents, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED)
+        ;
         tblStudents = new javax.swing.JTable();
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -79,7 +78,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         });
 
         jScrollPane3.setForeground(new java.awt.Color(31, 28, 28));
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setAutoscrolls(true);
         jScrollPane3.setDoubleBuffered(true);
         jScrollPane3.setWheelScrollingEnabled(false);
 
@@ -101,12 +100,22 @@ public class RegisteredStudents extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13"
+                "StudentID", "Birth Certificate", "Student Name", "National ID No / Passport No", "Gender", "Nationality", "County", "Sub County", "Mobile  Phone", "Email Address", "Postal Address", "Gender", "Next of Kin", "Next of Kin Phone"
             }
         ));
+        /*
+        tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        */
+        tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblStudents.setAutoscrolls(false);
         tblStudents.setDoubleBuffered(true);
         tblStudents.setSelectionForeground(java.awt.SystemColor.activeCaption);
         tblStudents.setPreferredScrollableViewportSize(new Dimension(dimension.width,dimension.height));
+        tblStudents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStudentsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblStudents);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -149,6 +158,13 @@ public class RegisteredStudents extends javax.swing.JPanel {
         populateTable(util.formatString(txtSearch.getText()));        // TODO add your handling code here:  
         
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentsMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = new DefaultTableModel();
+        JOptionPane.showMessageDialog(this, tblStudents.getSelectedRow());
+
+    }//GEN-LAST:event_tblStudentsMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -62,40 +62,46 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="1c" green="1c" red="1f" type="rgb"/>
         </Property>
-        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
+        <Property name="autoscrolls" type="boolean" value="true"/>
         <Property name="doubleBuffered" type="boolean" value="true"/>
         <Property name="wheelScrollingEnabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JScrollPane(tblStudents)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JScrollPane(tblStudents, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED)&#xa;"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblStudents">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="13" rowCount="0">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                <Column editable="true" title="Title 5" type="java.lang.Object"/>
-                <Column editable="true" title="Title 6" type="java.lang.Object"/>
-                <Column editable="true" title="Title 7" type="java.lang.Object"/>
-                <Column editable="true" title="Title 8" type="java.lang.Object"/>
-                <Column editable="true" title="Title 9" type="java.lang.Object"/>
-                <Column editable="true" title="Title 10" type="java.lang.Object"/>
-                <Column editable="true" title="Title 11" type="java.lang.Object"/>
-                <Column editable="true" title="Title 12" type="java.lang.Object"/>
-                <Column editable="true" title="Title 13" type="java.lang.Object"/>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="/*">
+              <Table columnCount="14" rowCount="0">
+                <Column editable="true" title="StudentID" type="java.lang.Object"/>
+                <Column editable="true" title="Birth Certificate" type="java.lang.Object"/>
+                <Column editable="true" title="Student Name" type="java.lang.Object"/>
+                <Column editable="true" title="National ID No / Passport No" type="java.lang.Object"/>
+                <Column editable="true" title="Gender" type="java.lang.Object"/>
+                <Column editable="true" title="Nationality" type="java.lang.Object"/>
+                <Column editable="true" title="County" type="java.lang.Object"/>
+                <Column editable="true" title="Sub County" type="java.lang.Object"/>
+                <Column editable="true" title="Mobile  Phone" type="java.lang.Object"/>
+                <Column editable="true" title="Email Address" type="java.lang.Object"/>
+                <Column editable="true" title="Postal Address" type="java.lang.Object"/>
+                <Column editable="true" title="Gender" type="java.lang.Object"/>
+                <Column editable="true" title="Next of Kin" type="java.lang.Object"/>
+                <Column editable="true" title="Next of Kin Phone" type="java.lang.Object"/>
               </Table>
             </Property>
+            <Property name="autoResizeMode" type="int" value="0" postCode="*/&#xa;tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);"/>
+            <Property name="autoscrolls" type="boolean" value="false"/>
             <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="80" green="0" id="Active Caption" palette="2" red="0" type="palette"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblStudentsMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tblStudents.setPreferredScrollableViewportSize(new Dimension(dimension.width,dimension.height));"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Silver);                        &#xa;            return c;&#xa;        };&#xa;    });&#xa;tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);*/"/>
