@@ -82,6 +82,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         });
 
         jScrollPane3.setForeground(new java.awt.Color(31, 28, 28));
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setAutoscrolls(true);
         jScrollPane3.setDoubleBuffered(true);
         jScrollPane3.setWheelScrollingEnabled(false);
@@ -111,9 +112,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         */
         tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tblStudents.setAutoscrolls(false);
         tblStudents.setDoubleBuffered(true);
-        tblStudents.setSelectionForeground(java.awt.SystemColor.activeCaption);
         tblStudents.setPreferredScrollableViewportSize(new Dimension(dimension.width,dimension.height));
         tblStudents.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

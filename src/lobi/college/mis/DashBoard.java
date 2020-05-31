@@ -92,6 +92,7 @@ public String userDept,user;
         jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
+        jToolBar1.setDoubleBuffered(true);
 
         btnRegistry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details1.png"))); // NOI18N
         btnRegistry.setText("Registry");
