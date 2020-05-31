@@ -68,6 +68,10 @@ public class ManageCourses extends javax.swing.JPanel {
         cboExaminingBody = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         cboDepartment = new javax.swing.JComboBox<>();
+        cboCourseFormat = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtSlug = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCourses = new javax.swing.JTable();
 
@@ -117,25 +121,26 @@ public class ManageCourses extends javax.swing.JPanel {
             }
         });
 
+        cboCourseFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MODULAR", "STAGE" }));
+
+        jLabel7.setText("Course Format");
+
+        jLabel8.setText("Slug / Abbreviation");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel1)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cboLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtAltRequirements)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(cboAccreditationBody, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -144,13 +149,28 @@ public class ManageCourses extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboExaminingBody, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtMinRequirements)
-                    .addComponent(cboDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSlug, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cboCourseFormat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(756, 756, 756)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRegisterCourse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,15 +178,19 @@ public class ManageCourses extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtSlug, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(cboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                    .addComponent(cboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(cboCourseFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtMinRequirements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMinRequirements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAltRequirements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,10 +201,10 @@ public class ManageCourses extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(cboAccreditationBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboExaminingBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegisterCourse)
-                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegisterCourse)))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnRegisterCourse, btnReset});
@@ -200,17 +224,17 @@ public class ManageCourses extends javax.swing.JPanel {
         tblCourses.setAutoCreateRowSorter(true);
         tblCourses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Level", "Course Name", "Min Requirements", "Alt Requirments", "Accreditation Body", "Examining Body"
+                "Level", "Course Name", "Short Name ", "Course Type", "Min Requirements", "Alt Requirments", "Accreditation Body", "Examining Body"
             }
         ));
         tblCourses.setDoubleBuffered(true);
-        tblCourses.setSelectionForeground(new java.awt.Color(219, 32, 32));
+        tblCourses.setSelectionBackground(new java.awt.Color(51, 153, 255));
         jScrollPane1.setViewportView(tblCourses);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -226,7 +250,7 @@ public class ManageCourses extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -240,20 +264,23 @@ public class ManageCourses extends javax.swing.JPanel {
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
             // create a sql date object so we can use it in our INSERT statement
-            String Query = "insert into Courses (CourseName,Level,Requirement,AltRequirement,Accreditor,Examiner,deptID) values (?,?,?,?,?,?,?)";
+            String Query = "insert into Courses (CourseName,Level,Requirement,AltRequirement,Accreditor,Examiner,deptID,courseFormat, slug) values (?,?,?,?,?,?,?,?,?)";
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = cnn.prepareStatement(Query);
-            preparedStmt.setString(1, txtCourseName.getText());
-            preparedStmt.setString(2, cboLevel.getSelectedItem().toString());
-            preparedStmt.setString(3, txtMinRequirements.getText());
-            preparedStmt.setString(4, txtAltRequirements.getText());
+            preparedStmt.setString(1, txtCourseName.getText().toUpperCase());
+            preparedStmt.setString(2, cboLevel.getSelectedItem().toString().toUpperCase());
+            preparedStmt.setString(3, txtMinRequirements.getText().toUpperCase());
+            preparedStmt.setString(4, txtAltRequirements.getText().toUpperCase());
             preparedStmt.setString(5, cboAccreditationBody.getSelectedItem().toString());
             preparedStmt.setString(6, cboExaminingBody.getSelectedItem().toString());
             preparedStmt.setInt(7, deptID);
+            preparedStmt.setString(8,cboCourseFormat.getSelectedItem().toString());
+            preparedStmt.setString(9,txtSlug.getText().toUpperCase());
+            
 
             // execute the preparedstatement
             preparedStmt.execute();
-            JOptionPane.showConfirmDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
@@ -285,6 +312,7 @@ public class ManageCourses extends javax.swing.JPanel {
     private javax.swing.JButton btnRegisterCourse;
     private javax.swing.JButton btnReset;
     private javax.swing.JComboBox<String> cboAccreditationBody;
+    private javax.swing.JComboBox<String> cboCourseFormat;
     private javax.swing.JComboBox<String> cboDepartment;
     private javax.swing.JComboBox<String> cboExaminingBody;
     private javax.swing.JComboBox<String> cboLevel;
@@ -294,12 +322,15 @@ public class ManageCourses extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCourses;
     private javax.swing.JTextField txtAltRequirements;
     private javax.swing.JTextField txtCourseName;
     private javax.swing.JTextField txtMinRequirements;
+    private javax.swing.JTextField txtSlug;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
@@ -316,7 +347,7 @@ public class ManageCourses extends javax.swing.JPanel {
             tm.setRowCount(0);
 
             while (rs.next()) {
-                Object o[] = {rs.getString("Level"), rs.getString("CourseName"), rs.getString("Requirement"), rs.getString("AltRequirement"), rs.getString("Accreditor"), rs.getString("Examiner")};
+                Object o[] = {rs.getString("Level").toUpperCase(), rs.getString("CourseName").toUpperCase(),rs.getString("Slug").toUpperCase(),rs.getString("CourseFormat"), rs.getString("Requirement"), rs.getString("AltRequirement"), rs.getString("Accreditor"), rs.getString("Examiner")};
                 tm.addRow(o);
 
             }
