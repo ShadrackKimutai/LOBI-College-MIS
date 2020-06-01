@@ -286,12 +286,14 @@
                                   <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="lblCourseFormat" min="-2" pref="271" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCourseFormat" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jComboBox2" pref="0" max="32767" attributes="0"/>
+                                  <Component id="cboStructure" min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -311,9 +313,10 @@
                               <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCourseFormat" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cboStructure" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCourseFormat" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -421,11 +424,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblCourseFormat">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Type"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JTextField" name="txtCohortID">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
@@ -473,17 +471,12 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox2">
+                <Component class="javax.swing.JComboBox" name="cboStructure">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="2+A+E"/>
-                        <StringItem index="1" value="3+E+A+2+E"/>
-                        <StringItem index="2" value="3+A+2+E"/>
-                        <StringItem index="3" value="3+E+3+E+A+2+E"/>
-                        <StringItem index="4" value="3+SE+2+SE+A+2+E"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;This shows the structure of the selected program&#xa;&lt;ol type=&quot;1&quot;&gt;&#xa;&lt;li&gt;Number Denotes the number of Terms in the selected Course. Range from 1 to 3. &lt;/li&gt;&#xa;&lt;li&gt;NE Denotes National Exam or External Exam by KNEC, NITA or TVET-CDACC &lt;/li&gt;&#xa;&lt;li&gt;IE Denotes Internal Exam. &lt;/li&gt;&#xa;&lt;li&gt;SE Denotes Stage Exam&lt;/li&gt;&#xa;&lt;li&gt;A Denotes Stage Exam&lt;/li&gt;&#xa;&lt;/ol&gt; "/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -501,6 +494,18 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DateFormat dateFormat = new SimpleDateFormat(&quot;yyyy/MM/dd HH:mm:ss&quot;);&#xa;jXDatePicker1.setFormats(dateFormat);"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtCourseFormat">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Course Format"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

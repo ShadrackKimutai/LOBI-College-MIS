@@ -33,7 +33,7 @@ public class LOBICollegeMIS {
         try {
             // Set cross-platform Java L&F (also called "Metal")
            // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-           UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
+           UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }

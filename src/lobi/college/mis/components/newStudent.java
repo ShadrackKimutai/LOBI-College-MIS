@@ -944,7 +944,7 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         populateCombo();
-        cboEnrollTo.removeAll();
+        cboEnrollTo.removeAllItems();
 
 //
 //DefaultComboBoxModel model = new DefaultComboBoxModel( yourStringArray );

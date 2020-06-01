@@ -75,15 +75,16 @@ public class ClassManager extends javax.swing.JPanel {
         jRadioButton3 = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        lblCourseFormat = new javax.swing.JLabel();
         txtCohortID = new javax.swing.JTextField();
         cboLevel = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSpinner3 = new javax.swing.JSpinner();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cboStructure = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        txtCourseFormat = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -292,8 +293,6 @@ public class ClassManager extends javax.swing.JPanel {
             }
         });
 
-        lblCourseFormat.setText("Type");
-
         txtCohortID.setEditable(false);
         txtCohortID.setDisabledTextColor(new java.awt.Color(245, 242, 238));
         txtCohortID.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -315,7 +314,7 @@ public class ClassManager extends javax.swing.JPanel {
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(30, 5, 60, 1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2+A+E", "3+E+A+2+E", "3+A+2+E", "3+E+3+E+A+2+E", "3+SE+2+SE+A+2+E" }));
+        cboStructure.setToolTipText("<html>This shows the structure of the selected program\n<ol type=\"1\">\n<li>Number Denotes the number of Terms in the selected Course. Range from 1 to 3. </li>\n<li>NE Denotes National Exam or External Exam by KNEC, NITA or TVET-CDACC </li>\n<li>IE Denotes Internal Exam. </li>\n<li>SE Denotes Stage Exam</li>\n<li>A Denotes Stage Exam</li>\n</ol> ");
 
         jLabel10.setText("Structure");
 
@@ -326,6 +325,10 @@ public class ClassManager extends javax.swing.JPanel {
                 jXDatePicker1ActionPerformed(evt);
             }
         });
+
+        txtCourseFormat.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+
+        jLabel7.setText("Course Format");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -362,12 +365,14 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jRadioButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCourseFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCourseFormat)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, 0, 1, Short.MAX_VALUE))))
+                        .addComponent(cboStructure, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,9 +387,10 @@ public class ClassManager extends javax.swing.JPanel {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3)
-                    .addComponent(lblCourseFormat)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(cboStructure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCourseFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -575,6 +581,7 @@ public class ClassManager extends javax.swing.JPanel {
     private void cboCoursesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboCoursesFocusLost
         // TODO add your handling code here:
         //generateClassID();
+        jRadioButton1.setSelected(true);
     }//GEN-LAST:event_cboCoursesFocusLost
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -646,38 +653,38 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jRadioButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton1FocusLost
         // TODO add your handling code here:
-       // generateClassID();
+        // generateClassID();
     }//GEN-LAST:event_jRadioButton1FocusLost
 
     private void jRadioButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton2FocusLost
         // TODO add your handling code here:
-       // generateClassID();
+        // generateClassID();
     }//GEN-LAST:event_jRadioButton2FocusLost
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
         // TODO add your handling code here:
-           generateClassID();
+        generateClassID();
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
         // TODO add your handling code here:
-           generateClassID();
+        generateClassID();
     }//GEN-LAST:event_jRadioButton2MouseClicked
 
     private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
         // TODO add your handling code here:
-           generateClassID();
+        generateClassID();
     }//GEN-LAST:event_jRadioButton3MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboCourses;
     private javax.swing.JComboBox<String> cboLevel;
+    private javax.swing.JComboBox<String> cboStructure;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -685,6 +692,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -708,10 +716,10 @@ public class ClassManager extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
-    private javax.swing.JLabel lblCourseFormat;
     private javax.swing.JTable tblCohorts;
     private javax.swing.JTable tblStudents;
     private javax.swing.JTextField txtCohortID;
+    private javax.swing.JTextField txtCourseFormat;
     // End of variables declaration//GEN-END:variables
 private void generateClassID() {
 
@@ -741,7 +749,55 @@ private void generateClassID() {
         txtCohortID.setText(tempString.toUpperCase());
 
         Util util = new Util();
-        System.out.println(util.getCourseID(cboCourses.getSelectedItem().toString(), cboLevel.getSelectedItem().toString()));
+        // System.out.println(util.getCourseID(cboCourses.getSelectedItem().toString(), cboLevel.getSelectedItem().toString()));
+        txtCourseFormat.removeAll();
+        txtCourseFormat.setText(generateClassFormat(util.getCourseID(cboCourses.getSelectedItem().toString(), cboLevel.getSelectedItem().toString())));
+        String str = txtCourseFormat.getText() + ":" + cboLevel.getSelectedItem();
+        cboStructure.removeAllItems();
+        switch (str.toUpperCase()) {
+            case "MODULAR:SHORT COURSE": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                break;
+            }
+            case "MODULAR:ARTISAN": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE", "3+NE+A"}));
+                break;
+            }
+            case "MODULAR:CRAFT": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "3+NE+A+2+NE", "2+NE+2+NE+A", "3+NE+2+NE+A"}));
+
+                break;
+            }
+            case "MODULAR:DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "3+NE+A+2+NE", "3+NE+2+NE+A+2+NE", "3+2+NE+2+NE+A"}));
+
+                break;
+            }
+            case "MODULAR:HIGHER DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE", "3+NE+P"}));
+
+                break;
+            }
+            case "STAGE:SHORT COURSE": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                break;
+            }
+            case "STAGE:CRAFT": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE", "2+SE+2+NE+A", "3+SE+2+NE+A"}));
+
+                break;
+            }
+            case "STAGE:DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE", "3+SE+2+SE+A+2+NE", "3+2+SE+2+SE+A"}));
+
+                break;
+            }
+            case "STAGE:HIGHER DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE", "3+NE+P"}));
+
+                break;
+            }
+        }
 
     }
 
@@ -752,13 +808,12 @@ private void generateClassID() {
             Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboCourses.removeAllItems();
-            ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "'");
+            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "'")) {
+                while (rs.next()) {
+                    cboCourses.addItem(rs.getString("courseName"));
 
-            while (rs.next()) {
-                cboCourses.addItem(rs.getString("courseName"));
-
+                }
             }
-            rs.close();
 
         } catch (SQLException e) {
 
@@ -775,11 +830,10 @@ private void generateClassID() {
 
         try {
             stmt = cnn.createStatement();
-            ResultSet rs = stmt.executeQuery("select slug from Courses where level='" + cboLevel.getSelectedItem() + "' and  CourseName='" + cboCourses.getSelectedItem() + "'");
-
-            rs.next();
-            slug = rs.getString(1);
-            rs.close();
+            try (ResultSet rs = stmt.executeQuery("select slug from Courses where level='" + cboLevel.getSelectedItem() + "' and  CourseName='" + cboCourses.getSelectedItem() + "'")) {
+                rs.next();
+                slug = rs.getString(1);
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "When selecting abbreveation, The system encountered the following, \n" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
@@ -806,8 +860,8 @@ private void generateClassID() {
                 preparedStmt.setString(3, cboCourses.getSelectedItem().toString());
                 preparedStmt.setInt(4, (int) jSpinner3.getValue());
                 preparedStmt.setString(5, jXDatePicker1.getEditor().getText());
-                preparedStmt.setString(6, jComboBox2.getSelectedItem().toString());
-                preparedStmt.setString(7, jComboBox2.getSelectedItem().toString());
+                preparedStmt.setString(6, cboStructure.getSelectedItem().toString());
+                preparedStmt.setString(7, cboStructure.getSelectedItem().toString());
 
                 // execute the preparedstatement
                 if (checkExists() == false) {
@@ -882,33 +936,23 @@ private void generateClassID() {
         return Exists;
     }
 
-    /*
-    private void generateClassID() {
-         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date CurrentDate = new Date();
-        Statement st;
-        ResultSet rs;
-        String slug, month, yearPart, tempString;
-        slug = getSlug();
-        
-        if (jRadioButton1.isSelected()) {
-            month = "J";
-        } else if (jRadioButton2.isSelected()) {
-            month = "M";
-        } else if (jRadioButton3.isSelected()) {
-            month = "S";
-        } else {
-          // JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
-            jRadioButton1.grabFocus();
-            return;
+    private String generateClassFormat(int courseID) {
+        String courseLevel = "";
+        try {
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            String Query = "select CourseFormat from Courses where CourseID='" + courseID + "'";
+            System.out.println(Query);
+            ResultSet rs = st.executeQuery(Query);
+            rs.next();
+            courseLevel = rs.getString(1);
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Issue on Getting Course ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
         }
-        yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
-        tempString = slug.toUpperCase() + yearPart + month;
-        // create a sql date object so we can use it in our INSERT statement
-        txtCohortID.setText("");
-        txtCohortID.setText(tempString.toUpperCase());
+        return courseLevel;
     }
-     */
+
     private void populateStudentTable() {
 
         try {
