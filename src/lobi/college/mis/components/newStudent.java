@@ -573,6 +573,11 @@ public class newStudent extends javax.swing.JPanel {
         jLabel14.setText("Level");
 
         cboCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboCourse.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboCourseItemStateChanged(evt);
+            }
+        });
         cboCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cboCourseMouseExited(evt);
@@ -998,6 +1003,12 @@ public class newStudent extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_cboStateItemStateChanged
+
+    private void cboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCourseItemStateChanged
+        // TODO add your handling code here:
+        System.out.println(cboCourse.getSelectedItem().toString());
+        System.out.println("");
+    }//GEN-LAST:event_cboCourseItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
