@@ -50,6 +50,7 @@ public class newStudent extends javax.swing.JPanel {
         initComponents();
         populateDept();
         studentID();
+       cboDept.setSelectedIndex(0);
 
     }
 
