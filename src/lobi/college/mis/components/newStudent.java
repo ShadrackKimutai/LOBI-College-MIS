@@ -5,19 +5,30 @@
  */
 package lobi.college.mis.components;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lobi.college.util.Configurations;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
+import lobi.college.util.Database;
+import lobi.college.util.Util;
 
 /**
  *
@@ -25,14 +36,22 @@ import lobi.college.util.Configurations;
  */
 public class newStudent extends javax.swing.JPanel {
 
-   
-   
-    public newStudent() {
-        
-            initComponents();
-       
-         populateCombo();
-        
+    private String enrolledInCourse;
+    private int courseID;
+    private int deptId;
+    private final String User;
+    private final String Dept;
+    private File selectedFile;
+
+    public newStudent(String user, String dept) {
+        this.User = user;
+        this.Dept = dept;
+        this.selectedFile = null;
+        initComponents();
+        populateDept();
+        studentID();
+        cboDept.setSelectedIndex(0);
+
     }
 
     /**
@@ -45,8 +64,6 @@ public class newStudent extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -66,16 +83,16 @@ public class newStudent extends javax.swing.JPanel {
         txtPhone = new javax.swing.JFormattedTextField();
         txtEmail = new javax.swing.JFormattedTextField();
         txtPassport = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         cboState = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtCounty = new javax.swing.JTextField();
         txtSubCounty = new javax.swing.JTextField();
         txtDivision = new javax.swing.JTextField();
         txtLocation = new javax.swing.JTextField();
         txtSubLocation = new javax.swing.JTextField();
         txtVillage = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        cboCounty = new javax.swing.JComboBox<>();
+        txtStudentID = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtNextofKin = new javax.swing.JTextField();
@@ -84,21 +101,25 @@ public class newStudent extends javax.swing.JPanel {
         txtNextOfKinEmail = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        txtPreviousGrade = new javax.swing.JTextField();
+        cboPreviousLevel = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        txtPreviousIndex = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnReset = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        cboDept = new javax.swing.JComboBox<>();
         cboLevel = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
         cboCourse = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        cboEnrollTo = new javax.swing.JComboBox<>();
+        cboCohort = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         picpassportphoto = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -204,18 +225,16 @@ public class newStudent extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Passport");
-
         cboState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kenyan", "East African", "International Student" }));
-
-        jLabel8.setText("Nationalty");
-
-        txtCounty.setText("(County)");
-        txtCounty.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtCountyFocusGained(evt);
+        cboState.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboStateItemStateChanged(evt);
             }
         });
+
+        jLabel7.setText("Passport");
+
+        jLabel8.setText("Nationalty");
 
         txtSubCounty.setText("(Sub County)");
         txtSubCounty.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -257,26 +276,29 @@ public class newStudent extends javax.swing.JPanel {
             }
         });
 
+        cboCounty.setEditable(true);
+        cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baringo", "Bomet\t", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita–Taveta", "Tana River", "Tharaka-Nithi", "Trans-Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                        .addComponent(txtPhone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtIdNum, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
@@ -285,15 +307,13 @@ public class newStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(optMale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(optFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(optMale)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(optFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtStdSur, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,7 +323,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -313,7 +333,7 @@ public class newStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                        .addComponent(txtVillage))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,12 +358,12 @@ public class newStudent extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVillage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -352,7 +372,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTextField5.setText("EMS18001");
+        txtStudentID.setText("EMS18001");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Secondary Information"));
 
@@ -419,23 +439,23 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel10.setText("Previous Level");
 
-        jTextField17.setText("(Mean Grade)");
-        jTextField17.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPreviousGrade.setText("(Mean Grade)");
+        txtPreviousGrade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField17FocusGained(evt);
+                txtPreviousGradeFocusGained(evt);
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KCPE", "KCSE", "ARTISAN CERTIFICATE", "KNEC CRAFT CERTIFICATE", "KNEC DIPLOMA CERTIFICATE" }));
+        cboPreviousLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KCPE", "KCSE", "ARTISAN CERTIFICATE", "KNEC CRAFT CERTIFICATE", "KNEC DIPLOMA CERTIFICATE" }));
 
         jLabel11.setText("Grade");
 
         jLabel12.setText("Index Number");
 
-        jTextField18.setText("(Enter Full Index Number of Previous Level)");
-        jTextField18.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPreviousIndex.setText("(Enter Full Index Number of Previous Level)");
+        txtPreviousIndex.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField18FocusGained(evt);
+                txtPreviousIndexFocusGained(evt);
             }
         });
 
@@ -451,10 +471,10 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField17)
-                    .addComponent(jTextField18))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(cboPreviousLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPreviousIndex, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                    .addComponent(txtPreviousGrade))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,16 +482,16 @@ public class newStudent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboPreviousLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPreviousGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtPreviousIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Registration Tools"));
@@ -482,8 +502,14 @@ public class newStudent extends javax.swing.JPanel {
                 btnResetMouseClicked(evt);
             }
         });
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         btnRegister.setText("Register Student");
+        btnRegister.setEnabled(false);
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegisterMouseClicked(evt);
@@ -499,7 +525,7 @@ public class newStudent extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+            .addComponent(btnRegister, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
             .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
@@ -509,18 +535,23 @@ public class newStudent extends javax.swing.JPanel {
                 .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Admission"));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ICT Department", "Mechanical Engineeing Department", "Building and Civil Engineering Department", "Hospitality and Dietetics Department", "Agriculural Engineering Department" }));
+        cboDept.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboDeptItemStateChanged(evt);
+            }
+        });
+        cboDept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDeptActionPerformed(evt);
+            }
+        });
 
-        jLabel14.setText("Level");
-
-        jLabel13.setText("Department");
-
-        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA" }));
+        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SHORT COURSE", "ARTISAN", "CRAFT", "DIPLOMA", "HIGHER DIPLOMA" }));
         cboLevel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboLevelItemStateChanged(evt);
@@ -531,15 +562,44 @@ public class newStudent extends javax.swing.JPanel {
                 cboLevelFocusGained(evt);
             }
         });
-        cboLevel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboLevelMouseClicked(evt);
+        cboLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLevelActionPerformed(evt);
             }
         });
 
-        cboCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel14.setText("Level");
+
+        cboCourse.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboCourseItemStateChanged(evt);
+            }
+        });
+        cboCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cboCourseMouseExited(evt);
+            }
+        });
 
         jLabel15.setText("Course");
+
+        jLabel13.setText("Department");
+
+        jLabel16.setText("Module");
+
+        cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
+        cboEnrollTo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboEnrollToItemStateChanged(evt);
+            }
+        });
+        cboEnrollTo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEnrollToActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Class");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -548,32 +608,56 @@ public class newStudent extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addComponent(cboDept, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboEnrollTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cboCohort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
                     .addComponent(cboCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(cboEnrollTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCohort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Student Photo"));
@@ -617,19 +701,19 @@ public class newStudent extends javax.swing.JPanel {
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -640,23 +724,31 @@ public class newStudent extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel3, jPanel4, jPanel5});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel3, jPanel4});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -671,6 +763,9 @@ public class newStudent extends javax.swing.JPanel {
     private void txtIdNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdNumFocusGained
         // TODO add your handling code here:
         txtIdNum.setText("");
+        if (txtPassport.getText().equals("(Passpot Number)")) {
+            txtPassport.setText("");
+        }
     }//GEN-LAST:event_txtIdNumFocusGained
 
     private void txtBCertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBCertActionPerformed
@@ -685,6 +780,10 @@ public class newStudent extends javax.swing.JPanel {
     private void txtStdFirstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdFirstFocusGained
         // TODO add your handling code here:
         txtStdFirst.setText("");
+        if (txtStdOther.getText().equals("(Other Names)")) {
+            txtStdOther.setText("");
+        }
+
     }//GEN-LAST:event_txtStdFirstFocusGained
 
     private void txtStdOtherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdOtherFocusGained
@@ -720,11 +819,6 @@ public class newStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNextOfKinEmailActionPerformed
 
-    private void txtCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCountyFocusGained
-        // TODO add your handling code here:
-        txtCounty.setText("");
-    }//GEN-LAST:event_txtCountyFocusGained
-
     private void txtSubCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubCountyFocusGained
         // TODO add your handling code here:
         txtSubCounty.setText("");
@@ -753,6 +847,9 @@ public class newStudent extends javax.swing.JPanel {
     private void txtPassportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassportFocusGained
         // TODO add your handling code here:
         txtPassport.setText("");
+        if (txtIdNum.getText().equals("(ID Number)")) {
+            txtIdNum.setText("");
+        }
     }//GEN-LAST:event_txtPassportFocusGained
 
     private void txtNextofKinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNextofKinFocusGained
@@ -770,71 +867,46 @@ public class newStudent extends javax.swing.JPanel {
         txtNextOfKinEmail.setText("");
     }//GEN-LAST:event_txtNextOfKinEmailFocusGained
 
-    private void jTextField17FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField17FocusGained
+    private void txtPreviousGradeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreviousGradeFocusGained
         // TODO add your handling code here:
-        jTextField17.setText("");
-    }//GEN-LAST:event_jTextField17FocusGained
+        txtPreviousGrade.setText("");
+    }//GEN-LAST:event_txtPreviousGradeFocusGained
 
-    private void jTextField18FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField18FocusGained
+    private void txtPreviousIndexFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPreviousIndexFocusGained
         // TODO add your handling code here:
-        jTextField18.setText("");
-    }//GEN-LAST:event_jTextField18FocusGained
+        txtPreviousIndex.setText("");
+    }//GEN-LAST:event_txtPreviousIndexFocusGained
 
     private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
         // TODO add your handling code here:
-        try {
-            // create a mysql database connection
-        Configurations cf=new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
-            
-           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
-                // create a sql date object so we can use it in our INSERT statement
-                Calendar calendar = Calendar.getInstance();
-                java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-                // the mysql insert statement
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date CurrentDate = new Date();
-                String IDNum = "", Gender = "", currentDate = "", Query = "";
-                currentDate = dateFormat.format(CurrentDate).toString();
-                if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
-                    IDNum = txtPassport.getText();
+        //System.out.println(txtBCert.getText() +"\n"+!txtBCert.getText().equals("")+"\n"+!txtBCert.getText().trim().equals("(B-Cert Number)") );
+        if (!txtBCert.getText().equals("") && !txtBCert.getText().trim().equals("(B-Cert Number)")) {
+            if (cboCourse.getItemCount() != 0) {
+                if (checkifEnrolled() == false) {
+                    try {
+
+                        enrollNewStudenttoClass();
+                        Thread.sleep(2000);
+                        insertNewStudent();
+                        studentID();
+                        resetFields();
+
+                        // newStudent.this.getTopLevelAncestor().dispose();
+                        // this.getTopLevelAncestor().setVisible(false);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else {
-                    IDNum = txtIdNum.getText();
-                }   if (optMale.isSelected()) {
-                    Gender = "Male";
-                } else if (optFemale.isSelected()) {
-                    Gender = "Female";
-                }   Query = "insert into Students (student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                // create the mysql insert preparedstatement
-                PreparedStatement preparedStmt = conn.prepareStatement(Query);
-                preparedStmt.setString(1, txtStdSur.getText() + " " + txtStdFirst.getText() + " " + txtStdOther.getText());
-                preparedStmt.setString(2, txtBCert.getText());
-                preparedStmt.setString(3, IDNum);
-                preparedStmt.setString(4, Gender);
-                preparedStmt.setString(5, cboState.getSelectedItem().toString());
-                preparedStmt.setString(6, txtCounty.getText());
-                preparedStmt.setString(7, txtSubCounty.getText());
-                preparedStmt.setString(8, txtDivision.getText());
-                preparedStmt.setString(9, txtLocation.getText());
-                preparedStmt.setString(10, txtSubLocation.getText());
-                preparedStmt.setString(11, txtVillage.getText());
-                preparedStmt.setString(12, txtAddress.getText());
-                preparedStmt.setString(13, txtPhone.getText());
-                preparedStmt.setString(14, txtEmail.getText());
-                preparedStmt.setString(15, txtNextofKin.getText() + "[" + cboParentType.getSelectedItem() + "]");
-                preparedStmt.setString(16, txtNextOfKinPhone.getText());
-                preparedStmt.setString(17, txtNextOfKinEmail.getText());
-                preparedStmt.setString(18, null);
-                preparedStmt.setString(19,currentDate);
-                // execute the preparedstatement
-                preparedStmt.execute();
-            
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Got an exception!");
-            System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this,"Error Occured",e.getMessage(),JOptionPane.ERROR);
+                    JOptionPane.showMessageDialog(this, "That students is already registered to another course.", "Student Already in Session", JOptionPane.ERROR_MESSAGE);
+                }
+                //this.getRootPane().setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Select a Course to be Persued By the Student.", "Missing Information", JOptionPane.ERROR_MESSAGE);
+                cboCourse.grabFocus();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Enter the Student's Birth Centificate Number - Cannot be empty.", "Missing Information", JOptionPane.ERROR_MESSAGE);
+            txtBCert.grabFocus();
         }
 
     }//GEN-LAST:event_btnRegisterMouseClicked
@@ -845,47 +917,157 @@ public class newStudent extends javax.swing.JPanel {
 
     private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnResetMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+
+        //recomended extensions
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "png", "jpeg");
+        fileChooser.setFileFilter(filter);
+
+        //fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                //System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                BufferedImage img = ImageIO.read(new File(selectedFile.getAbsolutePath()));
+
+                Image dimg = img.getScaledInstance(picpassportphoto.getWidth(), picpassportphoto.getHeight(),
+                        Image.SCALE_SMOOTH);
+
+                ImageIcon passPortPhoto = new ImageIcon(dimg);
+                picpassportphoto.setText("");
+                picpassportphoto.setIcon(passPortPhoto);
+            } catch (NullPointerException | IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
         // TODO add your handling code here:
-         
-    }//GEN-LAST:event_cboLevelFocusGained
 
-    private void cboLevelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLevelMouseClicked
-        // TODO add your handling code here:
-        populateCombo();
-    }//GEN-LAST:event_cboLevelMouseClicked
+    }//GEN-LAST:event_cboLevelFocusGained
 
     private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
         // TODO add your handling code here:
-        populateCombo();
+
+   populateCombo();
+        cboEnrollTo.removeAllItems();
+
+//
+//DefaultComboBoxModel model = new DefaultComboBoxModel( yourStringArray );
+//comboBox.setModel( model );
+        switch (cboLevel.getSelectedIndex()) {
+            case 0:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+                break;
+            case 1:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+                break;
+            case 2:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2"}));
+                break;
+            case 3:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2", "3"}));
+                break;
+            case 4:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+                break;
+        }
     }//GEN-LAST:event_cboLevelItemStateChanged
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        System.out.println(cboCourse.getItemCount());
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_cboLevelActionPerformed
+
+    private void cboCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCourseMouseExited
+        // TODO add your handling code here:
+        btnRegister.setEnabled(true);
+    }//GEN-LAST:event_cboCourseMouseExited
+
+    private void cboDeptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDeptItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboDeptItemStateChanged
+
+    private void cboDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDeptActionPerformed
+        // TODO add your handling code here:
+        populateCombo();
+    }//GEN-LAST:event_cboDeptActionPerformed
+
+    private void cboStateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboStateItemStateChanged
+        // TODO add your handling code here:
+        if (cboState.getSelectedItem().equals("Kenya")) {
+            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Baringo", "Bomet6", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita–Taveta", "Tana River", "Tharaka-Nithi", "Trans-Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"}));
+
+        } else {
+            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{""}));
+
+        }
+    }//GEN-LAST:event_cboStateItemStateChanged
+
+    private void cboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCourseItemStateChanged
+        // TODO add your handling code here:
+        // System.out.println(cboCourse.getSelectedItem().toString());
+        // System.out.println("");
+    }//GEN-LAST:event_cboCourseItemStateChanged
+
+    private void cboEnrollToItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboEnrollToItemStateChanged
+
+
+    }//GEN-LAST:event_cboEnrollToItemStateChanged
+
+    private void cboEnrollToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEnrollToActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        /* 
+            HOW TO DO IT
+            ============
+            Youve Been given the department, the level and the year of intake. plus we can get the structure of the exam. then since structure mutates as the 
+            class progresses, we look for the classes with the same or near the same mutation that would fit the characteristics. This feature will look intakes
+            to classes at the begining of academic years as no class will match the patterns unless at the end of year
+         */
+
+        int x = 0;
+
+        if (cboEnrollTo.getItemCount() != 0) {
+
+            populateCohorts(cboEnrollTo.getSelectedIndex() + 1);
+
+        }
+
+
+    }//GEN-LAST:event_cboEnrollToActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox<String> cboCohort;
+    private javax.swing.JComboBox<String> cboCounty;
     private javax.swing.JComboBox<String> cboCourse;
+    private javax.swing.JComboBox<String> cboDept;
+    private javax.swing.JComboBox<String> cboEnrollTo;
     private javax.swing.JComboBox<String> cboLevel;
     private javax.swing.JComboBox<String> cboParentType;
+    private javax.swing.JComboBox<String> cboPreviousLevel;
     private javax.swing.JComboBox<String> cboState;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -893,6 +1075,8 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -908,15 +1092,11 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JRadioButton optFemale;
     private javax.swing.JRadioButton optMale;
     private javax.swing.JLabel picpassportphoto;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtBCert;
-    private javax.swing.JTextField txtCounty;
     private javax.swing.JTextField txtDivision;
     private javax.swing.JFormattedTextField txtEmail;
     private javax.swing.JFormattedTextField txtIdNum;
@@ -926,46 +1106,354 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtNextofKin;
     private javax.swing.JTextField txtPassport;
     private javax.swing.JFormattedTextField txtPhone;
+    private javax.swing.JTextField txtPreviousGrade;
+    private javax.swing.JTextField txtPreviousIndex;
     private javax.swing.JTextField txtStdFirst;
     private javax.swing.JTextField txtStdOther;
     private javax.swing.JTextField txtStdSur;
+    private javax.swing.JTextField txtStudentID;
     private javax.swing.JTextField txtSubCounty;
     private javax.swing.JTextField txtSubLocation;
     private javax.swing.JTextField txtVillage;
     // End of variables declaration//GEN-END:variables
 
     private void populateCombo() {
+        Util x = new Util();
 
- 
-        
         //combo.addItem("Please Select...");
- 
         try {
-               Configurations cf=new Configurations();
-            String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
-            // create a sql date object so we can use it in our INSERT statement
-           
-           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
-            Statement st = conn.createStatement();
-             cboCourse.removeAllItems();
-            ResultSet rs = st.executeQuery("select CourseName  from Courses Where Level = '"+cboLevel.getSelectedItem().toString()+"'");
- 
+
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            cboCourse.removeAllItems();
+            ResultSet rs = st.executeQuery("select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId=" + x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) + "");
+            //System.out.println("Query is : select CourseName from Courses Where Level = '" + cboLevel.getSelectedItem().toString() + "' and DeptId="+ x.getDepartmentID(String.valueOf(cboDept.getSelectedItem())) +"");
             while (rs.next()) {
-                    cboCourse.addItem(rs.getString("CourseName"));
-                    System.out.println(rs.getString("CourseName"));
+                cboCourse.addItem(rs.getString("CourseName"));
+
             }
-            
-   
-        } catch (SQLException | ClassNotFoundException e) {
-                
-           JOptionPane.showMessageDialog(this,  "When Populating Courses, " +e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Courses, " + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
- 
- 
-        
-    }    
 
-   
+    }
+
+    private void populateDept() {
+        try {
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            cboDept.removeAllItems();
+            ResultSet rs = st.executeQuery("select DeptName,DeptID  from Departments where AdmittingFlag=1");
+
+            while (rs.next()) {
+                cboDept.addItem(rs.getString("DeptName"));
+
+                //   System.out.println(deptId);
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        populateCombo();
+    }
+
+    private void studentID() {
+        String StudentID = "";
+        try {
+
+            String yearPart, Query, Pattern = "KTVC";
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date CurrentDate = new Date();
+            Statement st;
+            ResultSet rs;
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+            yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
+            Pattern = Pattern + yearPart;
+            int tempVal = 1;
+            st = cnn.createStatement();
+            Query = "select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'";
+
+            rs = st.executeQuery(Query);
+
+            while (rs != null) {
+
+                rs = st.executeQuery("select *  from Students where StudentId='" + Pattern + formatIndex(tempVal) + "'");
+                // System.out.println(Pattern + formatIndex(tempVal));
+                if (!rs.first()) {
+                    StudentID = Pattern + formatIndex(tempVal);
+                    txtStudentID.setText(StudentID);
+                    break;
+                } else {
+                    tempVal++;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private String formatIndex(int tempVal) {
+        String Pattern = "";
+        switch (String.valueOf(tempVal).length()) {
+            case 1:
+                Pattern = "000" + String.valueOf(tempVal);
+                break;
+            case 2:
+                Pattern = "00" + String.valueOf(tempVal);
+                break;
+            case 3:
+                Pattern = "0" + String.valueOf(tempVal);
+                break;
+            case 4:
+                Pattern = String.valueOf(tempVal);
+                break;
+        }
+
+        return Pattern;
+    }
+
+    private void insertNewStudent() {
+        Util u = new Util();
+        ClassLoader classLoader = null;
+        boolean notHavingIDorPassPort = false;
+        FileInputStream fileInputStream;
+
+        if (((txtIdNum.getText().equals("")) || (txtIdNum.getText().equals("(ID Number)"))) && ((txtPassport.getText().equals("")) || (txtPassport.getText().equals("(Passpot Number)")))) {
+            notHavingIDorPassPort = true;
+        }
+
+        try {
+
+            Connection cnn = Database.getConnection();
+            // create a sql date object so we can use it in our INSERT statement
+            // the mysql insert statement
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date CurrentDate = new Date();
+            String IDNum, Gender, currentDate, Query;
+            currentDate = dateFormat.format(CurrentDate);
+            if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
+                IDNum = txtPassport.getText();
+            } else {
+                IDNum = txtIdNum.getText();
+            }
+            if (optMale.isSelected()) {
+                Gender = "Male";
+                if (selectedFile == null) {
+
+                    selectedFile = new File("." + "/src/lobi/college/mis/resources/male.passport.less.png");
+                }
+            } else if (optFemale.isSelected()) {
+                Gender = "Female";
+                if (selectedFile == null) {
+                    selectedFile = new File("." + "/src/lobi/college/mis/resources/female.passport.less.png");
+                }
+            } else {
+
+                optMale.grabFocus();
+                return;
+            }
+            // System.out.println(IDNum);
+            fileInputStream = new FileInputStream(selectedFile);
+
+            if (!notHavingIDorPassPort) {
+                Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStmt = cnn.prepareStatement(Query);
+                preparedStmt.setString(1, u.formatString(txtStudentID.getText().toUpperCase()));
+                preparedStmt.setString(2, u.formatString(txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase()));
+                preparedStmt.setString(3, txtBCert.getText().toUpperCase());
+                preparedStmt.setString(4, IDNum);
+                preparedStmt.setString(5, Gender.toUpperCase());
+                preparedStmt.setString(6, cboState.getSelectedItem().toString().toUpperCase());
+                preparedStmt.setString(7, u.formatString(cboCounty.getSelectedItem().toString().toUpperCase()));
+                preparedStmt.setString(8, u.formatString(txtSubCounty.getText().toUpperCase()));
+                preparedStmt.setString(9, u.formatString(txtDivision.getText().toUpperCase()));
+                preparedStmt.setString(10, u.formatString(txtLocation.getText().toUpperCase()));
+                preparedStmt.setString(11, u.formatString(txtSubLocation.getText().toUpperCase()));
+                preparedStmt.setString(12, u.formatString(txtVillage.getText().toUpperCase()));
+                preparedStmt.setString(13, u.formatString(txtAddress.getText().toUpperCase()));
+                preparedStmt.setString(14, txtPhone.getText().toUpperCase());
+                preparedStmt.setString(15, txtEmail.getText().toUpperCase());
+                preparedStmt.setString(16, u.formatString(txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]"));
+                preparedStmt.setString(17, txtNextOfKinPhone.getText().toUpperCase());
+                preparedStmt.setString(18, txtNextOfKinEmail.getText().toUpperCase());
+                preparedStmt.setBinaryStream(19, fileInputStream, (int) selectedFile.length());
+                preparedStmt.setString(20, currentDate);
+                preparedStmt.execute();
+            } else {
+                Query = "insert into Students (studentID,student_name, B_Certificate, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStmt = cnn.prepareStatement(Query);
+                preparedStmt.setString(1, txtStudentID.getText().toUpperCase());
+                preparedStmt.setString(2, u.formatString(txtStdSur.getText().toUpperCase() + " " + txtStdFirst.getText().toUpperCase() + " " + txtStdOther.getText().toUpperCase()));
+                preparedStmt.setString(3, txtBCert.getText().toUpperCase());
+                preparedStmt.setString(4, Gender.toUpperCase());
+                preparedStmt.setString(5, cboState.getSelectedItem().toString().toUpperCase());
+                preparedStmt.setString(6, u.formatString(cboCounty.getSelectedItem().toString().toUpperCase()));
+                preparedStmt.setString(7, u.formatString(txtSubCounty.getText().toUpperCase()));
+                preparedStmt.setString(8, u.formatString(txtDivision.getText().toUpperCase()));
+                preparedStmt.setString(9, u.formatString(txtLocation.getText().toUpperCase()));
+                preparedStmt.setString(10, u.formatString(txtSubLocation.getText().toUpperCase()));
+                preparedStmt.setString(11, u.formatString(txtVillage.getText().toUpperCase()));
+                preparedStmt.setString(12, u.formatString(txtAddress.getText().toUpperCase()));
+                preparedStmt.setString(13, txtPhone.getText().toUpperCase());
+                preparedStmt.setString(14, txtEmail.getText().toUpperCase());
+                preparedStmt.setString(15, u.formatString(txtNextofKin.getText().toUpperCase() + "[" + cboParentType.getSelectedItem() + "]"));
+                preparedStmt.setString(16, txtNextOfKinPhone.getText().toUpperCase());
+                preparedStmt.setString(17, txtNextOfKinEmail.getText().toUpperCase());
+                preparedStmt.setBinaryStream(18, fileInputStream, (int) selectedFile.length());
+                preparedStmt.setString(19, currentDate);
+                preparedStmt.execute();
+            }
+            // create the mysql insert preparedstatement
+
+            // execute the preparedstatement
+            JOptionPane.showMessageDialog(this, "New Student should report to the department to be allocated to a class", "Class Placement", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (FileNotFoundException | NullPointerException | SQLException e) {
+            System.err.println(e.toString());
+            System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()), "Error Occured", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void enrollNewStudenttoClass() {
+        try {
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+
+            String Query = "insert into CourseEnrollment(StudentID,Bcert, CourseID,AdmittingLevel, AdmittingIndex, AdmittingAveGrade,CurrentProgress, CurrentActivity ) Values(?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStmt = cnn.prepareStatement(Query);
+            preparedStmt.setString(1, txtStudentID.getText());
+            preparedStmt.setInt(2, Integer.valueOf(txtBCert.getText()));
+            preparedStmt.setInt(3, courseID);
+            preparedStmt.setString(4, cboPreviousLevel.getSelectedItem().toString());
+            preparedStmt.setString(5, txtPreviousIndex.getText());
+            preparedStmt.setString(6, txtPreviousGrade.getText());
+            preparedStmt.setString(7, cboEnrollTo.getSelectedItem().toString());
+            preparedStmt.setString(8, "Active");
+            preparedStmt.execute();
+            JOptionPane.showMessageDialog(this, "New Student has been Enrolled to pursue\n" + cboCourse.getSelectedItem().toString() + " Starting from Module/Stage " + cboEnrollTo.getSelectedItem(), "Insert Successful", JOptionPane.INFORMATION_MESSAGE);
+            repaint();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    private boolean checkifEnrolled() {
+        boolean enrolled = false;
+        try {
+            String Query;
+            Statement st;
+            ResultSet rs;
+
+            Connection cnn = Database.getConnection();
+            st = cnn.createStatement();
+            Query = "select *  from CourseEnrollment where Bcert=" + txtBCert.getText() + "";
+
+            rs = st.executeQuery(Query);
+
+            if (rs.first()) {
+
+                enrolled = true;
+                getEnrolledCourse(rs.getInt("CourseID"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return enrolled;
+    }
+
+    private void getEnrolledCourse(int CourseId) {
+        try {
+            String Query;
+            Statement st;
+            ResultSet rs;
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+            st = cnn.createStatement();
+            Query = "select CourseName  from Courses where CourseID=" + CourseId + "";
+
+            rs = st.executeQuery(Query);
+            enrolledInCourse = rs.getString("CourseName");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private void resetFields() {
+        txtStdSur.setText("(Sur Name)");
+        txtStdFirst.setText("(First Name)");
+        txtStdOther.setText("(Other Names)");
+        txtIdNum.setText("(ID Number)");
+        txtBCert.setText("(B-Cert Number)");
+        txtAddress.setText("(Post Office Box)");
+        txtPhone.setText("(Phone Number)");
+        txtEmail.setText("(Email)");
+        txtPassport.setText("(Passpot Number)");
+        txtSubCounty.setText("(Sub County)");
+        txtDivision.setText("(Division)");
+        txtLocation.setText("(Location)");
+        txtSubLocation.setText("(Sub Location)");
+        txtVillage.setText("(Village/Estate)");
+        txtNextofKin.setText("(Next of Kin Name)");
+        txtNextOfKinPhone.setText("(Phone Number)");
+        txtNextOfKinEmail.setText("(Email)");
+        txtPreviousGrade.setText("(Mean Grade)");
+        jLabel12.setText("Index Number");
+    }
+
+    private void populateCohorts(int yearOfStudy) {
+        Util x = new Util();
+        //System.out.println("class year of study " + yearOfStudy);
+        String Query = "";
+        switch (yearOfStudy) {
+            case 1:
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.locked='0' AND cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND (" + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + ")";
+                break;
+            case 2:
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.locked='0' AND cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND  (" + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + ")";
+
+                break;
+            case 3:
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.locked='0' AND cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND (" + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + ")";
+
+                break;
+        }
+        System.out.println(Query);
+        try {
+
+            //  USE THE SQL STRING
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            cboCohort.removeAllItems();
+            ResultSet rs = st.executeQuery(Query);
+
+            while (rs.next()) {
+                cboCohort.addItem(rs.getString("cohortName"));
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Cohorts," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }
+
 }

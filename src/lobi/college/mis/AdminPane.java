@@ -7,6 +7,7 @@ package lobi.college.mis;
 
 import java.awt.BorderLayout;
 import lobi.college.mis.components.ManageCourses;
+import lobi.college.mis.components.ManageDepartments;
 import lobi.college.mis.components.newStudent;
 
 /**
@@ -15,11 +16,17 @@ import lobi.college.mis.components.newStudent;
  */
 public class AdminPane extends javax.swing.JInternalFrame {
 
+    private final String User;
+    private final String Dept;
+
     /**
      * Creates new form AdminPane
      */
-    public AdminPane() {
+    public AdminPane(String user,String dept) {
+        this.User=user;
+        this.Dept=dept;
         initComponents();
+        System.out.println(user+dept);
     }
 
     /**
@@ -32,9 +39,11 @@ public class AdminPane extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        btnAlterStudentDetail = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnMgtDepartments = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnCourses = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnStaff = new javax.swing.JButton();
         adminPane = new javax.swing.JPanel();
 
         setClosable(true);
@@ -43,20 +52,55 @@ public class AdminPane extends javax.swing.JInternalFrame {
         setTitle("Administration Pane");
         setDoubleBuffered(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jToolBar1.setRollover(true);
 
-        btnAlterStudentDetail.setText("Manage Students");
-        jToolBar1.add(btnAlterStudentDetail);
-        jToolBar1.add(jSeparator1);
+        btnMgtDepartments.setText("Departments");
+        btnMgtDepartments.setFocusable(false);
+        btnMgtDepartments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMgtDepartments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMgtDepartments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMgtDepartmentsMouseClicked(evt);
+            }
+        });
+        btnMgtDepartments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMgtDepartmentsActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnMgtDepartments);
+        jToolBar1.add(jSeparator2);
 
         btnCourses.setText("Courses");
+        btnCourses.setFocusable(false);
         btnCourses.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCoursesMouseClicked(evt);
             }
         });
         jToolBar1.add(btnCourses);
+        jToolBar1.add(jSeparator1);
+
+        btnStaff.setText("Staff");
+        jToolBar1.add(btnStaff);
 
         javax.swing.GroupLayout adminPaneLayout = new javax.swing.GroupLayout(adminPane);
         adminPane.setLayout(adminPaneLayout);
@@ -89,7 +133,7 @@ public class AdminPane extends javax.swing.JInternalFrame {
 
     private void btnCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCoursesMouseClicked
         // TODO add your handling code here:
-         ManageCourses courses = new ManageCourses();
+         ManageCourses courses = new ManageCourses(User,Dept);
         adminPane.removeAll();
        adminPane.setVisible(false);
         adminPane.setSize(adminPane.getSize().width,adminPane.getSize().height);
@@ -101,12 +145,38 @@ public class AdminPane extends javax.swing.JInternalFrame {
         pack();
     }//GEN-LAST:event_btnCoursesMouseClicked
 
+    private void btnMgtDepartmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMgtDepartmentsMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnMgtDepartmentsMouseClicked
+
+    private void btnMgtDepartmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMgtDepartmentsActionPerformed
+        // TODO add your handling code here:
+         ManageDepartments dept = new ManageDepartments(User,Dept);
+        adminPane.removeAll();
+       adminPane.setVisible(false);
+        adminPane.setSize(adminPane.getSize().width,adminPane.getSize().height);
+        adminPane.setVisible(true);
+        adminPane.setLayout(new BorderLayout());
+        adminPane.add(dept);
+
+        adminPane.setVisible(true);
+        pack();
+    }//GEN-LAST:event_btnMgtDepartmentsActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        btnMgtDepartments.doClick();
+    }//GEN-LAST:event_formInternalFrameOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminPane;
-    private javax.swing.JButton btnAlterStudentDetail;
     private javax.swing.JButton btnCourses;
+    private javax.swing.JButton btnMgtDepartments;
+    private javax.swing.JButton btnStaff;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

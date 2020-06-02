@@ -20,13 +20,27 @@ import lobi.college.util.Configurations;
  * @author shady
  */
 public class DashBoard extends javax.swing.JFrame {
+public String userDept,user;
 
+    public String getUserDept() {
+        return userDept;
+    }
+
+    public String getUser() {
+        return user;
+    }
     /**
      * Creates new form DashBoard
+     *
+     * @param User
+     * @param UserDepartment
      */
-    public DashBoard() {
+    public DashBoard(String User, String UserDepartment) {
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        this.user=User;
+        this.userDept=UserDepartment;
+        
     }
 
     /**
@@ -66,15 +80,26 @@ public class DashBoard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LoBi College MIS");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
+        jToolBar1.setDoubleBuffered(true);
 
         btnRegistry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details1.png"))); // NOI18N
         btnRegistry.setText("Registry");
         btnRegistry.setFocusable(false);
         btnRegistry.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistry.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
+        btnRegistry.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
         btnRegistry.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
         btnRegistry.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnRegistry.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +114,8 @@ public class DashBoard extends javax.swing.JFrame {
         btnAcademicPane.setText("Academics");
         btnAcademicPane.setFocusable(false);
         btnAcademicPane.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAcademicPane.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
+        btnAcademicPane.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
         btnAcademicPane.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
         btnAcademicPane.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAcademicPane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,6 +135,8 @@ public class DashBoard extends javax.swing.JFrame {
         btnProcurement.setText("Procurement");
         btnProcurement.setFocusable(false);
         btnProcurement.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProcurement.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
+        btnProcurement.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
         btnProcurement.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
         btnProcurement.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnProcurement.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,6 +151,8 @@ public class DashBoard extends javax.swing.JFrame {
         jButton2.setText("Accounts");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
         jButton2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +167,8 @@ public class DashBoard extends javax.swing.JFrame {
         btnAdmin.setText("Administration");
         btnAdmin.setFocusable(false);
         btnAdmin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAdmin.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
+        btnAdmin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
         btnAdmin.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
         btnAdmin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,7 +272,7 @@ public class DashBoard extends javax.swing.JFrame {
         int c = desktopPane.getAllFrames().length;
         Random r = new Random();
         if (c < 5) {
-            RegistryDash registry = new RegistryDash();
+            RegistryDash registry = new RegistryDash(user,userDept);
             registry.setVisible(true);
 
             desktopPane.add(registry);
@@ -268,7 +301,7 @@ public class DashBoard extends javax.swing.JFrame {
                 sp.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -282,7 +315,7 @@ public class DashBoard extends javax.swing.JFrame {
         int c = desktopPane.getAllFrames().length;
         Random r = new Random();
         if (c < 5) {
-            AdminPane admPane = new AdminPane();
+            AdminPane admPane = new AdminPane(user,userDept);
             admPane.setVisible(true);
             desktopPane.add(admPane);
             admPane.setLocation(c * 50, c * 50);
@@ -290,7 +323,7 @@ public class DashBoard extends javax.swing.JFrame {
                 admPane.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAdminMouseClicked
@@ -308,18 +341,18 @@ public class DashBoard extends javax.swing.JFrame {
                 procPane.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnProcurementMouseClicked
 
     private void btnAcademicPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcademicPaneMouseClicked
         // TODO add your handling code here:
-        
-                  int c = desktopPane.getAllFrames().length;
+
+        int c = desktopPane.getAllFrames().length;
         Random r = new Random();
         if (c < 5) {
-            AcademicPane academicPane = new AcademicPane();
+            AcademicPane academicPane = new AcademicPane(user,userDept);
             academicPane.setVisible(true);
             desktopPane.add(academicPane);
             academicPane.setLocation(c * 50, c * 50);
@@ -327,10 +360,21 @@ public class DashBoard extends javax.swing.JFrame {
                 academicPane.setSelected(true);
             } catch (java.beans.PropertyVetoException e) {
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAcademicPaneMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        Configurations conf = new Configurations();
+        conf.deletePropertiesFile();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+       this.setTitle("LoBI College MIS ("+user+")");
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -357,7 +401,8 @@ public class DashBoard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashBoard().setVisible(true);
+                //new DashBoard().setVisible(true);
+                
             }
         });
     }

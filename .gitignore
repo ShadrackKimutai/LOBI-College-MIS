@@ -1,2 +1,5 @@
-*.class
 *.dll
+/dist/
+.git
+*.class
+/build/

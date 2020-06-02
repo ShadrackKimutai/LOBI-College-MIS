@@ -6,18 +6,20 @@
 package lobi.college.mis.components;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import lobi.college.util.Configurations;
+import lobi.college.util.Database;
+import lobi.college.util.Util;
+import javax.swing.JScrollPane;
+import lobi.college.util.StudentInfo;
 
 /**
  *
@@ -25,16 +27,26 @@ import lobi.college.util.Configurations;
  */
 public class RegisteredStudents extends javax.swing.JPanel {
 
+    private String User, Dept;
     private final Color Silver;
+    Toolkit toolkit;
+    Dimension dimension;
 
     /**
      * Creates new form RegisteredStudents
+     *
+     * @param user
+     * @param dept
      */
-    public RegisteredStudents() {
-        Silver=new Color(247, 247, 247);
+    public RegisteredStudents(String user, String dept) {
+        this.User = user;
+        this.Dept = dept;
+        Silver = new Color(247, 247, 247);
+        toolkit = Toolkit.getDefaultToolkit();
+        dimension = toolkit.getScreenSize();
         initComponents();
         populateTable();
-        
+
     }
 
     /**
@@ -46,20 +58,36 @@ public class RegisteredStudents extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane(tblStudents);
+        jScrollPane3 = new JScrollPane(tblStudents, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED)
+        ;
         tblStudents = new javax.swing.JTable();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student Number", "Name", "Department", "Course", " " }));
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/research.png"))); // NOI18N
         jButton1.setText("<html><b>Search</b>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jScrollPane3.setForeground(new java.awt.Color(31, 28, 28));
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane3.setAutoscrolls(true);
+        jScrollPane3.setDoubleBuffered(true);
+        jScrollPane3.setWheelScrollingEnabled(false);
 
-        tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        /*tblStudents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
             @Override
             public Component getTableCellRendererComponent(JTable table,
@@ -71,15 +99,26 @@ public class RegisteredStudents extends javax.swing.JPanel {
                 return c;
             };
         });
+        tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);*/
         tblStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13"
+                "StudentID", "Birth Certificate", "Student Name", "National ID No / Passport No", "Gender", "Nationality", "County", "Sub County", "Mobile  Phone", "Email Address", "Postal Address", "Gender", "Next of Kin", "Next of Kin Phone"
             }
         ));
+        /*
+        tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        */
+        tblStudents.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblStudents.setDoubleBuffered(true);
+        tblStudents.setPreferredScrollableViewportSize(new Dimension(dimension.width,dimension.height));
+        tblStudents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStudentsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblStudents);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -87,70 +126,114 @@ public class RegisteredStudents extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(375, Short.MAX_VALUE))
-            .addComponent(jScrollPane3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(User + Dept);        // TODO add your handling code here:
+        Util util = new Util();
+
+        populateTable(util.formatString(txtSearch.getText()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        Util util = new Util();
+        populateTable(util.formatString(txtSearch.getText()));        // TODO add your handling code here:  
+
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void tblStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentsMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
+        String x = model.getValueAt(tblStudents.getSelectedRow(), 0).toString();
+       // JOptionPane.showMessageDialog(this, x);
+        try {
+            StudentInfo studentInfo = new StudentInfo(x);
+            studentInfo.setLocationRelativeTo(this);
+            studentInfo.setVisible(true);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_tblStudentsMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblStudents;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        
-         
-        
-        
-        
-        try{
-    Configurations cf=new Configurations();
-     String myUrl = cf.getProperties().getProperty("url");
-            Class.forName(cf.getProperties().getProperty("driverClassName"));
+
+        try {
+
             // create a sql date object so we can use it in our INSERT statement
-           
             File f = new File("server.properties");
-           Connection conn = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password")); 
-            
-       
-        PreparedStatement ps = conn.prepareStatement("Select * from Students");
-        ResultSet rs=ps.executeQuery();
-        DefaultTableModel tm = (DefaultTableModel)tblStudents.getModel();
-        tm.setRowCount(0);
+            Connection cnn = Database.getConnection();
 
-        while(rs.next()){
+            PreparedStatement ps = cnn.prepareStatement("Select * from Students");
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
+            tm.setRowCount(0);
 
-            Object o[] = {rs.getInt("B_Certificate"),rs.getString("Student_Name"),rs.getInt("IDNo"),rs.getString("Gender"),rs.getString("Nationality"),rs.getString("County"),rs.getString("Subcounty"),rs.getString("Phone"),rs.getString("email"),rs.getString("Address"),rs.getString("Gender"),rs.getString("NextOfKin"),rs.getString("NextofKinPhone")};
-            tm.addRow(o);
+            while (rs.next()) {
 
+                Object o[] = {rs.getString("StudentID"), rs.getInt("B_Certificate"), rs.getString("Student_Name"), rs.getInt("IDNo"), rs.getString("Gender"), rs.getString("Nationality"), rs.getString("County"), rs.getString("Subcounty"), rs.getString("Phone"), rs.getString("email"), rs.getString("Address"), rs.getString("Gender"), rs.getString("NextOfKin"), rs.getString("NextofKinPhone")};
+                tm.addRow(o);
 
+            }
 
+            tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
-
-tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
-    catch(ClassNotFoundException | SQLException e){
 
-        JOptionPane.showMessageDialog(null,"Error "+e.getMessage());
-    }  }
+    private void populateTable(String key) {
+
+        try {
+
+            // create a sql date object so we can use it in our INSERT statement
+            Connection cnn = Database.getConnection();
+            PreparedStatement ps = cnn.prepareStatement("SELECT * FROM Students WHERE StudentID like '%" + key + "%' OR Student_Name like '%" + key + "%' OR B_Certificate like '%" + key + "%' OR IDNo like '%" + key + "%' OR Gender like '%" + key + "%' OR Nationality like '%" + key + "%' OR County like '%" + key + "%' OR Subcounty like '%" + key + "%' OR Division like '%" + key + "%' OR Location like '%" + key + "%' OR SubLocation like '%" + key + "%' OR Village like '%" + key + "%' OR Address like '%" + key + "%' OR Phone like '%" + key + "%' OR email like '%" + key + "%' OR NextOfKin like '%" + key + "%' OR NextofKinPhone like '%" + key + "%' OR NextofKinEmail");
+            //PreparedStatement ps = cnn.prepareStatement("Select * from Students where "+dbParam+" like '%"+key+"%'");
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) tblStudents.getModel();
+            tm.setRowCount(0);
+
+            while (rs.next()) {
+
+                Object o[] = {rs.getString("StudentID"), rs.getInt("B_Certificate"), rs.getString("Student_Name"), rs.getInt("IDNo"), rs.getString("Gender"), rs.getString("Nationality"), rs.getString("County"), rs.getString("Subcounty"), rs.getString("Phone"), rs.getString("email"), rs.getString("Address"), rs.getString("Gender"), rs.getString("NextOfKin"), rs.getString("NextofKinPhone")};
+                tm.addRow(o);
+
+            }
+
+            tblStudents.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
 }

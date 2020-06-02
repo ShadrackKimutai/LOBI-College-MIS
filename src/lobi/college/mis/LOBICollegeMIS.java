@@ -5,41 +5,56 @@
  */
 package lobi.college.mis;
 
-import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import lobi.college.util.splash;
+import javax.swing.plaf.metal.MetalMenuBarUI;
+//import ch.randelshofer.quaqua.BasicQuaquaLookAndFeel;
+//import ch.randelshofer.quaqua.QuaquaLookAndFeel15
+//import com.formdev.flatlaf.FlatDarculaLaf;
 
+//import //
 /**
  *
  * @author shady
  */
 public class LOBICollegeMIS {
 
+   
+    public LOBICollegeMIS() {
+
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-       
-         try {
+
+        try {
             // Set cross-platform Java L&F (also called "Metal")
-           UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-        } catch (UnsupportedLookAndFeelException e) {
-            // handle exception
-        } catch (ClassNotFoundException e) {
-            // handle exception
-        } catch (InstantiationException e) {
-            // handle exception
-        } catch (IllegalAccessException e) {
+           // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+           UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
-            
+
+        splash Splash = new splash();
+        Splash.setLocationRelativeTo(null);
+
+        Splash.setVisible(true);
+        Splash.progressBar();
+//        try {
+//            Thread.sleep(4500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//
+//        }
         // TODO code application logic here
-        Login login=new Login();
+        Login login = new Login();
         login.setLocationRelativeTo(null);
         login.setVisible(true);
-       
-       
+        Splash.dispose();
+
     }
-    
+
 }

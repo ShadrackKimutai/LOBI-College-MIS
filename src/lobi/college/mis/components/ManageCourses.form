@@ -25,9 +25,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="228" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="282" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,22 +46,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="cboLevel" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtCourseName" min="-2" pref="640" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="txtAltRequirements" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="cboAccreditationBody" max="32767" attributes="0"/>
@@ -72,15 +64,36 @@
                           <Component id="cboExaminingBody" min="-2" pref="373" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtMinRequirements" alignment="0" max="32767" attributes="0"/>
-                      <Component id="cboDepartment" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cboLevel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCourseName" min="-2" pref="516" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="cboDepartment" min="-2" pref="647" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtSlug" min="-2" pref="79" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel7" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="cboCourseFormat" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="756" pref="756" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnRegisterCourse" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnReset" min="-2" pref="99" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,16 +104,20 @@
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCourseName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cboLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSlug" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cboDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cboCourseFormat" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace pref="9" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtMinRequirements" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -114,10 +131,10 @@
                       <Component id="cboAccreditationBody" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cboExaminingBody" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnRegisterCourse" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnReset" linkSize="1" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnReset" linkSize="2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="btnRegisterCourse" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -185,6 +202,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnResetMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboAccreditationBody">
@@ -227,17 +245,41 @@
         <Component class="javax.swing.JComboBox" name="cboDepartment">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="0"/>
+            </Property>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboDepartmentActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboCourseFormat">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="MODULAR"/>
+                <StringItem index="1" value="STAGE"/>
               </StringArray>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Course Format"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Slug / Abbreviation"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSlug">
         </Component>
       </SubComponents>
     </Container>
@@ -252,9 +294,11 @@
           <Properties>
             <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="8" rowCount="4">
                 <Column editable="true" title="Level" type="java.lang.Object"/>
                 <Column editable="true" title="Course Name" type="java.lang.Object"/>
+                <Column editable="true" title="Short Name " type="java.lang.Object"/>
+                <Column editable="true" title="Course Type" type="java.lang.Object"/>
                 <Column editable="true" title="Min Requirements" type="java.lang.Object"/>
                 <Column editable="true" title="Alt Requirments" type="java.lang.Object"/>
                 <Column editable="true" title="Accreditation Body" type="java.lang.Object"/>
@@ -262,12 +306,12 @@
               </Table>
             </Property>
             <Property name="doubleBuffered" type="boolean" value="true"/>
-            <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="20" green="20" red="db" type="rgb"/>
+            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="33" type="rgb"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblCourses.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Color.lightGray);                        &#xa;            return c;&#xa;        };&#xa;    });"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*tblCourses.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xa;&#xa;        @Override&#xa;        public Component getTableCellRendererComponent(JTable table, &#xa;                Object value, boolean isSelected, boolean hasFocus,&#xa;                int row, int column) {&#xa;            Component c = super.getTableCellRendererComponent(table, &#xa;                value, isSelected, hasFocus, row, column);&#xa;            c.setBackground(row%2==0 ? Color.white : Color.lightGray);                        &#xa;            return c;&#xa;        };&#xa;    });*/"/>
           </AuxValues>
         </Component>
       </SubComponents>
