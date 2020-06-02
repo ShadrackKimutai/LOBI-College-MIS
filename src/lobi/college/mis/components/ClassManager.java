@@ -851,7 +851,7 @@ private void generateClassID() {
                 // create a sql date object so we can use it in our INSERT statement
                 Connection cnn = Database.getConnection();
                 // create a sql date object so we can use it in our INSERT statement
-                String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress) values (?,?,?,?,?,?,?)";
+                String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress,locked) values (?,?,?,?,?,?,?,?)";
 
 // create the mysql insert preparedstatement
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
@@ -862,7 +862,7 @@ private void generateClassID() {
                 preparedStmt.setString(5, jXDatePicker1.getEditor().getText());
                 preparedStmt.setString(6, cboStructure.getSelectedItem().toString());
                 preparedStmt.setString(7, cboStructure.getSelectedItem().toString());
-
+                preparedStmt.setInt(8,0);
                 // execute the preparedstatement
                 if (checkExists() == false) {
                     preparedStmt.execute();
