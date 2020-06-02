@@ -8,7 +8,9 @@ package lobi.college.mis;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import lobi.college.util.splash;
-import javax.swing.plaf.metal.MetalMenuBarUI;
+import ch.randelshofer.quaqua.QuaquaLookAndFeel;
+
+
 //import ch.randelshofer.quaqua.BasicQuaquaLookAndFeel;
 //import ch.randelshofer.quaqua.QuaquaLookAndFeel15
 //import com.formdev.flatlaf.FlatDarculaLaf;
@@ -33,7 +35,7 @@ public class LOBICollegeMIS {
         try {
             // Set cross-platform Java L&F (also called "Metal")
            // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-           UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+           UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
