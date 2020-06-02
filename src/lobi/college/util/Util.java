@@ -42,7 +42,7 @@ public class Util {
             ResultSet rs = st.executeQuery("select DeptID from Departments where DeptName='" + Department + "'");
             rs.next();
             departmentID = rs.getInt(1);
-rs.close();
+            rs.close();
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Issue on Getting Department ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
@@ -72,11 +72,11 @@ rs.close();
     }
 
     public int getCourseID(String Course, String Level) {
- int courseID = 0;
+        int courseID = 0;
         try {
             Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
-     String Query="select CourseID from Courses where CourseName='" + Course + "' and Level='"+Level+"'";
+            String Query = "select CourseID from Courses where CourseName='" + Course + "' and Level='" + Level + "'";
             System.out.println(Query);
             ResultSet rs = st.executeQuery(Query);
             rs.next();
@@ -86,6 +86,57 @@ rs.close();
             JOptionPane.showMessageDialog(null, "Issue on Getting Course ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
         }
         return courseID;
+    }
+
+    public String getCoursePattern(String level, int yearOfStudy) {
+        String coursePattern = "";
+        //SHORT COURSE", "ARTISAN", "CRAFT ", "DIPLOMA", "HIGHER DIPLOMA"
+        switch (yearOfStudy) {
+            case 1: {
+                switch (level) {
+                    case "SHORT COURSE": {
+                        coursePattern = "(cohorts.progress like '1+IE')";
+                        break;
+                    }
+                    case "ARTISAN": {
+                        coursePattern = "(cohorts.progress like '3+NE') OR (cohorts.progress like '2+A+NE')";
+                        break;
+                    }
+                    case "CRAFT": {
+                        coursePattern = "(cohorts.progress like '2+NE+A+2+NE') OR (cohorts.progress like '3+NE+A+2+NE') OR (cohorts.progress like'2+NE+2+NE+A') OR (cohorts.progress like '3+NE+2+NE+A') OR (cohorts.progress like '2+SE+A+2+NE') OR (cohorts.progress like '3+SE+A+2+NE') OR (cohorts.progress like '2+SE+2+NE+A' ) OR (cohorts.progress like '3+SE+2+NE+A') ";
+                        break;
+                    }
+                    case "DIPLOMA": {
+                        coursePattern = "(cohorts.progress like '2+NE+A+2+NE') OR (cohorts.progress like '3+NE+A+2+NE') OR (cohorts.progress like'3+NE+2+NE+A+2+NE') OR (cohorts.progress like '3+2+NE+2+NE+A') OR (cohorts.progress like '2+SE+A+2+NE') OR (cohorts.progress like '3+SE+A+2+NE') OR  (cohorts.progress like'3+SE+2+SE+A+2+NE') OR (cohorts.progress like '3+2+SE+2+SE+A')";
+                        break;
+                    }
+                    case "HIGHER DIPLOMA": {
+                        coursePattern = "(cohorts.progress like '2+P+NE') OR (cohorts.progress like '3+NE+P')";
+                        break;
+                    }
+                }
+                break;
+            }
+            case 2: {
+                switch (level) {
+                    case "CRAFT": {
+                        coursePattern = "(cohorts.progress like '2+NE') OR (cohorts.progress like '2+NE+A' )";
+                        break;
+                    }
+                    case "DIPLOMA": {
+                        coursePattern = "(cohorts.progress like '2+NE') OR (cohorts.progress like '2+NE+A+2+NE') OR (cohorts.progress like '2+NE+2+NE+A') OR (cohorts.progress like '2+SE+A+2+NE')";
+                        break;
+                    }
+                }
+                break;
+            }
+            case 3: {
+                        coursePattern = "(cohorts.progress like '2+NE') OR (cohorts.progress like '2+NE+A')";
+                break;
+            }
+        }
+
+        return coursePattern;
     }
 
 }

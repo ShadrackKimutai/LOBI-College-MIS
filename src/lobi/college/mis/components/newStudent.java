@@ -46,11 +46,11 @@ public class newStudent extends javax.swing.JPanel {
     public newStudent(String user, String dept) {
         this.User = user;
         this.Dept = dept;
-        this.selectedFile=null;
+        this.selectedFile = null;
         initComponents();
         populateDept();
         studentID();
-       cboDept.setSelectedIndex(0);
+        cboDept.setSelectedIndex(0);
 
     }
 
@@ -64,8 +64,6 @@ public class newStudent extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -120,7 +118,7 @@ public class newStudent extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         cboEnrollTo = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboCohort = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         picpassportphoto = new javax.swing.JLabel();
@@ -553,7 +551,7 @@ public class newStudent extends javax.swing.JPanel {
             }
         });
 
-        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ARTISAN", "CRAFT ", "DIPLOMA", "HIGHER DIPLOMA" }));
+        cboLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SHORT COURSE", "ARTISAN", "CRAFT", "DIPLOMA", "HIGHER DIPLOMA" }));
         cboLevel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboLevelItemStateChanged(evt);
@@ -572,7 +570,6 @@ public class newStudent extends javax.swing.JPanel {
 
         jLabel14.setText("Level");
 
-        cboCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboCourse.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboCourseItemStateChanged(evt);
@@ -591,8 +588,16 @@ public class newStudent extends javax.swing.JPanel {
         jLabel16.setText("Module");
 
         cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboEnrollTo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboEnrollToItemStateChanged(evt);
+            }
+        });
+        cboEnrollTo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEnrollToActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Class");
 
@@ -628,15 +633,15 @@ public class newStudent extends javax.swing.JPanel {
                                         .addGap(6, 6, 6)
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(cboCohort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
@@ -650,9 +655,9 @@ public class newStudent extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(cboEnrollTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboCohort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Student Photo"));
@@ -725,14 +730,22 @@ public class newStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel3, jPanel4});
@@ -871,12 +884,12 @@ public class newStudent extends javax.swing.JPanel {
             if (cboCourse.getItemCount() != 0) {
                 if (checkifEnrolled() == false) {
                     try {
-                        
-                       enrollNewStudenttoClass();
-                         Thread.sleep(2000);
-                         insertNewStudent();
-                          studentID();
-                          resetFields();
+
+                        enrollNewStudenttoClass();
+                        Thread.sleep(2000);
+                        insertNewStudent();
+                        studentID();
+                        resetFields();
 
                         // newStudent.this.getTopLevelAncestor().dispose();
                         // this.getTopLevelAncestor().setVisible(false);
@@ -916,9 +929,9 @@ public class newStudent extends javax.swing.JPanel {
         JFileChooser fileChooser = new JFileChooser();
 
         //recomended extensions
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images","jpg", "png", "jpeg");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "png", "jpeg");
         fileChooser.setFileFilter(filter);
-        
+
         //fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -948,6 +961,16 @@ public class newStudent extends javax.swing.JPanel {
     private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
         // TODO add your handling code here:
 
+
+    }//GEN-LAST:event_cboLevelItemStateChanged
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        System.out.println(cboCourse.getItemCount());
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
+        // TODO add your handling code here:
         populateCombo();
         cboEnrollTo.removeAllItems();
 
@@ -959,24 +982,18 @@ public class newStudent extends javax.swing.JPanel {
                 cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
                 break;
             case 1:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2"}));
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
                 break;
             case 2:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2", "3"}));
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2"}));
                 break;
             case 3:
+                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2", "3"}));
+                break;
+            case 4:
                 cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
                 break;
         }
-    }//GEN-LAST:event_cboLevelItemStateChanged
-
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
-        System.out.println(cboCourse.getItemCount());
-    }//GEN-LAST:event_btnResetActionPerformed
-
-    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_cboLevelActionPerformed
 
     private void cboCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCourseMouseExited
@@ -995,27 +1012,53 @@ public class newStudent extends javax.swing.JPanel {
 
     private void cboStateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboStateItemStateChanged
         // TODO add your handling code here:
-        if (cboState.getSelectedItem().equals("Kenya")){
-            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baringo", "Bomet\t", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita–Taveta", "Tana River", "Tharaka-Nithi", "Trans-Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot" }));
+        if (cboState.getSelectedItem().equals("Kenya")) {
+            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Baringo", "Bomet6", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita–Taveta", "Tana River", "Tharaka-Nithi", "Trans-Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"}));
 
-        }else{
-            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {""}));
+        } else {
+            cboCounty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{""}));
 
         }
     }//GEN-LAST:event_cboStateItemStateChanged
 
     private void cboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCourseItemStateChanged
         // TODO add your handling code here:
-        System.out.println(cboCourse.getSelectedItem().toString());
-        System.out.println("");
+        // System.out.println(cboCourse.getSelectedItem().toString());
+        // System.out.println("");
     }//GEN-LAST:event_cboCourseItemStateChanged
+
+    private void cboEnrollToItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboEnrollToItemStateChanged
+
+
+    }//GEN-LAST:event_cboEnrollToItemStateChanged
+
+    private void cboEnrollToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEnrollToActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        /* 
+            HOW TO DO IT
+            ============
+            Youve Been given the department, the level and the year of intake. plus we can get the structure of the exam. then since structure mutates as the 
+            class progresses, we look for the classes with the same or near the same mutation that would fit the characteristics. This feature will look intakes
+            to classes at the begining of academic years as no class will match the patterns unless at the end of year
+         */
+
+        int x = 0;
+
+        if (cboEnrollTo.getItemCount() != 0) {
+
+            populateCohorts(cboEnrollTo.getSelectedIndex() + 1);
+
+        }
+
+
+    }//GEN-LAST:event_cboEnrollToActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JComboBox<String> cboCohort;
     private javax.swing.JComboBox<String> cboCounty;
     private javax.swing.JComboBox<String> cboCourse;
     private javax.swing.JComboBox<String> cboDept;
@@ -1025,7 +1068,6 @@ public class newStudent extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboPreviousLevel;
     private javax.swing.JComboBox<String> cboState;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1187,9 +1229,7 @@ public class newStudent extends javax.swing.JPanel {
         ClassLoader classLoader = null;
         boolean notHavingIDorPassPort = false;
         FileInputStream fileInputStream;
-        
-      
-        
+
         if (((txtIdNum.getText().equals("")) || (txtIdNum.getText().equals("(ID Number)"))) && ((txtPassport.getText().equals("")) || (txtPassport.getText().equals("(Passpot Number)")))) {
             notHavingIDorPassPort = true;
         }
@@ -1201,7 +1241,7 @@ public class newStudent extends javax.swing.JPanel {
             // the mysql insert statement
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date CurrentDate = new Date();
-            String IDNum, Gender, currentDate, Query ;
+            String IDNum, Gender, currentDate, Query;
             currentDate = dateFormat.format(CurrentDate);
             if (txtIdNum.getText().isEmpty() && !txtPassport.getText().isEmpty()) {
                 IDNum = txtPassport.getText();
@@ -1210,23 +1250,23 @@ public class newStudent extends javax.swing.JPanel {
             }
             if (optMale.isSelected()) {
                 Gender = "Male";
-                if (selectedFile == null){
-                    
-        selectedFile = new File("."+"/src/lobi/college/mis/resources/male.passport.less.png");
+                if (selectedFile == null) {
+
+                    selectedFile = new File("." + "/src/lobi/college/mis/resources/male.passport.less.png");
                 }
             } else if (optFemale.isSelected()) {
                 Gender = "Female";
-                if (selectedFile == null){
-        selectedFile = new File("."+"/src/lobi/college/mis/resources/female.passport.less.png");
+                if (selectedFile == null) {
+                    selectedFile = new File("." + "/src/lobi/college/mis/resources/female.passport.less.png");
                 }
-            }else{
-               
+            } else {
+
                 optMale.grabFocus();
-                 return;
+                return;
             }
             // System.out.println(IDNum);
-            fileInputStream=new FileInputStream (selectedFile);
- 
+            fileInputStream = new FileInputStream(selectedFile);
+
             if (!notHavingIDorPassPort) {
                 Query = "insert into Students (studentID,student_name, B_Certificate, IdNo, Gender, Nationality,county,subcounty,division,location,sublocation,Village,Address,Phone,Email,NextofKin,NextofKinPhone,NextofKinEmail,Photo,CreatedOn) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
@@ -1356,9 +1396,9 @@ public class newStudent extends javax.swing.JPanel {
     }
 
     private void resetFields() {
- txtStdSur.setText("(Sur Name)");
- txtStdFirst.setText("(First Name)");
-txtStdOther.setText("(Other Names)");
+        txtStdSur.setText("(Sur Name)");
+        txtStdFirst.setText("(First Name)");
+        txtStdOther.setText("(Other Names)");
         txtIdNum.setText("(ID Number)");
         txtBCert.setText("(B-Cert Number)");
         txtAddress.setText("(Post Office Box)");
@@ -1374,5 +1414,46 @@ txtStdOther.setText("(Other Names)");
         txtNextOfKinPhone.setText("(Phone Number)");
         txtNextOfKinEmail.setText("(Email)");
         txtPreviousGrade.setText("(Mean Grade)");
-        jLabel12.setText("Index Number");    }
+        jLabel12.setText("Index Number");
+    }
+
+    private void populateCohorts(int yearOfStudy) {
+        Util x = new Util();
+        System.out.println("class year of study " + yearOfStudy);
+        String Query = "";
+        switch (yearOfStudy) {
+            case 1:
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND " + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + "";
+                break;
+            case 2:
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND  " + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + "";
+
+                break;
+            case 3:
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND " + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + "";
+
+                break;
+        }
+        System.out.println(Query);
+        try {
+
+            //  USE THE SQL STRING
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            cboCohort.removeAllItems();
+            ResultSet rs = st.executeQuery(Query);
+
+            while (rs.next()) {
+                cboCohort.addItem(rs.getString("cohortName"));
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Cohorts," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }
+
 }
