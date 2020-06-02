@@ -868,7 +868,7 @@ private void generateClassID() {
                     preparedStmt.execute();
                     JOptionPane.showMessageDialog(this, "Cohourt has been created successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Cohourt already Exists", "Entry Exists", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Cohourt already Exists", "Entry Exists", JOptionPane.ERROR_MESSAGE);
                     txtCohortID.grabFocus();
                     return;
                 }

@@ -961,17 +961,7 @@ public class newStudent extends javax.swing.JPanel {
     private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
         // TODO add your handling code here:
 
-
-    }//GEN-LAST:event_cboLevelItemStateChanged
-
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
-        System.out.println(cboCourse.getItemCount());
-    }//GEN-LAST:event_btnResetActionPerformed
-
-    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
-        // TODO add your handling code here:
-        populateCombo();
+   populateCombo();
         cboEnrollTo.removeAllItems();
 
 //
@@ -994,6 +984,16 @@ public class newStudent extends javax.swing.JPanel {
                 cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
                 break;
         }
+    }//GEN-LAST:event_cboLevelItemStateChanged
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        System.out.println(cboCourse.getItemCount());
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
+        // TODO add your handling code here:
+     
     }//GEN-LAST:event_cboLevelActionPerformed
 
     private void cboCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCourseMouseExited
@@ -1419,18 +1419,18 @@ public class newStudent extends javax.swing.JPanel {
 
     private void populateCohorts(int yearOfStudy) {
         Util x = new Util();
-        System.out.println("class year of study " + yearOfStudy);
+        //System.out.println("class year of study " + yearOfStudy);
         String Query = "";
         switch (yearOfStudy) {
             case 1:
-                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND " + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + "";
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.locked='0' AND cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND (" + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + ")";
                 break;
             case 2:
-                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND  " + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + "";
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.locked='0' AND cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND  (" + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + ")";
 
                 break;
             case 3:
-                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND " + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + "";
+                Query = "SELECT cohortName FROM Cohorts WHERE cohorts.locked='0' AND cohorts.level='" + cboLevel.getSelectedItem().toString() + "'  AND cohorts.course ='" + cboCourse.getSelectedItem().toString() + "' AND (" + x.getCoursePattern(cboLevel.getSelectedItem().toString(), yearOfStudy) + ")";
 
                 break;
         }

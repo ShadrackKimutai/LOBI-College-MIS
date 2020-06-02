@@ -77,7 +77,7 @@ public class Util {
             Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             String Query = "select CourseID from Courses where CourseName='" + Course + "' and Level='" + Level + "'";
-            System.out.println(Query);
+           // System.out.println(Query);
             ResultSet rs = st.executeQuery(Query);
             rs.next();
             courseID = rs.getInt(1);
