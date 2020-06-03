@@ -51,21 +51,21 @@ public class Util {
 
         return departmentID;
     }
-
-    public int getCourseID(String Course) {
-        int courseID = 0;
-        try {
-            Connection cnn = Database.getConnection();
-            Statement st = cnn.createStatement();
-            ResultSet rs = st.executeQuery("select CourseID from Courses where CourseName='" + Course + "'");
-            rs.next();
-            courseID = rs.getInt(1);
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Issue on Getting Course ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
-        }
-        return courseID;
-    }
+//
+//    public int getCourseID(String Course) {
+//        int courseID = 0;
+//        try {
+//            Connection cnn = Database.getConnection();
+//            Statement st = cnn.createStatement();
+//            ResultSet rs = st.executeQuery("select CourseID from Courses where CourseName='" + Course + "'");
+//            rs.next();
+//            courseID = rs.getInt(1);
+//            rs.close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Issue on Getting Course ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+//        }
+//        return courseID;
+//    }
 
     public String formatString(String unsanitizedString) {
         return unsanitizedString.replace("'", "`");
