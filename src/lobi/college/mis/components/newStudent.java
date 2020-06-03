@@ -163,6 +163,11 @@ public class newStudent extends javax.swing.JPanel {
 
         buttonGroup1.add(optMale);
         optMale.setText("Male");
+        optMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optMaleActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(optFemale);
         optFemale.setText("Female");
@@ -292,54 +297,55 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(txtStdSur, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtStdFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtStdOther, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(txtIdNum, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtPassport, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtBCert, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(optMale, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(150, 150, 150)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(optFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cboCounty, 0, 1, Short.MAX_VALUE))
-                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtEmail))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtVillage, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtIdNum, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboState, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cboCounty, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPassport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(txtAddress))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPhone)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtSubCounty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBCert)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(optFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(optMale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSubLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtVillage))
+                            .addComponent(txtEmail)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtStdSur, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtStdFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtStdOther)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,26 +426,27 @@ public class newStudent extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboParentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboParentType, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNextofKin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116)
-                .addComponent(txtNextOfKinPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNextofKin, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNextOfKinEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtNextOfKinPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNextOfKinEmail)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNextOfKinEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNextOfKinPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNextofKin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNextofKin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNextOfKinPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNextOfKinEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cboParentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Admitting Qualifications"));
@@ -481,7 +488,7 @@ public class newStudent extends javax.swing.JPanel {
                     .addComponent(txtPreviousGrade, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPreviousIndex, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboPreviousLevel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -621,27 +628,23 @@ public class newStudent extends javax.swing.JPanel {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cboLevel, 0, 140, Short.MAX_VALUE)
-                                    .addComponent(cboEnrollTo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cboEnrollTo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboLevel, 0, 152, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cboCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cboCohort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jLabel17))
+                                    .addComponent(jLabel15))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboDept, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboCohort, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cboDept, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -689,8 +692,8 @@ public class newStudent extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
             .addComponent(picpassportphoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,22 +711,24 @@ public class newStudent extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(2, 2, 2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -737,10 +742,10 @@ public class newStudent extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(16, 16, 16)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -751,105 +756,9 @@ public class newStudent extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtStdFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStdFirstActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStdFirstActionPerformed
-
-    private void txtIdNumMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdNumMouseEntered
-        //   jFormattedTextField1.setText("");        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdNumMouseEntered
-
-    private void txtIdNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdNumFocusGained
-        // TODO add your handling code here:
-        txtIdNum.setText("");
-        if (txtPassport.getText().equals("(Passpot Number)")) {
-            txtPassport.setText("");
-        }
-    }//GEN-LAST:event_txtIdNumFocusGained
-
-    private void txtBCertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBCertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBCertActionPerformed
-
-    private void txtStdSurFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdSurFocusGained
-        // TODO add your handling code here:
-        txtStdSur.setText("");
-    }//GEN-LAST:event_txtStdSurFocusGained
-
-    private void txtStdFirstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdFirstFocusGained
-        // TODO add your handling code here:
-        txtStdFirst.setText("");
-        if (txtStdOther.getText().equals("(Other Names)")) {
-            txtStdOther.setText("");
-        }
-
-    }//GEN-LAST:event_txtStdFirstFocusGained
-
-    private void txtStdOtherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdOtherFocusGained
-        // TODO add your handling code here:
-        txtStdOther.setText("");
-    }//GEN-LAST:event_txtStdOtherFocusGained
-
-    private void txtBCertFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBCertFocusGained
-        // TODO add your handling code here:
-        txtBCert.setText("");
-    }//GEN-LAST:event_txtBCertFocusGained
-
-    private void txtPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusGained
-        // TODO add your handling code here:
-        txtPhone.setText("");
-    }//GEN-LAST:event_txtPhoneFocusGained
-
-    private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
-        // TODO add your handling code here:
-        txtEmail.setText("");
-    }//GEN-LAST:event_txtEmailFocusGained
-
-    private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
-        // TODO add your handling code here:
-        txtAddress.setText("");
-    }//GEN-LAST:event_txtAddressFocusGained
-
-    private void txtSubLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubLocationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSubLocationActionPerformed
-
     private void txtNextOfKinEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNextOfKinEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNextOfKinEmailActionPerformed
-
-    private void txtSubCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubCountyFocusGained
-        // TODO add your handling code here:
-        txtSubCounty.setText("");
-    }//GEN-LAST:event_txtSubCountyFocusGained
-
-    private void txtDivisionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDivisionFocusGained
-        // TODO add your handling code here:
-        txtDivision.setText("");
-    }//GEN-LAST:event_txtDivisionFocusGained
-
-    private void txtLocationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLocationFocusGained
-        // TODO add your handling code here:
-        txtLocation.setText("");
-    }//GEN-LAST:event_txtLocationFocusGained
-
-    private void txtSubLocationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubLocationFocusGained
-        // TODO add your handling code here:
-        txtSubLocation.setText("");
-    }//GEN-LAST:event_txtSubLocationFocusGained
-
-    private void txtVillageFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtVillageFocusGained
-        // TODO add your handling code here:
-        txtVillage.setText("");
-    }//GEN-LAST:event_txtVillageFocusGained
-
-    private void txtPassportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassportFocusGained
-        // TODO add your handling code here:
-        txtPassport.setText("");
-        if (txtIdNum.getText().equals("(ID Number)")) {
-            txtIdNum.setText("");
-        }
-    }//GEN-LAST:event_txtPassportFocusGained
 
     private void txtNextofKinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNextofKinFocusGained
         // TODO add your handling code here:
@@ -962,63 +871,40 @@ public class newStudent extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_cboLevelFocusGained
-
-    private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
-        // TODO add your handling code here:
-
-   populateCombo();
-        cboEnrollTo.removeAllItems();
-
-//
-//DefaultComboBoxModel model = new DefaultComboBoxModel( yourStringArray );
-//comboBox.setModel( model );
-        switch (cboLevel.getSelectedIndex()) {
-            case 0:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
-                break;
-            case 1:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
-                break;
-            case 2:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2"}));
-                break;
-            case 3:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2", "3"}));
-                break;
-            case 4:
-                cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
-                break;
-        }
-    }//GEN-LAST:event_cboLevelItemStateChanged
-
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
         
         //System.out.println(cboCourse.getItemCount());
     }//GEN-LAST:event_btnResetActionPerformed
 
-    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
+    private void txtVillageFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtVillageFocusGained
         // TODO add your handling code here:
-     
-    }//GEN-LAST:event_cboLevelActionPerformed
+        txtVillage.setText("");
+    }//GEN-LAST:event_txtVillageFocusGained
 
-    private void cboCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCourseMouseExited
+    private void txtSubLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubLocationActionPerformed
         // TODO add your handling code here:
-        btnRegister.setEnabled(true);
-    }//GEN-LAST:event_cboCourseMouseExited
+    }//GEN-LAST:event_txtSubLocationActionPerformed
 
-    private void cboDeptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDeptItemStateChanged
+    private void txtSubLocationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubLocationFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboDeptItemStateChanged
+        txtSubLocation.setText("");
+    }//GEN-LAST:event_txtSubLocationFocusGained
 
-    private void cboDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDeptActionPerformed
+    private void txtLocationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLocationFocusGained
         // TODO add your handling code here:
-        populateCombo();
-    }//GEN-LAST:event_cboDeptActionPerformed
+        txtLocation.setText("");
+    }//GEN-LAST:event_txtLocationFocusGained
+
+    private void txtDivisionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDivisionFocusGained
+        // TODO add your handling code here:
+        txtDivision.setText("");
+    }//GEN-LAST:event_txtDivisionFocusGained
+
+    private void txtSubCountyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubCountyFocusGained
+        // TODO add your handling code here:
+        txtSubCounty.setText("");
+    }//GEN-LAST:event_txtSubCountyFocusGained
 
     private void cboStateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboStateItemStateChanged
         // TODO add your handling code here:
@@ -1031,27 +917,86 @@ public class newStudent extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cboStateItemStateChanged
 
-    private void cboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCourseItemStateChanged
+    private void txtPassportFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassportFocusGained
         // TODO add your handling code here:
-        // System.out.println(cboCourse.getSelectedItem().toString());
-        // System.out.println("");
-    }//GEN-LAST:event_cboCourseItemStateChanged
+        txtPassport.setText("");
+        if (txtIdNum.getText().equals("(ID Number)")) {
+            txtIdNum.setText("");
+        }
+    }//GEN-LAST:event_txtPassportFocusGained
 
-    private void cboEnrollToItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboEnrollToItemStateChanged
+    private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
+        // TODO add your handling code here:
+        txtEmail.setText("");
+    }//GEN-LAST:event_txtEmailFocusGained
 
+    private void txtPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusGained
+        // TODO add your handling code here:
+        txtPhone.setText("");
+    }//GEN-LAST:event_txtPhoneFocusGained
 
-    }//GEN-LAST:event_cboEnrollToItemStateChanged
+    private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
+        // TODO add your handling code here:
+        txtAddress.setText("");
+    }//GEN-LAST:event_txtAddressFocusGained
+
+    private void txtBCertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBCertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBCertActionPerformed
+
+    private void txtBCertFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBCertFocusGained
+        // TODO add your handling code here:
+        txtBCert.setText("");
+    }//GEN-LAST:event_txtBCertFocusGained
+
+    private void txtIdNumMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdNumMouseEntered
+        //   jFormattedTextField1.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdNumMouseEntered
+
+    private void txtIdNumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdNumFocusGained
+        // TODO add your handling code here:
+        txtIdNum.setText("");
+        if (txtPassport.getText().equals("(Passpot Number)")) {
+            txtPassport.setText("");
+        }
+    }//GEN-LAST:event_txtIdNumFocusGained
+
+    private void txtStdOtherFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdOtherFocusGained
+        // TODO add your handling code here:
+        txtStdOther.setText("");
+    }//GEN-LAST:event_txtStdOtherFocusGained
+
+    private void txtStdFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStdFirstActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStdFirstActionPerformed
+
+    private void txtStdFirstFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdFirstFocusGained
+        // TODO add your handling code here:
+        txtStdFirst.setText("");
+        if (txtStdOther.getText().equals("(Other Names)")) {
+            txtStdOther.setText("");
+        }
+    }//GEN-LAST:event_txtStdFirstFocusGained
+
+    private void txtStdSurFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStdSurFocusGained
+        // TODO add your handling code here:
+        txtStdSur.setText("");
+    }//GEN-LAST:event_txtStdSurFocusGained
+
+    private void optMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optMaleActionPerformed
 
     private void cboEnrollToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEnrollToActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        /* 
-            HOW TO DO IT
-            ============
-            Youve Been given the department, the level and the year of intake. plus we can get the structure of the exam. then since structure mutates as the 
-            class progresses, we look for the classes with the same or near the same mutation that would fit the characteristics. This feature will look intakes
-            to classes at the begining of academic years as no class will match the patterns unless at the end of year
-         */
+        /*
+        HOW TO DO IT
+        ============
+        Youve Been given the department, the level and the year of intake. plus we can get the structure of the exam. then since structure mutates as the
+        class progresses, we look for the classes with the same or near the same mutation that would fit the characteristics. This feature will look intakes
+        to classes at the begining of academic years as no class will match the patterns unless at the end of year
+        */
 
         int x = 0;
 
@@ -1061,8 +1006,68 @@ public class newStudent extends javax.swing.JPanel {
 
         }
 
-
     }//GEN-LAST:event_cboEnrollToActionPerformed
+
+    private void cboEnrollToItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboEnrollToItemStateChanged
+
+    }//GEN-LAST:event_cboEnrollToItemStateChanged
+
+    private void cboCourseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCourseMouseExited
+        // TODO add your handling code here:
+        btnRegister.setEnabled(true);
+    }//GEN-LAST:event_cboCourseMouseExited
+
+    private void cboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCourseItemStateChanged
+        // TODO add your handling code here:
+        // System.out.println(cboCourse.getSelectedItem().toString());
+        // System.out.println("");
+    }//GEN-LAST:event_cboCourseItemStateChanged
+
+    private void cboLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLevelActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cboLevelActionPerformed
+
+    private void cboLevelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboLevelFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboLevelFocusGained
+
+    private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
+        // TODO add your handling code here:
+
+        populateCombo();
+        cboEnrollTo.removeAllItems();
+
+        //
+        //DefaultComboBoxModel model = new DefaultComboBoxModel( yourStringArray );
+        //comboBox.setModel( model );
+        switch (cboLevel.getSelectedIndex()) {
+            case 0:
+            cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+            break;
+            case 1:
+            cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+            break;
+            case 2:
+            cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2"}));
+            break;
+            case 3:
+            cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1", "2", "3"}));
+            break;
+            case 4:
+            cboEnrollTo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+            break;
+        }
+    }//GEN-LAST:event_cboLevelItemStateChanged
+
+    private void cboDeptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDeptActionPerformed
+        // TODO add your handling code here:
+        populateCombo();
+    }//GEN-LAST:event_cboDeptActionPerformed
+
+    private void cboDeptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboDeptItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboDeptItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegister;
