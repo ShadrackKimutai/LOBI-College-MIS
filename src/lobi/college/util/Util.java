@@ -57,7 +57,7 @@ public class Util {
 //        try {
 //            Connection cnn = Database.getConnection();
 //            Statement st = cnn.createStatement();
-//            ResultSet rs = st.executeQuery("select CourseID from Courses where CourseName='" + Course + "'");
+//            ResultSet rs LIKE st.executeQuery("select CourseID from Courses where CourseName='" + Course + "'");
 //            rs.next();
 //            courseID = rs.getInt(1);
 //            rs.close();
@@ -95,23 +95,23 @@ public class Util {
             case 1: {
                 switch (level) {
                     case "SHORT COURSE": {
-                        coursePattern = "(cohorts.progress like '1+IE')";
+                        coursePattern = "(cohorts.progress LIKE '1+IE')";
                         break;
                     }
                     case "ARTISAN": {
-                        coursePattern = "(cohorts.progress like '3+NE') OR (cohorts.progress like '2+A+NE')";
+                        coursePattern = "(cohorts.progress LIKE '3+NE') OR (cohorts.progress LIKE '2+A+NE')";
                         break;
                     }
                     case "CRAFT": {
-                        coursePattern = "(cohorts.progress like '2+NE+A+2+NE') OR (cohorts.progress like '3+NE+A+2+NE') OR (cohorts.progress like'2+NE+2+NE+A') OR (cohorts.progress like '3+NE+2+NE+A') OR (cohorts.progress like '2+SE+A+2+NE') OR (cohorts.progress like '3+SE+A+2+NE') OR (cohorts.progress like '2+SE+2+NE+A' ) OR (cohorts.progress like '3+SE+2+NE+A') ";
+                        coursePattern = "(cohorts.progress LIKE '2+NE+A+2+NE') OR (cohorts.progress LIKE '3+NE+A+2+NE') OR (cohorts.progress LIKE'2+NE+2+NE+A') OR (cohorts.progress LIKE '3+NE+2+NE+A') OR (cohorts.progress LIKE '2+SE+A+2+NE') OR (cohorts.progress LIKE '3+SE+A+2+NE') OR (cohorts.progress LIKE '2+SE+2+NE+A' ) OR (cohorts.progress LIKE '3+SE+2+NE+A') ";
                         break;
                     }
                     case "DIPLOMA": {
-                        coursePattern = "(cohorts.progress like '2+NE+A+2+NE') OR (cohorts.progress like '3+NE+A+2+NE') OR (cohorts.progress like'3+NE+2+NE+A+2+NE') OR (cohorts.progress like '3+2+NE+2+NE+A') OR (cohorts.progress like '2+SE+A+2+NE') OR (cohorts.progress like '3+SE+A+2+NE') OR  (cohorts.progress like'3+SE+2+SE+A+2+NE') OR (cohorts.progress like '3+2+SE+2+SE+A')";
+                        coursePattern = "(cohorts.progress LIKE '2+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+3+NE+A+2+NE') OR (cohorts.progress LIKE '3+NE+A+2+NE') OR (cohorts.progress LIKE'3+NE+3+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+2+NE+A')  OR (cohorts.progress LIKE '3+SE+A+2+NE') OR  (cohorts.progress LIKE'3+SE+2+SE+A+2+NE') OR (cohorts.progress LIKE '3+2+SE+2+SE+A')";
                         break;
                     }
                     case "HIGHER DIPLOMA": {
-                        coursePattern = "(cohorts.progress like '2+P+NE') OR (cohorts.progress like '3+NE+P')";
+                        coursePattern = "(cohorts.progress LIKE '2+P+NE') OR (cohorts.progress LIKE '3+NE+P')";
                         break;
                     }
                 }
@@ -120,18 +120,18 @@ public class Util {
             case 2: {
                 switch (level) {
                     case "CRAFT": {
-                        coursePattern = "(cohorts.progress like '2+NE') OR (cohorts.progress like '2+NE+A' )";
+                        coursePattern = "(cohorts.progress LIKE '2+NE') OR (cohorts.progress LIKE '2+NE+A' )";
                         break;
                     }
                     case "DIPLOMA": {
-                        coursePattern = "(cohorts.progress like '2+NE') OR (cohorts.progress like '2+NE+A+2+NE') OR (cohorts.progress like '2+NE+2+NE+A') OR (cohorts.progress like '2+SE+A+2+NE')";
+                        coursePattern = "(cohorts.progress LIKE '2+NE') OR (cohorts.progress LIKE '2+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+2+NE+A') OR (cohorts.progress LIKE '2+SE+A+2+NE')";
                         break;
                     }
                 }
                 break;
             }
             case 3: {
-                        coursePattern = "(cohorts.progress like '2+NE') OR (cohorts.progress like '2+NE+A')";
+                        coursePattern = "(cohorts.progress LIKE '2+NE') OR (cohorts.progress LIKE '2+NE+A')";
                 break;
             }
         }
