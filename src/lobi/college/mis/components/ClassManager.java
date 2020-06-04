@@ -71,9 +71,9 @@ public class ClassManager extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         cboCourses = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        optJan = new javax.swing.JRadioButton();
+        optMay = new javax.swing.JRadioButton();
+        optSep = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         txtCohortID = new javax.swing.JTextField();
@@ -131,7 +131,7 @@ public class ClassManager extends javax.swing.JPanel {
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -177,7 +177,7 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 831, Short.MAX_VALUE)
+            .addGap(0, 923, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,70 +220,71 @@ public class ClassManager extends javax.swing.JPanel {
 
         jLabel5.setText(" Intake");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("January");
-        jRadioButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(optJan);
+        optJan.setSelected(true);
+        optJan.setText("January");
+        optJan.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        optJan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton1ItemStateChanged(evt);
+                optJanItemStateChanged(evt);
             }
         });
-        jRadioButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        optJan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jRadioButton1FocusLost(evt);
+                optJanFocusLost(evt);
             }
         });
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        optJan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton1MouseClicked(evt);
+                optJanMouseClicked(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("May");
-        jRadioButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(optMay);
+        optMay.setText("May");
+        optMay.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        optMay.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton2ItemStateChanged(evt);
+                optMayItemStateChanged(evt);
             }
         });
-        jRadioButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+        optMay.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jRadioButton2FocusLost(evt);
+                optMayFocusLost(evt);
             }
         });
-        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        optMay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton2MouseClicked(evt);
+                optMayMouseClicked(evt);
             }
         });
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        optMay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                optMayActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("September");
-        jRadioButton3.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jRadioButton3.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(optSep);
+        optSep.setText("September");
+        optSep.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        optSep.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jRadioButton3ItemStateChanged(evt);
+                optSepItemStateChanged(evt);
             }
         });
-        jRadioButton3.addFocusListener(new java.awt.event.FocusAdapter() {
+        optSep.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jRadioButton3FocusLost(evt);
+                optSepFocusLost(evt);
             }
         });
-        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        optSep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton3MouseClicked(evt);
+                optSepMouseClicked(evt);
             }
         });
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        optSep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                optSepActionPerformed(evt);
             }
         });
 
@@ -334,6 +335,7 @@ public class ClassManager extends javax.swing.JPanel {
         jLabel7.setText("Course Format");
 
         buttonGroup2.add(optRegular);
+        optRegular.setSelected(true);
         optRegular.setText("Regular Class");
 
         buttonGroup2.add(optParallel);
@@ -344,11 +346,12 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
                 .addComponent(cboLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(cboCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboCourses, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optRegular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -359,11 +362,11 @@ public class ClassManager extends javax.swing.JPanel {
                         .addGap(25, 25, 25)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton1)
+                        .addComponent(optJan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
+                        .addComponent(optMay)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3)
+                        .addComponent(optSep)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -383,7 +386,7 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jSpinner3)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(160, 160, 160)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -403,25 +406,23 @@ public class ClassManager extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
+                    .addComponent(optJan)
+                    .addComponent(optMay)
+                    .addComponent(optSep)
                     .addComponent(cboStructure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(txtCourseFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCohortID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addContainerGap(12, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCohortID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel8)
+                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Class");
@@ -456,17 +457,17 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/people.png")), jPanel5); // NOI18N
@@ -533,7 +534,7 @@ public class ClassManager extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(614, 707, Short.MAX_VALUE))
+                .addGap(614, 799, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -561,8 +562,8 @@ public class ClassManager extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,10 +584,10 @@ public class ClassManager extends javax.swing.JPanel {
         cboCourses.setEnabled(true);
     }//GEN-LAST:event_cboLevelItemStateChanged
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void optSepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optSepActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_optSepActionPerformed
 
     private void cboCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCoursesActionPerformed
         // TODO add your handling code here:
@@ -601,13 +602,13 @@ public class ClassManager extends javax.swing.JPanel {
     private void cboCoursesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboCoursesFocusLost
         // TODO add your handling code here:
         //generateClassID();
-        jRadioButton1.setSelected(true);
+        optJan.setSelected(true);
     }//GEN-LAST:event_cboCoursesFocusLost
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void optMayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMayActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_optMayActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -620,10 +621,10 @@ public class ClassManager extends javax.swing.JPanel {
         //JOptionPane.showMessageDialog(jXDatePicker1, jXDatePicker1.getEditor().getText());
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
-    private void jRadioButton3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton3FocusLost
+    private void optSepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optSepFocusLost
         // TODO add your handling code here:
         //generateClassID();
-    }//GEN-LAST:event_jRadioButton3FocusLost
+    }//GEN-LAST:event_optSepFocusLost
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -659,42 +660,42 @@ public class ClassManager extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtCohortIDPropertyChange
 
-    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
+    private void optJanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optJanItemStateChanged
 
-    }//GEN-LAST:event_jRadioButton1ItemStateChanged
+    }//GEN-LAST:event_optJanItemStateChanged
 
-    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
+    private void optMayItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optMayItemStateChanged
 
-    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+    }//GEN-LAST:event_optMayItemStateChanged
 
-    private void jRadioButton3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton3ItemStateChanged
+    private void optSepItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optSepItemStateChanged
 
-    }//GEN-LAST:event_jRadioButton3ItemStateChanged
+    }//GEN-LAST:event_optSepItemStateChanged
 
-    private void jRadioButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton1FocusLost
+    private void optJanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optJanFocusLost
         // TODO add your handling code here:
         // generateClassID();
-    }//GEN-LAST:event_jRadioButton1FocusLost
+    }//GEN-LAST:event_optJanFocusLost
 
-    private void jRadioButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButton2FocusLost
+    private void optMayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optMayFocusLost
         // TODO add your handling code here:
         // generateClassID();
-    }//GEN-LAST:event_jRadioButton2FocusLost
+    }//GEN-LAST:event_optMayFocusLost
 
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+    private void optJanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optJanMouseClicked
         // TODO add your handling code here:
         generateClassID();
-    }//GEN-LAST:event_jRadioButton1MouseClicked
+    }//GEN-LAST:event_optJanMouseClicked
 
-    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+    private void optMayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optMayMouseClicked
         // TODO add your handling code here:
         generateClassID();
-    }//GEN-LAST:event_jRadioButton2MouseClicked
+    }//GEN-LAST:event_optMayMouseClicked
 
-    private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
+    private void optSepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optSepMouseClicked
         // TODO add your handling code here:
         generateClassID();
-    }//GEN-LAST:event_jRadioButton3MouseClicked
+    }//GEN-LAST:event_optSepMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -724,9 +725,6 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -737,8 +735,11 @@ public class ClassManager extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
+    private javax.swing.JRadioButton optJan;
+    private javax.swing.JRadioButton optMay;
     private javax.swing.JRadioButton optParallel;
     private javax.swing.JRadioButton optRegular;
+    private javax.swing.JRadioButton optSep;
     private javax.swing.JTable tblCohorts;
     private javax.swing.JTable tblStudents;
     private javax.swing.JTextField txtCohortID;
@@ -751,19 +752,34 @@ private void generateClassID() {
 
         String slug, month, yearPart, tempString;
         slug = getSlug();
+        if (optRegular.isSelected()) {
+            if (optJan.isSelected()) {
+                month = "J";
 
-        if (jRadioButton1.isSelected()) {
-            month = "J";
-
-        } else if (jRadioButton2.isSelected()) {
-            month = "M";
-        } else if (jRadioButton3.isSelected()) {
-            month = "S";
+            } else if (optMay.isSelected()) {
+                month = "M";
+            } else if (optSep.isSelected()) {
+                month = "S";
+            } else {
+                // JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
+                month = "J";
+                optJan.setSelected(true);
+                // return;
+            }
         } else {
-            // JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
-            month = "J";
-            jRadioButton1.setSelected(true);
-            // return;
+            if (optJan.isSelected()) {
+                month = "JP";
+
+            } else if (optMay.isSelected()) {
+                month = "MP";
+            } else if (optSep.isSelected()) {
+                month = "SP";
+            } else {
+                // JOptionPane.showMessageDialog(jRadioButton1, "Please select the intake period,", "Information Missing", JOptionPane.ERROR_MESSAGE);
+                month = "J";
+                optJan.setSelected(true);
+                // return;
+            }
         }
         yearPart = String.valueOf(dateFormat.format(CurrentDate).charAt(2)) + String.valueOf(dateFormat.format(CurrentDate).charAt(3));
         tempString = slug.toUpperCase() + yearPart + month;
@@ -777,7 +793,8 @@ private void generateClassID() {
         txtCourseFormat.setText(generateClassFormat(util.getCourseID(cboCourses.getSelectedItem().toString(), cboLevel.getSelectedItem().toString())));
         String str = txtCourseFormat.getText() + ":" + cboLevel.getSelectedItem();
         cboStructure.removeAllItems();
-        switch (str.toUpperCase()) {
+        if (optRegular.isSelected()){
+            switch (str.toUpperCase()) {
             case "MODULAR:SHORT COURSE": {
                 cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
                 break;
@@ -787,17 +804,17 @@ private void generateClassID() {
                 break;
             }
             case "MODULAR:CRAFT": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "3+NE+A+2+NE", "2+NE+2+NE+A", "3+NE+2+NE+A"}));
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{ "3+NE+A+2+NE", "3+NE+2+NE+A"}));
 
                 break;
             }
             case "MODULAR:DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "3+NE+A+2+NE", "3+NE+2+NE+A+2+NE", "3+2+NE+2+NE+A"}));
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+3+NE+A+2+NE", "3+NE+3+NE+2+NE+A"}));
 
                 break;
             }
             case "MODULAR:HIGHER DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE", "3+NE+P"}));
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+P"}));
 
                 break;
             }
@@ -806,20 +823,66 @@ private void generateClassID() {
                 break;
             }
             case "STAGE:CRAFT": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE", "2+SE+2+NE+A", "3+SE+2+NE+A"}));
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+SE+A+2+NE", "3+SE+2+NE+A"}));
 
                 break;
             }
             case "STAGE:DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE", "3+SE+2+SE+A+2+NE", "3+2+SE+2+SE+A"}));
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{ "3+SE+2+SE+2+NE+A", "3+SE+2+SE+A+2+NE"}));
 
                 break;
             }
             case "STAGE:HIGHER DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE", "3+NE+P"}));
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+P"}));
 
                 break;
             }
+        }
+        }else{
+            switch (str.toUpperCase()) {
+            case "MODULAR:SHORT COURSE": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                break;
+            }
+            case "MODULAR:ARTISAN": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE"}));
+                break;
+            }
+            case "MODULAR:CRAFT": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE",  "2+NE+2+NE+A"}));
+
+                break;
+            }
+            case "MODULAR:DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE"}));
+
+                break;
+            }
+            case "MODULAR:HIGHER DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE"}));
+
+                break;
+            }
+            case "STAGE:SHORT COURSE": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                break;
+            }
+            case "STAGE:CRAFT": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE","2+SE+2+NE+A"}));
+
+                break;
+            }
+            case "STAGE:DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE"}));
+
+                break;
+            }
+            case "STAGE:HIGHER DIPLOMA": {
+                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE"}));
+
+                break;
+            }
+        }
         }
 
     }
@@ -866,15 +929,16 @@ private void generateClassID() {
     }
 
     private void createCohort() {
-        if (jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected()) {
-
+        if ((optJan.isSelected() || optMay.isSelected() || optSep.isSelected()) && (optRegular.isSelected() || optParallel.isSelected())) {
+            String Nature;
+            Nature = optJan.isSelected() ? "REGULAR" : "PARALLEL";
             try {
                 // create a mysql database connection
 
                 // create a sql date object so we can use it in our INSERT statement
                 Connection cnn = Database.getConnection();
                 // create a sql date object so we can use it in our INSERT statement
-                String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress,locked) values (?,?,?,?,?,?,?,?)";
+                String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress,nature,locked) values (?,?,?,?,?,?,?,?)";
 
 // create the mysql insert preparedstatement
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
@@ -885,7 +949,7 @@ private void generateClassID() {
                 preparedStmt.setString(5, jXDatePicker1.getEditor().getText());
                 preparedStmt.setString(6, cboStructure.getSelectedItem().toString());
                 preparedStmt.setString(7, cboStructure.getSelectedItem().toString());
-                preparedStmt.setInt(8,0);
+                preparedStmt.setInt(8, 0);
                 // execute the preparedstatement
                 if (checkExists() == false) {
                     preparedStmt.execute();
@@ -903,7 +967,7 @@ private void generateClassID() {
             }
             populateTable();
         } else {
-            jRadioButton1.grabFocus();
+            optJan.grabFocus();
         }
 // `CohortName`, `Level`, `Course`, `Capacity`, `StartDate`, `Structure`, `Progress`
     }
