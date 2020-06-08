@@ -28,17 +28,19 @@ import javax.swing.table.DefaultTableModel;
  * @author Shady
  */
 public class StudentInfo extends javax.swing.JDialog {
-private String studentID;
+
+    private String studentID;
+
     /**
      * Creates new form NewJDialog
      */
     public StudentInfo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-       
+
     }
 
     public StudentInfo(String StudentID) {
-        this.studentID=StudentID; 
+        this.studentID = StudentID;
         initComponents();
         populateInfo();
     }
@@ -52,112 +54,127 @@ private String studentID;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         picpassportphoto = new javax.swing.JLabel();
-        lblStdID = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        lblNumber = new javax.swing.JLabel();
-        lblCourse = new javax.swing.JLabel();
-        lblGender = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
+        txtStdID = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtGender = new javax.swing.JTextField();
+        txtNumber = new javax.swing.JTextField();
+        txtIDNumber = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtCourse = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Student Information");
         setAlwaysOnTop(true);
+        setBackground(java.awt.SystemColor.text);
         setModal(true);
+        setPreferredSize(new java.awt.Dimension(535, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(400, 365));
         setType(java.awt.Window.Type.POPUP);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 141, Short.MAX_VALUE)
-        );
-
         picpassportphoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        picpassportphoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         picpassportphoto.setFocusable(false);
 
-        lblStdID.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblStdID.setText("Student ID");
+        txtStdID.setEditable(false);
+        txtStdID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtStdID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblName.setText("Student Name");
+        txtName.setEditable(false);
+        txtName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblNumber.setText("Student Number");
+        txtGender.setEditable(false);
+        txtGender.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtGender.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtGender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtGender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGenderActionPerformed(evt);
+            }
+        });
 
-        lblCourse.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblCourse.setText("Student  Current Program");
+        txtNumber.setEditable(false);
+        txtNumber.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtNumber.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblGender.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblGender.setText("Gender");
+        txtIDNumber.setEditable(false);
+        txtIDNumber.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtIDNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtCourse.setEditable(false);
+        txtCourse.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
+        txtCourse.setColumns(20);
+        txtCourse.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtCourse.setLineWrap(true);
+        txtCourse.setRows(2);
+        txtCourse.setWrapStyleWord(true);
+        txtCourse.setAutoscrolls(false);
+        txtCourse.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtCourse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtCourse.setDoubleBuffered(true);
+        txtCourse.setFocusable(false);
+        jScrollPane1.setViewportView(txtCourse);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtGender, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(txtStdID))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblCourse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblStdID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(68, 68, 68)
-                                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(9, 9, 9))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(56, 56, 56)))
-                                .addGap(100, 100, 100)
-                                .addComponent(lblNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtIDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtName)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblStdID, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGender)
-                            .addComponent(lblNumber))
+                            .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCourse)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(147, 147, 147))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtName, txtStdID});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtGender, txtIDNumber, txtNumber});
 
         getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,14 +220,14 @@ private String studentID;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblCourse;
-    private javax.swing.JLabel lblGender;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblNumber;
-    private javax.swing.JLabel lblStdID;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel picpassportphoto;
+    private javax.swing.JTextArea txtCourse;
+    private javax.swing.JTextField txtGender;
+    private javax.swing.JTextField txtIDNumber;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNumber;
+    private javax.swing.JTextField txtStdID;
     // End of variables declaration//GEN-END:variables
 
     private void populateInfo() {
@@ -220,48 +237,47 @@ private String studentID;
             File f = new File("server.properties");
             Connection cnn = Database.getConnection();
 
-            PreparedStatement ps = cnn.prepareStatement("Select * from Students where studentId='"+studentID+"'");
+            PreparedStatement ps = cnn.prepareStatement("Select * from Students where studentId='" + studentID + "'");
             ResultSet rs = ps.executeQuery();
-            
-            
 
             while (rs.next()) {
-                lblStdID.setText(studentID);
-                 lblName.setText(rs.getString("Student_Name"));
-                 lblNumber.setText("Mobile: "+rs.getString("Phone"));
-                 lblCourse.setText(String.format("<html><body style=\"text-align: justify;  text-justify: inter-word;\">%s</body></html>",getCourseName(studentID)));
-                 lblGender.setText("Gender: "+rs.getString("Gender"));
-                 BufferedImage img = ImageIO.read(rs.getBinaryStream("photo"));
-                 Image dimg = img.getScaledInstance(picpassportphoto.getWidth(), picpassportphoto.getHeight(),Image.SCALE_SMOOTH);
-                 ImageIcon passPortPhoto = new ImageIcon(dimg);
-                 picpassportphoto.setIcon(passPortPhoto);
-                        //, rs.getString("email"), rs.getString("Address"), rs.getString("Gender"), rs.getString("NextOfKin"), rs.getString("NextofKinPhone")};
-             
-        
+                txtStdID.setText(studentID);
+                txtName.setText(rs.getString("Student_Name"));
+                txtNumber.setText("PHONE:" + rs.getString("Phone"));
+                txtCourse.setText(getCourseName(studentID)[0]+ " IN " + getCourseName(studentID)[1]+" ("+ getCourseName(studentID)[2] + ")" );
+                txtGender.setText(rs.getString("Gender"));
+                txtIDNumber.setText(( rs.getString("IDNo")!=null? "ID NO:" + rs.getString("IDNo"): "HAS NO ID"));
+                BufferedImage img = ImageIO.read(rs.getBinaryStream("photo"));
+                Image dimg = img.getScaledInstance(picpassportphoto.getWidth(), picpassportphoto.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon passPortPhoto = new ImageIcon(dimg);
+                picpassportphoto.setIcon(passPortPhoto);
+                //, rs.getString("email"), rs.getString("Address"), rs.getString("Gender"), rs.getString("NextOfKin"), rs.getString("NextofKinPhone")};
+
             }
 
         } catch (IOException | SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        } 
+        }
     }
-  public String getCourseName(String StudentID) {
-        String CourseName = null;
-            try {
-             Connection cnn = Database.getConnection();
-            Statement st = cnn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT CRS.LEVEL, CRS.COURSENAME FROM COURSEENROLLMENT CRSENR INNER JOIN COURSES CRS ON CRSENR.COURSEID=CRS.COURSEID WHERE CRSENR.STUDENTID='"+StudentID+"'");
-            rs.next();
-        CourseName=rs.getString(1).toUpperCase()+" IN "+rs.getString(2).toUpperCase();
 
+    public String[] getCourseName(String StudentID) {
+        String [] CourseName = null;
+        try {
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            String Query = "SELECT CRS.LEVEL, CRS.COURSENAME,CRSENR.COHORT FROM COURSEENROLLMENT CRSENR INNER JOIN COURSES CRS ON CRSENR.COURSEID=CRS.COURSEID WHERE CRSENR.STUDENTID='" + StudentID + "'";
+          //  System.out.println(Query);
+            ResultSet rs = st.executeQuery(Query);
+            rs.next();
+            String []temp = {rs.getString(1).toUpperCase(), rs.getString(2).toUpperCase(),rs.getString(3)};
+            CourseName=temp;
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "Issue on Getting Department ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Issue on Getting Course Name ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
 
-          
-        
         return CourseName;
     }
 }

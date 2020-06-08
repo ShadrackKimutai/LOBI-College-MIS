@@ -189,7 +189,7 @@ public class RegisteredStudents extends javax.swing.JPanel {
         try {
 
             // create a sql date object so we can use it in our INSERT statement
-            File f = new File("server.properties");
+           // File f = new File("server.properties");
             Connection cnn = Database.getConnection();
 
             PreparedStatement ps = cnn.prepareStatement("Select * from Students");
