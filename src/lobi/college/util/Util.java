@@ -145,7 +145,7 @@ public class Util {
             Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             String Query = " select count(*) from CourseEnrollment where cohort='"+cohort+"' and currentActivity='ACTIVE'";
-            System.out.println(Query);
+           // System.out.println(Query);
             ResultSet rs = st.executeQuery(Query);
             rs.next();
             count = rs.getInt(1);
