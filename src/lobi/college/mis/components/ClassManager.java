@@ -13,12 +13,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import lobi.college.util.Database;
 import lobi.college.util.StudentInfo;
 import lobi.college.util.Util;
@@ -40,8 +43,10 @@ public class ClassManager extends javax.swing.JPanel {
         this.Dept = dept;
         initComponents();
         populateTable();
+        populateLevelTree();
         populateStudentTable();
         cboLevel.setSelectedIndex(1);
+        
     }
 
     /**
@@ -89,7 +94,7 @@ public class ClassManager extends javax.swing.JPanel {
         optRegular = new javax.swing.JRadioButton();
         optParallel = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        treLevels = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCohorts = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
@@ -425,18 +430,9 @@ public class ClassManager extends javax.swing.JPanel {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Class");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Artisan");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Craft");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Diploma");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Higher Diploma");
-        treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.setEnabled(false);
-        jScrollPane1.setViewportView(jTree1);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        treLevels.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(treLevels);
 
         tblCohorts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -740,7 +736,6 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTree jTree1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
@@ -751,6 +746,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JRadioButton optSep;
     private javax.swing.JTable tblCohorts;
     private javax.swing.JTable tblStudents;
+    private javax.swing.JTree treLevels;
     private javax.swing.JTextField txtCohortID;
     private javax.swing.JTextField txtCourseFormat;
     // End of variables declaration//GEN-END:variables
@@ -1108,5 +1104,85 @@ Util util=new Util();
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error ", JOptionPane.ERROR);
         }
     }
+    
+    public final void populateLevelTree() {
+       
+           
+        try {
+            Connection cnn=Database.getConnection();
+              Statement stmt=cnn.createStatement();
+
+ 
+            try {
+                 
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            ArrayList list = new ArrayList();
+            list.add("Programmes");
+            String sql = "SELECT * from cohorts";
+ 
+            ResultSet rs = stmt.executeQuery(sql);
+ 
+            while (rs.next()) {
+                Object value[] = {rs.getString(1), rs.getString(2)};
+                list.add(value);
+            }
+            Object hierarchy[] = list.toArray();
+            DefaultMutableTreeNode root = processHierarchy(hierarchy);
+ 
+            DefaultTreeModel treeModel = new DefaultTreeModel(root);
+            treLevels.setModel(treeModel);
+        } catch (Exception e) {
+        }
+    }
+    
+     public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
+        try {
+            Connection cnn=Database.getConnection();
+              Statement stmt=cnn.createStatement();
+
+            int ctrow = 0;
+            int i = 0;
+            try {
+ 
+               
+                String sql = "SELECT distinct level from cohorts";
+                ResultSet rs = stmt.executeQuery(sql);
+ 
+                while (rs.next()) {
+                    ctrow = rs.getRow();
+                }
+                String L1Nam[] = new String[ctrow];
+                ResultSet rs1 = stmt.executeQuery(sql);
+                while (rs1.next()) {
+                    L1Nam[i] = rs1.getString("level");
+                    i++;
+                }
+                DefaultMutableTreeNode child, grandchild;
+                for (int childIndex = 0; childIndex < L1Nam.length; childIndex++) {
+                    child = new DefaultMutableTreeNode(L1Nam[childIndex]);
+                    node.add(child);//add each created child to root
+                    String sql2 = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' ";
+                    ResultSet rs3 = stmt.executeQuery(sql2);
+                    while (rs3.next()) {
+                      grandchild = new DefaultMutableTreeNode(rs3.getString("CohortName"));
+                     child.add(grandchild);//add each grandchild to each child
+                    }
+                }
+ 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+ 
+        } catch (Exception e) {
+        }
+ 
+        return (node);
+    }
+ 
+    
 
 }
