@@ -139,4 +139,22 @@ public class Util {
         return coursePattern;
     }
 
+        public int getCohortEnrollment(String cohort) {
+        int count = 0;
+        try {
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            String Query = " select count(*) from CourseEnrollment where cohort='"+cohort+"' and currentActivity='ACTIVE'";
+            System.out.println(Query);
+            ResultSet rs = st.executeQuery(Query);
+            rs.next();
+            count = rs.getInt(1);
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("Issue on Getting Enrolled Students in "+ cohort+ " " + e.getMessage());
+        }
+        return count;
+       
+    }
+
 }

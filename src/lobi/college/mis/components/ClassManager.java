@@ -318,7 +318,7 @@ public class ClassManager extends javax.swing.JPanel {
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(30, 5, 60, 1));
 
-        cboStructure.setToolTipText("<html>This shows the structure of the selected program\n<ol type=\"1\">\n<li>Number Denotes the number of Terms in the selected Course. Range from 1 to 3. </li>\n<li>NE Denotes National Exam or External Exam by KNEC, NITA or TVET-CDACC </li>\n<li>IE Denotes Internal Exam. </li>\n<li>SE Denotes Stage Exam</li>\n<li>A Denotes Stage Exam</li>\n</ol> ");
+        cboStructure.setToolTipText("<html>This shows the structure of the selected program\n<ol type=\"1\">\n<li>Number Denotes the number of Terms in the selected Course. Range from 1 to 3. </li>\n<li>NE Denotes National Exam or External Exam by KNEC, NITA or TVET-CDACC </li>\n<li>IE Denotes Internal Exam. </li>\n<li>SE Denotes Stage Exam</li>\n<li>A Denotes Attachment.</li>\n</ol> ");
 
         jLabel10.setText("Structure");
 
@@ -440,15 +440,23 @@ public class ClassManager extends javax.swing.JPanel {
 
         tblCohorts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cohort", "Level", "Course", "Enrolled", "Capacity", "Effective Date"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblCohorts);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -895,7 +903,7 @@ private void generateClassID() {
             Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboCourses.removeAllItems();
-            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "'")) {
+            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID="+Dept+"")) {
                 while (rs.next()) {
                     cboCourses.addItem(rs.getString("courseName"));
 
@@ -939,7 +947,7 @@ private void generateClassID() {
                 // create a sql date object so we can use it in our INSERT statement
                 Connection cnn = Database.getConnection();
                 // create a sql date object so we can use it in our INSERT statement
-                String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress,nature,locked) values (?,?,?,?,?,?,?,?,?)";
+                String Query = "insert into Cohorts (CohortName,Level,Course,Capacity,StartDate,Structure,Progress,nature,locked,deptId) values (?,?,?,?,?,?,?,?,?,?)";
 
 // create the mysql insert preparedstatement
                 PreparedStatement preparedStmt = cnn.prepareStatement(Query);
@@ -952,13 +960,14 @@ private void generateClassID() {
                 preparedStmt.setString(7, cboStructure.getSelectedItem().toString());
                   preparedStmt.setString(8, Nature);
                 preparedStmt.setInt(9, 0);
+                preparedStmt.setString(10,Dept);
               
                 // execute the preparedstatement
                 if (checkExists() == false) {
                     preparedStmt.execute();
                     JOptionPane.showMessageDialog(this, "Cohourt has been created successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Cohourt already Exists", "Entry Exists", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "The cohourt "+txtCohortID.getText()+" already Exists", "Cohort Exists", JOptionPane.ERROR_MESSAGE);
                     txtCohortID.grabFocus();
                     return;
                 }
@@ -976,20 +985,20 @@ private void generateClassID() {
     }
 
     private void populateTable() {
-
+Util util=new Util();
         try {
 
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
 
-            PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts order by No DESC ");
+            PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId="+Dept+" order by No DESC ");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblCohorts.getModel();
             tm.setRowCount(0);
-
+            
             while (rs.next()) {
-
-                Object o[] = {rs.getString("CohortName"), rs.getString("Level"), rs.getString("Course"), rs.getInt("Capacity"), rs.getString("StartDate")};
+                int x=util.getCohortEnrollment(rs.getString(1));
+                Object o[] = {rs.getString("CohortName"), rs.getString("Level"), rs.getString("Course"),x ,rs.getInt("Capacity"), rs.getString("StartDate")};
                 tm.addRow(o);
 
             }
@@ -1011,7 +1020,7 @@ private void generateClassID() {
 
             Connection cnn = Database.getConnection();
             st = cnn.createStatement();
-            Query = "select *  from Cohorts where CohortName='" + txtCohortID.getText() + "' and deptId='"+Dept+"'";
+            Query = "select *  from Cohorts where CohortName='" + txtCohortID.getText() + "'";
 
             rs = st.executeQuery(Query);
 

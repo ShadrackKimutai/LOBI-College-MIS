@@ -55,11 +55,6 @@ public class StudentInfo extends javax.swing.JDialog {
     private void initComponents() {
 
         picpassportphoto = new javax.swing.JLabel();
-        txtStdID = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        txtGender = new javax.swing.JTextField();
-        txtNumber = new javax.swing.JTextField();
-        txtIDNumber = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtCourse = new javax.swing.JTextArea();
 
@@ -77,33 +72,6 @@ public class StudentInfo extends javax.swing.JDialog {
         picpassportphoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         picpassportphoto.setFocusable(false);
 
-        txtStdID.setEditable(false);
-        txtStdID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtStdID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtName.setEditable(false);
-        txtName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtGender.setEditable(false);
-        txtGender.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtGender.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtGender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        txtGender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGenderActionPerformed(evt);
-            }
-        });
-
-        txtNumber.setEditable(false);
-        txtNumber.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtNumber.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtIDNumber.setEditable(false);
-        txtIDNumber.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtIDNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -115,7 +83,7 @@ public class StudentInfo extends javax.swing.JDialog {
         txtCourse.setRows(2);
         txtCourse.setWrapStyleWord(true);
         txtCourse.setAutoscrolls(false);
-        txtCourse.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtCourse.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.SystemColor.activeCaptionBorder));
         txtCourse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtCourse.setDoubleBuffered(true);
         txtCourse.setFocusable(false);
@@ -127,54 +95,24 @@ public class StudentInfo extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGender, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                            .addComponent(txtStdID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtName)))))
+                .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(picpassportphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addGap(0, 3, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(picpassportphoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtName, txtStdID});
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtGender, txtIDNumber, txtNumber});
 
         getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,11 +161,6 @@ public class StudentInfo extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel picpassportphoto;
     private javax.swing.JTextArea txtCourse;
-    private javax.swing.JTextField txtGender;
-    private javax.swing.JTextField txtIDNumber;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtNumber;
-    private javax.swing.JTextField txtStdID;
     // End of variables declaration//GEN-END:variables
 
     private void populateInfo() {
@@ -241,17 +174,14 @@ public class StudentInfo extends javax.swing.JDialog {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                txtStdID.setText(studentID);
-                txtName.setText(rs.getString("Student_Name"));
-                txtNumber.setText("PHONE:" + rs.getString("Phone"));
-                txtCourse.setText(getCourseName(studentID)[0]+ " IN " + getCourseName(studentID)[1]+" ("+ getCourseName(studentID)[2] + ")" );
-                txtGender.setText(rs.getString("Gender"));
-                txtIDNumber.setText(( rs.getString("IDNo")!=null? "ID NO:" + rs.getString("IDNo"): "HAS NO ID"));
+             
+                txtCourse.setText(studentID+" \n"+rs.getString("Student_Name")+"\n"+ getCourseName(studentID)[0]+ " IN " + getCourseName(studentID)[1]+" ("+ getCourseName(studentID)[2] + ")"+"\n"+"PHONE:" + rs.getString("Phone")+" "+( rs.getString("IDNo")!=null? "ID NO:" + rs.getString("IDNo"): "STUDENT HAS NO ID") );
+            
                 BufferedImage img = ImageIO.read(rs.getBinaryStream("photo"));
                 Image dimg = img.getScaledInstance(picpassportphoto.getWidth(), picpassportphoto.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon passPortPhoto = new ImageIcon(dimg);
                 picpassportphoto.setIcon(passPortPhoto);
-                //, rs.getString("email"), rs.getString("Address"), rs.getString("Gender"), rs.getString("NextOfKin"), rs.getString("NextofKinPhone")};
+             
 
             }
 

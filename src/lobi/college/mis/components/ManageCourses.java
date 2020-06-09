@@ -280,11 +280,11 @@ public class ManageCourses extends javax.swing.JPanel {
 
             // execute the preparedstatement
             preparedStmt.execute();
-            JOptionPane.showMessageDialog(this, "Course has been regstered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Course has been registered successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,  e.getMessage(),"Error Occured", JOptionPane.ERROR_MESSAGE);
         }
         populateTable();
     }//GEN-LAST:event_btnRegisterCourseMouseClicked

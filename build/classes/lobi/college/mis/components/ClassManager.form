@@ -491,7 +491,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;This shows the structure of the selected program&#xa;&lt;ol type=&quot;1&quot;&gt;&#xa;&lt;li&gt;Number Denotes the number of Terms in the selected Course. Range from 1 to 3. &lt;/li&gt;&#xa;&lt;li&gt;NE Denotes National Exam or External Exam by KNEC, NITA or TVET-CDACC &lt;/li&gt;&#xa;&lt;li&gt;IE Denotes Internal Exam. &lt;/li&gt;&#xa;&lt;li&gt;SE Denotes Stage Exam&lt;/li&gt;&#xa;&lt;li&gt;A Denotes Stage Exam&lt;/li&gt;&#xa;&lt;/ol&gt; "/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;This shows the structure of the selected program&#xa;&lt;ol type=&quot;1&quot;&gt;&#xa;&lt;li&gt;Number Denotes the number of Terms in the selected Course. Range from 1 to 3. &lt;/li&gt;&#xa;&lt;li&gt;NE Denotes National Exam or External Exam by KNEC, NITA or TVET-CDACC &lt;/li&gt;&#xa;&lt;li&gt;IE Denotes Internal Exam. &lt;/li&gt;&#xa;&lt;li&gt;SE Denotes Stage Exam&lt;/li&gt;&#xa;&lt;li&gt;A Denotes Attachment.&lt;/li&gt;&#xa;&lt;/ol&gt; "/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -553,6 +553,7 @@
                     <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
                       <TreeModel code="Class&#xa; Artisan&#xa; Craft&#xa; Diploma&#xa; Higher Diploma &#xa;&#xa;&#xa;"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -567,11 +568,13 @@
                 <Component class="javax.swing.JTable" name="tblCohorts">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                      <Table columnCount="6" rowCount="4">
+                        <Column editable="true" title="Cohort" type="java.lang.Object"/>
+                        <Column editable="true" title="Level" type="java.lang.Object"/>
+                        <Column editable="true" title="Course" type="java.lang.Object"/>
+                        <Column editable="true" title="Enrolled" type="java.lang.Integer"/>
+                        <Column editable="true" title="Capacity" type="java.lang.Integer"/>
+                        <Column editable="true" title="Effective Date" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
