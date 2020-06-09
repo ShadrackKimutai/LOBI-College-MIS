@@ -435,6 +435,7 @@ public class ClassManager extends javax.swing.JPanel {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Higher Diploma");
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.setEnabled(false);
         jScrollPane1.setViewportView(jTree1);
 
         tblCohorts.setModel(new javax.swing.table.DefaultTableModel(
@@ -1010,7 +1011,7 @@ private void generateClassID() {
 
             Connection cnn = Database.getConnection();
             st = cnn.createStatement();
-            Query = "select *  from Cohorts where CohortName='" + txtCohortID.getText() + "'";
+            Query = "select *  from Cohorts where CohortName='" + txtCohortID.getText() + "' and deptId='"+Dept+"'";
 
             rs = st.executeQuery(Query);
 
