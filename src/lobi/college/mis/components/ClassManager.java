@@ -997,7 +997,7 @@ Util util=new Util();
             tm.setRowCount(0);
             
             while (rs.next()) {
-                int x=util.getCohortEnrollment(rs.getString(1));
+                int x=util.getCohortEnrollment(rs.getString("CohortName"));
                 Object o[] = {rs.getString("CohortName"), rs.getString("Level"), rs.getString("Course"),x ,rs.getInt("Capacity"), rs.getString("StartDate")};
                 tm.addRow(o);
 
