@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -46,7 +47,7 @@ public class ClassManager extends javax.swing.JPanel {
         populateLevelTree();
         populateStudentTable();
         cboLevel.setSelectedIndex(1);
-        
+
     }
 
     /**
@@ -101,7 +102,7 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstActiveCohorts = new javax.swing.JList<>();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -464,20 +465,20 @@ public class ClassManager extends javax.swing.JPanel {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Classes"));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstActiveCohorts.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList1);
+        jScrollPane4.setViewportView(lstActiveCohorts);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 849, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 865, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -766,7 +767,6 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -788,6 +788,7 @@ public class ClassManager extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
+    private javax.swing.JList<String> lstActiveCohorts;
     private javax.swing.JRadioButton optJan;
     private javax.swing.JRadioButton optMay;
     private javax.swing.JRadioButton optParallel;
@@ -847,96 +848,96 @@ private void generateClassID() {
         txtCourseFormat.setText(generateClassFormat(util.getCourseID(cboCourses.getSelectedItem().toString(), cboLevel.getSelectedItem().toString())));
         String str = txtCourseFormat.getText() + ":" + cboLevel.getSelectedItem();
         cboStructure.removeAllItems();
-        if (optRegular.isSelected()){
+        if (optRegular.isSelected()) {
             switch (str.toUpperCase()) {
-            case "MODULAR:SHORT COURSE": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
-                break;
-            }
-            case "MODULAR:ARTISAN": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE", "3+NE+A"}));
-                break;
-            }
-            case "MODULAR:CRAFT": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{ "3+NE+A+2+NE", "3+NE+2+NE+A"}));
+                case "MODULAR:SHORT COURSE": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                    break;
+                }
+                case "MODULAR:ARTISAN": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE", "3+NE+A"}));
+                    break;
+                }
+                case "MODULAR:CRAFT": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+A+2+NE", "3+NE+2+NE+A"}));
 
-                break;
-            }
-            case "MODULAR:DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+3+NE+A+2+NE", "3+NE+3+NE+2+NE+A"}));
+                    break;
+                }
+                case "MODULAR:DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+3+NE+A+2+NE", "3+NE+3+NE+2+NE+A"}));
 
-                break;
-            }
-            case "MODULAR:HIGHER DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+P"}));
+                    break;
+                }
+                case "MODULAR:HIGHER DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+P"}));
 
-                break;
-            }
-            case "STAGE:SHORT COURSE": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
-                break;
-            }
-            case "STAGE:CRAFT": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+SE+A+2+NE", "3+SE+2+NE+A"}));
+                    break;
+                }
+                case "STAGE:SHORT COURSE": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                    break;
+                }
+                case "STAGE:CRAFT": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+SE+A+2+NE", "3+SE+2+NE+A"}));
 
-                break;
-            }
-            case "STAGE:DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{ "3+SE+2+SE+2+NE+A", "3+SE+2+SE+A+2+NE"}));
+                    break;
+                }
+                case "STAGE:DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+SE+2+SE+2+NE+A", "3+SE+2+SE+A+2+NE"}));
 
-                break;
-            }
-            case "STAGE:HIGHER DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+P"}));
+                    break;
+                }
+                case "STAGE:HIGHER DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"3+NE+P"}));
 
-                break;
+                    break;
+                }
             }
-        }
-        }else{
+        } else {
             switch (str.toUpperCase()) {
-            case "MODULAR:SHORT COURSE": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
-                break;
-            }
-            case "MODULAR:ARTISAN": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE"}));
-                break;
-            }
-            case "MODULAR:CRAFT": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE",  "2+NE+2+NE+A"}));
+                case "MODULAR:SHORT COURSE": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                    break;
+                }
+                case "MODULAR:ARTISAN": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE"}));
+                    break;
+                }
+                case "MODULAR:CRAFT": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "2+NE+2+NE+A"}));
 
-                break;
-            }
-            case "MODULAR:DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE"}));
+                    break;
+                }
+                case "MODULAR:DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE"}));
 
-                break;
-            }
-            case "MODULAR:HIGHER DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE"}));
+                    break;
+                }
+                case "MODULAR:HIGHER DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE"}));
 
-                break;
-            }
-            case "STAGE:SHORT COURSE": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
-                break;
-            }
-            case "STAGE:CRAFT": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE","2+SE+2+NE+A"}));
+                    break;
+                }
+                case "STAGE:SHORT COURSE": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1+IE"}));
+                    break;
+                }
+                case "STAGE:CRAFT": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "2+SE+2+NE+A"}));
 
-                break;
-            }
-            case "STAGE:DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE"}));
+                    break;
+                }
+                case "STAGE:DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+SE+A+2+NE", "3+SE+A+2+NE"}));
 
-                break;
-            }
-            case "STAGE:HIGHER DIPLOMA": {
-                cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE"}));
+                    break;
+                }
+                case "STAGE:HIGHER DIPLOMA": {
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+P+NE"}));
 
-                break;
+                    break;
+                }
             }
-        }
         }
 
     }
@@ -948,7 +949,7 @@ private void generateClassID() {
             Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboCourses.removeAllItems();
-            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID="+Dept+"")) {
+            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID=" + Dept + "")) {
                 while (rs.next()) {
                     cboCourses.addItem(rs.getString("courseName"));
 
@@ -1003,23 +1004,23 @@ private void generateClassID() {
                 preparedStmt.setString(5, jXDatePicker1.getEditor().getText());
                 preparedStmt.setString(6, cboStructure.getSelectedItem().toString());
                 preparedStmt.setString(7, cboStructure.getSelectedItem().toString());
-                  preparedStmt.setString(8, Nature);
+                preparedStmt.setString(8, Nature);
                 preparedStmt.setInt(9, 0);
-                preparedStmt.setString(10,Dept);
-              
+                preparedStmt.setString(10, Dept);
+
                 // execute the preparedstatement
                 if (checkExists() == false) {
                     preparedStmt.execute();
                     JOptionPane.showMessageDialog(this, "Cohourt has been created successfuly", "Entry Successful", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "The cohourt "+txtCohortID.getText()+" already Exists", "Cohort Exists", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "The cohourt " + txtCohortID.getText() + " already Exists", "Cohort Exists", JOptionPane.ERROR_MESSAGE);
                     txtCohortID.grabFocus();
                     return;
                 }
                 preparedStmt.close();
             } catch (NullPointerException | SQLException ex) {
-              
-              System.err.println(ex.getMessage());
+
+                System.err.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
             }
             populateTable();
@@ -1031,20 +1032,20 @@ private void generateClassID() {
     }
 
     private void populateTable() {
-Util util=new Util();
+        Util util = new Util();
         try {
 
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
 
-            PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId="+Dept+" order by No DESC ");
+            PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId=" + Dept + " order by No DESC ");
             ResultSet rs = ps.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) tblCohorts.getModel();
             tm.setRowCount(0);
-            
+
             while (rs.next()) {
-                int x=util.getCohortEnrollment(rs.getString("CohortName"));
-                Object o[] = {rs.getString("CohortName").toUpperCase(), rs.getString("Level").toUpperCase(), rs.getString("Course").toUpperCase(),x ,rs.getInt("Capacity"), rs.getString("StartDate")};
+                int x = util.getCohortEnrollment(rs.getString("CohortName"));
+                Object o[] = {rs.getString("CohortName").toUpperCase(), rs.getString("Level").toUpperCase(), rs.getString("Course").toUpperCase(), x, rs.getInt("Capacity"), rs.getString("StartDate")};
                 tm.addRow(o);
 
             }
@@ -1087,7 +1088,7 @@ Util util=new Util();
             Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             String Query = "select CourseFormat from Courses where CourseID='" + courseID + "'";
-           //System.out.println(Query);
+            //System.out.println(Query);
             ResultSet rs = st.executeQuery(Query);
             rs.next();
             courseLevel = rs.getString(1);
@@ -1154,55 +1155,51 @@ Util util=new Util();
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error ", JOptionPane.ERROR);
         }
     }
-    
-    public final void populateLevelTree() {
-       
-           
-        try {
-            Connection cnn=Database.getConnection();
-              Statement stmt=cnn.createStatement();
 
- 
+    public final void populateLevelTree() {
+
+        try {
+            Connection cnn = Database.getConnection();
+            Statement stmt = cnn.createStatement();
+
             try {
-                 
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
             ArrayList list = new ArrayList();
             list.add("Programmes");
             String Query = "SELECT * from cohorts";
- 
+
             ResultSet rs = stmt.executeQuery(Query);
- 
+
             while (rs.next()) {
                 Object value[] = {rs.getString(1), rs.getString(2)};
                 list.add(value);
             }
             Object hierarchy[] = list.toArray();
             DefaultMutableTreeNode root = processHierarchy(hierarchy);
- 
+
             DefaultTreeModel treeModel = new DefaultTreeModel(root);
             treLevels.setModel(treeModel);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
-     public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
+
+    public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
         try {
-            Connection cnn=Database.getConnection();
-              Statement stmt=cnn.createStatement();
+            Connection cnn = Database.getConnection();
+            Statement stmt = cnn.createStatement();
 
             int trow = 0;
             int i = 0;
             try {
- 
-               
-                String Query = "SELECT distinct level from cohorts where DeptId="+Dept+"";
+
+                String Query = "SELECT distinct level from cohorts where DeptId=" + Dept + "";
                 ResultSet rs = stmt.executeQuery(Query);
- 
+
                 while (rs.next()) {
                     trow = rs.getRow();
                 }
@@ -1216,26 +1213,43 @@ Util util=new Util();
                 for (int childIndex = 0; childIndex < L1Nam.length; childIndex++) {
                     child = new DefaultMutableTreeNode(L1Nam[childIndex]);
                     node.add(child);//add each created child to root
-                    String subQuery = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' and deptId="+Dept+" ORDER BY `CohortName` DESC, `StartDate` ASC";
+                    String subQuery = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' and deptId=" + Dept + " ORDER BY `CohortName` DESC, `StartDate` ASC";
                     ResultSet rs2 = stmt.executeQuery(subQuery);
                     while (rs2.next()) {
-                      grandchild = new DefaultMutableTreeNode(rs2.getString("CohortName"));
-                     child.add(grandchild);//add each grandchild to each child
+                        grandchild = new DefaultMutableTreeNode(rs2.getString("CohortName"));
+                        child.add(grandchild);//add each grandchild to each child
                     }
                 }
- 
+
             } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+                System.out.println(ex.getMessage());
             }
- 
+
         } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+            System.out.println(ex.getMessage());
 
         }
- 
+
         return (node);
     }
- 
-    
+private void populateActiveClasses(){
+    try {
 
+            // create a sql date object so we can use it in our INSERT statement
+            Connection conn = Database.getConnection();
+            Statement st = conn.createStatement();
+            DefaultListModel lstModel = new DefaultListModel();
+            lstActiveCohorts.removeAll();
+            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID=" + Dept + "")) {
+                while (rs.next()) {
+                                   lstModel.addElement(rs.getString("CohortName"));
+                }
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Departments," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+}
 }
