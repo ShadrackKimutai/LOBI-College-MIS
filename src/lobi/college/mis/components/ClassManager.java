@@ -968,12 +968,13 @@ private void generateClassID() {
                     return;
                 }
                 preparedStmt.close();
-            } catch (SQLException e) {
-                System.err.println("Error Encountered!");
-                System.err.println(e.getMessage());
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            } catch (NullPointerException | SQLException ex) {
+              
+              System.err.println(ex.getMessage());
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
             }
             populateTable();
+            populateLevelTree();
         } else {
             optJan.grabFocus();
         }
@@ -994,7 +995,7 @@ Util util=new Util();
             
             while (rs.next()) {
                 int x=util.getCohortEnrollment(rs.getString("CohortName"));
-                Object o[] = {rs.getString("CohortName"), rs.getString("Level"), rs.getString("Course"),x ,rs.getInt("Capacity"), rs.getString("StartDate")};
+                Object o[] = {rs.getString("CohortName").toUpperCase(), rs.getString("Level").toUpperCase(), rs.getString("Course").toUpperCase(),x ,rs.getInt("Capacity"), rs.getString("StartDate")};
                 tm.addRow(o);
 
             }
@@ -1037,7 +1038,7 @@ Util util=new Util();
             Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             String Query = "select CourseFormat from Courses where CourseID='" + courseID + "'";
-            System.out.println(Query);
+           //System.out.println(Query);
             ResultSet rs = st.executeQuery(Query);
             rs.next();
             courseLevel = rs.getString(1);
@@ -1121,9 +1122,9 @@ Util util=new Util();
             }
             ArrayList list = new ArrayList();
             list.add("Programmes");
-            String sql = "SELECT * from cohorts";
+            String Query = "SELECT * from cohorts";
  
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(Query);
  
             while (rs.next()) {
                 Object value[] = {rs.getString(1), rs.getString(2)};
@@ -1134,7 +1135,8 @@ Util util=new Util();
  
             DefaultTreeModel treeModel = new DefaultTreeModel(root);
             treLevels.setModel(treeModel);
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -1144,19 +1146,19 @@ Util util=new Util();
             Connection cnn=Database.getConnection();
               Statement stmt=cnn.createStatement();
 
-            int ctrow = 0;
+            int trow = 0;
             int i = 0;
             try {
  
                
-                String sql = "SELECT distinct level from cohorts";
-                ResultSet rs = stmt.executeQuery(sql);
+                String Query = "SELECT distinct level from cohorts where DeptId="+Dept+"";
+                ResultSet rs = stmt.executeQuery(Query);
  
                 while (rs.next()) {
-                    ctrow = rs.getRow();
+                    trow = rs.getRow();
                 }
-                String L1Nam[] = new String[ctrow];
-                ResultSet rs1 = stmt.executeQuery(sql);
+                String L1Nam[] = new String[trow];
+                ResultSet rs1 = stmt.executeQuery(Query);
                 while (rs1.next()) {
                     L1Nam[i] = rs1.getString("level");
                     i++;
@@ -1165,19 +1167,21 @@ Util util=new Util();
                 for (int childIndex = 0; childIndex < L1Nam.length; childIndex++) {
                     child = new DefaultMutableTreeNode(L1Nam[childIndex]);
                     node.add(child);//add each created child to root
-                    String sql2 = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' ";
-                    ResultSet rs3 = stmt.executeQuery(sql2);
-                    while (rs3.next()) {
-                      grandchild = new DefaultMutableTreeNode(rs3.getString("CohortName"));
+                    String subQuery = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' and deptId="+Dept+" ORDER BY `CohortName` DESC, `StartDate` ASC";
+                    ResultSet rs2 = stmt.executeQuery(subQuery);
+                    while (rs2.next()) {
+                      grandchild = new DefaultMutableTreeNode(rs2.getString("CohortName"));
                      child.add(grandchild);//add each grandchild to each child
                     }
                 }
  
             } catch (Exception ex) {
-                ex.printStackTrace();
+            System.out.println(ex.getMessage());
             }
  
-        } catch (Exception e) {
+        } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+
         }
  
         return (node);

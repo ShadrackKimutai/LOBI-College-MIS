@@ -14,14 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -76,7 +71,7 @@ public class StudentInfo extends javax.swing.JDialog {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         txtCourse.setEditable(false);
-        txtCourse.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
+        txtCourse.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
         txtCourse.setColumns(20);
         txtCourse.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtCourse.setLineWrap(true);
@@ -108,6 +103,8 @@ public class StudentInfo extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
                 .addContainerGap(273, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, picpassportphoto});
 
         getAccessibleContext().setAccessibleParent(null);
 
@@ -175,7 +172,7 @@ public class StudentInfo extends javax.swing.JDialog {
 
             while (rs.next()) {
              
-                txtCourse.setText(studentID+" \n"+rs.getString("Student_Name")+"\n"+ getCourseName(studentID)[0]+ " IN " + getCourseName(studentID)[1]+" ("+ getCourseName(studentID)[2] + ")"+"\n"+"PHONE:" + rs.getString("Phone")+" "+( rs.getString("IDNo")!=null? "ID NO:" + rs.getString("IDNo"): "STUDENT HAS NO ID") );
+                txtCourse.setText(studentID+" \n"+rs.getString("Student_Name")+"\n"+ getCourseName(studentID)[0]+ " IN " + getCourseName(studentID)[1]+" ("+ getCourseName(studentID)[2] + ")"+"\n"+"PHONE:" + rs.getString("Phone")+", "+( rs.getString("IDNo")!=null? "ID NO:" + rs.getString("IDNo"): "STUDENT HAS NO ID") );
             
                 BufferedImage img = ImageIO.read(rs.getBinaryStream("photo"));
                 Image dimg = img.getScaledInstance(picpassportphoto.getWidth(), picpassportphoto.getHeight(), Image.SCALE_SMOOTH);
