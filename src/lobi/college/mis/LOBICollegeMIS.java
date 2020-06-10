@@ -15,7 +15,7 @@ import ch.randelshofer.quaqua.QuaquaLookAndFeel;
 //import ch.randelshofer.quaqua.QuaquaLookAndFeel15
 //import com.formdev.flatlaf.FlatDarculaLaf;
 
-//import //
+import com.formdev.flatlaf.FlatIntelliJLaf;
 /**
  *
  * @author shady
@@ -35,7 +35,7 @@ public class LOBICollegeMIS {
         try {
             // Set cross-platform Java L&F (also called "Metal")
            // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-           UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+           UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }

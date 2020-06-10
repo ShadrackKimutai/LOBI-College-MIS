@@ -46,8 +46,8 @@ public class ClassManager extends javax.swing.JPanel {
         populateTable();
         populateLevelTree();
         populateStudentTable();
+        populateActiveClasses();    
         cboLevel.setSelectedIndex(1);
-
     }
 
     /**
@@ -465,11 +465,9 @@ public class ClassManager extends javax.swing.JPanel {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Classes"));
 
-        lstActiveCohorts.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        lstActiveCohorts.setAutoscrolls(false);
         jScrollPane4.setViewportView(lstActiveCohorts);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -477,12 +475,12 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 865, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 834, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -493,9 +491,7 @@ public class ClassManager extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Advance Classes", jPanel4);
@@ -1240,10 +1236,12 @@ private void populateActiveClasses(){
             Statement st = conn.createStatement();
             DefaultListModel lstModel = new DefaultListModel();
             lstActiveCohorts.removeAll();
-            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID=" + Dept + "")) {
+            try (ResultSet rs = st.executeQuery("SELECT CohortName from Cohorts where DeptID=" + Dept + "")) {
                 while (rs.next()) {
-                                   lstModel.addElement(rs.getString("CohortName"));
+                   lstModel.addElement(rs.getString("CohortName"));
                 }
+                
+                lstActiveCohorts.setModel(lstModel);
             }
 
         } catch (SQLException e) {
