@@ -1178,7 +1178,7 @@ private void generateClassID() {
 
             DefaultTreeModel treeModel = new DefaultTreeModel(root);
             treLevels.setModel(treeModel);
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -1191,7 +1191,7 @@ private void generateClassID() {
 
             int trow = 0;
             int i = 0;
-            try {
+            
 
                 String Query = "SELECT distinct level from cohorts where DeptId=" + Dept + "";
                 ResultSet rs = stmt.executeQuery(Query);
@@ -1217,11 +1217,7 @@ private void generateClassID() {
                     }
                 }
 
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-
-        } catch (Exception ex) {
+            } catch (SQLException ex) {
             System.out.println(ex.getMessage());
 
         }
