@@ -73,10 +73,6 @@ public class ClassManager extends javax.swing.JPanel {
         jXDatePicker3 = new org.jdesktop.swingx.JXDatePicker();
         jPanel6 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        treLevels = new javax.swing.JTree();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblCohorts = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -99,6 +95,10 @@ public class ClassManager extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         optRegular = new javax.swing.JRadioButton();
         optParallel = new javax.swing.JRadioButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblCohorts = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        treLevels = new javax.swing.JTree();
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -142,7 +142,7 @@ public class ClassManager extends javax.swing.JPanel {
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 365, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -179,7 +179,7 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/interface.png")), jPanel3); // NOI18N
@@ -188,11 +188,11 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 971, Short.MAX_VALUE)
+            .addGap(0, 973, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 366, Short.MAX_VALUE)
+            .addGap(0, 472, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Nominal  Roll", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/archive.png")), jPanel6); // NOI18N
@@ -202,31 +202,6 @@ public class ClassManager extends javax.swing.JPanel {
                 jPanel5FocusGained(evt);
             }
         });
-
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        treLevels.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(treLevels);
-
-        tblCohorts.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Cohort", "Level", "Course", "Enrolled", "Capacity", "Effective Date"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tblCohorts);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Create a new Class"));
 
@@ -377,6 +352,31 @@ public class ClassManager extends javax.swing.JPanel {
         buttonGroup2.add(optParallel);
         optParallel.setText("Parallel Class");
 
+        tblCohorts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cohort", "Level", "Course", "Enrolled", "Capacity", "Effective Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblCohorts);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        treLevels.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(treLevels);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -429,6 +429,11 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboStructure, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,13 +463,18 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
         );
 
         jTabbedPane2.addTab("Create Class", jPanel2);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Classes"));
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Classes"));
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         lstActiveCohorts.setAutoscrolls(false);
@@ -475,12 +485,14 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 834, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 810, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -494,26 +506,17 @@ public class ClassManager extends javax.swing.JPanel {
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Advance Classes", jPanel4);
+        jTabbedPane2.addTab("Class Tools", jPanel4);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2))
             .addComponent(jTabbedPane2)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+            .addComponent(jTabbedPane2)
         );
 
         jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/people.png")), jPanel5); // NOI18N
@@ -580,7 +583,7 @@ public class ClassManager extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(614, 847, Short.MAX_VALUE))
+                .addGap(614, 849, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,63 +617,10 @@ public class ClassManager extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, Short.MAX_VALUE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, Short.MAX_VALUE)
+                .addGap(0, 96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jPanel5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel5FocusGained
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jPanel5FocusGained
-
-    private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
-        // TODO add your handling code here:
-        populateCourses();
-        cboCourses.setEnabled(true);
-    }//GEN-LAST:event_cboLevelItemStateChanged
-
-    private void optSepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optSepActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_optSepActionPerformed
-
-    private void cboCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCoursesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboCoursesActionPerformed
-
-    private void cboCoursesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCoursesMouseExited
-        // TODO add your handling code here:
-//generateClassID();
-
-    }//GEN-LAST:event_cboCoursesMouseExited
-
-    private void cboCoursesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboCoursesFocusLost
-        // TODO add your handling code here:
-        //generateClassID();
-        optJan.setSelected(true);
-    }//GEN-LAST:event_cboCoursesFocusLost
-
-    private void optMayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMayActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_optMayActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        createCohort();
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
-        // TODO add your handling code here:
-        //JOptionPane.showMessageDialog(jXDatePicker1, jXDatePicker1.getEditor().getText());
-    }//GEN-LAST:event_jXDatePicker1ActionPerformed
-
-    private void optSepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optSepFocusLost
-        // TODO add your handling code here:
-        //generateClassID();
-    }//GEN-LAST:event_optSepFocusLost
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -696,52 +646,98 @@ public class ClassManager extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblStudentsMouseClicked
 
-    private void cboCoursesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCoursesItemStateChanged
+    private void jPanel5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel5FocusGained
         // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel5FocusGained
 
-    }//GEN-LAST:event_cboCoursesItemStateChanged
+    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+        // TODO add your handling code here:
+        //JOptionPane.showMessageDialog(jXDatePicker1, jXDatePicker1.getEditor().getText());
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
+    private void cboLevelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLevelItemStateChanged
+        // TODO add your handling code here:
+        populateCourses();
+        cboCourses.setEnabled(true);
+    }//GEN-LAST:event_cboLevelItemStateChanged
 
     private void txtCohortIDPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtCohortIDPropertyChange
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtCohortIDPropertyChange
 
-    private void optJanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optJanItemStateChanged
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        createCohort();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    }//GEN-LAST:event_optJanItemStateChanged
+    private void optSepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optSepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optSepActionPerformed
 
-    private void optMayItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optMayItemStateChanged
+    private void optSepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optSepMouseClicked
+        // TODO add your handling code here:
+        generateClassID();
+    }//GEN-LAST:event_optSepMouseClicked
 
-    }//GEN-LAST:event_optMayItemStateChanged
+    private void optSepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optSepFocusLost
+        // TODO add your handling code here:
+        //generateClassID();
+    }//GEN-LAST:event_optSepFocusLost
 
     private void optSepItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optSepItemStateChanged
 
     }//GEN-LAST:event_optSepItemStateChanged
 
-    private void optJanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optJanFocusLost
+    private void optMayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMayActionPerformed
         // TODO add your handling code here:
-        // generateClassID();
-    }//GEN-LAST:event_optJanFocusLost
-
-    private void optMayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optMayFocusLost
-        // TODO add your handling code here:
-        // generateClassID();
-    }//GEN-LAST:event_optMayFocusLost
-
-    private void optJanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optJanMouseClicked
-        // TODO add your handling code here:
-        generateClassID();
-    }//GEN-LAST:event_optJanMouseClicked
+    }//GEN-LAST:event_optMayActionPerformed
 
     private void optMayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optMayMouseClicked
         // TODO add your handling code here:
         generateClassID();
     }//GEN-LAST:event_optMayMouseClicked
 
-    private void optSepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optSepMouseClicked
+    private void optMayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optMayFocusLost
+        // TODO add your handling code here:
+        // generateClassID();
+    }//GEN-LAST:event_optMayFocusLost
+
+    private void optMayItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optMayItemStateChanged
+
+    }//GEN-LAST:event_optMayItemStateChanged
+
+    private void optJanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optJanMouseClicked
         // TODO add your handling code here:
         generateClassID();
-    }//GEN-LAST:event_optSepMouseClicked
+    }//GEN-LAST:event_optJanMouseClicked
+
+    private void optJanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_optJanFocusLost
+        // TODO add your handling code here:
+        // generateClassID();
+    }//GEN-LAST:event_optJanFocusLost
+
+    private void optJanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_optJanItemStateChanged
+
+    }//GEN-LAST:event_optJanItemStateChanged
+
+    private void cboCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCoursesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboCoursesActionPerformed
+
+    private void cboCoursesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboCoursesMouseExited
+        // TODO add your handling code here:
+        //generateClassID();
+    }//GEN-LAST:event_cboCoursesMouseExited
+
+    private void cboCoursesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboCoursesFocusLost
+        // TODO add your handling code here:
+        //generateClassID();
+        optJan.setSelected(true);
+    }//GEN-LAST:event_cboCoursesFocusLost
+
+    private void cboCoursesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCoursesItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboCoursesItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1151,7 +1147,7 @@ private void generateClassID() {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error ", JOptionPane.ERROR);
         }
     }
-
+@SuppressWarnings("CallToThreadDumpStack")
     public final void populateLevelTree() {
 
         try {
@@ -1161,7 +1157,7 @@ private void generateClassID() {
             try {
 
             } catch (Exception ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
             ArrayList list = new ArrayList();
             list.add("Programmes");
@@ -1182,7 +1178,7 @@ private void generateClassID() {
             System.out.println(ex.getMessage());
         }
     }
-
+@SuppressWarnings("CallToThreadDumpStack")
     public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
         try {
@@ -1232,12 +1228,14 @@ private void populateActiveClasses(){
             Statement st = conn.createStatement();
             DefaultListModel lstModel = new DefaultListModel();
             lstActiveCohorts.removeAll();
+           
             try (ResultSet rs = st.executeQuery("SELECT CohortName from Cohorts where DeptID=" + Dept + "")) {
                 while (rs.next()) {
                    lstModel.addElement(rs.getString("CohortName"));
                 }
                 
                 lstActiveCohorts.setModel(lstModel);
+          
             }
 
         } catch (SQLException e) {
