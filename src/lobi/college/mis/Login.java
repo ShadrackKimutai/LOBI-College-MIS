@@ -171,7 +171,7 @@ public class Login extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         Util util = new Util(); 
-         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"1");
+         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"5");
            dashBoard.setVisible(true);
            util.setUserDeptID(1);
            this.setVisible(false); 
