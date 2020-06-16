@@ -67,7 +67,6 @@ public class Configurations {
         } catch (IOException ex) {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public static Properties readPropertiesFile(String fileName) throws IOException {

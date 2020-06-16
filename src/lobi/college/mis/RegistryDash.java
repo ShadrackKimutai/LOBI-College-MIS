@@ -48,7 +48,7 @@ private String User,Dept;
         setMaximizable(true);
         setTitle("Registy Pane");
         setDoubleBuffered(true);
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/details.png"))); // NOI18N
         setName(""); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {

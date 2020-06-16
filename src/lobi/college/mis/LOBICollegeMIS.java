@@ -8,24 +8,19 @@ package lobi.college.mis;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import lobi.college.util.splash;
-import ch.randelshofer.quaqua.QuaquaLookAndFeel;
+import java.awt.Dialog;
+import java.awt.Window;
 
-//import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-//import ch.randelshofer.quaqua.BasicQuaquaLookAndFeel;
-//import ch.randelshofer.quaqua.QuaquaLookAndFeel15
-//import com.formdev.flatlaf.FlatDarculaLaf;
-
-import com.formdev.flatlaf.FlatIntelliJLaf;
 /**
  *
  * @author shady
  */
 public class LOBICollegeMIS {
 
-   
-    public LOBICollegeMIS() {
-
+    private static void dispose() {
     }
+
+   
 
     /**
      * @param args the command line arguments
@@ -34,8 +29,8 @@ public class LOBICollegeMIS {
 
         try {
             // Set cross-platform Java L&F (also called "Metal")
-           // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-           UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
+            // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
@@ -44,19 +39,28 @@ public class LOBICollegeMIS {
         Splash.setLocationRelativeTo(null);
 
         Splash.setVisible(true);
-        Splash.progressBar();
-//        try {
-//            Thread.sleep(4500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//
-//        }
-        // TODO code application logic here
-        Login login = new Login();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
-        Splash.dispose();
+        Splash.ProgressBar();
+
+        try {
+            Thread.sleep(4500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+        //  TODO code application logic here
+        Window[] ownerlessWindows = Dialog.getOwnerlessWindows();
+        
+        if (ownerlessWindows.length < 2) {
+            Login login = new Login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+            Splash.dispose();
+        }else{
+            Splash.dispose();
+        }
 
     }
+
+    
 
 }

@@ -59,6 +59,8 @@ public class StudentInfo extends javax.swing.JDialog {
         setTitle("Student Information");
         setAlwaysOnTop(true);
         setBackground(java.awt.SystemColor.text);
+        setIconImage(null);
+        setIconImages(null);
         setModal(true);
         setPreferredSize(new java.awt.Dimension(535, 400));
         setResizable(false);

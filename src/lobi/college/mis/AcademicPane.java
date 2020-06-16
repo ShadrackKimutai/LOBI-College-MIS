@@ -7,6 +7,7 @@ package lobi.college.mis;
 
 import java.awt.BorderLayout;
 import lobi.college.mis.components.ClassManager;
+import lobi.college.mis.components.DepartmentalRequisition;
 import lobi.college.mis.components.Exams;
 
 /**
@@ -34,41 +35,52 @@ private String User,Dept;
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnClassMgt = new javax.swing.JButton();
+        btnExams = new javax.swing.JButton();
+        btnRequisition = new javax.swing.JButton();
         AcadPane = new javax.swing.JPanel();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Academic Pane");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/progress.png"))); // NOI18N
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
-        jButton1.setText("Class Management");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClassMgt.setText("Class Management");
+        btnClassMgt.setFocusable(false);
+        btnClassMgt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClassMgt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnClassMgt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClassMgtActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(btnClassMgt);
 
-        jButton2.setText("Examination");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnExams.setText("Examination");
+        btnExams.setFocusable(false);
+        btnExams.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExams.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnExamsActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(btnExams);
 
-        AcadPane.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.shadow"));
+        btnRequisition.setText("Requisition and Inventory");
+        btnRequisition.setFocusable(false);
+        btnRequisition.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRequisition.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRequisition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequisitionActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRequisition);
 
         javax.swing.GroupLayout AcadPaneLayout = new javax.swing.GroupLayout(AcadPane);
         AcadPane.setLayout(AcadPaneLayout);
@@ -94,15 +106,15 @@ private String User,Dept;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(AcadPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnExamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExamsActionPerformed
         // TODO add your handling code here:
         Exams exams = new Exams(User,Dept);
         AcadPane.removeAll();
@@ -115,9 +127,9 @@ private String User,Dept;
         pack();
 
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnExamsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnClassMgtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassMgtActionPerformed
         // TODO add your handling code here:
         ClassManager classmgr = new ClassManager(User,Dept);
         AcadPane.removeAll();
@@ -128,13 +140,27 @@ private String User,Dept;
         AcadPane.add(classmgr);
         AcadPane.setVisible(true);
         pack();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnClassMgtActionPerformed
+
+    private void btnRequisitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequisitionActionPerformed
+        // TODO add your handling code here:
+         DepartmentalRequisition dptR = new DepartmentalRequisition(User,Dept);
+        AcadPane.removeAll();
+        AcadPane.setVisible(false);
+        AcadPane.setSize(AcadPane.getSize().width, AcadPane.getSize().height);
+        AcadPane.setVisible(true);
+        AcadPane.setLayout(new BorderLayout());
+        AcadPane.add(dptR);
+        AcadPane.setVisible(true);
+        pack();
+    }//GEN-LAST:event_btnRequisitionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AcadPane;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnClassMgt;
+    private javax.swing.JButton btnExams;
+    private javax.swing.JButton btnRequisition;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

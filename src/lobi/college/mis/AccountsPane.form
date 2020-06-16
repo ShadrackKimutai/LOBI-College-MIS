@@ -9,10 +9,9 @@
     <Property name="autoscrolls" type="boolean" value="true"/>
     <Property name="doubleBuffered" type="boolean" value="true"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-      <Image iconType="3" name="/lobi/college/mis/resources/accounting1.png"/>
+      <Image iconType="3" name="/lobi/college/mis/resources/gfx/accounting1.png"/>
     </Property>
     <Property name="icon" type="boolean" value="true"/>
-    <Property name="maximum" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

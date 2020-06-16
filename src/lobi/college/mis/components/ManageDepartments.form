@@ -55,7 +55,7 @@
               <JTabbedPaneConstraints tabName="Register Department">
                 <Property name="tabTitle" type="java.lang.String" value="Register Department"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/lobi/college/mis/resources/document.png"/>
+                  <Image iconType="3" name="/lobi/college/mis/resources/gfx/document.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -109,7 +109,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnRegisterDept" pref="32" max="32767" attributes="0"/>
+                          <Component id="btnRegisterDept" max="32767" attributes="0"/>
                           <Component id="jButton2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -186,7 +186,7 @@
               <JTabbedPaneConstraints tabName="Assign Departmental Head">
                 <Property name="tabTitle" type="java.lang.String" value="Assign Departmental Head"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/lobi/college/mis/resources/manager.png"/>
+                  <Image iconType="3" name="/lobi/college/mis/resources/gfx/manager.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>

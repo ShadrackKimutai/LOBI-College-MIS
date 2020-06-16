@@ -142,8 +142,8 @@
     <Container class="javax.swing.JToolBar" name="jToolBar1">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-            <EtchetBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+            <BevelBorder/>
           </Border>
         </Property>
         <Property name="floatable" type="boolean" value="false"/>
@@ -156,7 +156,7 @@
         <Component class="javax.swing.JButton" name="btnRegistry">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lobi/college/mis/resources/details1.png"/>
+              <Image iconType="3" name="/lobi/college/mis/resources/gfx/details1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Registry"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -176,12 +176,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistryActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
         </Component>
         <Component class="javax.swing.JButton" name="btnAcademicPane">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lobi/college/mis/resources/progress1.png"/>
+              <Image iconType="3" name="/lobi/college/mis/resources/gfx/progress1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Academics"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -207,7 +207,7 @@
         <Component class="javax.swing.JButton" name="btnProcurement">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lobi/college/mis/resources/export1.png"/>
+              <Image iconType="3" name="/lobi/college/mis/resources/gfx/export1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Procurement"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -232,7 +232,7 @@
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lobi/college/mis/resources/accounting.png"/>
+              <Image iconType="3" name="/lobi/college/mis/resources/gfx/accounting.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Accounts"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -257,7 +257,7 @@
         <Component class="javax.swing.JButton" name="btnAdmin">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lobi/college/mis/resources/config1.png"/>
+              <Image iconType="3" name="/lobi/college/mis/resources/gfx/config1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Administration"/>
             <Property name="focusable" type="boolean" value="false"/>

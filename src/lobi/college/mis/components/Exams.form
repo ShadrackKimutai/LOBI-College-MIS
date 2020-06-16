@@ -62,7 +62,7 @@
                   <JTabbedPaneConstraints tabName="Capture Exams">
                     <Property name="tabTitle" type="java.lang.String" value="Capture Exams"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/lobi/college/mis/resources/archive.png"/>
+                      <Image iconType="3" name="/lobi/college/mis/resources/gfx/archive.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
@@ -87,7 +87,7 @@
                   <JTabbedPaneConstraints tabName="Grade Exams">
                     <Property name="tabTitle" type="java.lang.String" value="Grade Exams"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/lobi/college/mis/resources/control.png"/>
+                      <Image iconType="3" name="/lobi/college/mis/resources/gfx/control.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
@@ -112,7 +112,7 @@
                   <JTabbedPaneConstraints tabName="Generate Report Forms">
                     <Property name="tabTitle" type="java.lang.String" value="Generate Report Forms"/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/lobi/college/mis/resources/mark.png"/>
+                      <Image iconType="3" name="/lobi/college/mis/resources/gfx/mark.png"/>
                     </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>

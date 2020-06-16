@@ -8,8 +8,9 @@
     <Property name="title" type="java.lang.String" value="Registy Pane"/>
     <Property name="doubleBuffered" type="boolean" value="true"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-      <Image iconType="3" name="/lobi/college/mis/resources/details.png"/>
+      <Image iconType="3" name="/lobi/college/mis/resources/gfx/details.png"/>
     </Property>
+    <Property name="icon" type="boolean" value="true"/>
     <Property name="name" type="java.lang.String" value="" noResource="true"/>
   </Properties>
   <SyntheticProperties>

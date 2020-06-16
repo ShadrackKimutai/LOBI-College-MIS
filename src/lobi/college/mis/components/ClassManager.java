@@ -45,7 +45,7 @@ public class ClassManager extends javax.swing.JPanel {
         this.Dept = dept;
         initComponents();
         populateTable();
-    populateLevelTree();
+   // populateLevelTree();
         populateStudentTable();   
         cboLevel.setSelectedIndex(1);
     }
@@ -97,10 +97,10 @@ public class ClassManager extends javax.swing.JPanel {
         optParallel = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCohorts = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        treLevels = new javax.swing.JTree();
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -177,10 +177,10 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(774, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/interface.png")), jPanel3); // NOI18N
+        jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/interface.png")), jPanel3); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -190,10 +190,10 @@ public class ClassManager extends javax.swing.JPanel {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 907, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Nominal  Roll", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/archive.png")), jPanel6); // NOI18N
+        jTabbedPane1.addTab("Nominal  Roll", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/archive.png")), jPanel6); // NOI18N
 
         jPanel5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -371,15 +371,6 @@ public class ClassManager extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblCohorts);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        treLevels.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        treLevels.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                treLevelsMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(treLevels);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -432,10 +423,7 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboStructure, 0, 254, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2))
+            .addComponent(jScrollPane2)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,24 +455,51 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jLabel9))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Create Class", jPanel2);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Advance Class tool"));
+        jPanel11.setToolTipText("");
+
+        jButton4.setText("Advance Active Classes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jButton4)
+                .addGap(0, 9, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jButton4)
+                .addGap(0, 818, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 969, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 784, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -511,7 +526,7 @@ public class ClassManager extends javax.swing.JPanel {
             .addComponent(jTabbedPane2)
         );
 
-        jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/people.png")), jPanel5); // NOI18N
+        jTabbedPane1.addTab("Classes", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/people.png")), jPanel5); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -566,7 +581,7 @@ public class ClassManager extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/research.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/research.png"))); // NOI18N
         jButton3.setText("Search");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -596,7 +611,7 @@ public class ClassManager extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details1.png")), jPanel7); // NOI18N
+        jTabbedPane1.addTab("Students", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/details1.png")), jPanel7); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -729,10 +744,10 @@ public class ClassManager extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboCoursesItemStateChanged
 
-    private void treLevelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treLevelsMouseClicked
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_treLevelsMouseClicked
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -743,6 +758,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -756,6 +772,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -764,7 +781,6 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner3;
@@ -781,7 +797,6 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JRadioButton optSep;
     private javax.swing.JTable tblCohorts;
     private javax.swing.JTable tblStudents;
-    private javax.swing.JTree treLevels;
     private javax.swing.JTextField txtCohortID;
     private javax.swing.JTextField txtCourseFormat;
     // End of variables declaration//GEN-END:variables
@@ -1141,80 +1156,80 @@ private void generateClassID() {
         }
     }
 
-    public void populateLevelTree() {
-
-        try {
-            Connection cnn = Database.getConnection();
-            Statement stmt = cnn.createStatement();
-
-            try {
-
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-            ArrayList list = new ArrayList();
-            list.add("Programmes");
-            String Query = "SELECT * from cohorts";
-
-            ResultSet rs = stmt.executeQuery(Query);
-
-            while (rs.next()) {
-                Object value[] = {rs.getString(1), rs.getString(2)};
-                list.add(value);
-            }
-            Object hierarchy[] = list.toArray();
-            DefaultMutableTreeNode root = processHierarchy(hierarchy);
-
-            DefaultTreeModel treeModel = new DefaultTreeModel(root);
-            treLevels.setModel(treeModel);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-@SuppressWarnings("CallToThreadDumpStack")
-    public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
-        try {
-            Connection cnn = Database.getConnection();
-            Statement stmt = cnn.createStatement();
-
-            int trow = 0;
-            int i = 0;
-            
-
-                String Query = "SELECT distinct level from cohorts where DeptId=" + Dept + "";
-                ResultSet rs = stmt.executeQuery(Query);
-
-                while (rs.next()) {
-                    trow = rs.getRow();
-                }
-                rs.close();
-                String L1Nam[] = new String[trow];
-                ResultSet rs1 = stmt.executeQuery(Query);
-                while (rs1.next()) {
-                    L1Nam[i] = rs1.getString("level");
-                    i++;
-                }
-                rs1.close();
-                DefaultMutableTreeNode child, grandchild;
-                for (int childIndex = 0; childIndex < L1Nam.length; childIndex++) {
-                    child = new DefaultMutableTreeNode(L1Nam[childIndex]);
-                    node.add(child);//add each created child to root
-                    String subQuery = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' and deptId=" + Dept + " ORDER BY `CohortName` DESC, `StartDate` ASC";
-                    ResultSet rs2 = stmt.executeQuery(subQuery);
-                    while (rs2.next()) {
-                        grandchild = new DefaultMutableTreeNode(rs2.getString("CohortName"));
-                        child.add(grandchild);//add each grandchild to each child
-                    }
-                    rs2.close();
-                }
-            cnn.close();
-            } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-
-        }
-
-        return (node);
-    }
+//    public void populateLevelTree() {
+//
+//        try {
+//            Connection cnn = Database.getConnection();
+//            Statement stmt = cnn.createStatement();
+//
+//            try {
+//
+//            } catch (Exception ex) {
+//                System.out.println(ex.getMessage());
+//            }
+//            ArrayList list = new ArrayList();
+//            list.add("Programmes");
+//            String Query = "SELECT * from cohorts";
+//
+//            ResultSet rs = stmt.executeQuery(Query);
+//
+//            while (rs.next()) {
+//                Object value[] = {rs.getString(1), rs.getString(2)};
+//                list.add(value);
+//            }
+//            Object hierarchy[] = list.toArray();
+//            DefaultMutableTreeNode root = processHierarchy(hierarchy);
+//
+//            DefaultTreeModel treeModel = new DefaultTreeModel(root);
+//            treLevels.setModel(treeModel);
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//    }
+//@SuppressWarnings("CallToThreadDumpStack")
+//    public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
+//        DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
+//        try {
+//            Connection cnn = Database.getConnection();
+//            Statement stmt = cnn.createStatement();
+//
+//            int trow = 0;
+//            int i = 0;
+//            
+//
+//                String Query = "SELECT distinct level from cohorts where DeptId=" + Dept + "";
+//                ResultSet rs = stmt.executeQuery(Query);
+//
+//                while (rs.next()) {
+//                    trow = rs.getRow();
+//                }
+//                rs.close();
+//                String L1Nam[] = new String[trow];
+//                ResultSet rs1 = stmt.executeQuery(Query);
+//                while (rs1.next()) {
+//                    L1Nam[i] = rs1.getString("level");
+//                    i++;
+//                }
+//                rs1.close();
+//                DefaultMutableTreeNode child, grandchild;
+//                for (int childIndex = 0; childIndex < L1Nam.length; childIndex++) {
+//                    child = new DefaultMutableTreeNode(L1Nam[childIndex]);
+//                    node.add(child);//add each created child to root
+//                    String subQuery = "SELECT CohortName from Cohorts where level ='" + L1Nam[childIndex] + "' and deptId=" + Dept + " ORDER BY `CohortName` DESC, `StartDate` ASC";
+//                    ResultSet rs2 = stmt.executeQuery(subQuery);
+//                    while (rs2.next()) {
+//                        grandchild = new DefaultMutableTreeNode(rs2.getString("CohortName"));
+//                        child.add(grandchild);//add each grandchild to each child
+//                    }
+//                    rs2.close();
+//                }
+//            cnn.close();
+//            } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//
+//        }
+//
+//        return (node);
+//    }
 
 }

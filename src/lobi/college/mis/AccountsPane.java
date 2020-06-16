@@ -33,7 +33,7 @@ public class AccountsPane extends javax.swing.JInternalFrame {
         setTitle("Accounts Pane");
         setAutoscrolls(true);
         setDoubleBuffered(true);
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/accounting1.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -51,7 +51,7 @@ public class Exams extends javax.swing.JPanel {
             .addGap(0, 468, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Capture Exams", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/archive.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("Capture Exams", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/archive.png")), jPanel1); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -64,7 +64,7 @@ public class Exams extends javax.swing.JPanel {
             .addGap(0, 468, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Grade Exams", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/control.png")), jPanel2); // NOI18N
+        jTabbedPane1.addTab("Grade Exams", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/control.png")), jPanel2); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -77,7 +77,7 @@ public class Exams extends javax.swing.JPanel {
             .addGap(0, 468, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Generate Report Forms", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/mark.png")), jPanel3); // NOI18N
+        jTabbedPane1.addTab("Generate Report Forms", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/mark.png")), jPanel3); // NOI18N
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);

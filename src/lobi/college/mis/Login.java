@@ -22,6 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        txtUserName.grabFocus();
     }
 
     /**
@@ -88,7 +89,7 @@ public class Login extends javax.swing.JFrame {
 
         Lockimage.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lockimage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lockimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/lock.png"))); // NOI18N
+        Lockimage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/lock.png"))); // NOI18N
         Lockimage.setDoubleBuffered(true);
         Lockimage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Lockimage.setPreferredSize(new java.awt.Dimension(100, 100));
@@ -106,10 +107,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(txtPassword)
                             .addComponent(txtUserName)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,27 +154,21 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+             Util util = new Util(); 
+         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"1");
+           dashBoard.setVisible(true);
+           util.setUserDeptID(1);
+           this.setVisible(false); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
        this.dispose();
-//       ClassLoader classLoader = null;
-//        File selectedFile = new File("."+"/src/lobi/college/mis/resources/female.passport.less.png");//(classLoader.getResource("female.passport.less.png").getFile());
-//        try {
-//            System.out.println(selectedFile.getCanonicalFile());
-//        } catch (IOException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
         // TODO add your handling code here:
-        Util util = new Util(); 
-         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"5");
-           dashBoard.setVisible(true);
-           util.setUserDeptID(1);
-           this.setVisible(false); 
+   
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed

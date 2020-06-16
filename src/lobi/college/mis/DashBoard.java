@@ -54,7 +54,7 @@ public String userDept,user;
 
         jToolBar1 = new javax.swing.JToolBar();
         btnRegistry = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
         btnAcademicPane = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnProcurement = new javax.swing.JButton();
@@ -89,18 +89,18 @@ public String userDept,user;
             }
         });
 
-        jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToolBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
         jToolBar1.setDoubleBuffered(true);
 
-        btnRegistry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details1.png"))); // NOI18N
+        btnRegistry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/details1.png"))); // NOI18N
         btnRegistry.setText("Registry");
         btnRegistry.setFocusable(false);
         btnRegistry.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRegistry.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
-        btnRegistry.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
-        btnRegistry.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/details.png"))); // NOI18N
+        btnRegistry.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/details.png"))); // NOI18N
+        btnRegistry.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/details.png"))); // NOI18N
+        btnRegistry.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/details.png"))); // NOI18N
         btnRegistry.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnRegistry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,15 +108,15 @@ public String userDept,user;
             }
         });
         jToolBar1.add(btnRegistry);
-        jToolBar1.add(jSeparator2);
+        jToolBar1.add(jSeparator3);
 
-        btnAcademicPane.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress1.png"))); // NOI18N
+        btnAcademicPane.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/progress1.png"))); // NOI18N
         btnAcademicPane.setText("Academics");
         btnAcademicPane.setFocusable(false);
         btnAcademicPane.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAcademicPane.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
-        btnAcademicPane.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
-        btnAcademicPane.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/progress.png"))); // NOI18N
+        btnAcademicPane.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/progress.png"))); // NOI18N
+        btnAcademicPane.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/progress.png"))); // NOI18N
+        btnAcademicPane.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/progress.png"))); // NOI18N
         btnAcademicPane.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAcademicPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -131,13 +131,13 @@ public String userDept,user;
         jToolBar1.add(btnAcademicPane);
         jToolBar1.add(jSeparator1);
 
-        btnProcurement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export1.png"))); // NOI18N
+        btnProcurement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/export1.png"))); // NOI18N
         btnProcurement.setText("Procurement");
         btnProcurement.setFocusable(false);
         btnProcurement.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnProcurement.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
-        btnProcurement.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
-        btnProcurement.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/export.png"))); // NOI18N
+        btnProcurement.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/export.png"))); // NOI18N
+        btnProcurement.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/export.png"))); // NOI18N
+        btnProcurement.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/export.png"))); // NOI18N
         btnProcurement.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnProcurement.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -147,13 +147,13 @@ public String userDept,user;
         jToolBar1.add(btnProcurement);
         jToolBar1.add(jSeparator4);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/accounting.png"))); // NOI18N
         jButton2.setText("Accounts");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
-        jButton2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/accounting1.png"))); // NOI18N
+        jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/accounting1.png"))); // NOI18N
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/accounting1.png"))); // NOI18N
+        jButton2.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/accounting1.png"))); // NOI18N
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,13 +163,13 @@ public String userDept,user;
         jToolBar1.add(jButton2);
         jToolBar1.add(jSeparator6);
 
-        btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config1.png"))); // NOI18N
+        btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/config1.png"))); // NOI18N
         btnAdmin.setText("Administration");
         btnAdmin.setFocusable(false);
         btnAdmin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAdmin.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
-        btnAdmin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
-        btnAdmin.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/config.png"))); // NOI18N
+        btnAdmin.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/config.png"))); // NOI18N
+        btnAdmin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/config.png"))); // NOI18N
+        btnAdmin.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/config.png"))); // NOI18N
         btnAdmin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -424,7 +424,7 @@ public String userDept,user;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton2;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar jToolBar1;

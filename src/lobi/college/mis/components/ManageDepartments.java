@@ -145,11 +145,11 @@ public class ManageDepartments extends javax.swing.JPanel {
                     .addComponent(optNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegisterDept, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btnRegisterDept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Register Department", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/document.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("Register Department", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/document.png")), jPanel1); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modify Existing Details"));
         jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -199,7 +199,7 @@ public class ManageDepartments extends javax.swing.JPanel {
                 .addComponent(txtModifyDept, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Assign Departmental Head", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/manager.png")), jPanel2); // NOI18N
+        jTabbedPane1.addTab("Assign Departmental Head", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/manager.png")), jPanel2); // NOI18N
 
         /*tblDepartment.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
