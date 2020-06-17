@@ -58,6 +58,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         txtUserName.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtUserName.setToolTipText("<html><b>Enter your Username here</b>. <br>\nIf you DO NOT have one or have FORGOTTEN<br>\nplease  contact the System Admin or MIS\n"); // NOI18N
 
         jButton1.setText("Login");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -81,6 +82,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtPassword.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtPassword.setToolTipText("<html><b>Enter your Password here</b>. <br>\nIf you DO NOT have one or have FORGOTTEN<br>\nplease  contact the System Admin or MIS\n");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);

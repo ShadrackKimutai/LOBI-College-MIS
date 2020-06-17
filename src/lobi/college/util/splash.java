@@ -41,6 +41,7 @@ public class splash extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         txtOutput = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -68,26 +69,41 @@ public class splash extends javax.swing.JFrame {
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         jLabel1.setDoubleBuffered(true);
 
+        jProgressBar1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jProgressBar1.setForeground(new java.awt.Color(102, 0, 102));
+        jProgressBar1.setToolTipText("");
+        jProgressBar1.setDoubleBuffered(true);
+        jProgressBar1.setFocusable(false);
+        jProgressBar1.setStringPainted(true);
+
+        txtOutput.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         txtOutput.setText("progress");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel2.setText("Version 0.1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
             .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtOutput)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtOutput)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,6 +155,7 @@ public class splash extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel txtOutput;
     // End of variables declaration//GEN-END:variables
@@ -156,14 +173,17 @@ public class splash extends javax.swing.JFrame {
                 jProgressBar1.setValue(i);
              
                 do {
+                    i++;
                     jProgressBar1.setValue(i);
                     if (i < 60) {
-                        txtOutput.setText("Loading :" + i + "%");
+                        txtOutput.setText("Loading Modules & Components");
                         Thread.sleep(30);
+                        //check whether jars exist
+                        
                     }
 
                     if ((i >= 60) && (i < 70)) {
-                        txtOutput.setText("Progress:" + i + "% - Trying to connect to database");
+                        txtOutput.setText("Trying to connect to database");
                         Thread.sleep(40);
                     }
                     if (i == 70) {
@@ -172,11 +192,11 @@ public class splash extends javax.swing.JFrame {
                         String Query = "show tables";
                         ResultSet rs = st.executeQuery(Query);
                         if (rs.first()) {
-                            System.out.println(rs.getString(1));
-                            report = "Progress:" + i + "% - Established Database Connectivity";
+                           // System.out.println(rs.getString(1));
+                            report = "Established Database Connectivity";
 
                         } else {
-                            report = "Progress:" + i + "% - Failed to Establish Database Connection ";
+                            report = "Failed to Establish Database Connection ";
                             this.cancel(true);
                             Thread.sleep(1000);
                         }
@@ -187,8 +207,10 @@ public class splash extends javax.swing.JFrame {
                         txtOutput.setText(report);
                         Thread.sleep(30);
                     }
+                    
+                    
 
-                    i++;
+                    
 
                 } while ((int) jProgressBar1.getValue() < 100);
 
@@ -197,7 +219,7 @@ public class splash extends javax.swing.JFrame {
 
             @Override
             protected void done() {
-                txtOutput.setText("Launching College MIS");
+                txtOutput.setText("Launching LOBI College MIS");
                 jProgressBar1.setValue(100);
 
             }

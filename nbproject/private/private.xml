@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/util/Configurations.java</file>
             <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/components/ClassManager.java</file>
-            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/util/StudentInfo.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/components/DepartmentalRequisition.java</file>
             <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/components/RegisteredStudents.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/Login.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/components/Exams.java</file>
             <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/AcademicPane.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/util/splash.java</file>
             <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/LOBICollegeMIS.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/util/Database.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/components/newStudent.java</file>
+            <file>file:/C:/Users/Shady/Documents/NetBeansProjects/LOBI-College-MIS/src/lobi/college/mis/resources/NewInterface.java</file>
         </group>
     </open-files>
 </project-private>
