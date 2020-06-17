@@ -175,7 +175,7 @@ public class splash extends javax.swing.JFrame {
                 do {
                     i++;
                     jProgressBar1.setValue(i);
-                    if ((i >= 10 && i < 18)) {
+                    if (i < 18) {
                         file = new File("molotov.ini");
                         if (file.exists()) {
                             txtOutput.setText("Loading module" + file.getName());
@@ -186,11 +186,11 @@ public class splash extends javax.swing.JFrame {
                             conf.checkCrucialFiles();
                         }
                     }
-                    if ((i >= 18 && i < 36)) {
+                    if ((i >= 18) && (i < 36)) {
                         file = new File("lib/mariadb-java-client-2.6.0.jar");
                         if (file.exists()) {
                             txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(10);
+                            Thread.sleep(40);
 
                         }else{
                             conf.checkCrucialFiles();
@@ -201,7 +201,7 @@ public class splash extends javax.swing.JFrame {
                         file = new File("lib/flatlaf-0.33.jar");
                         if (file.exists()) {
                             txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(10);
+                            Thread.sleep(40);
 
                         }else{
                             conf.checkCrucialFiles();
@@ -211,7 +211,7 @@ public class splash extends javax.swing.JFrame {
                         file = new File("lib/swingx-0.9.1.jar");
                         if (file.exists()) {
                             txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(10);
+                            Thread.sleep(40);
 
                         }else{
                             conf.checkCrucialFiles();
@@ -219,7 +219,7 @@ public class splash extends javax.swing.JFrame {
                     }
                     if ((i >= 70) && (i < 80)) {
                         txtOutput.setText("Trying to connect to database");
-                        Thread.sleep(10);
+                        Thread.sleep(20);
                     }
                     if (i == 80) {
                         Connection cnn = Database.getConnection();
@@ -238,16 +238,67 @@ public class splash extends javax.swing.JFrame {
 
                         Thread.sleep(100);
                     }
-                    if ((i >= 80) && (i < 100)) {
+                    if (i >= 80) {
                         txtOutput.setText(report);
-                        Thread.sleep(10);
+                        Thread.sleep(20);
                     }
 
                 } while ((int) jProgressBar1.getValue() < 100);
 
                 return null;
             }
+            
+             /*protected Void doInBackground() throws Exception {
+                String report = "";
+                int i = 0;
 
+                jProgressBar1.setValue(i);
+
+                do {
+                    jProgressBar1.setValue(i);
+                    if (i < 60) {
+                        switch(i){
+                            case 20:{
+                        txtOutput.setText("Loading : " + i + "%");
+                        Thread.sleep(30);
+                        break;
+                        }
+                    }
+                    }
+
+                    if ((i >= 60) && (i < 70)) {
+                        txtOutput.setText("Loading : " + i + "% - Trying to connect to database");
+                        Thread.sleep(40);
+                    }
+                    if (i == 70) {
+                        Connection cnn = Database.getConnection();
+                        Statement st = cnn.createStatement();
+                        String Query = "show tables";
+                        ResultSet rs = st.executeQuery(Query);
+                        if (rs.first()) {
+                            System.out.println(rs.getString(1));
+                            report = "Loading : " + i + "% - Established Database Connectivity";
+
+                        } else {
+                            report = "Loading : " + i + "% - Failed to Establish Database Connection ";
+                            // this.cancel(true);
+                            Thread.sleep(1000);
+                        }
+
+                        Thread.sleep(100);
+                    }
+                    if ((i >= 70) && (i < 100)) {
+                        txtOutput.setText(report);
+                        Thread.sleep(30);
+                    }
+
+                    i++;
+
+                } while ((int) jProgressBar1.getValue() < 100);
+
+                return null;
+            }
+ */
             @Override
             protected void done() {
                 txtOutput.setText("Launching LOBI College MIS");

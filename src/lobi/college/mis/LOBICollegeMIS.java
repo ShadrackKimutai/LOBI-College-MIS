@@ -46,7 +46,7 @@ public class LOBICollegeMIS {
         Splash.ProgressBar();
 
         try {
-          Thread.sleep(1800);
+          Thread.sleep(4500);
         } catch (InterruptedException e) {
             e.printStackTrace();
 
