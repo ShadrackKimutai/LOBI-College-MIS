@@ -46,14 +46,14 @@ public class LOBICollegeMIS {
         Splash.ProgressBar();
 
         try {
-            Thread.sleep(4500);
+          Thread.sleep(1800);
         } catch (InterruptedException e) {
             e.printStackTrace();
 
         }
         //  TODO code application logic here
         Window[] ownerlessWindows = Dialog.getOwnerlessWindows();
-        
+        System.out.println(ownerlessWindows.length);
         if (ownerlessWindows.length < 2) {
             Login login = new Login();
             login.setLocationRelativeTo(null);

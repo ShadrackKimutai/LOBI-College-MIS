@@ -9,11 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SwingWorker;
-import lobi.college.mis.Login;
+import java.io.File;
 
 /**
  *
@@ -90,9 +88,10 @@ public class splash extends javax.swing.JFrame {
             .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,32 +166,68 @@ public class splash extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
                 String report = "";
+                Configurations conf=null;
                 int i = 0;
-               
+                File file = null;
 
                 jProgressBar1.setValue(i);
-             
+
                 do {
                     i++;
                     jProgressBar1.setValue(i);
-                    if (i < 60) {
-                        txtOutput.setText("Loading Modules & Components");
-                        Thread.sleep(30);
-                        //check whether jars exist
-                        
-                    }
+                    if ((i >= 10 && i < 18)) {
+                        file = new File("molotov.ini");
+                        if (file.exists()) {
+                            txtOutput.setText("Loading module" + file.getName());
+                            Thread.sleep(10);
+                            //check whether jars exist
 
-                    if ((i >= 60) && (i < 70)) {
-                        txtOutput.setText("Trying to connect to database");
-                        Thread.sleep(40);
+                        }else{
+                            conf.checkCrucialFiles();
+                        }
                     }
-                    if (i == 70) {
+                    if ((i >= 18 && i < 36)) {
+                        file = new File("lib/mariadb-java-client-2.6.0.jar");
+                        if (file.exists()) {
+                            txtOutput.setText("Loading module" + file.getName());
+                            Thread.sleep(10);
+
+                        }else{
+                            conf.checkCrucialFiles();
+                        }
+                    }
+                    
+                    if ((i >= 36) && (i < 56)) {
+                        file = new File("lib/flatlaf-0.33.jar");
+                        if (file.exists()) {
+                            txtOutput.setText("Loading module" + file.getName());
+                            Thread.sleep(10);
+
+                        }else{
+                            conf.checkCrucialFiles();
+                        }
+                    }
+                    if ((i >= 56 && i < 70)) {
+                        file = new File("lib/swingx-0.9.1.jar");
+                        if (file.exists()) {
+                            txtOutput.setText("Loading module" + file.getName());
+                            Thread.sleep(10);
+
+                        }else{
+                            conf.checkCrucialFiles();
+                        }
+                    }
+                    if ((i >= 70) && (i < 80)) {
+                        txtOutput.setText("Trying to connect to database");
+                        Thread.sleep(10);
+                    }
+                    if (i == 80) {
                         Connection cnn = Database.getConnection();
                         Statement st = cnn.createStatement();
                         String Query = "show tables";
                         ResultSet rs = st.executeQuery(Query);
                         if (rs.first()) {
-                           // System.out.println(rs.getString(1));
+                            // System.out.println(rs.getString(1));
                             report = "Established Database Connectivity";
 
                         } else {
@@ -201,16 +236,12 @@ public class splash extends javax.swing.JFrame {
                             Thread.sleep(1000);
                         }
 
-                      Thread.sleep(100);
+                        Thread.sleep(100);
                     }
-                    if ((i >= 70) && (i < 100)) {
+                    if ((i >= 80) && (i < 100)) {
                         txtOutput.setText(report);
-                        Thread.sleep(30);
+                        Thread.sleep(10);
                     }
-                    
-                    
-
-                    
 
                 } while ((int) jProgressBar1.getValue() < 100);
 
@@ -225,7 +256,8 @@ public class splash extends javax.swing.JFrame {
             }
 
             @Override
-            protected void process(List<String> chunks) {
+            protected void process(List<String> chunks
+            ) {
                 String value = chunks.get(chunks.size() - 1);
                 txtOutput.setText(value);
             }

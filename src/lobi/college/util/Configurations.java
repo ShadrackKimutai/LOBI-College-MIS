@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import lobi.college.mis.components.newStudent;
 
 /**
@@ -90,6 +91,12 @@ public class Configurations {
         }
 
         return prop;
+    }
+
+    public void checkCrucialFiles() {
+       
+            JOptionPane.showMessageDialog(null, "File Missing Error. \nThe Application has detected that a crucial file is Missing. \nQuiting...", "File Missing Error", JOptionPane.ERROR_MESSAGE);
+
     }
 
     public void deletePropertiesFile() {
