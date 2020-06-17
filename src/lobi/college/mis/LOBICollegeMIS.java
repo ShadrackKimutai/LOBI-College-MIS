@@ -11,6 +11,7 @@ import lobi.college.util.splash;
 import java.awt.Dialog;
 import java.awt.Window;
 
+
 /**
  *
  * @author shady
@@ -28,9 +29,12 @@ public class LOBICollegeMIS {
     public static void main(String[] args) {
 
         try {
-            // Set cross-platform Java L&F (also called "Metal")
-            // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
+           //UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+            // UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
+            // UIManager.setLookAndFeel(" javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            // UIManager.setLookAndFeel("ch.randelshofer.quaqua.BasicQuaquaLookAndFeel");
+            //UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
