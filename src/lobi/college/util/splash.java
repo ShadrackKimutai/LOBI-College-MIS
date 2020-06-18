@@ -12,6 +12,9 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.SwingWorker;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -159,172 +162,91 @@ public class splash extends javax.swing.JFrame {
     private javax.swing.JLabel txtOutput;
     // End of variables declaration//GEN-END:variables
 
-    private void start() throws InterruptedException {
+    public void StartUp() {
+        String report = "";
+        Configurations conf = null;
+        int i = 0;
+        File file = null;
 
-        SwingWorker<Void, String> worker = new SwingWorker<Void, String>() {
-
-            @Override
-            protected Void doInBackground() throws Exception {
-                String report = "";
-                Configurations conf=null;
-                int i = 0;
-                File file = null;
-
-                jProgressBar1.setValue(i);
-
-                do {
-                    i++;
-                    jProgressBar1.setValue(i);
-                    if (i < 18) {
-                        file = new File("molotov.ini");
-                        if (file.exists()) {
-                            txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(10);
-                            //check whether jars exist
-
-                        }else{
-                            conf.checkCrucialFiles();
-                        }
-                    }
-                    if ((i >= 18) && (i < 36)) {
-                        file = new File("lib/mariadb-java-client-2.6.0.jar");
-                        if (file.exists()) {
-                            txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(40);
-
-                        }else{
-                            conf.checkCrucialFiles();
-                        }
-                    }
-                    
-                    if ((i >= 36) && (i < 56)) {
-                        file = new File("lib/flatlaf-0.33.jar");
-                        if (file.exists()) {
-                            txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(40);
-
-                        }else{
-                            conf.checkCrucialFiles();
-                        }
-                    }
-                    if ((i >= 56 && i < 70)) {
-                        file = new File("lib/swingx-0.9.1.jar");
-                        if (file.exists()) {
-                            txtOutput.setText("Loading module" + file.getName());
-                            Thread.sleep(40);
-
-                        }else{
-                            conf.checkCrucialFiles();
-                        }
-                    }
-                    if ((i >= 70) && (i < 80)) {
-                        txtOutput.setText("Trying to connect to database");
-                        Thread.sleep(20);
-                    }
-                    if (i == 80) {
-                        Connection cnn = Database.getConnection();
-                        Statement st = cnn.createStatement();
-                        String Query = "show tables";
-                        ResultSet rs = st.executeQuery(Query);
-                        if (rs.first()) {
-                            // System.out.println(rs.getString(1));
-                            report = "Established Database Connectivity";
-
-                        } else {
-                            report = "Failed to Establish Database Connection ";
-                            this.cancel(true);
-                            Thread.sleep(1000);
-                        }
-
-                        Thread.sleep(100);
-                    }
-                    if (i >= 80) {
-                        txtOutput.setText(report);
-                        Thread.sleep(20);
-                    }
-
-                } while ((int) jProgressBar1.getValue() < 100);
-
-                return null;
-            }
-            
-             /*protected Void doInBackground() throws Exception {
-                String report = "";
-                int i = 0;
-
-                jProgressBar1.setValue(i);
-
-                do {
-                    jProgressBar1.setValue(i);
-                    if (i < 60) {
-                        switch(i){
-                            case 20:{
-                        txtOutput.setText("Loading : " + i + "%");
-                        Thread.sleep(30);
-                        break;
-                        }
-                    }
-                    }
-
-                    if ((i >= 60) && (i < 70)) {
-                        txtOutput.setText("Loading : " + i + "% - Trying to connect to database");
-                        Thread.sleep(40);
-                    }
-                    if (i == 70) {
-                        Connection cnn = Database.getConnection();
-                        Statement st = cnn.createStatement();
-                        String Query = "show tables";
-                        ResultSet rs = st.executeQuery(Query);
-                        if (rs.first()) {
-                            System.out.println(rs.getString(1));
-                            report = "Loading : " + i + "% - Established Database Connectivity";
-
-                        } else {
-                            report = "Loading : " + i + "% - Failed to Establish Database Connection ";
-                            // this.cancel(true);
-                            Thread.sleep(1000);
-                        }
-
-                        Thread.sleep(100);
-                    }
-                    if ((i >= 70) && (i < 100)) {
-                        txtOutput.setText(report);
-                        Thread.sleep(30);
-                    }
-
-                    i++;
-
-                } while ((int) jProgressBar1.getValue() < 100);
-
-                return null;
-            }
- */
-            @Override
-            protected void done() {
-                txtOutput.setText("Launching LOBI College MIS");
-                jProgressBar1.setValue(100);
-
-            }
-
-            @Override
-            protected void process(List<String> chunks
-            ) {
-                String value = chunks.get(chunks.size() - 1);
-                txtOutput.setText(value);
-            }
-        };
-        worker.execute();
-
-    }
-
-    public void ProgressBar() {
+        jProgressBar1.setValue(i);
         try {
-            start();
+            do {
+                i++;
+                jProgressBar1.setValue(i);
+                if (i < 18) {
+                    file = new File("molotov.ini");
+                    if (file.exists()) {
+                        txtOutput.setText("Loading module" + file.getName());
+                        Thread.sleep(10);
+                        //check whether jars exist
 
-        } catch (InterruptedException ex) {
-            System.out.println(ex.getMessage());
+                    } else {
+                        conf.checkCrucialFiles();
+                    }
+                }
+                if ((i >= 18) && (i < 36)) {
+                    file = new File("lib/mariadb-java-client-2.6.0.jar");
+                    if (file.exists()) {
+                        txtOutput.setText("Loading module" + file.getName());
+                        Thread.sleep(40);
+
+                    } else {
+                        conf.checkCrucialFiles();
+                    }
+                }
+
+                if ((i >= 36) && (i < 56)) {
+                    file = new File("lib/flatlaf-0.33.jar");
+                    if (file.exists()) {
+                        txtOutput.setText("Loading module" + file.getName());
+                        Thread.sleep(40);
+
+                    } else {
+                        conf.checkCrucialFiles();
+                    }
+                }
+                if ((i >= 56 && i < 70)) {
+                    file = new File("lib/swingx-0.9.1.jar");
+                    if (file.exists()) {
+                        txtOutput.setText("Loading module" + file.getName());
+                        Thread.sleep(40);
+
+                    } else {
+                        conf.checkCrucialFiles();
+                    }
+                }
+                if ((i >= 70) && (i < 80)) {
+                    txtOutput.setText("Trying to connect to database");
+                    Thread.sleep(20);
+                }
+                if (i == 80) {
+                    Connection cnn = Database.getConnection();
+                    Statement st = cnn.createStatement();
+                    String Query = "show tables";
+                    ResultSet rs = st.executeQuery(Query);
+                    if (rs.first()) {
+                        // System.out.println(rs.getString(1));
+                        report = "Established Database Connectivity";
+
+                    } else {
+
+                        report = "Failed to Establish Database Connection ";
+                        //this.cancel(true);
+                        Thread.sleep(1000);
+
+                    }
+
+                    Thread.sleep(100);
+                }
+                if (i >= 80) {
+                    txtOutput.setText(report);
+                    Thread.sleep(20);
+                }
+
+            } while ((int) jProgressBar1.getValue() < 100);
+        } catch (InterruptedException | SQLException ex) {
+            Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return;
     }
-
 }
