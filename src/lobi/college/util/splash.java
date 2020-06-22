@@ -177,11 +177,11 @@ public class splash extends javax.swing.JFrame {
                     file = new File("molotov.ini");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(10);
+                        Thread.sleep(30);
                         //check whether jars exist
 
                     } else {
-                        conf.checkCrucialFiles();
+                     //   conf.checkCrucialFiles();
                     }
                 }
                 if ((i >= 18) && (i < 36)) {
