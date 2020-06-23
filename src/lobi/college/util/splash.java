@@ -5,6 +5,7 @@
  */
 package lobi.college.util;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -177,18 +178,18 @@ public class splash extends javax.swing.JFrame {
                     file = new File("molotov.ini");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(30);
+                        Thread.sleep(10);
                         //check whether jars exist
 
                     } else {
-                     //   conf.checkCrucialFiles();
+                        //   conf.checkCrucialFiles();
                     }
                 }
                 if ((i >= 18) && (i < 36)) {
                     file = new File("lib/mariadb-java-client-2.6.0.jar");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(40);
+                        Thread.sleep(20);
 
                     } else {
                         conf.checkCrucialFiles();
@@ -199,7 +200,7 @@ public class splash extends javax.swing.JFrame {
                     file = new File("lib/flatlaf-0.33.jar");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(40);
+                        Thread.sleep(20);
 
                     } else {
                         conf.checkCrucialFiles();
@@ -209,7 +210,7 @@ public class splash extends javax.swing.JFrame {
                     file = new File("lib/swingx-0.9.1.jar");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(40);
+                        Thread.sleep(20);
 
                     } else {
                         conf.checkCrucialFiles();
@@ -242,8 +243,12 @@ public class splash extends javax.swing.JFrame {
                     txtOutput.setText(report);
                     Thread.sleep(20);
                 }
-
+if(i==100){
+     txtOutput.setText("Launching LoBI College MIS");
+                    Thread.sleep(300);
+}
             } while ((int) jProgressBar1.getValue() < 100);
+            
         } catch (InterruptedException | SQLException ex) {
             Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,9 +22,8 @@ public class Database {
             Class.forName(cf.getProperties().getProperty("driverClassName"));
             Connection con = DriverManager.getConnection(myUrl, cf.getProperties().getProperty("username"), cf.getProperties().getProperty("password"));
             return con;
-        } catch (Exception e) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Database Connection Error. Application cant reach the Database. \nQuiting...", "Database Connection Failed", JOptionPane.ERROR_MESSAGE);
-            //  JOptionPane.showInternalMessageDialog(null, "Database Connection Failed \n"+e.getMessage(), "Connection Error", 0);
             return null;
         }
     }

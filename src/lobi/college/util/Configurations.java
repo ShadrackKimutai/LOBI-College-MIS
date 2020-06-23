@@ -82,10 +82,10 @@ public class Configurations {
 
         } catch (FileNotFoundException e) {
 
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (IOException e) {
 
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             fileInputStream.close();
         }
