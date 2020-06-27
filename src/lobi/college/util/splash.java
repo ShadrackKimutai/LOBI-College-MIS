@@ -180,7 +180,6 @@ public class splash extends javax.swing.JFrame {
                         txtOutput.setText("Loading module" + file.getName());
                         Thread.sleep(10);
                         //check whether jars exist
-
                     } else {
                         //   conf.checkCrucialFiles();
                     }
@@ -190,7 +189,6 @@ public class splash extends javax.swing.JFrame {
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
                         Thread.sleep(20);
-
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -201,7 +199,6 @@ public class splash extends javax.swing.JFrame {
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
                         Thread.sleep(20);
-
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -211,7 +208,6 @@ public class splash extends javax.swing.JFrame {
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
                         Thread.sleep(20);
-
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -226,29 +222,25 @@ public class splash extends javax.swing.JFrame {
                     String Query = "show tables";
                     ResultSet rs = st.executeQuery(Query);
                     if (rs.first()) {
-                        // System.out.println(rs.getString(1));
+                      System.out.println(rs.getString(1));
                         report = "Established Database Connectivity";
-
                     } else {
-
                         report = "Failed to Establish Database Connection ";
                         //this.cancel(true);
                         Thread.sleep(1000);
-
                     }
-
                     Thread.sleep(100);
                 }
                 if (i >= 80) {
                     txtOutput.setText(report);
                     Thread.sleep(20);
                 }
-if(i==100){
-     txtOutput.setText("Launching LoBI College MIS");
+                if (i == 100) {
+                    txtOutput.setText("Launching LoBI College MIS");
                     Thread.sleep(300);
-}
+                }
             } while ((int) jProgressBar1.getValue() < 100);
-            
+
         } catch (InterruptedException | SQLException ex) {
             Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -15,9 +15,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
@@ -101,7 +103,7 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstCohorts = new javax.swing.JList<>();
         jPanel12 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
@@ -483,7 +485,7 @@ public class ClassManager extends javax.swing.JPanel {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jScrollPane4.setViewportView(jList1);
+        jScrollPane4.setViewportView(lstCohorts);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Advance Class tool"));
         jPanel12.setToolTipText("");
@@ -820,7 +822,6 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
@@ -842,6 +843,7 @@ public class ClassManager extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
+    private javax.swing.JList<String> lstCohorts;
     private javax.swing.JRadioButton optJan;
     private javax.swing.JRadioButton optMay;
     private javax.swing.JRadioButton optParallel;
@@ -1092,22 +1094,28 @@ private void generateClassID() {
 
             PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId=" + Dept + " order by No DESC ");
             ResultSet rs = ps.executeQuery();
+      ArrayList cohortName = new ArrayList();
+            
             DefaultTableModel tm = (DefaultTableModel) tblCohorts.getModel();
             tm.setRowCount(0);
+            
 
             while (rs.next()) {
                 int x = util.getCohortEnrollment(rs.getString("CohortName"));
+                cohortName.add(rs.getString("CohortName").toUpperCase());
                 Object o[] = {rs.getString("CohortName").toUpperCase(), rs.getString("Level").toUpperCase(), rs.getString("Course").toUpperCase(), x, rs.getInt("Capacity"), rs.getString("StartDate")};
                 tm.addRow(o);
-
+                System.out.println(rs.getString("CohortName").toUpperCase());
             }
             rs.close();
 
             tblCohorts.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+            lstCohorts=new JList(new Vector(cohortName));
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
+        
     }
 
     private boolean checkExists() {
@@ -1301,5 +1309,5 @@ public void populateActiveClasses(){
 //
 //        return (node);
 //    }
-
+ 
 }

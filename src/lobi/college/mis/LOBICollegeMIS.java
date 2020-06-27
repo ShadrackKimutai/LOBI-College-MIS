@@ -48,7 +48,7 @@ public class LOBICollegeMIS {
       
         //  TODO code application logic here
         Window[] ownerlessWindows = Dialog.getOwnerlessWindows();
-        System.out.println(ownerlessWindows.length);
+       // System.out.println(ownerlessWindows.length);
         if (ownerlessWindows.length < 2) {
             Login login = new Login();
             login.setLocationRelativeTo(null);
