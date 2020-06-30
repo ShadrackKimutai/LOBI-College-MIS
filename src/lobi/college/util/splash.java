@@ -188,7 +188,7 @@ public class splash extends javax.swing.JFrame {
                     file = new File("lib/mariadb-java-client-2.6.0.jar");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -198,7 +198,7 @@ public class splash extends javax.swing.JFrame {
                     file = new File("lib/flatlaf-0.33.jar");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -207,7 +207,7 @@ public class splash extends javax.swing.JFrame {
                     file = new File("lib/swingx-0.9.1.jar");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -245,5 +245,6 @@ public class splash extends javax.swing.JFrame {
             Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
         }
         return;
+       
     }
 }

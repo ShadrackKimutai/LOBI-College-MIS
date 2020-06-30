@@ -45,7 +45,7 @@ public class LOBICollegeMIS {
         Splash.setVisible(true);
         Splash.StartUp();
 
-      
+    
         //  TODO code application logic here
         Window[] ownerlessWindows = Dialog.getOwnerlessWindows();
        // System.out.println(ownerlessWindows.length);

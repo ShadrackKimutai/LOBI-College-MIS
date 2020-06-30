@@ -47,7 +47,7 @@ public class ClassManager extends javax.swing.JPanel {
         this.User = user;
         this.Dept = dept;
         initComponents();
-        populateTable();
+        populateCohorts();
    // populateLevelTree();
         populateStudentTable();   
         cboLevel.setSelectedIndex(1);
@@ -102,11 +102,11 @@ public class ClassManager extends javax.swing.JPanel {
         tblCohorts = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lstCohorts = new javax.swing.JList<>();
         jPanel12 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -485,8 +485,6 @@ public class ClassManager extends javax.swing.JPanel {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jScrollPane4.setViewportView(lstCohorts);
-
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Advance Class tool"));
         jPanel12.setToolTipText("");
 
@@ -516,27 +514,31 @@ public class ClassManager extends javax.swing.JPanel {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
         );
+
+        jScrollPane4.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(628, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -822,6 +824,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
@@ -843,7 +846,6 @@ public class ClassManager extends javax.swing.JPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
-    private javax.swing.JList<String> lstCohorts;
     private javax.swing.JRadioButton optJan;
     private javax.swing.JRadioButton optMay;
     private javax.swing.JRadioButton optParallel;
@@ -1077,7 +1079,7 @@ private void generateClassID() {
                 System.err.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
             }
-            populateTable();
+            populateCohorts();
 //            populateLevelTree();
         } else {
             optJan.grabFocus();
@@ -1085,7 +1087,7 @@ private void generateClassID() {
 // `CohortName`, `Level`, `Course`, `Capacity`, `StartDate`, `Structure`, `Progress`
     }
 
-    private void populateTable() {
+    private void populateCohorts() {
         Util util = new Util();
         try {
 
@@ -1094,23 +1096,27 @@ private void generateClassID() {
 
             PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId=" + Dept + " order by No DESC ");
             ResultSet rs = ps.executeQuery();
-      ArrayList cohortName = new ArrayList();
-            
+     jList1.removeAll();
+      DefaultListModel lstModel = new DefaultListModel();
+            jList1.removeAll();
             DefaultTableModel tm = (DefaultTableModel) tblCohorts.getModel();
             tm.setRowCount(0);
             
-
+int i=0;
             while (rs.next()) {
                 int x = util.getCohortEnrollment(rs.getString("CohortName"));
-                cohortName.add(rs.getString("CohortName").toUpperCase());
+               // cohortName.add(i,rs.getString("CohortName").toUpperCase().toString());
                 Object o[] = {rs.getString("CohortName").toUpperCase(), rs.getString("Level").toUpperCase(), rs.getString("Course").toUpperCase(), x, rs.getInt("Capacity"), rs.getString("StartDate")};
-                tm.addRow(o);
-                System.out.println(rs.getString("CohortName").toUpperCase());
+               tm.addRow(o);
+              lstModel.addElement(rs.getString("CohortName"));
+                
+            
             }
+            jList1.setModel(lstModel);
             rs.close();
 
             tblCohorts.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-            lstCohorts=new JList(new Vector(cohortName));
+         
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
