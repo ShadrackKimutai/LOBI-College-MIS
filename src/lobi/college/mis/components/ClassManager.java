@@ -1097,7 +1097,7 @@ private void generateClassID() {
             PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId=" + Dept + " order by No DESC ");
             ResultSet rs = ps.executeQuery();
      jList1.removeAll();
-      DefaultListModel lstModel = new DefaultListModel();
+      DefaultListModel<String> lstModel = new DefaultListModel<String>();
             jList1.removeAll();
             DefaultTableModel tm = (DefaultTableModel) tblCohorts.getModel();
             tm.setRowCount(0);
@@ -1220,26 +1220,27 @@ int i=0;
 
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error ", JOptionPane.ERROR);
         }
-    }
-public void populateActiveClasses(){
-    int i=0;
-    try {
-            Connection cnn = Database.getConnection();
-            Statement stmt = cnn.createStatement();
-                
-            String Query = "SELECT * from cohorts";
-
-            ResultSet rs = stmt.executeQuery(Query);
-            DefaultListModel lm=null;
-            
-            while (rs.next()) {
-                lm.add(i, rs.getString(2));
-            }
-          //  jList1.modlm;
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
 }
+    
+//public void populateActiveClasses(){
+//    int i=0;
+//    try {
+//            Connection cnn = Database.getConnection();
+//            Statement stmt = cnn.createStatement();
+//                
+//            String Query = "SELECT * from cohorts";
+//
+//            ResultSet rs = stmt.executeQuery(Query);
+//            DefaultListModel lm=null;
+//            
+//            while (rs.next()) {
+//                lm.add(i, rs.getString(2));
+//            }
+//          //  jList1.modlm;
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//}
 //    public void populateLevelTree() {
 //
 //        try {
