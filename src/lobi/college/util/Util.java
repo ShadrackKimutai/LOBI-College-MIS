@@ -156,5 +156,22 @@ public class Util {
         return count;
        
     }
+        public String getCohortProgress(String cohort) {
+        String Progress = "";
+        try {
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            String Query = " select progress from Cohorts where cohortName='"+cohort+"'";
+           // System.out.println(Query);
+            ResultSet rs = st.executeQuery(Query);
+            rs.next();
+            Progress = rs.getString(1);
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("Issue on Getting Enrolled Students in "+ cohort+ " " + e.getMessage());
+        }
+        return Progress;
+       
+    }
 
 }

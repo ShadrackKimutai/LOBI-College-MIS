@@ -5,6 +5,7 @@
  */
 package lobi.college.mis.components;
 
+import java.awt.List;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,20 +14,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.ListModel;
-import static javax.swing.SwingUtilities.isRightMouseButton;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import lobi.college.util.Database;
 import lobi.college.util.StudentInfo;
 import lobi.college.util.Util;
@@ -48,8 +42,8 @@ public class ClassManager extends javax.swing.JPanel {
         this.Dept = dept;
         initComponents();
         populateCohorts();
-   // populateLevelTree();
-        populateStudentTable();   
+        // populateLevelTree();
+        populateStudentTable();
         cboLevel.setSelectedIndex(1);
     }
 
@@ -105,6 +99,9 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel12 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jPanel7 = new javax.swing.JPanel();
@@ -495,26 +492,55 @@ public class ClassManager extends javax.swing.JPanel {
             }
         });
 
-        jLabel12.setText("Add Cost");
+        jLabel12.setText("Fees Included");
+
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("Next Term Fees");
+
+        jCheckBox2.setText("Examination Fees");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox3.setText("Professional Body Membership Fees");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jCheckBox2))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
         );
@@ -530,7 +556,7 @@ public class ClassManager extends javax.swing.JPanel {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(628, Short.MAX_VALUE))
+                .addContainerGap(574, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,22 +811,31 @@ public class ClassManager extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        advanceClasses();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
         // TODO add your handling code here:
-     System.out.println("2");
+        System.out.println("2");
     }//GEN-LAST:event_jTabbedPane2FocusGained
 
     private void jPanel4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel4FocusGained
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jPanel4FocusGained
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         // TODO add your handling code here:
-           
+
     }//GEN-LAST:event_jTabbedPane2MouseClicked
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -812,6 +847,9 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -956,16 +994,16 @@ private void generateClassID() {
                     break;
                 }
                 case "MODULAR:ARTISAN": {
-                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE","3+A+NE"}));
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+A+NE", "3+A+NE"}));
                     break;
                 }
                 case "MODULAR:CRAFT": {
-                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE","3+NE+A+2+NE", "3+NE+2+NE+A"}));
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "3+NE+A+2+NE", "3+NE+2+NE+A"}));
 
                     break;
                 }
                 case "MODULAR:DIPLOMA": {
-                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE","3+NE+3+NE+A+2+NE","3+NE+2+NE+A+2+NE"}));
+                    cboStructure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"2+NE+A+2+NE", "3+NE+3+NE+A+2+NE", "3+NE+2+NE+A+2+NE"}));
 
                     break;
                 }
@@ -1096,32 +1134,31 @@ private void generateClassID() {
 
             PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId=" + Dept + " order by No DESC ");
             ResultSet rs = ps.executeQuery();
-     jList1.removeAll();
-      DefaultListModel<String> lstModel = new DefaultListModel<String>();
+            jList1.removeAll();
+            DefaultListModel<String> lstModel = new DefaultListModel<String>();
             jList1.removeAll();
             DefaultTableModel tm = (DefaultTableModel) tblCohorts.getModel();
             tm.setRowCount(0);
-            
-int i=0;
+
+            int i = 0;
             while (rs.next()) {
                 int x = util.getCohortEnrollment(rs.getString("CohortName"));
-               // cohortName.add(i,rs.getString("CohortName").toUpperCase().toString());
+                // cohortName.add(i,rs.getString("CohortName").toUpperCase().toString());
                 Object o[] = {rs.getString("CohortName").toUpperCase(), rs.getString("Level").toUpperCase(), rs.getString("Course").toUpperCase(), x, rs.getInt("Capacity"), rs.getString("StartDate")};
-               tm.addRow(o);
-              lstModel.addElement(rs.getString("CohortName"));
-                
-            
+                tm.addRow(o);
+                lstModel.addElement(rs.getString("CohortName"));
+
             }
             jList1.setModel(lstModel);
             rs.close();
 
             tblCohorts.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-         
+
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
-        
+
     }
 
     private boolean checkExists() {
@@ -1220,8 +1257,8 @@ int i=0;
 
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error ", JOptionPane.ERROR);
         }
-}
-    
+    }
+
 //public void populateActiveClasses(){
 //    int i=0;
 //    try {
@@ -1316,5 +1353,46 @@ int i=0;
 //
 //        return (node);
 //    }
- 
+    private void advanceClasses() {
+        String temp;
+        java.util.List<String> lst = jList1.getSelectedValuesList();
+        Util util = new Util();
+        for (String var : lst) {
+            temp = util.getCohortProgress(var);
+
+            switch (temp.substring(0, 4)) {
+                case "1+NE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
+                    break;
+                }
+                case "1+IE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+                    break;
+                }
+                case "2+NE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    break;
+                }
+                case "3+NE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    break;
+                }
+                case "1+SE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    break;
+                }
+                case "2+SE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    break;
+                }
+                case "3+SE": {
+                    JOptionPane.showMessageDialog(this, var + ":" + temp + ": bill for Tuition and Decrement");
+                    break;
+                }
+
+            }
+        }
+
+    }
+
 }
