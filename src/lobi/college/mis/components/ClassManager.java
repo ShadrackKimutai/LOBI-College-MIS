@@ -15,11 +15,13 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.util.Database;
 import lobi.college.util.StudentInfo;
@@ -104,6 +106,8 @@ public class ClassManager extends javax.swing.JPanel {
         jCheckBox3 = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jLabel11 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -143,7 +147,7 @@ public class ClassManager extends javax.swing.JPanel {
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 478, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -180,7 +184,7 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(774, Short.MAX_VALUE))
+                .addContainerGap(455, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/interface.png")), jPanel3); // NOI18N
@@ -189,11 +193,11 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 973, Short.MAX_VALUE)
+            .addGap(0, 1084, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 907, Short.MAX_VALUE)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Nominal  Roll", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/archive.png")), jPanel6); // NOI18N
@@ -427,7 +431,7 @@ public class ClassManager extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinner3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
@@ -436,7 +440,7 @@ public class ClassManager extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboStructure, 0, 254, Short.MAX_VALUE))))
+                        .addComponent(cboStructure, 0, 305, Short.MAX_VALUE))))
             .addComponent(jScrollPane2)
         );
         jPanel2Layout.setVerticalGroup(
@@ -469,7 +473,7 @@ public class ClassManager extends javax.swing.JPanel {
                         .addComponent(jLabel9))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Create Class", jPanel2);
@@ -540,7 +544,7 @@ public class ClassManager extends javax.swing.JPanel {
                 .addComponent(jCheckBox2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
         );
@@ -554,28 +558,47 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addContainerGap(668, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4))
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jProgressBar2.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
+        jProgressBar2.setForeground(new java.awt.Color(153, 0, 153));
+        jProgressBar2.setDoubleBuffered(true);
+        jProgressBar2.setStringPainted(true);
+
+        jLabel11.setText("jLabel11");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jTabbedPane2.addTab("Class Tools", jPanel4);
@@ -655,7 +678,7 @@ public class ClassManager extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(614, 849, Short.MAX_VALUE))
+                .addGap(614, 960, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -682,13 +705,13 @@ public class ClassManager extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jTabbedPane1)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -719,6 +742,15 @@ public class ClassManager extends javax.swing.JPanel {
     private void jPanel5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel5FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel5FocusGained
+
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
+
+    private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
+        // TODO add your handling code here:
+        System.out.println("2");
+    }//GEN-LAST:event_jTabbedPane2FocusGained
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         // TODO add your handling code here:
@@ -809,33 +841,22 @@ public class ClassManager extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboCoursesItemStateChanged
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        advanceClasses();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
-        // TODO add your handling code here:
-        System.out.println("2");
-    }//GEN-LAST:event_jTabbedPane2FocusGained
-
     private void jPanel4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel4FocusGained
         // TODO add your handling code here:
-
     }//GEN-LAST:event_jPanel4FocusGained
 
-    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTabbedPane2MouseClicked
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+        advanceClasses();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -853,6 +874,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -874,6 +896,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1357,42 +1380,68 @@ private void generateClassID() {
         String temp;
         java.util.List<String> lst = jList1.getSelectedValuesList();
         Util util = new Util();
+        jProgressBar2.setValue(0);
+        int i = 1;
         for (String var : lst) {
             temp = util.getCohortProgress(var);
-
+            int tempVal = ((i * 100) / lst.size());
+           // jLabel11.removeAll();
+            try{
             switch (temp.substring(0, 4)) {
                 case "1+NE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
+                 // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
+
                     break;
                 }
                 case "1+IE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+                    //JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+
                     break;
                 }
                 case "2+NE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                  //  JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
                     break;
                 }
                 case "3+NE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                   // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
                     break;
                 }
                 case "1+SE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                //     JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
                     break;
                 }
                 case "2+SE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                 //  JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
                     break;
                 }
                 case "3+SE": {
-                    JOptionPane.showMessageDialog(this, var + ":" + temp + ": bill for Tuition and Decrement");
+                   // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
+                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
                     break;
                 }
 
             }
+            } catch (Exception ex){
+                
+            }
+            System.out.println(tempVal);
+            jProgressBar2.setValue(tempVal);
+            i++;
+            
         }
 
     }
 
 }
+
