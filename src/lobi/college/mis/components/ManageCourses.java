@@ -102,11 +102,6 @@ public class ManageCourses extends javax.swing.JPanel {
                 btnResetMouseClicked(evt);
             }
         });
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
-            }
-        });
 
         cboAccreditationBody.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "K.I.C.D", "TVET CDACC", "N.I.T.A", "K.A.S.N.E.B", "Internal " }));
 
@@ -292,9 +287,7 @@ public class ManageCourses extends javax.swing.JPanel {
     private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
         // TODO add your handling code here:
 
-        txtAltRequirements.setText("");
-        txtMinRequirements.setText("");
-        txtCourseName.setText("");
+        populateTable();
     }//GEN-LAST:event_btnResetMouseClicked
 
     private void cboDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDepartmentActionPerformed
@@ -302,11 +295,6 @@ public class ManageCourses extends javax.swing.JPanel {
         // System.out.println(Util.getDepartmentID(String.valueOf(cboDepartment.getSelectedItem().toString())));
 
     }//GEN-LAST:event_cboDepartmentActionPerformed
-
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnResetActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegisterCourse;
@@ -357,6 +345,9 @@ public class ManageCourses extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 
         }
+        txtAltRequirements.setText("");
+        txtMinRequirements.setText("");
+        txtCourseName.setText("");
     }
 
     private void populateDepartments() {

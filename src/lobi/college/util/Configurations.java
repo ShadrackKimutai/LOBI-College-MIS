@@ -52,7 +52,7 @@ public class Configurations {
             // set the properties value
             prop.setProperty("url", "jdbc:mysql://localhost:3306/CollegeMIS?zeroDateTimeBehavior=convertToNull [root on Default schema]");
             prop.setProperty("username", "root");
-            prop.setProperty("password", " ");
+            prop.setProperty("password", "c071x8");
             prop.setProperty("driverClassName", "org.mariadb.jdbc.Driver");
 
             // save properties to project root folder

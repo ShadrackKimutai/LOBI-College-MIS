@@ -245,13 +245,11 @@ public class ManageDepartments extends javax.swing.JPanel {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        txtDeptName.setText("");
-        txtDeptSlugName.setText("");
+        populateTable();
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void btnRegisterDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterDeptMouseClicked
-        // TODO add your handling code here:
-        // TODO add your handling code here:
+                jButton2.doClick();
 
         try {
 
@@ -279,6 +277,7 @@ public class ManageDepartments extends javax.swing.JPanel {
             // execute the preparedstatement
             preparedStmt.execute();
             JOptionPane.showConfirmDialog(this, "Department has been registered successfuly", "Entry Successful", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
         } catch (SQLException e) {
             System.err.println("Error Encountered!");
             System.err.println(e.getMessage());
@@ -345,6 +344,9 @@ public class ManageDepartments extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error Occured", e.getMessage(), JOptionPane.ERROR_MESSAGE);
 
         }
+        
+        txtDeptName.setText("");
+        txtDeptSlugName.setText("");
     }
 
     private void populateDepartments() {

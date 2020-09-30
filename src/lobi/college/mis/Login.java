@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
              Util util = new Util(); 
-         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"1");
+         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"19");
            dashBoard.setVisible(true);
            util.setUserDeptID(1);
            this.setVisible(false); 

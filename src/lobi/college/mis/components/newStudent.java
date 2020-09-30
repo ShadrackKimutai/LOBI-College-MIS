@@ -812,7 +812,7 @@ public class newStudent extends javax.swing.JPanel {
                 }
                 }else{
                JOptionPane.showMessageDialog(this, "Select a Cohort to be Persued By the Student.", "Missing Information", JOptionPane.ERROR_MESSAGE);
-                cboCohort.grabFocus();
+                cboEnrollTo.grabFocus();
                 
                 }
             } else {
@@ -1455,7 +1455,7 @@ public class newStudent extends javax.swing.JPanel {
 
                 break;
         }
-        System.out.println(Query);
+        //System.out.println(Query);
         try {
 
             //  USE THE SQL STRING

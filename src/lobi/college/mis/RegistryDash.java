@@ -38,8 +38,13 @@ private String User,Dept;
 
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton2 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        btnBulkRegister = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         registryPane = new javax.swing.JPanel();
 
@@ -82,6 +87,7 @@ private String User,Dept;
             }
         });
         jToolBar1.add(jButton1);
+        jToolBar1.add(jSeparator1);
 
         jButton2.setText("Register Student");
         jButton2.setFocusable(false);
@@ -93,6 +99,14 @@ private String User,Dept;
             }
         });
         jToolBar1.add(jButton2);
+        jToolBar1.add(jSeparator2);
+
+        btnBulkRegister.setText("Bulk Register Students (KUCCPS)");
+        btnBulkRegister.setFocusable(false);
+        btnBulkRegister.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBulkRegister.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnBulkRegister);
+        jToolBar1.add(jSeparator3);
 
         jButton3.setText("Modify Student");
         jButton3.setFocusable(false);
@@ -104,6 +118,7 @@ private String User,Dept;
             }
         });
         jToolBar1.add(jButton3);
+        jToolBar1.add(jSeparator4);
 
         jButton4.setText("Registry Reports");
         jButton4.setFocusable(false);
@@ -188,10 +203,15 @@ private String User,Dept;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBulkRegister;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JPanel registryPane;
     // End of variables declaration//GEN-END:variables
