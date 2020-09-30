@@ -16,10 +16,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import lobi.college.util.Database;
-import lobi.college.util.Util;
+import lobi.college.mis.util.Database;
+import lobi.college.mis.util.Util;
 import javax.swing.JScrollPane;
-import lobi.college.util.StudentInfo;
+import lobi.college.mis.util.StudentInfo;
 
 /**
  *

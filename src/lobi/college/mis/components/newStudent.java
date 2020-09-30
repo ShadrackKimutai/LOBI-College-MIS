@@ -27,8 +27,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import lobi.college.util.Database;
-import lobi.college.util.Util;
+import lobi.college.mis.util.Database;
+import lobi.college.mis.util.Util;
 
 /**
  *

@@ -7,7 +7,7 @@ package lobi.college.mis;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import lobi.college.util.splash;
+import lobi.college.mis.util.splash;
 import java.awt.Dialog;
 import java.awt.Window;
 

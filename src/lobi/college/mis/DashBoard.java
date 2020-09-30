@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import lobi.college.util.Configurations;
+import lobi.college.mis.util.Configurations;
 
 /**
  *

@@ -15,7 +15,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import lobi.college.util.Database;
+import lobi.college.mis.util.Database;
 
 /**
  *
