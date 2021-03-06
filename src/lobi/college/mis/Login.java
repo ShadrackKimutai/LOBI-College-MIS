@@ -16,13 +16,14 @@ import lobi.college.mis.util.Util;
  * @author shady
  */
 public class Login extends javax.swing.JFrame {
-
+DashBoard dashBoard;
     /**
      * Creates new form DashBoard
      */
     public Login() {
         initComponents();
         txtUserName.grabFocus();
+         dashBoard=new DashBoard(txtUserName.getText(),"1");
     }
 
     /**
@@ -157,10 +158,10 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
              Util util = new Util(); 
-         DashBoard dashBoard=new DashBoard(txtUserName.getText(),"19");
-           dashBoard.setVisible(true);
+        
            util.setUserDeptID(1);
            this.setVisible(false); 
+             dashBoard.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -209,6 +210,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+                
             }
         });
     }

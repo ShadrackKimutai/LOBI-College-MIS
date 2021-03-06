@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="905454d9-bdb8-40f3-b1ed-ab1a5c63e2dc">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="150"/>
+	<style name="style1"/>
+	<queryString>
+		<![CDATA[SELECT  `StudentID`,  `Student_Name`,  `B_Certificate`,  `IDNo`,  `Gender`,  `Nationality`,  `County`,  `Subcounty`,  `Division`,  `Location`,  `SubLocation`,  `Village`,  `Address`,  `Phone`,  `email`,  `NextOfKin`,  `NextofKinPhone`,  `NextofKinEmail` FROM Students]]>
+	</queryString>
+	<field name="StudentID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Student_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="B_Certificate" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IDNo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Gender" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nationality" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="County" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Subcounty" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Division" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Location" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SubLocation" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Village" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Phone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NextOfKin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NextofKinPhone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NextofKinEmail" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<image>
+				<reportElement x="325" y="0" width="111" height="79" uuid="9bc4337e-5101-4835-96e0-712e06d8328d"/>
+				<imageExpression><![CDATA["C:\\Users\\DELL\\Downloads\\picture-45153.jpeg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="165" y="79" width="511" height="20" uuid="cf959efb-aa77-4671-b071-c5d66ab62eef"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KIPKABUS TECHNICAL AND VOCATIONAL COLLEGE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="226" y="0" width="276" height="20" uuid="0c54c3f1-345c-4516-9a07-155cc4c920d0"/>
+				<textElement>
+					<font size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENROLLED STUDENTS SUMMARY]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="65" height="20" uuid="39f20472-cbd3-4b23-b1d3-a166095d9538"/>
+				<text><![CDATA[StudentID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="29" width="161" height="20" uuid="5e880b70-a6f0-420b-8521-310a3477bd23"/>
+				<text><![CDATA[Student_Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="30" width="66" height="20" uuid="627c7314-25f7-46c9-b89f-294dfe370178"/>
+				<text><![CDATA[B_Certificate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="30" width="58" height="20" uuid="7cd18124-ce34-4075-98be-3bf49328d93e"/>
+				<text><![CDATA[IDNo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="30" width="45" height="20" uuid="492c9e0e-a2b5-421b-84fd-2c102b2710ef"/>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="30" width="143" height="20" uuid="c19df0a6-32e1-4181-a56b-d8bad6c13e51"/>
+				<text><![CDATA[County]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="538" y="29" width="138" height="20" uuid="2b601d63-fcc0-4349-9a50-ee0d36f72b1f"/>
+				<text><![CDATA[Subcounty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="676" y="30" width="100" height="20" uuid="a0294425-7ba9-4225-bd45-f601d77de8a0"/>
+				<text><![CDATA[Phone]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="49" width="790" height="1" uuid="fbadcda1-2e5c-40aa-aade-0c38f7b3b258"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="65" height="16" uuid="72d13d0d-ba9d-45e1-b599-fe9be2fef33a"/>
+				<textFieldExpression><![CDATA[$F{StudentID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="0" width="161" height="15" uuid="e18c7244-3d91-4c8d-b456-94823cbbfaef"/>
+				<textFieldExpression><![CDATA[$F{Student_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="0" width="66" height="15" uuid="4021a639-886f-4c88-9fc6-7a121802a821"/>
+				<textFieldExpression><![CDATA[$F{B_Certificate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="0" width="58" height="16" uuid="a1c2052c-92d6-4845-b406-be0cdfac0775"/>
+				<textFieldExpression><![CDATA[$F{IDNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="45" height="16" uuid="aed69bb9-b87e-4efe-884a-26b273e05b51"/>
+				<textFieldExpression><![CDATA[$F{Gender}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="143" height="16" uuid="be12e909-0b03-4e38-b86a-8944fe05ee47"/>
+				<textFieldExpression><![CDATA[$F{County}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="538" y="0" width="138" height="16" uuid="3f7ad7c4-2e1d-486d-9868-a12e5265c699"/>
+				<textFieldExpression><![CDATA[$F{Subcounty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="676" y="0" width="100" height="15" uuid="9426caa9-f036-48e1-b4a4-5b73199921e9"/>
+				<textFieldExpression><![CDATA[$F{Phone}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="17" width="790" height="1" uuid="ea5e4bcd-4bd1-48ce-bc6d-37aaf37084c7"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="34" width="100" height="20" uuid="862ae8c9-b13b-42dc-b8b6-135b861bac01"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="34" width="100" height="20" uuid="ba95e64c-7f03-46ba-a768-a535214d092f"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="18" splitType="Stretch"/>
+	</summary>
+</jasperReport>

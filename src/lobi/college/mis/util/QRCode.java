@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lobi.college.mis.resources;
+package lobi.college.mis.util;
 
 /**
  *
  * @author Shady
  */
-public interface NewInterface {
+public class QRCode {
     
 }

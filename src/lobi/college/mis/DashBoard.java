@@ -6,9 +6,14 @@
 package lobi.college.mis;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -20,6 +25,8 @@ import lobi.college.mis.util.Configurations;
  * @author shady
  */
 public class DashBoard extends javax.swing.JFrame {
+
+   
 public String userDept,user;
 
     public String getUserDept() {
@@ -41,7 +48,11 @@ public String userDept,user;
         this.user=User;
         this.userDept=UserDepartment;
         
+        
+      
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +73,19 @@ public String userDept,user;
         jButton2 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btnAdmin = new javax.swing.JButton();
-        desktopPane = new javax.swing.JDesktopPane();
+        desktopPane = new javax.swing.JDesktopPane(){
+            ImageIcon icon = new ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/ilUOk6.jpg"));
+            Image image = icon.getImage();
+
+            Image newimage = image.getScaledInstance(1500, 1000, Image.SCALE_SMOOTH);
+
+            @Override
+            protected void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                g.drawImage(newimage, 0, 0, this);
+            }
+        };
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -80,15 +103,17 @@ public String userDept,user;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LoBi College MIS");
+        setBackground(new java.awt.Color(255, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
+        jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -256,8 +281,7 @@ public String userDept,user;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,7 +308,7 @@ public String userDept,user;
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "More than five (5) windows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistryActionPerformed
 
@@ -302,7 +326,7 @@ public String userDept,user;
             } catch (java.beans.PropertyVetoException e) {
             }
         } else {
-            JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "More than five (5) windows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -324,7 +348,7 @@ public String userDept,user;
             } catch (java.beans.PropertyVetoException e) {
             }
         } else {
-            JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "More than five (5) windows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAdminMouseClicked
 
@@ -342,7 +366,7 @@ public String userDept,user;
             } catch (java.beans.PropertyVetoException e) {
             }
         } else {
-            JOptionPane.showMessageDialog(this, "More than Five (5) WIndows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "More than five (5) windows are currently active. \nClose some to allow new windows.", "Multiple Window Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnProcurementMouseClicked
 
@@ -385,17 +409,17 @@ public String userDept,user;
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-
-        } catch (UnsupportedLookAndFeelException e) {
-            // handle exception
-        } catch (InstantiationException ex) {
-            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            // Set cross-platform Java L&F (also called "Metal")
+//            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+//
+//        } catch (UnsupportedLookAndFeelException e) {
+//            // handle exception
+//        } catch (InstantiationException ex) {
+//            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            Logger.getLogger(DashBoard.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -405,6 +429,8 @@ public String userDept,user;
                 
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -43,16 +44,18 @@ public class Configurations {
     }
 
     public Configurations() {
-        filename = "molotov.ini";
+        
+        new File("rxt").mkdir();
+        filename = "rxt/molotov.ini";
 
         try (OutputStream output = new FileOutputStream(filename)) {
 
             Properties prop = new Properties();
 
             // set the properties value
-            prop.setProperty("url", "jdbc:mysql://localhost:3306/CollegeMIS?zeroDateTimeBehavior=convertToNull [root on Default schema]");
+            prop.setProperty("url", "jdbc:mysql://localhost:3306/collegemis?zeroDateTimeBehavior=CONVERT_TO_NULL [root on Default schema]");
             prop.setProperty("username", "root");
-            prop.setProperty("password", "c071x8");
+            prop.setProperty("password", "");
             prop.setProperty("driverClassName", "org.mariadb.jdbc.Driver");
 
             // save properties to project root folder
@@ -68,6 +71,8 @@ public class Configurations {
         } catch (IOException ex) {
             Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
 
     public static Properties readPropertiesFile(String fileName) throws IOException {
@@ -93,6 +98,9 @@ public class Configurations {
         return prop;
     }
 
+    /**
+     *
+     */
     public void checkCrucialFiles() {
        
             JOptionPane.showMessageDialog(null, "File Missing Error. \nThe Application has detected that a crucial file is Missing. \nQuiting...", "File Missing Error", JOptionPane.ERROR_MESSAGE);

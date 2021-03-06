@@ -5,11 +5,16 @@
  */
 package lobi.college.mis.util;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,21 +56,21 @@ public class Util {
 
         return departmentID;
     }
-//
-//    public int getCourseID(String Course) {
-//        int courseID = 0;
-//        try {
-//            Connection cnn = Database.getConnection();
-//            Statement st = cnn.createStatement();
-//            ResultSet rs LIKE st.executeQuery("select CourseID from Courses where CourseName='" + Course + "'");
-//            rs.next();
-//            courseID = rs.getInt(1);
-//            rs.close();
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Issue on Getting Course ID ," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
-//        }
-//        return courseID;
-//    }
+public static void  copyFiles(InputStream io, String fileName) {
+    //System.out.println();
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            byte[] buf = new byte[256];
+            int read = 0;
+            while ((read = io.read(buf)) > 0) {
+                fos.write(buf, 0, read);
+                
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+    }
 
     public String formatString(String unsanitizedString) {
         return unsanitizedString.replace("'", "`");
@@ -107,7 +112,7 @@ public class Util {
                         break;
                     }
                     case "DIPLOMA": {
-                        coursePattern = "(cohorts.progress LIKE '2+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+3+NE+A+2+NE') OR (cohorts.progress LIKE '3+NE+A+2+NE') OR (cohorts.progress LIKE'3+NE+3+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+2+NE+A')  OR (cohorts.progress LIKE '3+SE+A+2+NE') OR  (cohorts.progress LIKE'3+SE+2+SE+A+2+NE') OR (cohorts.progress LIKE '3+2+SE+2+SE+A')";
+                        coursePattern = "(cohorts.progress LIKE '2+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+3+NE+A+2+NE') OR (cohorts.progress LIKE '3+NE+A+2+NE') OR (cohorts.progress LIKE'3+NE+3+NE+A+2+NE') OR (cohorts.progress LIKE '2+NE+2+NE+A')  OR (cohorts.progress LIKE '3+SE+A+2+NE') OR  (cohorts.progress LIKE'3+SE+2+SE+A+2+NE') OR (cohorts.progress LIKE '3+SE+2+SE+A+3+NE')";
                         break;
                     }
                     case "HIGHER DIPLOMA": {

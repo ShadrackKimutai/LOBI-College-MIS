@@ -161,7 +161,7 @@ public class splash extends javax.swing.JFrame {
     private javax.swing.JLabel txtOutput;
     // End of variables declaration//GEN-END:variables
 
-    public void StartUp() {
+    public boolean StartUp() {
         String report = "";
         Configurations conf = null;
         int i = 0;
@@ -172,40 +172,59 @@ public class splash extends javax.swing.JFrame {
             do {
                 i++;
                 jProgressBar1.setValue(i);
-                if (i < 18) {
+                if (i <  15) {
                     file = new File("molotov.ini");
                     if (file.exists()) {
                         txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(10);
+                        Thread.sleep(30);
                         //check whether jars exist
                     } else {
                         //   conf.checkCrucialFiles();
                     }
                 }
-                if ((i >= 18) && (i < 36)) {
-                    file = new File("lib/mariadb-java-client-2.6.0.jar");
+                
+                if ((i >= 15) && (i < 26)) {
+                    file = new File("lib/jdt-compiler.jar");
                     if (file.exists()) {
-                        txtOutput.setText("Loading module" + file.getName());
+                        txtOutput.setText("Loading module: " + file.getName());
                         Thread.sleep(10);
                     } else {
-                        conf.checkCrucialFiles();
+                    conf.checkCrucialFiles();
+                    }
+                }
+                if ((i >= 26) && (i < 36)) {
+                    file = new File("lib/mariadb-java-client-2.6.0.jar");
+                    if (file.exists()) {
+                        txtOutput.setText("Loading module: " + file.getName());
+                        Thread.sleep(10);
+                    } else {
+                    conf.checkCrucialFiles();
                     }
                 }
 
                 if ((i >= 36) && (i < 56)) {
                     file = new File("lib/flatlaf-0.33.jar");
                     if (file.exists()) {
-                        txtOutput.setText("Loading module" + file.getName());
+                        txtOutput.setText("Loading module: " + file.getName());
                         Thread.sleep(10);
                     } else {
                         conf.checkCrucialFiles();
                     }
                 }
-                if ((i >= 56 && i < 70)) {
+                 if ((i >= 56) && (i < 66)) {
+                    file = new File("lib/jasperreports-3.5.3.jar");
+                    if (file.exists()) {
+                        txtOutput.setText("Loading module: " + file.getName());
+                        Thread.sleep(10);
+                    } else {
+                        conf.checkCrucialFiles();
+                    }
+                }
+                if ((i >= 66 && i < 70)) {
                     file = new File("lib/swingx-0.9.1.jar");
                     if (file.exists()) {
-                        txtOutput.setText("Loading module" + file.getName());
-                        Thread.sleep(10);
+                        txtOutput.setText("Loading module: " + file.getName());
+                        Thread.sleep(50);
                     } else {
                         conf.checkCrucialFiles();
                     }
@@ -214,20 +233,30 @@ public class splash extends javax.swing.JFrame {
                     txtOutput.setText("Trying to connect to database");
                     Thread.sleep(20);
                 }
+
                 if (i == 80) {
-                    Connection cnn = Database.getConnection();
-                    Statement st = cnn.createStatement();
-                    String Query = "show tables";
-                    ResultSet rs = st.executeQuery(Query);
-                    if (rs.first()) {
-                      System.out.println(rs.getString(1));
-                        report = "Established Database Connectivity";
-                    } else {
-                        report = "Failed to Establish Database Connection ";
-                        //this.cancel(true);
+                    
+                        Connection cnn = Database.getConnection();
+                         
+                        Statement st = cnn.createStatement();
+                        
+                        String Query = "show tables";
+                       
+                        ResultSet rs = st.executeQuery(Query);
+                       
+
+                        if (rs.first()) {
+                            System.out.println(rs.getString(1));
+                            report = "Established Database Connectivity";
+                        } else {
+                            report = "Failed to Establish Database Connection ";
+                            //this.cancel(true);
+                            Thread.sleep(1000);
+                            // this.dispose();
+                        }
+
                         Thread.sleep(1000);
-                    }
-                    Thread.sleep(100);
+                   
                 }
                 if (i >= 80) {
                     txtOutput.setText(report);
@@ -239,10 +268,17 @@ public class splash extends javax.swing.JFrame {
                 }
             } while ((int) jProgressBar1.getValue() < 100);
 
-        } catch (InterruptedException | SQLException ex) {
+        } catch (InterruptedException | SQLException ex ) {
             Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }catch(NullPointerException ex){
+            Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return;
-       
+        
+            
+        
+        return true;
+
     }
 }

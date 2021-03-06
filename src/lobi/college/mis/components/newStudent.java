@@ -6,6 +6,7 @@
 package lobi.college.mis.components;
 
 import java.awt.Image;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -802,7 +803,10 @@ public class newStudent extends javax.swing.JPanel {
                         Thread.sleep(2000);
                         insertNewStudent();
                         studentID();
-                        resetFields();
+                        this.removeAll();
+                       this.revalidate();
+                       this.repaint();
+
 
                     } catch (InterruptedException ex) {
                         Logger.getLogger(newStudent.class.getName()).log(Level.SEVERE, null, ex);
@@ -1455,7 +1459,7 @@ public class newStudent extends javax.swing.JPanel {
 
                 break;
         }
-        //System.out.println(Query);
+       //System.out.println(Query);
         try {
 
             //  USE THE SQL STRING

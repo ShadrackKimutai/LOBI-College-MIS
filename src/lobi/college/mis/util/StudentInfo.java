@@ -198,7 +198,7 @@ public class StudentInfo extends javax.swing.JDialog {
             Connection cnn = Database.getConnection();
             Statement st = cnn.createStatement();
             String Query = "SELECT CRS.LEVEL, CRS.COURSENAME,CRSENR.COHORT FROM COURSEENROLLMENT CRSENR INNER JOIN COURSES CRS ON CRSENR.COURSEID=CRS.COURSEID WHERE CRSENR.STUDENTID='" + StudentID + "'";
-          //  System.out.println(Query);
+           System.out.println(Query);
             ResultSet rs = st.executeQuery(Query);
             rs.next();
             String []temp = {rs.getString(1).toUpperCase(), rs.getString(2).toUpperCase(),rs.getString(3)};

@@ -8,6 +8,7 @@ package lobi.college.mis;
 import java.awt.BorderLayout;
 import lobi.college.mis.components.RegisteredStudents;
 import lobi.college.mis.components.newStudent;
+//import lobi.college.mis.reports.studentsReport;
 
 /**
  *
@@ -124,6 +125,11 @@ private String User,Dept;
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton4);
 
         javax.swing.GroupLayout registryPaneLayout = new javax.swing.GroupLayout(registryPane);
@@ -200,6 +206,23 @@ private String User,Dept;
         // TODO add your handling code here:
         jButton1.doClick();
     }//GEN-LAST:event_loadRegisteredStudents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+//        // TODO add your handling code here:
+//         studentsReport studentReport = new studentsReport();
+//        //studentReport.setVisible(true);
+//        registryPane.removeAll();
+//        registryPane.setVisible(false);
+//        studentReport.setSize(registryPane.getSize().width,registryPane.getSize().height);
+//        //studentReport.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        studentReport.setVisible(true);
+//        registryPane.setLayout(new BorderLayout());
+//        registryPane.add(studentReport);
+//
+//        registryPane.setVisible(true);
+//        pack();
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

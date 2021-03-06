@@ -6,7 +6,6 @@
 package lobi.college.mis.components;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.mis.util.Database;
 import lobi.college.mis.util.Util;
