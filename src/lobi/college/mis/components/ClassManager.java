@@ -5,8 +5,9 @@
  */
 package lobi.college.mis.components;
 
-import java.awt.List;
+import java.awt.BorderLayout;
 import java.io.File;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,17 +16,24 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import lobi.college.mis.util.Database;
 import lobi.college.mis.util.StudentInfo;
 import lobi.college.mis.util.Util;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -43,10 +51,13 @@ public class ClassManager extends javax.swing.JPanel {
         this.User = user;
         this.Dept = dept;
         initComponents();
+        System.out.println(Dept);
         populateCohorts();
+        populateRegisterCohorts();
         // populateLevelTree();
         populateStudentTable();
         cboLevel.setSelectedIndex(1);
+        createTempFiles();
     }
 
     /**
@@ -64,12 +75,13 @@ public class ClassManager extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboCohortName = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGenerateRegister = new javax.swing.JButton();
         jXDatePicker2 = new org.jdesktop.swingx.JXDatePicker();
         jXDatePicker3 = new org.jdesktop.swingx.JXDatePicker();
+        registerPane = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -120,13 +132,18 @@ public class ClassManager extends javax.swing.JPanel {
 
         jLabel1.setText("Select Class");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboCohortName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Term Start Date");
 
         jLabel3.setText("Term End Date");
 
-        jButton1.setText("Generate Register");
+        btnGenerateRegister.setText("Generate Register");
+        btnGenerateRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateRegisterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,40 +152,46 @@ public class ClassManager extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboCohortName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                        .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 478, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+                        .addComponent(btnGenerateRegister)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cboCohortName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
+                    .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                    .addComponent(btnGenerateRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51))
+        );
+
+        javax.swing.GroupLayout registerPaneLayout = new javax.swing.GroupLayout(registerPane);
+        registerPane.setLayout(registerPaneLayout);
+        registerPaneLayout.setHorizontalGroup(
+            registerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        registerPaneLayout.setVerticalGroup(
+            registerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -177,14 +200,17 @@ public class ClassManager extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(registerPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(registerPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registers", new javax.swing.ImageIcon(getClass().getResource("/lobi/college/mis/resources/gfx/interface.png")), jPanel3); // NOI18N
@@ -858,20 +884,68 @@ public class ClassManager extends javax.swing.JPanel {
         advanceClasses();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void btnGenerateRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateRegisterActionPerformed
+        Connection cnn = Database.getConnection();
+        try {
+
+            resetPanel();
+
+            //  String reportPath = "reports/Courses3.jas";
+            // File theFile = new File(reportPath);
+            // String reportPath = "./reports/Courses3.jrxml";
+            String reportPath = "rxt/studentRegisters.jrxml";
+            System.out.println(reportPath);
+            System.out.println(new File(reportPath).toURI().toString());
+            // InputStream input = this.getClass().getResourceAsStream(reportPath);
+            //
+            JasperDesign jasperDesign = JRXmlLoader.load(reportPath);
+
+            String strQuery;
+
+            strQuery = "SELECT CSR.STUDENTID, STUD.STUDENT_NAME FROM STUDENTS STUD INNER JOIN COURSEENROLLMENT CSR ON STUD.STUDENTID=CSR.STUDENTID WHERE  CSR.Cohort='" + cboCohortName.getSelectedItem() + "'";
+
+            //Build a new query
+            System.out.println(strQuery);
+            // update the data query
+            JRDesignQuery newQuery = new JRDesignQuery();
+            newQuery.setText(strQuery);
+            jasperDesign.setQuery(newQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jp = JasperFillManager.fillReport(jasperReport, null, cnn);
+            JRViewer vw = new JRViewer(jp);
+
+            registerPane.setLayout(new BorderLayout());
+            registerPane.repaint();
+            registerPane.add(vw);
+            registerPane.revalidate();
+            cnn.close();
+        } catch (SQLException ex) {
+            String connectMsg = "Could not create the report " + ex.getMessage() + " " + ex.getLocalizedMessage();
+            System.out.println(connectMsg);
+        } catch (JRException ex) {
+            Logger.getLogger(ClassManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ClassManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnGenerateRegisterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGenerateRegister;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cboCohortName;
     private javax.swing.JComboBox<String> cboCourses;
     private javax.swing.JComboBox<String> cboLevel;
     private javax.swing.JComboBox<String> cboStructure;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -912,6 +986,7 @@ public class ClassManager extends javax.swing.JPanel {
     private javax.swing.JRadioButton optParallel;
     private javax.swing.JRadioButton optRegular;
     private javax.swing.JRadioButton optSep;
+    private javax.swing.JPanel registerPane;
     private javax.swing.JTable tblCohorts;
     private javax.swing.JTable tblStudents;
     private javax.swing.JTextField txtCohortID;
@@ -1066,7 +1141,9 @@ private void generateClassID() {
             Connection conn = Database.getConnection();
             Statement st = conn.createStatement();
             cboCourses.removeAllItems();
-            try (ResultSet rs = st.executeQuery("select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID=" + Dept + "")) {
+            String query = "select coursename from Courses where level='" + cboLevel.getSelectedItem() + "' and DeptID=" + Dept + "";
+            System.out.println(query + " at populate courses");
+            try (ResultSet rs = st.executeQuery(query)) {
                 while (rs.next()) {
                     cboCourses.addItem(rs.getString("courseName"));
 
@@ -1154,8 +1231,9 @@ private void generateClassID() {
 
             // create a sql date object so we can use it in our INSERT statement
             Connection cnn = Database.getConnection();
-
-            PreparedStatement ps = cnn.prepareStatement("Select * from Cohorts where deptId=" + Dept + " order by No DESC ");
+            String query = "Select * from Cohorts where deptId=" + Dept + " order by No DESC";
+            System.out.println(query + " at populate Cohorts");
+            PreparedStatement ps = cnn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             jList1.removeAll();
             DefaultListModel<String> lstModel = new DefaultListModel<String>();
@@ -1385,63 +1463,101 @@ private void generateClassID() {
         for (String var : lst) {
             temp = util.getCohortProgress(var);
             int tempVal = ((i * 100) / lst.size());
-           // jLabel11.removeAll();
-            try{
-            switch (temp.substring(0, 4)) {
-                case "1+NE": {
-                 // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
+            // jLabel11.removeAll();
+            try {
+                switch (temp.substring(0, 4)) {
+                    case "1+NE": {
+                        // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for national exam");
 
-                    break;
+                        break;
+                    }
+                    case "1+IE": {
+                        //JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+
+                        break;
+                    }
+                    case "2+NE": {
+                        //  JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
+                        break;
+                    }
+                    case "3+NE": {
+                        // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
+                        break;
+                    }
+                    case "1+SE": {
+                        //     JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
+                        break;
+                    }
+                    case "2+SE": {
+                        //  JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
+                        break;
+                    }
+                    case "3+SE": {
+                        // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+
+                        jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
+                        break;
+                    }
+
                 }
-                case "1+IE": {
-                    //JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for tuition and internal exam");
+            } catch (Exception ex) {
 
-                    break;
-                }
-                case "2+NE": {
-                  //  JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-
-                    break;
-                }
-                case "3+NE": {
-                   // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-
-                    break;
-                }
-                case "1+SE": {
-                //     JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-
-                    break;
-                }
-                case "2+SE": {
-                 //  JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-
-                    break;
-                }
-                case "3+SE": {
-                   // JOptionPane.showMessageDialog(this, var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-
-                    jLabel11.setText(var + ":" + temp + ":" + temp.substring(0, 4) + " bill for Tuition and Decrement");
-                    break;
-                }
-
-            }
-            } catch (Exception ex){
-                
             }
             System.out.println(tempVal);
             jProgressBar2.setValue(tempVal);
             i++;
-            
+
         }
 
     }
 
-}
+    private void resetPanel() {
+        try {
 
+            registerPane.removeAll();
+            registerPane.revalidate();
+            registerPane.repaint();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
+    private void populateRegisterCohorts() {
+        String Query = "SELECT * FROM cohorts WHERE cohorts.DeptID ='" + this.Dept + "'";
+        //String Query="SELECT CSR.STUDENTID, STUD.STUDENT_NAME FROM STUDENTS STUD INNER JOIN COURSEENROLLMENT CSR ON STUD.STUDENTID=CSR.STUDENTID WHERE  EXISTS (SELECT * FROM cohorts WHERE DeptID ='"+this.Dept+"')";
+        System.out.println(Query);
+        try {
+
+            //  USE THE SQL STRING
+            Connection cnn = Database.getConnection();
+            Statement st = cnn.createStatement();
+            cboCohortName.removeAllItems();
+            ResultSet rs = st.executeQuery(Query);
+
+            while (rs.next()) {
+                cboCohortName.addItem(rs.getString("cohortName"));
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(this, "When Populating Cohorts," + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    private void createTempFiles()  {
+        Util.copyFiles(getClass().getResourceAsStream(".\\..\\reports\\studentRegisters.jrxml"), "rxt/studentRegisters.jrxml");
+    }
+
+}
